@@ -1,27 +1,102 @@
 apply plugin: 'com.android.application'
 
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+
+
+class Config {
+    String gitSha
+    Properties keystoreProps
+}
+
+ext {
+    config = new Config()
+    config.gitSha = getGitSha()
+    config.keystoreProps = new Properties()
+
+    def basePath = projectDir.absolutePath + "/config/"
+    config.keystoreProps.load(new FileInputStream(rootProject.file((basePath + "keystore.properties"))))
+}
+
 android {
-    compileSdkVersion 'Google Inc.:Google APIs:23'
-    buildToolsVersion "23.0.2"
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
         applicationId "com.smarstudio.deviceinfo"
-        minSdkVersion 9
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
     }
+
+    signingConfigs {
+        release {
+            storeFile file(config.keystoreProps.release_store_file)
+            storePassword config.keystoreProps.release_store_pass
+            keyAlias config.keystoreProps.release_key_alias
+            keyPassword config.keystoreProps.release_key_pass
+        }
+
+        debug {
+            storeFile file('keystores/debug.keystore')
+            storePassword 'deviceinfodebug'
+            keyAlias 'Device info debug'
+            keyPassword 'deviceinfodebug'
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            useProguard true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled true
+            useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        mock
+        prod
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    // Remove mockRelease as it's not needed.
+    android.variantFilter { variant ->
+        if (variant.buildType.name.equals('release')
+                && variant.getFlavors().get(0).name.equals('mock')) {
+            variant.setIgnore(true);
+        }
+    }
+
+    // Always show the result of every unit test, even if it passes.
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
         }
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    
-    testCompile 'junit:junit:4.12'
+    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.supportLibraryVersion"
+    compile "com.google.guava:guava:$rootProject.guavaVersion"
+
+    testCompile "junit:junit:$rootProject.junitVersion"
+}
+
+def getGitSha() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
 }

@@ -23,3 +23,17 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.10'
     distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 }
+
+// Define versions in a single place
+ext {
+    // Sdk and tools
+    minSdkVersion = 9
+    targetSdkVersion = 23
+    compileSdkVersion = 23
+    buildToolsVersion = '23.0.2'
+
+    // App dependencies
+    supportLibraryVersion = '23.1.1'
+    guavaVersion = '18.0'
+    junitVersion = '4.12'
+}
