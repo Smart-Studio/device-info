@@ -1,4 +1,17 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "com.jakewharton.hugo:hugo-plugin:$rootProject.hugoVersion"
+    }
+}
+
 apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.hugo'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
 
 def versionMajor = 1
 def versionMinor = 0
@@ -52,12 +65,14 @@ android {
             minifyEnabled true
             useProguard true
             shrinkResources true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         debug {
             minifyEnabled true
             useProguard false
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -68,8 +83,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     // Remove mockRelease as it's not needed.
@@ -93,7 +108,18 @@ dependencies {
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
     compile "com.google.guava:guava:$rootProject.guavaVersion"
+    compile "com.google.android.gms:play-services-analytics:$rootProject.playServicesVersion"
+    compile "com.google.android.gms:play-services-base:$rootProject.playServicesVersion"
+    compile "com.google.android.gms:play-services-ads:$rootProject.playServicesVersion"
+    compile "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
+    compile "com.jakewharton.timber:timber:$rootProject.timberVersion"
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$rootProject.leakCanaryVersion"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
+    compile "com.google.dagger:dagger:$rootProject.dagger2Version"
+    apt "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
 
+
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
     testCompile "junit:junit:$rootProject.junitVersion"
 }
 
