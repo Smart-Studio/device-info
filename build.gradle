@@ -42,5 +42,11 @@ ext {
     dagger2Version = '2.0.2'
     hugoVersion = '1.2.1'
 
+    // Testing dependencies
+    espressoVersion = '2.2.1'
+    testingSupportVersion = '0.4.1'
+    mockitoVersion = '2.0.2-beta'
+    powerMockitoVersion = '1.6.4'
+
     junitVersion = '4.12'
 }
