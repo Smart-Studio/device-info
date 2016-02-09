@@ -22,12 +22,19 @@ import com.smartstudio.deviceinfo.injection.Injector;
 import com.smartstudio.deviceinfo.injection.components.AppComponent;
 import com.smartstudio.deviceinfo.injection.components.DaggerAppComponent;
 
+import javax.inject.Inject;
+
+import timber.log.Timber;
+
 public class DeviceInfoApp extends Application {
     private static DeviceInfoApp sApp;
 
     public static DeviceInfoApp get() {
         return sApp;
     }
+
+    @Inject
+    Timber.Tree mLoggerTree;
 
     private final AppComponent mComponent;
 
@@ -39,6 +46,12 @@ public class DeviceInfoApp extends Application {
                 .appModule(Injector.injectAppModule(sApp))
                 .build();
         mComponent.inject(this);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Timber.plant(mLoggerTree);
     }
 
     public AppComponent getComponent() {
