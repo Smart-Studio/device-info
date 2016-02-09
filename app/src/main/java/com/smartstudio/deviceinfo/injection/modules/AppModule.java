@@ -19,11 +19,15 @@ package com.smartstudio.deviceinfo.injection.modules;
 import android.app.Application;
 import android.content.Context;
 
+import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
 import com.smartstudio.deviceinfo.injection.scopes.PerApplication;
+import com.smartstudio.deviceinfo.logging.DebugTree;
+import com.smartstudio.deviceinfo.logging.ReleaseTree;
 
 import dagger.Module;
 import dagger.Provides;
+import timber.log.Timber;
 
 @Module
 public class AppModule {
@@ -44,6 +48,12 @@ public class AppModule {
     @PerApplication
     Application provideApplication() {
         return mApp;
+    }
+
+    @Provides
+    @PerApplication
+    Timber.Tree provideTimberTree() {
+        return BuildConfig.DEBUG ? new DebugTree() : new ReleaseTree();
     }
 
 }
