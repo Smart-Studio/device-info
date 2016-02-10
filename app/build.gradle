@@ -1,11 +1,13 @@
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
+        maven { url 'https://www.testfairy.com/maven' }
         mavenCentral()
     }
 
     dependencies {
         classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'com.testfairy.plugins.gradle:testfairy:1.+'
         classpath "com.jakewharton.hugo:hugo-plugin:$rootProject.hugoVersion"
     }
 }
@@ -16,6 +18,7 @@ repositories {
 
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
+apply plugin: 'testfairy'
 apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
@@ -90,18 +93,21 @@ android {
         }
 
         debug {
-            //TODO Enable crashlytics when this bug is fixed
+            //TODO Enable crashlytics when this bug is fixed https://twittercommunity.com/t/crashlyticsstoredeobs-task-fails-with-enabled-shrinker/60935
             ext.enableCrashlytics = false
             minifyEnabled true
             useProguard false
             applicationIdSuffix '.debug'
+            versionNameSuffix " ${config.gitSha}"
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
     productFlavors {
-        mock
+        mock {
+            applicationIdSuffix '.mock'
+        }
         prod
     }
 
@@ -123,6 +129,14 @@ android {
         testLogging {
             events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
         }
+    }
+
+    testfairyConfig {
+        apiKey config.props.testfairy_api_key
+        videoRate "1"
+        videoQuality "medium"
+        iconWatermark true
+        maxDuration "10m"
     }
 }
 
