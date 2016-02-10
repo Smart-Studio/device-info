@@ -1,14 +1,21 @@
 buildscript {
     repositories {
+        maven { url 'https://maven.fabric.io/public' }
         mavenCentral()
     }
 
     dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
         classpath "com.jakewharton.hugo:hugo-plugin:$rootProject.hugoVersion"
     }
 }
 
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
@@ -20,16 +27,21 @@ def versionPatch = 0
 
 class Config {
     String gitSha
-    Properties keystoreProps
+    Properties props
 }
 
 ext {
     config = new Config()
     config.gitSha = getGitSha()
-    config.keystoreProps = new Properties()
+    config.props = new Properties()
+    config.props.load(new FileInputStream(project.file(("config/config.properties"))))
 
-    def basePath = projectDir.absolutePath + "/config/"
-    config.keystoreProps.load(new FileInputStream(rootProject.file((basePath + "keystore.properties"))))
+    Properties fabricProperties = new Properties()
+    File fabricPropertiesFile = new File(project.projectDir, "fabric.properties")
+    fabricPropertiesFile.createNewFile()
+    fabricProperties.load(new FileInputStream(fabricPropertiesFile))
+    fabricProperties.apiSecret = config.props.fabric_api_secret
+    fabricProperties.store(new FileOutputStream(fabricPropertiesFile), null)
 }
 
 android {
@@ -43,15 +55,21 @@ android {
         versionCode versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
 
+        manifestPlaceholders = [
+                fabricApiKey: config.props.fabric_api_key
+        ]
+
+        ext.betaDistributionGroupAliasesFilePath = config.props.fabric_testers_file
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
         release {
-            storeFile file(config.keystoreProps.release_store_file)
-            storePassword config.keystoreProps.release_store_pass
-            keyAlias config.keystoreProps.release_key_alias
-            keyPassword config.keystoreProps.release_key_pass
+            storeFile file(config.props.release_store_file)
+            storePassword config.props.release_store_pass
+            keyAlias config.props.release_key_alias
+            keyPassword config.props.release_key_pass
         }
 
         debug {
@@ -72,8 +90,11 @@ android {
         }
 
         debug {
+            //TODO Enable crashlytics when this bug is fixed
+            ext.enableCrashlytics = false
             minifyEnabled true
             useProguard false
+            applicationIdSuffix '.debug'
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -120,6 +141,9 @@ dependencies {
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
     compile "com.google.dagger:dagger:$rootProject.dagger2Version"
     apt "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
 
     // Android Testing Support Library's runner and rules
     androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion"

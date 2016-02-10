@@ -18,12 +18,14 @@ package com.smartstudio.deviceinfo;
 
 import android.app.Application;
 
+import com.crashlytics.android.Crashlytics;
 import com.smartstudio.deviceinfo.injection.Injector;
 import com.smartstudio.deviceinfo.injection.components.AppComponent;
 import com.smartstudio.deviceinfo.injection.components.DaggerAppComponent;
 
 import javax.inject.Inject;
 
+import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 public class DeviceInfoApp extends Application {
@@ -35,6 +37,8 @@ public class DeviceInfoApp extends Application {
 
     @Inject
     Timber.Tree mLoggerTree;
+    @Inject
+    Crashlytics mCrashlytics;
 
     private final AppComponent mComponent;
 
@@ -52,9 +56,14 @@ public class DeviceInfoApp extends Application {
     public void onCreate() {
         super.onCreate();
         Timber.plant(mLoggerTree);
+        initCrashlytics();
     }
 
     public AppComponent getComponent() {
         return mComponent;
+    }
+
+    private void initCrashlytics(){
+        Fabric.with(this, mCrashlytics);
     }
 }

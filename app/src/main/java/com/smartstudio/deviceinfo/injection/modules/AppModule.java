@@ -19,6 +19,7 @@ package com.smartstudio.deviceinfo.injection.modules;
 import android.app.Application;
 import android.content.Context;
 
+import com.crashlytics.android.Crashlytics;
 import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
 import com.smartstudio.deviceinfo.injection.scopes.PerApplication;
@@ -55,5 +56,12 @@ public class AppModule {
     Timber.Tree provideTimberTree() {
         return BuildConfig.DEBUG ? new DebugTree() : new ReleaseTree();
     }
+
+    @Provides
+    @PerApplication
+    Crashlytics provideCrashlytics() {
+        return new Crashlytics();
+    }
+
 
 }
