@@ -35,6 +35,7 @@ public class DeviceInfoApp extends Application {
         return sApp;
     }
 
+ 
     @Inject
     Timber.Tree mLoggerTree;
     @Inject
