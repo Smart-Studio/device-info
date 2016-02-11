@@ -57,6 +57,7 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         versionCode versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        project.archivesBaseName = "device-info-${versionName}"
 
         manifestPlaceholders = [
                 fabricApiKey: config.props.fabric_api_key
@@ -159,7 +160,7 @@ dependencies {
         transitive = true;
     }
 
-    // Android Testing Support Library's runner and rules
+    // Espresso UI Testing dependencies.
     androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
     androidTestCompile "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion"
     androidTestCompile "com.android.support.test.espresso:espresso-intents:$rootProject.ext.espressoVersion"
