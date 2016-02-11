@@ -63,7 +63,7 @@ public class DeviceInfoApp extends Application {
         return mComponent;
     }
 
-    private void initCrashlytics(){
+    private void initCrashlytics() {
         Fabric.with(this, mCrashlytics);
     }
 }
