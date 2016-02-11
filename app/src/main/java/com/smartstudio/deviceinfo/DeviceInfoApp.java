@@ -32,7 +32,7 @@ public class DeviceInfoApp extends Application {
     private static DeviceInfoApp sApp;
 
     public static DeviceInfoApp get() {
-        return sApp;  
+        return sApp; 
     }
 
     @Inject
