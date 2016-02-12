@@ -48,6 +48,8 @@ ext {
     testingSupportVersion = '0.4.1'
     mockitoVersion = '2.0.2-beta'
     powerMockitoVersion = '1.6.4'
+    robolectricVersion = '3.0'
+    assertjVersion = '3.3.0'
 
     junitVersion = '4.12'
 }
