@@ -9,11 +9,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity" />
+        <activity android:name=".controllers.ScreenInfoActivity" />
 
         <activity-alias
             android:name=".Launcher"
-            android:targetActivity=".MainActivity" >
+            android:targetActivity=".controllers.ScreenInfoActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

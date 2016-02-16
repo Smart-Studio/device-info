@@ -14,19 +14,14 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.injection.components;
+package com.smartstudio.deviceinfo.ui;
 
-import com.smartstudio.deviceinfo.DeviceInfoApp;
-import com.smartstudio.deviceinfo.injection.modules.AppModule;
-import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
-import com.smartstudio.deviceinfo.injection.scopes.PerApplication;
+import android.support.annotation.LayoutRes;
+import android.view.View;
 
-import dagger.Component;
+public interface BaseView {
+    @LayoutRes
+    int getLayoutResource();
 
-@PerApplication
-@Component(modules = AppModule.class)
-public interface AppComponent {
-    void inject(DeviceInfoApp app);
-
-    ScreenInfoComponent plus(ScreenInfoModule module);
+    void init(View view);
 }

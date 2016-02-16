@@ -2,6 +2,7 @@ package com.smartstudio.deviceinfo;
 
 import android.app.Activity;
 
+import com.smartstudio.deviceinfo.controllers.ScreenInfoActivity;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
 
 import org.junit.Before;
@@ -14,11 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(CustomRobolectricGradleTestRunner.class)
 @Config(sdk = 21, constants = BuildConfig.class)
-public class MainActivityTest {
+public class ScreenInfoActivityTest {
 
     @Before
     public void setUp() throws Exception {
-        Activity activity = Robolectric.setupActivity(MainActivity.class);
+        Activity activity = Robolectric.setupActivity(ScreenInfoActivity.class);
     }
 
     @Test

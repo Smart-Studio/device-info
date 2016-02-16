@@ -18,7 +18,7 @@ package com.smartstudio.deviceinfo.logging;
 
 import android.util.Log;
 
-//import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.Crashlytics;
 
 import timber.log.Timber;
 
@@ -39,7 +39,7 @@ public class ReleaseTree extends Timber.Tree {
         if (isLoggable(priority)) {
 
             if (priority == Log.ERROR && t != null) {
-              //  Crashlytics.logException(t);
+                Crashlytics.logException(t);
             }
 
             if (message.length() < MAX_LOG_LENGTH) {

@@ -16,17 +16,14 @@
 
 package com.smartstudio.deviceinfo.injection.components;
 
-import com.smartstudio.deviceinfo.DeviceInfoApp;
-import com.smartstudio.deviceinfo.injection.modules.AppModule;
+import com.smartstudio.deviceinfo.controllers.ScreenInfoActivity;
 import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
-import com.smartstudio.deviceinfo.injection.scopes.PerApplication;
+import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 
-import dagger.Component;
+import dagger.Subcomponent;
 
-@PerApplication
-@Component(modules = AppModule.class)
-public interface AppComponent {
-    void inject(DeviceInfoApp app);
-
-    ScreenInfoComponent plus(ScreenInfoModule module);
+@PerActivity
+@Subcomponent(modules = ScreenInfoModule.class)
+public interface ScreenInfoComponent {
+    void inject(ScreenInfoActivity activity);
 }
