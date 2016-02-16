@@ -55,6 +55,7 @@ public class CustomView extends ViewGroup {
         if (attrs != null) {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.PropertyView, 0, 0);
             setTitle(a.getText(R.styleable.PropertyView_titleText));
+            setValue(a.getText(R.styleable.PropertyView_valueText));
             a.recycle();
         }
 
@@ -93,38 +94,66 @@ public class CustomView extends ViewGroup {
     }
 
     @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        MarginLayoutParams params = (MarginLayoutParams) mTxtTitle.getLayoutParams();
-        mTxtTitle.layout(params.leftMargin, params.topMargin, r / 2 - params.rightMargin,
-                params.topMargin + mTxtTitle.getMeasuredHeight());
-        params = (MarginLayoutParams) mTxtValue.getLayoutParams();
-        mTxtValue.layout(r / 2 + params.leftMargin, params.topMargin, r - params.rightMargin,
-                params.topMargin + mTxtValue.getMeasuredHeight());
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        final MarginLayoutParams titleParams = (MarginLayoutParams) mTxtTitle.getLayoutParams();
+        final MarginLayoutParams valueParams = (MarginLayoutParams) mTxtValue.getLayoutParams();
+
+        int childLeft;
+        int childRight;
+        int childTop;
+        int childBottom;
+
+        /*if (mTxtTitle.getMeasuredHeight() < mTxtValue.getMeasuredHeight()) {
+            childLeft = titleParams.leftMargin + getPaddingLeft();
+            childRight = right / 2 - titleParams.rightMargin - getPaddingRight();
+            childTop = (getMeasuredHeight() - mTxtTitle.getMeasuredHeight()) / 2 + titleParams.topMargin - titleParams.bottomMargin - getPaddingTop();
+            childBottom = childTop + mTxtTitle.getMeasuredHeight();
+        } else {*/
+        childLeft = titleParams.leftMargin + getPaddingLeft();
+        childRight = childLeft + mTxtTitle.getMeasuredWidth();
+        childTop = titleParams.topMargin + getPaddingTop();
+        childBottom = childTop + mTxtTitle.getMeasuredHeight();
+        /*}*/
+
+        mTxtTitle.layout(childLeft, childTop, childRight, childBottom);
+
+        childLeft = childRight + valueParams.leftMargin;
+        childRight = childLeft + mTxtValue.getMeasuredWidth();
+        childTop = titleParams.topMargin + getPaddingTop();
+        childBottom = childBottom + mTxtValue.getMeasuredHeight();
+
+        mTxtValue.layout(childLeft, childTop, childRight, childBottom);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int widthConstraints = getPaddingLeft() + getPaddingRight();
-        int heightConstraints = getPaddingBottom() + getPaddingTop();
+        int widthPadding = getPaddingLeft() + getPaddingRight();
+        int heightPadding = getPaddingBottom() + getPaddingTop();
+
         int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
 
-        measureChildWithMargins(mTxtTitle, widthMeasureSpec, widthConstraints, heightMeasureSpec, heightConstraints);
-        widthConstraints += mTxtTitle.getMeasuredWidth();
-        measureChildWithMargins(mTxtValue, widthMeasureSpec, widthConstraints, heightMeasureSpec, heightConstraints);
+        measureChildWithMargins(mTxtTitle, widthMeasureSpec, widthPadding, heightMeasureSpec, heightPadding);
+        measureChildWithMargins(mTxtValue, widthMeasureSpec, widthPadding, heightMeasureSpec, heightPadding);
 
         int height = Math.max(mTxtTitle.getMeasuredHeight(), mTxtValue.getMeasuredHeight());
+
         MarginLayoutParams params = (MarginLayoutParams) mTxtTitle.getLayoutParams();
-        setMeasuredDimension(parentWidth, height + params.topMargin + params.bottomMargin);
+        //TODO Handle textViews margins
+
+        setMeasuredDimension(parentWidth, height + params.topMargin + params.bottomMargin + heightPadding);
     }
 
     @Override
     protected void measureChildWithMargins(View child, int parentWidthMeasureSpec,
                                            int widthUsed, int parentHeightMeasureSpec, int heightUsed) {
         int parentWidth = MeasureSpec.getSize(parentWidthMeasureSpec);
+
+        int padding = child == mTxtTitle ? getPaddingLeft() : getPaddingRight();
+
         final MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
 
         final int childWidthMeasureSpec = getChildMeasureSpec(parentWidthMeasureSpec,
-                lp.leftMargin + lp.rightMargin + widthUsed, parentWidth / 2 - lp.leftMargin - lp.rightMargin);
+                lp.leftMargin + lp.rightMargin + widthUsed, parentWidth / 2 - lp.leftMargin - lp.rightMargin) - padding;
         final int childHeightMeasureSpec = getChildMeasureSpec(parentHeightMeasureSpec,
                 lp.topMargin + lp.bottomMargin + heightUsed, lp.height);
 
