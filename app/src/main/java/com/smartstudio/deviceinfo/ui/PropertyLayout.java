@@ -58,7 +58,6 @@ public class PropertyLayout extends ViewGroup {
             setValue(a.getText(R.styleable.PropertyView_valueText));
             a.recycle();
         }
-
     }
 
     /**
@@ -66,7 +65,7 @@ public class PropertyLayout extends ViewGroup {
      */
     @Override
     protected ViewGroup.LayoutParams generateDefaultLayoutParams() {
-        return new MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        return new MarginLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
     }
 
     /**
@@ -95,8 +94,8 @@ public class PropertyLayout extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        final MarginLayoutParams titleParams = (MarginLayoutParams) mTxtTitle.getLayoutParams();
-        final MarginLayoutParams valueParams = (MarginLayoutParams) mTxtValue.getLayoutParams();
+        MarginLayoutParams titleParams = (MarginLayoutParams) mTxtTitle.getLayoutParams();
+        MarginLayoutParams valueParams = (MarginLayoutParams) mTxtValue.getLayoutParams();
 
         int childLeft;
         int childRight;
@@ -143,7 +142,6 @@ public class PropertyLayout extends ViewGroup {
         measureChildWithMargins(mTxtValue, widthMeasureSpec, widthPadding, heightMeasureSpec, heightPadding);
 
         int height = Math.max(mTxtTitle.getMeasuredHeight(), mTxtValue.getMeasuredHeight());
-
         MarginLayoutParams params = (MarginLayoutParams) mTxtTitle.getLayoutParams();
         //TODO Handle textViews margins
         setMeasuredDimension(parentWidth, height + params.topMargin + params.bottomMargin + heightPadding);
@@ -154,14 +152,18 @@ public class PropertyLayout extends ViewGroup {
                                            int widthUsed, int parentHeightMeasureSpec, int heightUsed) {
         int parentWidth = MeasureSpec.getSize(parentWidthMeasureSpec);
 
+        MarginLayoutParams params = (MarginLayoutParams) getLayoutParams();
+        MarginLayoutParams childParams = (MarginLayoutParams) child.getLayoutParams();
+
         int padding = child == mTxtTitle ? getPaddingLeft() : getPaddingRight();
+        int totalMargin = params.leftMargin + params.rightMargin;
+        int margin = child == mTxtTitle ? params.leftMargin : params.rightMargin;
 
-        final MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
-
-        final int childWidthMeasureSpec = getChildMeasureSpec(parentWidthMeasureSpec,
-                lp.leftMargin + lp.rightMargin + widthUsed, parentWidth / 2 - lp.leftMargin - lp.rightMargin) - padding;
-        final int childHeightMeasureSpec = getChildMeasureSpec(parentHeightMeasureSpec,
-                lp.topMargin + lp.bottomMargin + heightUsed, lp.height);
+        int childWidthMeasureSpec = getChildMeasureSpec(parentWidthMeasureSpec,
+                childParams.leftMargin + childParams.rightMargin + widthUsed, (parentWidth + totalMargin) / 2
+                        - childParams.leftMargin - childParams.rightMargin - padding - margin);
+        int childHeightMeasureSpec = getChildMeasureSpec(parentHeightMeasureSpec,
+                childParams.topMargin + childParams.bottomMargin + heightUsed, childParams.height);
 
         child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
     }

@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.smartstudio.deviceinfo.ui.PropertiesLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -58,4 +58,4 @@
         android:layout_height="wrap_content"
         app:titleText="@string/navigation_bar_height" />
 
-</LinearLayout>
+</com.smartstudio.deviceinfo.ui.PropertiesLayout>
