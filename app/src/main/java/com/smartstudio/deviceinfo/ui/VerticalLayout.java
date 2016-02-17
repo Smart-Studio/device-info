@@ -24,18 +24,18 @@ import android.view.ViewGroup;
 /**
  * TODO Add a class header comment
  */
-public class PropertiesLayout extends ViewGroup {
+public class VerticalLayout extends ViewGroup {
     private boolean mIsLayoutFinished;
 
-    public PropertiesLayout(Context context) {
+    public VerticalLayout(Context context) {
         super(context);
     }
 
-    public PropertiesLayout(Context context, AttributeSet attrs) {
+    public VerticalLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public PropertiesLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public VerticalLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -75,8 +75,8 @@ public class PropertiesLayout extends ViewGroup {
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
             MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
-            child.layout(params.leftMargin, height, params.leftMargin + child.getMeasuredWidth(), height + child.getMeasuredHeight());
-            height += child.getMeasuredHeight();
+            child.layout(params.leftMargin, height+params.topMargin, params.leftMargin + child.getMeasuredWidth(), height+params.topMargin + child.getMeasuredHeight());
+            height += child.getMeasuredHeight() + params.topMargin + params.bottomMargin;
         }
 
         mIsLayoutFinished = true;
@@ -95,7 +95,8 @@ public class PropertiesLayout extends ViewGroup {
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
             measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, 0);
-            height += child.getMeasuredHeight();
+            MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
+            height += child.getMeasuredHeight() + params.topMargin + params.bottomMargin;
         }
 
         setMeasuredDimension(parentWidth, height);

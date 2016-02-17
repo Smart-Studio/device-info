@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<com.smartstudio.deviceinfo.ui.PropertiesLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.smartstudio.deviceinfo.ui.VerticalLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,18 +22,21 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
+        android:layout_marginBottom="10dp"
         android:id="@+id/toolbar_screen_info"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary" />
 
     <com.smartstudio.deviceinfo.ui.PropertyLayout
+        style="@style/ScreenInfoProperty"
         android:id="@+id/view_device_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:titleText="@string/device" />
 
     <com.smartstudio.deviceinfo.ui.PropertyLayout
+        style="@style/ScreenInfoProperty"
         android:id="@+id/view_os"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,21 +44,24 @@
         tools:valueText="Android 5.1" />
 
     <com.smartstudio.deviceinfo.ui.PropertyLayout
+        style="@style/ScreenInfoProperty"
         android:id="@+id/view_screen_res"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:titleText="@string/screen_info" />
 
     <com.smartstudio.deviceinfo.ui.PropertyLayout
+        style="@style/ScreenInfoProperty"
         android:id="@+id/view_screen_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:titleText="@string/status_bar_height" />
 
     <com.smartstudio.deviceinfo.ui.PropertyLayout
+        style="@style/ScreenInfoProperty"
         android:id="@+id/view_screen_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:titleText="@string/navigation_bar_height" />
 
-</com.smartstudio.deviceinfo.ui.PropertiesLayout>
+</com.smartstudio.deviceinfo.ui.VerticalLayout>
