@@ -28,21 +28,21 @@ import com.smartstudio.deviceinfo.R;
 /**
  * TODO Add a class header comment
  */
-public class CustomView extends ViewGroup {
+public class PropertyLayout extends ViewGroup {
     private TextView mTxtTitle;
     private TextView mTxtValue;
 
-    public CustomView(Context context) {
+    public PropertyLayout(Context context) {
         super(context);
         init(null);
     }
 
-    public CustomView(Context context, AttributeSet attrs) {
+    public PropertyLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
-    public CustomView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public PropertyLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
@@ -103,25 +103,32 @@ public class CustomView extends ViewGroup {
         int childTop;
         int childBottom;
 
-        /*if (mTxtTitle.getMeasuredHeight() < mTxtValue.getMeasuredHeight()) {
-            childLeft = titleParams.leftMargin + getPaddingLeft();
-            childRight = right / 2 - titleParams.rightMargin - getPaddingRight();
-            childTop = (getMeasuredHeight() - mTxtTitle.getMeasuredHeight()) / 2 + titleParams.topMargin - titleParams.bottomMargin - getPaddingTop();
-            childBottom = childTop + mTxtTitle.getMeasuredHeight();
-        } else {*/
+        //TxtTitle layout
         childLeft = titleParams.leftMargin + getPaddingLeft();
         childRight = childLeft + mTxtTitle.getMeasuredWidth();
-        childTop = titleParams.topMargin + getPaddingTop();
-        childBottom = childTop + mTxtTitle.getMeasuredHeight();
-        /*}*/
 
+        if (mTxtTitle.getMeasuredHeight() < mTxtValue.getMeasuredHeight()) {
+            childTop = titleParams.topMargin + getPaddingTop() + mTxtValue.getMeasuredHeight() / 2
+                    - mTxtTitle.getMeasuredHeight() / 2;
+        } else {
+            childTop = titleParams.topMargin + getPaddingTop();
+        }
+
+        childBottom = childTop + mTxtTitle.getMeasuredHeight();
         mTxtTitle.layout(childLeft, childTop, childRight, childBottom);
 
+        //TxtValue layout
         childLeft = childRight + valueParams.leftMargin;
         childRight = childLeft + mTxtValue.getMeasuredWidth();
-        childTop = titleParams.topMargin + getPaddingTop();
-        childBottom = childBottom + mTxtValue.getMeasuredHeight();
 
+        if (mTxtValue.getMeasuredHeight() < mTxtTitle.getMeasuredHeight()) {
+            childTop = titleParams.topMargin + getPaddingTop() + mTxtTitle.getMeasuredHeight() / 2
+                    - mTxtValue.getMeasuredHeight() / 2;
+        } else {
+            childTop = titleParams.topMargin + getPaddingTop();
+        }
+
+        childBottom = childTop + mTxtValue.getMeasuredHeight();
         mTxtValue.layout(childLeft, childTop, childRight, childBottom);
     }
 
@@ -139,7 +146,6 @@ public class CustomView extends ViewGroup {
 
         MarginLayoutParams params = (MarginLayoutParams) mTxtTitle.getLayoutParams();
         //TODO Handle textViews margins
-
         setMeasuredDimension(parentWidth, height + params.topMargin + params.bottomMargin + heightPadding);
     }
 

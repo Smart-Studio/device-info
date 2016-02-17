@@ -41,19 +41,19 @@ public class ScreenInfoViewImpl implements ScreenInfoView {
     Toolbar mToolbar;
 
     @Bind(R.id.view_device_name)
-    CustomView mViewDeviceName;
+    PropertyLayout mViewDeviceName;
 
     @Bind(R.id.view_os)
-    CustomView mViewOs;
+    PropertyLayout mViewOs;
 
     @Bind(R.id.view_screen_res)
-    CustomView mViewScreenRes;
+    PropertyLayout mViewScreenRes;
 
     @Bind(R.id.view_screen_status)
-    CustomView mViewScreenStatus;
+    PropertyLayout mViewScreenStatus;
 
     @Bind(R.id.view_screen_navigation)
-    CustomView mViewScreenNavigation;
+    PropertyLayout mViewScreenNavigation;
 
     @Inject
     public ScreenInfoViewImpl(ScreenInfoController controller) {
