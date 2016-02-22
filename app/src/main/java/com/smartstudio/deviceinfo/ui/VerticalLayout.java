@@ -70,13 +70,17 @@ public class VerticalLayout extends ViewGroup {
             return;
         }
 
-        int height = 0;
+        int height = getPaddingTop();
 
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
-            MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
-            child.layout(params.leftMargin, height+params.topMargin, params.leftMargin + child.getMeasuredWidth(), height+params.topMargin + child.getMeasuredHeight());
-            height += child.getMeasuredHeight() + params.topMargin + params.bottomMargin;
+            if (child.getVisibility() != View.GONE) {
+                MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
+                height += params.topMargin;
+                child.layout(params.leftMargin, height, params.leftMargin
+                        + child.getMeasuredWidth(), height + child.getMeasuredHeight());
+                height += child.getMeasuredHeight() + params.bottomMargin;
+            }
         }
 
         mIsLayoutFinished = true;
@@ -90,13 +94,15 @@ public class VerticalLayout extends ViewGroup {
         }
 
         int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
-        int height = 0;
+        int height = getPaddingTop() + getPaddingBottom();
 
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
-            measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, 0);
-            MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
-            height += child.getMeasuredHeight() + params.topMargin + params.bottomMargin;
+            if (child.getVisibility() != View.GONE) {
+                measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, height);
+                MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
+                height += child.getMeasuredHeight() + params.topMargin + params.bottomMargin;
+            }
         }
 
         setMeasuredDimension(parentWidth, height);

@@ -15,9 +15,22 @@
   -->
 
 <resources>
-    <string name="screen_info">Screen info</string>
-    <string name="device">Device</string>
-    <string name="os">Android version</string>
+    <string name="device_info_title">Device Info</string>
+    <string name="model">Model</string>
+    <string name="manufacturer">Manufacturer</string>
+    <string name="os_version">Android version</string>
+    <string name="os_codename">Android codename</string>
+    <string name="os_api">Android API</string>
+    <string name="screen_size_title">Screen size</string>
+    <string name="screen_resolution">Resolution</string>
+    <string name="screen_inches">Inches</string>
+    <string name="screen_size">Size</string>
     <string name="status_bar_height">Status bar height</string>
     <string name="navigation_bar_height">Navigation bar height</string>
+    <string name="screen_density_title">Screen density</string>
+    <string name="screen_density">Density</string>
+    <string name="screen_density_code">Density code</string>
+    <string name="screen_density_x">Density x</string>
+    <string name="screen_density_y">Density y</string>
+    <string name="screen_content_title">Content area</string>
 </resources>

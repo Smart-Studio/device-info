@@ -16,8 +16,10 @@
 
 package com.smartstudio.deviceinfo.ui;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +56,10 @@ public class PropertyLayout extends ViewGroup {
 
         if (attrs != null) {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.PropertyView, 0, 0);
-            setTitle(a.getText(R.styleable.PropertyView_titleText));
-            setValue(a.getText(R.styleable.PropertyView_valueText));
+            setTitle(a.getText(R.styleable.PropertyView_title_text));
+            setValue(a.getText(R.styleable.PropertyView_value_text));
+            mTxtTitle.setTextColor(a.getColor(R.styleable.PropertyView_title_color, Color.WHITE));
+            mTxtTitle.setTextColor(a.getColor(R.styleable.PropertyView_value_color, Color.WHITE));
             a.recycle();
         }
     }
