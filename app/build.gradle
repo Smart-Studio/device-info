@@ -161,12 +161,17 @@ dependencies {
 
     // Espresso UI Testing dependencies.
     androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
-    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion"
+    androidTestCompile ("com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion"){
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'support-v4'
+    }
     androidTestCompile "com.android.support.test.espresso:espresso-intents:$rootProject.ext.espressoVersion"
     androidTestCompile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.ext.espressoVersion"
     // Android Testing Support Library's runner and rules
     androidTestCompile "com.android.support.test:runner:$rootProject.ext.testingSupportVersion"
     androidTestCompile "com.android.support.test:rules:$rootProject.ext.testingSupportVersion"
+    androidTestCompile 'com.squareup.assertj:assertj-android:1.1.1'
 
     // Dependencies for local unit tests
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
@@ -176,6 +181,7 @@ dependencies {
     testCompile "org.powermock:powermock-api-mockito:$rootProject.powerMockitoVersion"
     testCompile "org.robolectric:robolectric:$rootProject.robolectricVersion"
     testCompile "org.assertj:assertj-core:$rootProject.assertjVersion"
+    testCompile 'com.squareup.assertj:assertj-android:1.1.1'
 }
 
 /*

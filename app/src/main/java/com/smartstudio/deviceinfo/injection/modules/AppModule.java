@@ -23,7 +23,6 @@ import android.content.res.Resources;
 import com.crashlytics.android.Crashlytics;
 import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
-import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.injection.scopes.PerApplication;
 import com.smartstudio.deviceinfo.logging.DebugTree;
 import com.smartstudio.deviceinfo.logging.ReleaseTree;

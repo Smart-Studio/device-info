@@ -32,10 +32,10 @@ public class ScreenInfo {
     private int navigationBarHeight;
     private String screenSize;
     private int densityDpi;
-    private float density;
+    private double density;
     private String densityCode;
-    private float densityX;
-    private float densityY;
+    private double densityX;
+    private double densityY;
     private int actionBarHeight;
     private int contentTop;
     private int contentBottom;
@@ -141,11 +141,11 @@ public class ScreenInfo {
         this.densityDpi = densityDpi;
     }
 
-    public float getDensity() {
+    public double getDensity() {
         return density;
     }
 
-    public void setDensity(float density) {
+    public void setDensity(double density) {
         this.density = density;
     }
 
@@ -157,19 +157,19 @@ public class ScreenInfo {
         this.densityCode = densityCode;
     }
 
-    public float getDensityX() {
+    public double getDensityX() {
         return densityX;
     }
 
-    public void setDensityX(float densityX) {
+    public void setDensityX(double densityX) {
         this.densityX = densityX;
     }
 
-    public float getDensityY() {
+    public double getDensityY() {
         return densityY;
     }
 
-    public void setDensityY(float densityY) {
+    public void setDensityY(double densityY) {
         this.densityY = densityY;
     }
 

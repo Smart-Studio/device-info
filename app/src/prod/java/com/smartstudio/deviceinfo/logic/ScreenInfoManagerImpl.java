@@ -22,11 +22,9 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.Display;
 import android.view.ViewConfiguration;
 
-import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 
@@ -36,13 +34,11 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-/**
- * TODO Add a class header comment
- */
 public class ScreenInfoManagerImpl implements ScreenInfoManager {
     private static final String METHOD_GET_RAW_WIDTH = "getRawWidth";
     private static final String METHOD_GET_RAW_HEIGHT = "getRawHeight";
 
+    //Android versions codenames
     private static final String CUPCAKE = "Cupcake";
     private static final String DONUT = "Donut";
     private static final String ECLAIR = "Eclair";
@@ -64,10 +60,13 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
     private static final String LOLLIPOP_MR1 = "Lollipop MR1";
     private static final String MARSHMALLOW = "Marshmallow";
 
+    //Device screen size
     private static final String SCREEN_SIZE_SMALL = "small";
     private static final String SCREEN_SIZE_NORMAL = "normal";
     private static final String SCREEN_SIZE_LARGE = "large";
     private static final String SCREEN_SIZE_XLARGE = "xlarge";
+
+    //Device screen density
     private static final String DENSITY_LDPI = "ldpi";
     private static final String DENSITY_MDPI = "mdpi";
     private static final String DENSITY_HDPI = "hdpi";
@@ -145,12 +144,8 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
         mScreenInfo.setDensityX(mDisplayMetrics.xdpi);
         mScreenInfo.setDensityY(mDisplayMetrics.ydpi);
 
-        /*TypedArray attrs = mContext.getTheme().obtainStyledAttributes(new int[android.R.attr.actionBarSize]);
-        int actionBarHeight = attrs.getDimensionPixelSize(0, 0);
-        attrs.recycle();*/
-
-        final TypedArray attrs = mContext.getTheme().obtainStyledAttributes(
-                new int[] { android.R.attr.actionBarSize });
+        TypedArray attrs = mContext.getTheme().obtainStyledAttributes(
+                new int[]{android.R.attr.actionBarSize});
         int actionBarHeight = (int) attrs.getDimension(0, 0);
         attrs.recycle();
 
@@ -159,7 +154,6 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
         mScreenInfo.setContentTop(contentTop);
         mScreenInfo.setContentHeight(height - statusBarHeight - navigationBarHeight);
         mScreenInfo.setContentBottom(height - navigationBarHeight);
-
 
         return mScreenInfo;
     }
