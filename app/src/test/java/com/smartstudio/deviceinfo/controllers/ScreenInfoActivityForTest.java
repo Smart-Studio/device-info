@@ -16,23 +16,18 @@
 
 package com.smartstudio.deviceinfo.controllers;
 
-import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
-import com.smartstudio.deviceinfo.model.ScreenInfo;
-import com.smartstudio.deviceinfo.ui.ScreenInfoView;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 public class ScreenInfoActivityForTest extends ScreenInfoActivity {
-    ScreenInfo mScreenInfo;
+    ScreenInfoActivityTestComponent mComponent;
 
     @Override
     protected void initComponent() {
-        mView = mock(ScreenInfoView.class);
-        mScreenInfoManager = mock(ScreenInfoManager.class);
-        mScreenInfo = mock(ScreenInfo.class);
-        when(mView.getLayoutResource()).thenReturn(R.layout.activity_screen_info);
-        when(mScreenInfoManager.getScreenInfo()).thenReturn(mScreenInfo);
+        mComponent = DaggerScreenInfoActivityTestComponent.builder()
+                .screenInfoActivityTestModule(new ScreenInfoActivityTestModule())
+                .build();
+        mComponent.inject(this);
+    }
+
+    public ScreenInfoActivityTestComponent getComponent() {
+        return mComponent;
     }
 }

@@ -19,13 +19,18 @@ package com.smartstudio.deviceinfo.controllers;
 import android.support.v7.widget.Toolbar;
 
 import com.smartstudio.deviceinfo.BuildConfig;
+import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
+import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
+import com.smartstudio.deviceinfo.ui.ScreenInfoView;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
+
+import javax.inject.Inject;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -35,18 +40,26 @@ import static org.mockito.Mockito.when;
 @RunWith(CustomRobolectricGradleTestRunner.class)
 @Config(sdk = 21, constants = BuildConfig.class)
 public class ScreenInfoActivityUnitTest {
+    @Inject
+    ScreenInfoView mView;
+    @Inject
+    ScreenInfoManager mScreenInfoManager;
+    @Inject
+    ScreenInfo mScreenInfo;
+
     private ScreenInfoActivityForTest mActivity;
 
     @Before
     public void setUp() throws Exception {
         mActivity = Robolectric.setupActivity(ScreenInfoActivityForTest.class);
+        mActivity.getComponent().inject(this);
     }
 
     @Test
     public void testOnCreate() throws Exception {
-        verify(mActivity.mView).getLayoutResource();
-        verify(mActivity.mScreenInfoManager).getScreenInfo();
-        verify(mActivity.mView).showScreenInfo(mActivity.mScreenInfo);
+        verify(mView).getLayoutResource();
+        verify(mScreenInfoManager).getScreenInfo();
+        verify(mView).showScreenInfo(mScreenInfo);
     }
 
     @Test
