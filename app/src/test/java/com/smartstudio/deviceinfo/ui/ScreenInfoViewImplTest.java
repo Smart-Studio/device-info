@@ -79,9 +79,9 @@ public class ScreenInfoViewImplTest {
     private static final int CONTENT_TOP = 146;
     private static final int CONTENT_TOP_DP = 73;
     private static final int CONTENT_BOTTOM = 1184;
-    private static final int CONTENT_BOTTOM_DP = 567;
+    private static final int CONTENT_BOTTOM_DP = 592;
     private static final int CONTENT_HEIGHT = 1134;
-    private static final int CONTENT_HEIGHT_DP = 592;
+    private static final int CONTENT_HEIGHT_DP = 567;
 
     private ScreenInfoViewImpl mView;
 

@@ -21,26 +21,26 @@ import com.smartstudio.deviceinfo.model.ScreenInfo;
 import javax.inject.Inject;
 
 public class ScreenInfoManagerImpl implements ScreenInfoManager {
-    private static final String DEVICE_MODEL = "Nexus 4";
-    private static final String MANUFACTURER = "LGE";
-    private static final String ANDROID_VERSION = "4.3";
-    private static final String ANDROID_CODENAME = "Jelly Bean MR2";
-    private static final int ANDROID_API = 18;
-    private static final int WIDTH = 768;
-    private static final int HEIGHT = 1280;
-    private static final double INCHES = 4.7;
-    private static final int STATUS_BAR_HEIGHT = 50;
-    private static final int NAVIGATION_BAR_HEIGHT = 96;
-    private static final String SCREEN_SIZE = "normal";
-    private static final int DENSITY_DPI = 320;
-    private static final double DENSITY = 2.0;
-    private static final String DENSITY_CODE = "xhdpi";
-    private static final double DENSITY_X = 319.79;
-    private static final double DENSITY_Y = 318.74;
-    private static final int ACTION_BAR_HEIGHT = 96;
-    private static final int CONTENT_TOP = 146;
-    private static final int CONTENT_BOTTOM = 1184;
-    private static final int CONTENT_HEIGHT = 1134;
+    public static final String DEVICE_MODEL = "Nexus 4";
+    public static final String MANUFACTURER = "LGE";
+    public static final String ANDROID_VERSION = "4.3";
+    public static final String ANDROID_CODENAME = "Jelly Bean MR2";
+    public static final int ANDROID_API = 18;
+    public static final int WIDTH = 768;
+    public static final int HEIGHT = 1280;
+    public static final double INCHES = 4.7;
+    public static final int STATUS_BAR_HEIGHT = 50;
+    public static final int NAVIGATION_BAR_HEIGHT = 96;
+    public static final String SCREEN_SIZE = "normal";
+    public static final int DENSITY_DPI = 320;
+    public static final double DENSITY = 2.0;
+    public static final String DENSITY_CODE = "xhdpi";
+    public static final double DENSITY_X = 319.79;
+    public static final double DENSITY_Y = 318.74;
+    public static final int ACTION_BAR_HEIGHT = 96;
+    public static final int CONTENT_TOP = 146;
+    public static final int CONTENT_BOTTOM = 1184;
+    public static final int CONTENT_HEIGHT = 1134;
 
     @Inject
     public ScreenInfoManagerImpl() {

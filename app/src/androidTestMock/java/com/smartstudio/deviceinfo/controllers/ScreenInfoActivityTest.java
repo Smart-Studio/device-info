@@ -17,6 +17,7 @@
 package com.smartstudio.deviceinfo.controllers;
 
 import android.support.annotation.IdRes;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 
 import com.smartstudio.deviceinfo.R;
@@ -26,35 +27,67 @@ import org.junit.Test;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.ACTION_BAR_HEIGHT;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.ANDROID_API;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.ANDROID_CODENAME;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.ANDROID_VERSION;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.CONTENT_BOTTOM;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.CONTENT_HEIGHT;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.CONTENT_TOP;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.DENSITY;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.DENSITY_CODE;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.DENSITY_DPI;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.DENSITY_X;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.DENSITY_Y;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.DEVICE_MODEL;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.HEIGHT;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.INCHES;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.MANUFACTURER;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.NAVIGATION_BAR_HEIGHT;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.SCREEN_SIZE;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.STATUS_BAR_HEIGHT;
+import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.WIDTH;
 import static org.hamcrest.CoreMatchers.allOf;
 
 public class ScreenInfoActivityTest {
+    private static final int WIDTH_DP = 384;
+    private static final int HEIGHT_DP = 640;
+    private static final int STATUS_HEIGHT_DP = 25;
+    private static final int NAVIGATION_BAR_HEIGHT_DP = 48;
+    private static final int ACTION_BAR_HEIGHT_DP = 48;
+    private static final int CONTENT_TOP_DP = 73;
+    private static final int CONTENT_BOTTOM_DP = 592;
+    private static final int CONTENT_HEIGHT_DP = 567;
+
     @Rule
     public ActivityTestRule<ScreenInfoActivity> activityRule = new ActivityTestRule<>(ScreenInfoActivity.class);
 
     @Test
     public void testProperties() throws Exception {
-        assertPropertyText(R.id.view_device_name, "Nexus 4");
-        assertPropertyText(R.id.view_device_manufacturer, "LGE");
-        assertPropertyText(R.id.view_os, "4.3");
-        assertPropertyText(R.id.view_os_codename, "Jelly Bean MR2");
-        assertPropertyText(R.id.view_os_api, "18");
-        assertPropertyText(R.id.view_screen_res, "768x1280 px (384x640 dp)");
-        assertPropertyText(R.id.view_screen_inches, "4.7\"");
-        assertPropertyText(R.id.view_screen_size, "normal");
-        assertPropertyText(R.id.view_screen_status, "50 px (25 dp)");
-        assertPropertyText(R.id.view_screen_navigation, "96 px (48 dp)");
-        assertPropertyText(R.id.view_screen_density, "320 dp (x2.0)");
-        assertPropertyText(R.id.view_screen_density_code, "xhdpi");
-        assertPropertyText(R.id.view_screen_density_x, "319.79 dp");
-        assertPropertyText(R.id.view_screen_density_y, "318.74 dp");
-        assertPropertyText(R.id.view_screen_content_height, "1134 px (567 dp)");
-        assertPropertyText(R.id.view_screen_action_bar, "96 px (48 dp)");
-        assertPropertyText(R.id.view_screen_content_top, "146 px (73 dp)");
-        assertPropertyText(R.id.view_screen_content_bottom, "1184 px (592 dp)");
+        assertPropertyText(R.id.view_device_name, DEVICE_MODEL);
+        assertPropertyText(R.id.view_device_manufacturer, MANUFACTURER);
+        assertPropertyText(R.id.view_os, ANDROID_VERSION);
+        assertPropertyText(R.id.view_os_codename, ANDROID_CODENAME);
+        assertPropertyText(R.id.view_os_api, String.valueOf(ANDROID_API));
+        assertPropertyText(R.id.view_screen_res, WIDTH + "x" + HEIGHT + " px (" + WIDTH_DP + "x" + HEIGHT_DP + " dp)");
+        assertPropertyText(R.id.view_screen_inches, INCHES + "\"");
+        assertPropertyText(R.id.view_screen_size, SCREEN_SIZE);
+        assertPropertyText(R.id.view_screen_status, STATUS_BAR_HEIGHT + " px (" + STATUS_HEIGHT_DP + " dp)");
+        assertPropertyText(R.id.view_screen_navigation, NAVIGATION_BAR_HEIGHT + " px (" + NAVIGATION_BAR_HEIGHT_DP + " dp)");
+        assertPropertyText(R.id.view_screen_density, DENSITY_DPI + " dp (x" + DENSITY + ")");
+        assertPropertyText(R.id.view_screen_density_code, DENSITY_CODE);
+        assertPropertyText(R.id.view_screen_density_x, DENSITY_X + " dp");
+        assertPropertyText(R.id.view_screen_density_y, DENSITY_Y + " dp");
+        assertPropertyText(R.id.view_screen_content_height, CONTENT_HEIGHT + " px (" + CONTENT_HEIGHT_DP + " dp)");
+        assertPropertyText(R.id.view_screen_action_bar, ACTION_BAR_HEIGHT + " px (" + ACTION_BAR_HEIGHT_DP + " dp)");
+        assertPropertyText(R.id.view_screen_content_top, CONTENT_TOP + " px (" + CONTENT_TOP_DP + " dp)");
+        assertPropertyText(R.id.view_screen_content_bottom, CONTENT_BOTTOM + " px (" + CONTENT_BOTTOM_DP + " dp)");
+        onView(allOf(withId(R.id.txt_property_value), withParent(withId(R.id.view_screen_navigation))))
+                .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
     }
 
     private void assertPropertyText(@IdRes int propertyId, String value) {

@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.utils;
-
-import android.content.res.Resources;
+package com.smartstudio.deviceinfo.controllers;
 
 /**
  * TODO Add a class header comment
  */
-public class Utils {
-    public static int pxToDp(int pixels) {
-        return Math.round(pixels / Resources.getSystem().getDisplayMetrics().density);
-    }
+public class ScreenInfoActivityMockTest {
+
 }
