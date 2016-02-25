@@ -21,6 +21,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.support.annotation.VisibleForTesting;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.ViewConfiguration;
@@ -28,6 +29,7 @@ import android.view.ViewConfiguration;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import javax.inject.Inject;
@@ -35,45 +37,49 @@ import javax.inject.Inject;
 import timber.log.Timber;
 
 public class ScreenInfoManagerImpl implements ScreenInfoManager {
-    private static final String METHOD_GET_RAW_WIDTH = "getRawWidth";
-    private static final String METHOD_GET_RAW_HEIGHT = "getRawHeight";
+    protected static final String METHOD_GET_RAW_WIDTH = "getRawWidth";
+    protected static final String METHOD_GET_RAW_HEIGHT = "getRawHeight";
+    protected static final String STATUS_BAR_HEIGHT = "status_bar_height";
+    protected static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
+    protected static final String DIMEN = "dimen";
+    protected static final String ANDROID = "android";
 
     //Android versions codenames
-    private static final String CUPCAKE = "Cupcake";
-    private static final String DONUT = "Donut";
-    private static final String ECLAIR = "Eclair";
-    private static final String ECLAIR_0_1 = "Eclair 0 1";
-    private static final String ECLAIR_MR1 = "Eclair MR1";
-    private static final String FROYO = "Froyo";
-    private static final String GINGERBREAD = "Gingerbread";
-    private static final String GINGERBREAD_MR1 = "Gingerbread MR1";
-    private static final String HONEYCOMB = "Honeycomb";
-    private static final String HONEYCOMB_MR1 = "Honeycomb MR1";
-    private static final String HONEYCOMB_MR2 = "Honeycomb MR2";
-    private static final String ICE_CREAM_SANDWICH = "Ice Cream Sandwich";
-    private static final String ICE_CREAM_SANDWICH_MR1 = "Ice Cream Sandwich MR1";
-    private static final String JELLY_BEAN = "Jelly Bean";
-    private static final String JELLY_BEAN_MR1 = "Jelly Bean MR1";
-    private static final String JELLY_BEAN_MR2 = "Jelly Bean MR2";
-    private static final String KITKAT = "Kitkat";
-    private static final String LOLLIPOP = "Lollipop";
-    private static final String LOLLIPOP_MR1 = "Lollipop MR1";
-    private static final String MARSHMALLOW = "Marshmallow";
+    protected static final String CUPCAKE = "Cupcake";
+    protected static final String DONUT = "Donut";
+    protected static final String ECLAIR = "Eclair";
+    protected static final String ECLAIR_0_1 = "Eclair 0 1";
+    protected static final String ECLAIR_MR1 = "Eclair MR1";
+    protected static final String FROYO = "Froyo";
+    protected static final String GINGERBREAD = "Gingerbread";
+    protected static final String GINGERBREAD_MR1 = "Gingerbread MR1";
+    protected static final String HONEYCOMB = "Honeycomb";
+    protected static final String HONEYCOMB_MR1 = "Honeycomb MR1";
+    protected static final String HONEYCOMB_MR2 = "Honeycomb MR2";
+    protected static final String ICE_CREAM_SANDWICH = "Ice Cream Sandwich";
+    protected static final String ICE_CREAM_SANDWICH_MR1 = "Ice Cream Sandwich MR1";
+    protected static final String JELLY_BEAN = "Jelly Bean";
+    protected static final String JELLY_BEAN_MR1 = "Jelly Bean MR1";
+    protected static final String JELLY_BEAN_MR2 = "Jelly Bean MR2";
+    protected static final String KITKAT = "Kitkat";
+    protected static final String LOLLIPOP = "Lollipop";
+    protected static final String LOLLIPOP_MR1 = "Lollipop MR1";
+    protected static final String MARSHMALLOW = "Marshmallow";
 
     //Device screen size
-    private static final String SCREEN_SIZE_SMALL = "small";
-    private static final String SCREEN_SIZE_NORMAL = "normal";
-    private static final String SCREEN_SIZE_LARGE = "large";
-    private static final String SCREEN_SIZE_XLARGE = "xlarge";
+    protected static final String SCREEN_SIZE_SMALL = "small";
+    protected static final String SCREEN_SIZE_NORMAL = "normal";
+    protected static final String SCREEN_SIZE_LARGE = "large";
+    protected static final String SCREEN_SIZE_XLARGE = "xlarge";
 
     //Device screen density
-    private static final String DENSITY_LDPI = "ldpi";
-    private static final String DENSITY_MDPI = "mdpi";
-    private static final String DENSITY_HDPI = "hdpi";
-    private static final String DENSITY_XHDPI = "xhdpi";
-    private static final String DENSITY_XXHDPI = "xxhdpi";
-    private static final String DENSITY_XXXHDPI = "xxxhdpi";
-    private static final String UNKNOWN = "unknown";
+    protected static final String DENSITY_LDPI = "ldpi";
+    protected static final String DENSITY_MDPI = "mdpi";
+    protected static final String DENSITY_HDPI = "hdpi";
+    protected static final String DENSITY_XHDPI = "xhdpi";
+    protected static final String DENSITY_XXHDPI = "xxhdpi";
+    protected static final String DENSITY_XXXHDPI = "xxxhdpi";
+    protected static final String UNKNOWN = "unknown";
 
     private final Display mDisplay;
     private final DisplayMetrics mDisplayMetrics;
@@ -83,13 +89,12 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
 
     @Inject
     public ScreenInfoManagerImpl(Display display, DisplayMetrics displayMetrics,
-                                 ScreenInfo screenInfo, @ForApplication Context context,
-                                 Resources resources) {
+                                 ScreenInfo screenInfo, @ForApplication Context context) {
         mDisplay = display;
         mDisplayMetrics = displayMetrics;
         mScreenInfo = screenInfo;
         mContext = context;
-        mResources = resources;
+        mResources = context.getResources();
     }
 
     @Override
@@ -104,23 +109,20 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
         } else {
             mDisplay.getMetrics(mDisplayMetrics);
             try {
-                Method getRawWidthMethod = Display.class.getMethod(METHOD_GET_RAW_WIDTH);
-                Method getRawHeightMethod = Display.class.getMethod(METHOD_GET_RAW_HEIGHT);
-
-                width = (int) getRawWidthMethod.invoke(mDisplay);
-                height = (int) getRawHeightMethod.invoke(mDisplay);
+                width = getWidth();
+                height = getHeight();
             } catch (Exception e) {
                 Timber.e(e, "Error getting screen resolution");
             }
         }
 
-        int statusBarResourceId = mResources.getIdentifier("status_bar_height", "dimen", "android");
+        int statusBarResourceId = mResources.getIdentifier(STATUS_BAR_HEIGHT, DIMEN, ANDROID);
         int statusBarHeight = mResources.getDimensionPixelSize(statusBarResourceId);
         mScreenInfo.setStatusBarHeight(statusBarHeight);
 
         int navigationBarHeight = 0;
         if (!ViewConfiguration.get(mContext).hasPermanentMenuKey()) {
-            int navigationBarResourceId = mResources.getIdentifier("navigation_bar_height", "dimen", "android");
+            int navigationBarResourceId = mResources.getIdentifier(NAVIGATION_BAR_HEIGHT, DIMEN, ANDROID);
             navigationBarHeight = mResources.getDimensionPixelSize(navigationBarResourceId);
             mScreenInfo.setNavigationBarHeight(navigationBarHeight);
         }
@@ -201,8 +203,6 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
                 return LOLLIPOP_MR1;
             case Build.VERSION_CODES.M:
                 return MARSHMALLOW;
-
-
             default:
                 return UNKNOWN;
         }
@@ -251,5 +251,17 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
             default:
                 return UNKNOWN;
         }
+    }
+
+    @VisibleForTesting
+    int getWidth() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        Method getRawWidthMethod = Display.class.getMethod(METHOD_GET_RAW_WIDTH);
+        return (int) getRawWidthMethod.invoke(mDisplay);
+    }
+
+    @VisibleForTesting
+    int getHeight() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        Method getRawHeightMethod = Display.class.getMethod(METHOD_GET_RAW_HEIGHT);
+        return (int) getRawHeightMethod.invoke(mDisplay);
     }
 }
