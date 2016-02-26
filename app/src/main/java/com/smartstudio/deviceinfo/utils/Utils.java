@@ -18,11 +18,12 @@ package com.smartstudio.deviceinfo.utils;
 
 import android.content.res.Resources;
 
-/**
- * TODO Add a class header comment
- */
-public class Utils {
+public final class Utils {
     public static int pxToDp(int pixels) {
         return Math.round(pixels / Resources.getSystem().getDisplayMetrics().density);
+    }
+
+    private Utils() {
+
     }
 }
