@@ -271,6 +271,8 @@ project.afterEvaluate {
                     html.destination = "${buildDir}/reports/jacoco"
                 }
             }
+
+            println "##teamcity[jacocoReport dataPath=\'${project.buildDir}/jacoco/test${productFlavorName.capitalize()}${buildTypeName.capitalize()}UnitTest.exec\' includes=\'com.smartstudio.deviceinfo.*\' excludes=\'**/R.class **/R\$*.class **/*_Factory.class **/BuildConfig.* **/Manifest*.* android/**/*.* **/di/**/*.* **/org/**/*.* **/*_MembersInjector.class **/*\$\$*.class\']"
         }
     }
 }
