@@ -214,7 +214,6 @@ def getGitSha() {
     return 'git rev-parse --short HEAD'.execute().text.trim()
 }
 
-
 project.afterEvaluate {
     // Grab all build types and product flavors
     def buildTypes = android.buildTypes.collect { type -> type.name }
@@ -232,10 +231,13 @@ project.afterEvaluate {
                 sourceName = "${productFlavorName}${buildTypeName.capitalize()}"
                 sourcePath = "${productFlavorName}/${buildTypeName}"
             }
-            def testTaskName = "test${sourceName.capitalize()}UnitTest"
+            def unitTestTaskName = "test${sourceName.capitalize()}UnitTest"
+            def connectedTestTaskName = "connected${sourceName.capitalize()}AndroidTest"
 
             // Create coverage task of form 'testFlavorTypeCoverage' depending on 'testFlavorTypeUnitTest'
-            task "${testTaskName}Coverage" (type:JacocoReport, dependsOn: "$testTaskName") {
+            task "${unitTestTaskName}Coverage"(type: JacocoReport) {
+                dependsOn "$unitTestTaskName"
+                dependsOn "$connectedTestTaskName"
                 group = "Reporting"
                 description = "Generate Jacoco coverage reports on the ${sourceName.capitalize()} build."
 
@@ -245,6 +247,10 @@ project.afterEvaluate {
                                    '**/R$*.class',
                                    '**/*$ViewInjector*.*',
                                    '**/*$ViewBinder*.*',
+                                   '**/*Factory*.class',
+                                   '**/injection/components/*.*',
+                                   '**/*Provider*.class',
+                                   '**/*_MembersInjector.class',
                                    '**/BuildConfig.*',
                                    '**/Manifest*.*']
                 )
@@ -256,21 +262,19 @@ project.afterEvaluate {
                 ]
                 additionalSourceDirs = files(coverageSourceDirs)
                 sourceDirectories = files(coverageSourceDirs)
-                executionData = files("${project.buildDir}/jacoco/${testTaskName}.exec")
+                executionData = fileTree(dir: project.projectDir, includes: ['**/*.exec', '**/*.ec'])
 
                 reports {
                     xml.enabled = true
+                    xml.destination = "${buildDir}/reports/jacocoTestReport.xml"
                     html.enabled = true
+                    html.destination = "${buildDir}/reports/jacoco"
                 }
             }
         }
     }
 }
 
-configurations {
-    jacocoReport
-}
-
 jacoco {
-    toolVersion = "0.7.5.201505241946"
+    toolVersion = "$rootProject.jacocoVersion"
 }

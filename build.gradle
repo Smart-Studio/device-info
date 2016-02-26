@@ -3,6 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
+        classpath "org.jacoco:org.jacoco.core:0.7.6.201602180812"
         classpath 'com.android.tools.build:gradle:2.0.0-beta6'
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
@@ -33,7 +34,7 @@ ext {
     buildToolsVersion = '23.0.2'
 
     // App dependencies
-    supportLibraryVersion = '23.1.1'
+    supportLibraryVersion = '23.2.0'
     playServicesVersion = '8.4.0'
     guavaVersion = '18.0'
     butterknifeVersion = '7.0.1'
@@ -52,4 +53,5 @@ ext {
     assertjVersion = '3.3.0'
 
     junitVersion = '4.12'
+    jacocoVersion = '0.7.6.201602180812'
 }
