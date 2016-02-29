@@ -233,6 +233,9 @@ project.afterEvaluate {
             }
             def unitTestTaskName = "test${sourceName.capitalize()}UnitTest"
             def connectedTestTaskName = "connected${sourceName.capitalize()}AndroidTest"
+            if (productFlavorName == "prod" && buildTypeName == "release"){
+                connectedTestTaskName = "connectedAndroidTest"
+            }
 
             // Create coverage task of form 'testFlavorTypeCoverage' depending on 'testFlavorTypeUnitTest'
             task "${unitTestTaskName}Coverage"(type: JacocoReport) {
@@ -271,8 +274,6 @@ project.afterEvaluate {
                     html.destination = "${buildDir}/reports/jacoco"
                 }
             }
-
-            println "##teamcity[jacocoReport dataPath=\'app/build//jacoco/test${productFlavorName.capitalize()}${buildTypeName.capitalize()}UnitTest.exec\' includes=\'com.smartstudio.deviceinfo.*\' excludes=\'**/R.class **/R\$*.class **/*_Factory.class **/BuildConfig.* **/Manifest*.* android/**/*.* **/di/**/*.* **/org/**/*.* **/*_MembersInjector.class **/*\$\$*.class\']"
         }
     }
 }
