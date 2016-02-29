@@ -18,6 +18,7 @@ package com.smartstudio.deviceinfo.injection.modules;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.crashlytics.android.Crashlytics;
 import com.smartstudio.deviceinfo.BuildConfig;
@@ -43,6 +44,12 @@ public class AppModule {
     @ForApplication
     Context provideContext() {
         return mApp;
+    }
+
+    @Provides
+    @PerApplication
+    Resources provideResources() {
+        return mApp.getResources();
     }
 
     @Provides

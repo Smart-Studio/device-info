@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2016 Smart Studio.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="device_info_title">Device Info</string>
+    <string name="model">Model</string>
+    <string name="manufacturer">Manufacturer</string>
+    <string name="os_version">Android version</string>
+    <string name="os_codename">Android codename</string>
+    <string name="os_api">Android API</string>
+    <string name="screen_size_title">Screen size</string>
+    <string name="screen_resolution">Resolution</string>
+    <string name="screen_inches">Inches</string>
+    <string name="screen_size">Size</string>
+    <string name="status_bar_height">Status bar height</string>
+    <string name="navigation_bar_height">Navigation bar height</string>
+    <string name="screen_density_title">Screen density</string>
+    <string name="screen_density">Density</string>
+    <string name="screen_density_code">Density code</string>
+    <string name="screen_density_x">Density x</string>
+    <string name="screen_density_y">Density y</string>
+    <string name="screen_content_title">Content area</string>
+</resources>

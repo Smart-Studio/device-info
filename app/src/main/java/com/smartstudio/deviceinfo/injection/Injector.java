@@ -17,11 +17,19 @@
 package com.smartstudio.deviceinfo.injection;
 
 import android.app.Application;
+import android.view.Display;
 
+import com.smartstudio.deviceinfo.controllers.ScreenInfoController;
 import com.smartstudio.deviceinfo.injection.modules.AppModule;
+import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
 
 public class Injector {
-    public static AppModule injectAppModule(Application app) {
+    public static AppModule provideAppModule(Application app) {
         return new AppModule(app);
+    }
+
+    public static ScreenInfoModule provideScreenInfoModule(ScreenInfoController controller,
+                                                           Display display) {
+        return new ScreenInfoModule(controller, display);
     }
 }

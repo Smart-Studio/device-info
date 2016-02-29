@@ -47,7 +47,7 @@ public class DeviceInfoApp extends Application {
 
         mComponent = DaggerAppComponent
                 .builder()
-                .appModule(Injector.injectAppModule(sApp))
+                .appModule(Injector.provideAppModule(sApp))
                 .build();
         mComponent.inject(this);
     }

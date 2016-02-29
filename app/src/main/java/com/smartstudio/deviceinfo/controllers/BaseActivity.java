@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.injection.components;
+package com.smartstudio.deviceinfo.controllers;
 
-import com.smartstudio.deviceinfo.DeviceInfoApp;
-import com.smartstudio.deviceinfo.injection.modules.AppModule;
-import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
-import com.smartstudio.deviceinfo.injection.scopes.PerApplication;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 
-import dagger.Component;
+public abstract class BaseActivity extends AppCompatActivity {
 
-@PerApplication
-@Component(modules = AppModule.class)
-public interface AppComponent {
-    void inject(DeviceInfoApp app);
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initComponent();
+    }
 
-    ScreenInfoComponent plus(ScreenInfoModule module);
+    protected abstract void initComponent();
+
+
 }

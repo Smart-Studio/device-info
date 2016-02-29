@@ -22,6 +22,7 @@ apply plugin: 'testfairy'
 apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'jacoco'
 
 def versionMajor = 1
 def versionMinor = 0
@@ -89,6 +90,7 @@ android {
             minifyEnabled true
             useProguard true
             shrinkResources true
+            testCoverageEnabled true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -96,6 +98,7 @@ android {
         debug {
             minifyEnabled true
             useProguard false
+            testCoverageEnabled true
             applicationIdSuffix '.debug'
             versionNameSuffix " ${config.gitSha}"
             signingConfig signingConfigs.debug
@@ -161,21 +164,30 @@ dependencies {
 
     // Espresso UI Testing dependencies.
     androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
-    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion"
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion") {
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'support-v4'
+    }
     androidTestCompile "com.android.support.test.espresso:espresso-intents:$rootProject.ext.espressoVersion"
     androidTestCompile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.ext.espressoVersion"
     // Android Testing Support Library's runner and rules
     androidTestCompile "com.android.support.test:runner:$rootProject.ext.testingSupportVersion"
     androidTestCompile "com.android.support.test:rules:$rootProject.ext.testingSupportVersion"
+    androidTestCompile 'com.squareup.assertj:assertj-android:1.1.1'
 
     // Dependencies for local unit tests
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
     testCompile "junit:junit:$rootProject.junitVersion"
     testCompile "org.mockito:mockito-all:$rootProject.mockitoVersion"
     testCompile "org.powermock:powermock-module-junit4:$rootProject.powerMockitoVersion"
+    testCompile "org.powermock:powermock-module-junit4-rule:$rootProject.powerMockitoVersion"
     testCompile "org.powermock:powermock-api-mockito:$rootProject.powerMockitoVersion"
     testCompile "org.robolectric:robolectric:$rootProject.robolectricVersion"
     testCompile "org.assertj:assertj-core:$rootProject.assertjVersion"
+    testCompile 'com.squareup.assertj:assertj-android:1.1.1'
+    testCompile "com.google.dagger:dagger:$rootProject.dagger2Version"
+    testCompile "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
 }
 
 /*
@@ -200,4 +212,72 @@ configurations.compile.dependencies.each { compileDependency ->
 
 def getGitSha() {
     return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+project.afterEvaluate {
+    // Grab all build types and product flavors
+    def buildTypes = android.buildTypes.collect { type -> type.name }
+    def productFlavors = android.productFlavors.collect { flavor -> flavor.name }
+
+    // When no product flavors defined, use empty
+    if (!productFlavors) productFlavors.add('')
+
+    productFlavors.each { productFlavorName ->
+        buildTypes.each { buildTypeName ->
+            def sourceName, sourcePath
+            if (!productFlavorName) {
+                sourceName = sourcePath = "${buildTypeName}"
+            } else {
+                sourceName = "${productFlavorName}${buildTypeName.capitalize()}"
+                sourcePath = "${productFlavorName}/${buildTypeName}"
+            }
+            def unitTestTaskName = "test${sourceName.capitalize()}UnitTest"
+            def connectedTestTaskName = "connected${sourceName.capitalize()}AndroidTest"
+            if (productFlavorName == "prod" && buildTypeName == "release"){
+                connectedTestTaskName = "connectedAndroidTest"
+            }
+
+            // Create coverage task of form 'testFlavorTypeCoverage' depending on 'testFlavorTypeUnitTest'
+            task "${unitTestTaskName}Coverage"(type: JacocoReport) {
+                dependsOn "$unitTestTaskName"
+                dependsOn "$connectedTestTaskName"
+                group = "Reporting"
+                description = "Generate Jacoco coverage reports on the ${sourceName.capitalize()} build."
+
+                classDirectories = fileTree(
+                        dir: "${project.buildDir}/intermediates/classes/${sourcePath}",
+                        excludes: ['**/R.class',
+                                   '**/R$*.class',
+                                   '**/*$ViewInjector*.*',
+                                   '**/*$ViewBinder*.*',
+                                   '**/*Factory*.class',
+                                   '**/injection/components/*.*',
+                                   '**/*Provider*.class',
+                                   '**/*_MembersInjector.class',
+                                   '**/BuildConfig.*',
+                                   '**/Manifest*.*']
+                )
+
+                def coverageSourceDirs = [
+                        "src/main/java",
+                        "src/$productFlavorName/java",
+                        "src/$buildTypeName/java"
+                ]
+                additionalSourceDirs = files(coverageSourceDirs)
+                sourceDirectories = files(coverageSourceDirs)
+                executionData = fileTree(dir: project.projectDir, includes: ['**/*.exec', '**/*.ec'])
+
+                reports {
+                    xml.enabled = true
+                    xml.destination = "${buildDir}/reports/jacoco/jacocoTestReport.xml"
+                    html.enabled = true
+                    html.destination = "${buildDir}/reports/jacoco"
+                }
+            }
+        }
+    }
+}
+
+jacoco {
+    toolVersion = "$rootProject.jacocoVersion"
 }

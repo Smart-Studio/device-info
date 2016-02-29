@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.injection.components;
+package com.smartstudio.deviceinfo.utils;
 
-import com.smartstudio.deviceinfo.DeviceInfoApp;
-import com.smartstudio.deviceinfo.injection.modules.AppModule;
-import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
-import com.smartstudio.deviceinfo.injection.scopes.PerApplication;
+import android.content.res.Resources;
 
-import dagger.Component;
+public final class Utils {
+    public static int pxToDp(int pixels) {
+        return Math.round(pixels / Resources.getSystem().getDisplayMetrics().density);
+    }
 
-@PerApplication
-@Component(modules = AppModule.class)
-public interface AppComponent {
-    void inject(DeviceInfoApp app);
+    private Utils() {
 
-    ScreenInfoComponent plus(ScreenInfoModule module);
+    }
 }

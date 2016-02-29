@@ -1,11 +1,21 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ScreenInfoProperty">
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="ScreenInfoProperty.Title">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textSize">16sp</item>
+        <item name="indicator_color">@android:color/holo_green_dark</item>
+    </style>
 </resources>
