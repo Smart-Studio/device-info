@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers;
+package com.smartstudio.deviceinfo.controllers.about;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
-/**
- * TODO Add a class header comment
- */
-public interface ScreenInfoController {
 
-    void setUpToolBar(Toolbar toolbar);
+public interface AboutController {
+    ActionBar setUpToolBar(Toolbar toolbar);
+
+    void onOpenSourceClicked();
 }

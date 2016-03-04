@@ -8,6 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="BaseToolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?android:attr/actionBarSize</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:elevation">5dp</item>
+        <item name="theme">@style/ToolbarTheme</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    </style>
+
     <style name="ScreenInfoProperty">
         <item name="android:layout_marginBottom">10dp</item>
     </style>
@@ -17,5 +29,15 @@
         <item name="android:textStyle">bold|italic</item>
         <item name="android:textSize">16sp</item>
         <item name="indicator_color">@android:color/holo_green_dark</item>
+    </style>
+
+    <style name="AboutProperty">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:clickable">true</item>
     </style>
 </resources>

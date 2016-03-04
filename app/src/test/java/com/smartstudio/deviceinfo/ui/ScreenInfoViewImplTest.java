@@ -20,8 +20,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.controllers.ScreenInfoController;
+import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoViewImpl;
 import com.smartstudio.deviceinfo.utils.Utils;
 
 import org.junit.Before;

@@ -64,6 +64,7 @@ android {
                 fabricApiKey: config.props.fabric_api_key
         ]
 
+        buildConfigField "String", "REPOSITORY_URL", "\"${config.props.repository_url}\""
         ext.betaDistributionGroupAliasesFilePath = config.props.fabric_testers_file
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -233,7 +234,7 @@ project.afterEvaluate {
             }
             def unitTestTaskName = "test${sourceName.capitalize()}UnitTest"
             def connectedTestTaskName = "connected${sourceName.capitalize()}AndroidTest"
-            if (productFlavorName == "prod" && buildTypeName == "release"){
+            if (productFlavorName == "prod" && buildTypeName == "release") {
                 connectedTestTaskName = "connectedAndroidTest"
             }
 

@@ -19,7 +19,9 @@ package com.smartstudio.deviceinfo.injection;
 import android.app.Application;
 import android.view.Display;
 
-import com.smartstudio.deviceinfo.controllers.ScreenInfoController;
+import com.smartstudio.deviceinfo.controllers.about.AboutController;
+import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
+import com.smartstudio.deviceinfo.injection.modules.AboutModule;
 import com.smartstudio.deviceinfo.injection.modules.AppModule;
 import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
 
@@ -31,5 +33,9 @@ public class Injector {
     public static ScreenInfoModule provideScreenInfoModule(ScreenInfoController controller,
                                                            Display display) {
         return new ScreenInfoModule(controller, display);
+    }
+
+    public static AboutModule provideAboutModule(AboutController controller){
+        return new AboutModule(controller);
     }
 }

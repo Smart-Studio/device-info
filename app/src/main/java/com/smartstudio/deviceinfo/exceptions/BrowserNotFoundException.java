@@ -14,16 +14,7 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.injection.components;
+package com.smartstudio.deviceinfo.exceptions;
 
-import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoActivity;
-import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
-import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
-
-import dagger.Subcomponent;
-
-@PerActivity
-@Subcomponent(modules = ScreenInfoModule.class)
-public interface ScreenInfoComponent {
-    void inject(ScreenInfoActivity activity);
+public class BrowserNotFoundException extends Exception {
 }

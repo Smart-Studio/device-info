@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.ui;
+package com.smartstudio.deviceinfo.ui.about;
 
-import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.ui.BaseView;
 
 /**
  * TODO Add a class header comment
  */
-public interface ScreenInfoView extends BaseView{
-    void showScreenInfo(ScreenInfo screenInfo);
+public interface AboutView extends BaseView{
 }

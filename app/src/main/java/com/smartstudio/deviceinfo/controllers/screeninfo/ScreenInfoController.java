@@ -14,22 +14,14 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers;
+package com.smartstudio.deviceinfo.controllers.screeninfo;
 
-import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoActivity;
+import android.support.v7.widget.Toolbar;
 
-public class ScreenInfoActivityForTest extends ScreenInfoActivity {
-    ScreenInfoActivityTestComponent mComponent;
+/**
+ * TODO Add a class header comment
+ */
+public interface ScreenInfoController {
 
-    @Override
-    protected void initComponent() {
-        mComponent = DaggerScreenInfoActivityTestComponent.builder()
-                .screenInfoActivityTestModule(new ScreenInfoActivityTestModule())
-                .build();
-        mComponent.inject(this);
-    }
-
-    public ScreenInfoActivityTestComponent getComponent() {
-        return mComponent;
-    }
+    void setUpToolBar(Toolbar toolbar);
 }

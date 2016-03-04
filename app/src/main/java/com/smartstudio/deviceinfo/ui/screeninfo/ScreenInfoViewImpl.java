@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.ui;
+package com.smartstudio.deviceinfo.ui.screeninfo;
 
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.controllers.ScreenInfoController;
+import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.ui.PropertyLayout;
 import com.smartstudio.deviceinfo.utils.Utils;
 
 import java.util.Locale;

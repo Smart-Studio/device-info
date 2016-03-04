@@ -20,7 +20,7 @@ import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
-import com.smartstudio.deviceinfo.ui.ScreenInfoView;
+import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
 
 import dagger.Module;
 import dagger.Provides;

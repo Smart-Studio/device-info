@@ -22,7 +22,7 @@ import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
-import com.smartstudio.deviceinfo.ui.ScreenInfoView;
+import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
 
 import org.junit.Before;
 import org.junit.Test;

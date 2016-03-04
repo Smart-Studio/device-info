@@ -21,10 +21,8 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_screen_info"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:elevation="5dp" />
+        style="@style/BaseToolbar"
+        app:title="@string/device_info_title" />
 
     <ScrollView
         android:layout_width="match_parent"

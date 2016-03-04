@@ -14,16 +14,33 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.injection.components;
+package com.smartstudio.deviceinfo.injection.modules;
 
-import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoActivity;
-import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
+import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
+import com.smartstudio.deviceinfo.ui.about.AboutView;
+import com.smartstudio.deviceinfo.ui.about.AboutViewImpl;
 
-import dagger.Subcomponent;
+import dagger.Module;
+import dagger.Provides;
 
-@PerActivity
-@Subcomponent(modules = ScreenInfoModule.class)
-public interface ScreenInfoComponent {
-    void inject(ScreenInfoActivity activity);
+@Module
+public class AboutModule {
+
+    private final AboutController mController;
+
+    public AboutModule(AboutController controller) {
+        mController = controller;
+    }
+
+    @Provides
+    AboutController provideController() {
+        return mController;
+    }
+
+    @Provides
+    @PerActivity
+    AboutView provideView(AboutViewImpl view) {
+        return view;
+    }
 }
