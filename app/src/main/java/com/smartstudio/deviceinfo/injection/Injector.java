@@ -20,9 +20,11 @@ import android.app.Application;
 import android.view.Display;
 
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
+import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
 import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.injection.modules.AboutModule;
 import com.smartstudio.deviceinfo.injection.modules.AppModule;
+import com.smartstudio.deviceinfo.injection.modules.AttributionsModule;
 import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
 
 public class Injector {
@@ -37,5 +39,9 @@ public class Injector {
 
     public static AboutModule provideAboutModule(AboutController controller){
         return new AboutModule(controller);
+    }
+
+    public static AttributionsModule provideAttributionsModule(AttributionsController controller){
+        return new AttributionsModule(controller);
     }
 }

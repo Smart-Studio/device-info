@@ -22,6 +22,8 @@
 
         <activity android:name=".controllers.about.AboutActivity" />
 
+        <activity android:name=".controllers.about.attributions.AttributionsActivity"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="${fabricApiKey}" />

@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.ui;
+package com.smartstudio.deviceinfo.controllers.about.attributions;
 
-import android.support.annotation.LayoutRes;
-import android.view.View;
+import com.smartstudio.deviceinfo.controllers.BaseController;
 
-public interface BaseView {
-    @LayoutRes
-    int getLayoutResourceId();
-
-    void init(View view);
+public interface AttributionsController extends BaseController {
+    void onAttributionClicked(String repoUrl);
 }

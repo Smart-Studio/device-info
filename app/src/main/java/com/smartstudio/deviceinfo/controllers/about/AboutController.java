@@ -16,12 +16,12 @@
 
 package com.smartstudio.deviceinfo.controllers.about;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
+import com.smartstudio.deviceinfo.controllers.BaseController;
 
 
-public interface AboutController {
-    ActionBar setUpToolBar(Toolbar toolbar);
-
+public interface AboutController extends BaseController {
     void onOpenSourceClicked();
+
+    void onAttributionsClicked();
+
 }

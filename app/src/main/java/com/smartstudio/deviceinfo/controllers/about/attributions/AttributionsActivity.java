@@ -14,40 +14,50 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.about;
+package com.smartstudio.deviceinfo.controllers.about.attributions;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.MenuItem;
 
-import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.DeviceInfoApp;
 import com.smartstudio.deviceinfo.controllers.BaseActivity;
-import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsActivity;
 import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
 import com.smartstudio.deviceinfo.injection.Injector;
-import com.smartstudio.deviceinfo.ui.about.AboutView;
+import com.smartstudio.deviceinfo.logic.AttributionsProvider;
+import com.smartstudio.deviceinfo.ui.about.attributions.AttributionsView;
 import com.smartstudio.deviceinfo.utils.Utils;
 
 import javax.inject.Inject;
 
 import timber.log.Timber;
 
-
-public class AboutActivity extends BaseActivity implements AboutController {
+public class AttributionsActivity extends BaseActivity implements AttributionsController {
 
     public static void launch(Activity activity) {
-        Intent intent = new Intent(activity, AboutActivity.class);
+        Intent intent = new Intent(activity, AttributionsActivity.class);
         activity.startActivity(intent);
     }
 
     @Inject
-    AboutView mView;
+    AttributionsView mView;
+
+    @Inject
+    AttributionsProvider mAttributionsProvider;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mView.showAttributions(mAttributionsProvider.getAttributions());
+    }
 
     @Override
     protected void initComponent() {
         DeviceInfoApp.get()
-                .getComponent().plus(Injector.provideAboutModule(this))
+                .getComponent()
+                .plus(Injector.provideAttributionsModule(this))
                 .inject(this);
     }
 
@@ -58,20 +68,16 @@ public class AboutActivity extends BaseActivity implements AboutController {
                 onBackPressed();
                 break;
         }
+
         return true;
     }
 
     @Override
-    public void onOpenSourceClicked() {
+    public void onAttributionClicked(String repoUrl) {
         try {
-            Utils.openUrl(this, BuildConfig.REPOSITORY_URL);
+            Utils.openUrl(this, repoUrl);
         } catch (BrowserNotFoundException e) {
-            Timber.e(e, "Error opening link");
+            Timber.e(e, "Error opening link to %s", repoUrl);
         }
-    }
-
-    @Override
-    public void onAttributionsClicked() {
-        AttributionsActivity.launch(this);
     }
 }

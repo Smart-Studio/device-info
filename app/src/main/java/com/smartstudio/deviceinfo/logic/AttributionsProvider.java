@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.ui;
+package com.smartstudio.deviceinfo.logic;
 
-import android.support.annotation.LayoutRes;
-import android.view.View;
+import com.smartstudio.deviceinfo.model.Attribution;
 
-public interface BaseView {
-    @LayoutRes
-    int getLayoutResourceId();
+import java.util.List;
 
-    void init(View view);
+public interface AttributionsProvider {
+    List<Attribution> getAttributions();
 }

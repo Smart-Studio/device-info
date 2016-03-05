@@ -18,6 +18,7 @@ package com.smartstudio.deviceinfo.injection.modules;
 
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
+import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.about.AboutView;
 import com.smartstudio.deviceinfo.ui.about.AboutViewImpl;
 
@@ -41,6 +42,12 @@ public class AboutModule {
     @Provides
     @PerActivity
     AboutView provideView(AboutViewImpl view) {
+        return view;
+    }
+
+    @Provides
+    @PerActivity
+    BaseView provideBaseView(AboutView view) {
         return view;
     }
 }

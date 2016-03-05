@@ -18,17 +18,31 @@ package com.smartstudio.deviceinfo.controllers;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
-public abstract class BaseActivity extends AppCompatActivity {
+import com.smartstudio.deviceinfo.ui.BaseView;
+
+import javax.inject.Inject;
+
+public abstract class BaseActivity extends AppCompatActivity implements BaseController {
+    @Inject
+    BaseView mView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initComponent();
+        setContentView(mView.getLayoutResourceId());
+        mView.init(getWindow().getDecorView());
     }
 
     protected abstract void initComponent();
 
-
+    @Override
+    public ActionBar setUpToolbar(Toolbar toolbar) {
+        setSupportActionBar(toolbar);
+        return getSupportActionBar();
+    }
 }

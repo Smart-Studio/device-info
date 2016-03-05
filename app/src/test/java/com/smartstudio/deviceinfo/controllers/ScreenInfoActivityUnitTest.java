@@ -57,7 +57,7 @@ public class ScreenInfoActivityUnitTest {
 
     @Test
     public void testOnCreate() throws Exception {
-        verify(mView).getLayoutResource();
+        verify(mView).getLayoutResourceId();
         verify(mScreenInfoManager).getScreenInfo();
         verify(mView).showScreenInfo(mScreenInfo);
     }

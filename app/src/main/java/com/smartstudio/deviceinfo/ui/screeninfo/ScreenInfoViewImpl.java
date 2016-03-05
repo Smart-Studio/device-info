@@ -22,6 +22,7 @@ import android.view.View;
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.ui.BaseViewImpl;
 import com.smartstudio.deviceinfo.ui.PropertyLayout;
 import com.smartstudio.deviceinfo.utils.Utils;
 
@@ -30,12 +31,8 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
-/**
- * TODO Add a class header comment
- */
-public class ScreenInfoViewImpl implements ScreenInfoView {
+public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
     private final ScreenInfoController mController;
 
     @Bind(R.id.toolbar_screen_info)
@@ -97,18 +94,24 @@ public class ScreenInfoViewImpl implements ScreenInfoView {
 
     @Inject
     public ScreenInfoViewImpl(ScreenInfoController controller) {
+        super(controller);
         mController = controller;
     }
 
     @Override
-    public int getLayoutResource() {
+    public int getLayoutResourceId() {
         return R.layout.activity_screen_info;
     }
 
     @Override
     public void init(View view) {
-        ButterKnife.bind(this, view);
-        mController.setUpToolBar(mToolbar);
+        super.init(view);
+        mController.setUpToolbar(mToolbar);
+    }
+
+    @Override
+    protected int getToolbarId() {
+        return R.id.toolbar_screen_info;
     }
 
     @Override
@@ -161,6 +164,5 @@ public class ScreenInfoViewImpl implements ScreenInfoView {
         String contentBottom = String.format(Locale.getDefault(), "%d px (%d dp)", screenInfo.getContentBottom(),
                 Utils.pxToDp(screenInfo.getContentBottom()));
         mViewContentBottom.setValue(String.valueOf(contentBottom));
-
     }
 }

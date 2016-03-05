@@ -17,4 +17,5 @@
 <resources>
     <string name="about_title">About</string>
     <string name="about_version">Version %s</string>
+    <string name="about_open_source">Open source project</string>
 </resources>

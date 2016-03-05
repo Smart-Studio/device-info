@@ -96,7 +96,7 @@ public class ScreenInfoViewImplTest {
 
     @Test
     public void testGetLayoutResource() throws Exception {
-        assertThat(mView.getLayoutResource()).isEqualTo(R.layout.activity_screen_info);
+        assertThat(mView.getLayoutResourceId()).isEqualTo(R.layout.activity_screen_info);
     }
 
     @Test

@@ -16,32 +16,19 @@
 
 <com.smartstudio.deviceinfo.ui.VerticalLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_about"
+        android:id="@+id/toolbar_attributions"
         style="@style/BaseToolbar"
-        app:title="@string/about_title" />
+        app:title="@string/attributions_title" />
 
-    <TextView
-        android:id="@+id/txt_about_version"
-        style="@style/AboutProperty"
-        tools:text="Version 1.0" />
-
-    <TextView
-        android:id="@+id/txt_about_open_source"
-        style="@style/AboutProperty"
-        android:drawableEnd="@mipmap/ic_github_icon"
-        android:drawableRight="@mipmap/ic_github_icon"
-        android:text="@string/about_open_source" />
-
-    <TextView
-        android:id="@+id/txt_about_attributions"
-        style="@style/AboutProperty"
-        android:text="@string/attributions_title" />
-
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_attributions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/gap_small"
+        android:paddingTop="@dimen/gap_small" />
 </com.smartstudio.deviceinfo.ui.VerticalLayout>

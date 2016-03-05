@@ -43,9 +43,6 @@ public class ScreenInfoActivity extends BaseActivity implements ScreenInfoContro
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(mView.getLayoutResource());
-        mView.init(getWindow().getDecorView());
-
         ScreenInfo screenInfo = mScreenInfoManager.getScreenInfo();
         mView.showScreenInfo(screenInfo);
     }
@@ -71,11 +68,5 @@ public class ScreenInfoActivity extends BaseActivity implements ScreenInfoContro
         DeviceInfoApp.get().getComponent()
                 .plus(Injector.provideScreenInfoModule(this, getWindowManager().getDefaultDisplay()))
                 .inject(this);
-    }
-
-    @Override
-    public void setUpToolBar(Toolbar toolbar) {
-        toolbar.showOverflowMenu();
-        setSupportActionBar(toolbar);
     }
 }

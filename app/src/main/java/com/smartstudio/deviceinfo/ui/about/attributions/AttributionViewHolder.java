@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.ui;
+package com.smartstudio.deviceinfo.ui.about.attributions;
 
-import android.support.annotation.LayoutRes;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-public interface BaseView {
-    @LayoutRes
-    int getLayoutResourceId();
+import com.smartstudio.deviceinfo.model.Attribution;
 
-    void init(View view);
+public abstract class AttributionViewHolder extends RecyclerView.ViewHolder {
+
+    public AttributionViewHolder(View itemView) {
+        super(itemView);
+    }
+
+    public abstract void onBind(Attribution attribution);
 }

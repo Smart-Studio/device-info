@@ -24,6 +24,7 @@ import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
 import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoViewImpl;
 
@@ -71,6 +72,12 @@ public class ScreenInfoModule {
     @Provides
     @PerActivity
     ScreenInfoView provideView(ScreenInfoViewImpl view) {
+        return view;
+    }
+
+    @Provides
+    @PerActivity
+    BaseView provideBaseView(ScreenInfoView view) {
         return view;
     }
 }

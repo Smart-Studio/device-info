@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.ui;
+package com.smartstudio.deviceinfo.controllers;
 
-import android.support.annotation.LayoutRes;
-import android.view.View;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 
-public interface BaseView {
-    @LayoutRes
-    int getLayoutResourceId();
-
-    void init(View view);
+public interface BaseController {
+    ActionBar setUpToolbar(Toolbar toolbar);
 }

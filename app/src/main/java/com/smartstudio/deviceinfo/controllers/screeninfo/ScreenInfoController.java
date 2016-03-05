@@ -16,12 +16,7 @@
 
 package com.smartstudio.deviceinfo.controllers.screeninfo;
 
-import android.support.v7.widget.Toolbar;
+import com.smartstudio.deviceinfo.controllers.BaseController;
 
-/**
- * TODO Add a class header comment
- */
-public interface ScreenInfoController {
-
-    void setUpToolBar(Toolbar toolbar);
+public interface ScreenInfoController extends BaseController {
 }

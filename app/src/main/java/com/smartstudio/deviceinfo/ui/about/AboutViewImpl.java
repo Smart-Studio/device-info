@@ -17,55 +17,57 @@
 package com.smartstudio.deviceinfo.ui.about;
 
 import android.content.res.Resources;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
+import com.smartstudio.deviceinfo.ui.BaseViewImpl;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * TODO Add a class header comment
  */
-public class AboutViewImpl implements AboutView {
-    @Bind(R.id.txt_version)
+public class AboutViewImpl extends BaseViewImpl implements AboutView {
+    @Bind(R.id.txt_about_version)
     TextView mTxtVersion;
 
-    @Bind(R.id.txt_open_source)
+    @Bind(R.id.txt_about_open_source)
     TextView mTxtOpenSource;
 
-    @Bind(R.id.txt_attributions)
+    @Bind(R.id.txt_about_attributions)
     TextView mTxtAttributions;
 
     private final AboutController mController;
 
     @Inject
     public AboutViewImpl(AboutController controller) {
+        super(controller);
         mController = controller;
     }
 
     @Override
-    public int getLayoutResource() {
+    public int getLayoutResourceId() {
         return R.layout.activity_about;
     }
 
     @Override
     public void init(View view) {
-        ButterKnife.bind(this, view);
-
+        super.init(view);
         Resources resources = view.getResources();
-        Toolbar toolbar = ButterKnife.findById(view, R.id.toolbar_about);
-        ActionBar actionBar = mController.setUpToolBar(toolbar);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(true);
         String version = resources.getString(R.string.about_version, BuildConfig.VERSION_NAME);
         mTxtVersion.setText(version);
         mTxtOpenSource.setOnClickListener(v -> mController.onOpenSourceClicked());
+        mTxtAttributions.setOnClickListener(v -> mController.onAttributionsClicked());
+    }
+
+    @Override
+    protected int getToolbarId() {
+        return R.id.toolbar_about;
     }
 }
