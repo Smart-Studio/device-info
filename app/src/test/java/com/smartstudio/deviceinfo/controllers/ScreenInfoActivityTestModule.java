@@ -20,6 +20,7 @@ import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
 
 import dagger.Module;
@@ -36,6 +37,12 @@ public class ScreenInfoActivityTestModule {
     ScreenInfoView provideView() {
         ScreenInfoView view = mock(ScreenInfoView.class);
         when(view.getLayoutResourceId()).thenReturn(R.layout.activity_screen_info);
+        return view;
+    }
+
+    @Provides
+    @PerActivity
+    BaseView provideBaseView(ScreenInfoView view) {
         return view;
     }
 

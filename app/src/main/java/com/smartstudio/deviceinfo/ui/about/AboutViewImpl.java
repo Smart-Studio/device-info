@@ -29,9 +29,6 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 
-/**
- * TODO Add a class header comment
- */
 public class AboutViewImpl extends BaseViewImpl implements AboutView {
     @Bind(R.id.txt_about_version)
     TextView mTxtVersion;

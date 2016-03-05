@@ -68,7 +68,7 @@ public class ScreenInfoActivityUnitTest {
         Toolbar toolbar = mock(Toolbar.class);
         when(toolbar.getContext()).thenReturn(mActivity);
 
-        mActivity.setUpToolBar(toolbar);
+        mActivity.setUpToolbar(toolbar);
         verify(mActivity).setSupportActionBar(toolbar);
     }
 }
