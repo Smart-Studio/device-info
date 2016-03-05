@@ -65,7 +65,6 @@ public class AboutActivity extends BaseActivity implements AboutController {
     public void onOpenSourceClicked() {
         try {
             Utils.openUrl(this, BuildConfig.REPOSITORY_URL);
-            mView.showNoBrowserError();
         } catch (BrowserNotFoundException e) {
             Timber.e(e, "Error opening link");
             mView.showNoBrowserError();
