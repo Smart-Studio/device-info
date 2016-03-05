@@ -51,6 +51,8 @@ ext {
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
+    //TODO To support shadow object in robolectric, remove when fixed https://github.com/robolectric/robolectric/issues/1862
+    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "com.smarstudio.deviceinfo"
@@ -186,6 +188,7 @@ dependencies {
     testCompile "org.powermock:powermock-module-junit4:$rootProject.powerMockitoVersion"
     testCompile "org.powermock:powermock-module-junit4-rule:$rootProject.powerMockitoVersion"
     testCompile "org.powermock:powermock-api-mockito:$rootProject.powerMockitoVersion"
+    testCompile "org.powermock:powermock-classloading-xstream:$rootProject.powerMockitoVersion"
     testCompile "org.robolectric:robolectric:$rootProject.robolectricVersion"
     testCompile "org.assertj:assertj-core:$rootProject.assertjVersion"
     testCompile 'com.squareup.assertj:assertj-android:1.1.1'

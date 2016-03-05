@@ -52,7 +52,7 @@ public class ScreenInfoActivityUnitTest {
     @Before
     public void setUp() throws Exception {
         mActivity = Robolectric.setupActivity(ScreenInfoActivityForTest.class);
-        mActivity.getComponent().inject(this);
+        mActivity.mComponent.inject(this);
     }
 
     @Test

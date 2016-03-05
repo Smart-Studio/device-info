@@ -96,7 +96,7 @@ public class UtilsTest {
 
         Utils.openUrl(context, OPEN_URL);
         PowerMockito.stub(PowerMockito.method(Utils.class, "isIntentAvailable")).toReturn(false);
-        
+
         try {
             Utils.openUrl(context, OPEN_URL);
             fail("BrowserNotFound exception expected");

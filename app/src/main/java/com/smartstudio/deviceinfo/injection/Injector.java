@@ -17,6 +17,7 @@
 package com.smartstudio.deviceinfo.injection;
 
 import android.app.Application;
+import android.content.Context;
 import android.view.Display;
 
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
@@ -37,11 +38,11 @@ public class Injector {
         return new ScreenInfoModule(controller, display);
     }
 
-    public static AboutModule provideAboutModule(AboutController controller){
-        return new AboutModule(controller);
+    public static AboutModule provideAboutModule(AboutController controller, Context context) {
+        return new AboutModule(controller, context);
     }
 
-    public static AttributionsModule provideAttributionsModule(AttributionsController controller){
+    public static AttributionsModule provideAttributionsModule(AttributionsController controller) {
         return new AttributionsModule(controller);
     }
 }

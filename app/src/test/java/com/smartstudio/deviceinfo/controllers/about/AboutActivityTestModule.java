@@ -14,46 +14,27 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.injection.modules;
+package com.smartstudio.deviceinfo.controllers.about;
 
-import android.content.Context;
-
-import com.smartstudio.deviceinfo.controllers.about.AboutController;
-import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
+import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.about.AboutView;
-import com.smartstudio.deviceinfo.ui.about.AboutViewImpl;
 
 import dagger.Module;
 import dagger.Provides;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 @Module
-public class AboutModule {
-
-    private final AboutController mController;
-    private final Context mContext;
-
-    public AboutModule(AboutController controller, Context context) {
-        mController = controller;
-        mContext = context;
-    }
+public class AboutActivityTestModule {
 
     @Provides
     @PerActivity
-    @ForActivity
-    Context provideContext() {
-        return mContext;
-    }
-
-    @Provides
-    AboutController provideController() {
-        return mController;
-    }
-
-    @Provides
-    @PerActivity
-    AboutView provideView(AboutViewImpl view) {
+    AboutView provideView() {
+        AboutView view = mock(AboutView.class);
+        when(view.getLayoutResourceId()).thenReturn(R.layout.activity_about);
         return view;
     }
 

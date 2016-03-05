@@ -16,13 +16,16 @@
 
 package com.smartstudio.deviceinfo.ui.about;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.ui.BaseViewImpl;
 
 import javax.inject.Inject;
@@ -40,11 +43,16 @@ public class AboutViewImpl extends BaseViewImpl implements AboutView {
     TextView mTxtAttributions;
 
     private final AboutController mController;
+    private final Context mContext;
+    private final Resources mResources;
+    private Toast mToast;
 
     @Inject
-    public AboutViewImpl(AboutController controller) {
+    public AboutViewImpl(AboutController controller, @ForActivity Context context) {
         super(controller);
         mController = controller;
+        mContext = context;
+        mResources = context.getResources();
     }
 
     @Override
@@ -55,9 +63,8 @@ public class AboutViewImpl extends BaseViewImpl implements AboutView {
     @Override
     public void init(View view) {
         super.init(view);
-        Resources resources = view.getResources();
         mActionBar.setDisplayHomeAsUpEnabled(true);
-        String version = resources.getString(R.string.about_version, BuildConfig.VERSION_NAME);
+        String version = mResources.getString(R.string.about_version, BuildConfig.VERSION_NAME);
         mTxtVersion.setText(version);
         mTxtOpenSource.setOnClickListener(v -> mController.onOpenSourceClicked());
         mTxtAttributions.setOnClickListener(v -> mController.onAttributionsClicked());
@@ -66,5 +73,17 @@ public class AboutViewImpl extends BaseViewImpl implements AboutView {
     @Override
     protected int getToolbarId() {
         return R.id.toolbar_about;
+    }
+
+    @Override
+    public void showNoBrowserError() {
+        String message = mResources.getString(R.string.error_no_browser);
+
+        if (mToast != null && mToast.getView().isShown()) {
+            return;
+        }
+
+        mToast = Toast.makeText(mContext, message, Toast.LENGTH_LONG);
+        mToast.show();
     }
 }

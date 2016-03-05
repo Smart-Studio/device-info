@@ -22,4 +22,5 @@ import com.smartstudio.deviceinfo.ui.BaseView;
  * TODO Add a class header comment
  */
 public interface AboutView extends BaseView{
+    void showNoBrowserError();
 }

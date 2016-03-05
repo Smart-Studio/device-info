@@ -47,7 +47,7 @@ public class AboutActivity extends BaseActivity implements AboutController {
     @Override
     protected void initComponent() {
         DeviceInfoApp.get()
-                .getComponent().plus(Injector.provideAboutModule(this))
+                .getComponent().plus(Injector.provideAboutModule(this, this))
                 .inject(this);
     }
 
@@ -65,8 +65,10 @@ public class AboutActivity extends BaseActivity implements AboutController {
     public void onOpenSourceClicked() {
         try {
             Utils.openUrl(this, BuildConfig.REPOSITORY_URL);
+            mView.showNoBrowserError();
         } catch (BrowserNotFoundException e) {
             Timber.e(e, "Error opening link");
+            mView.showNoBrowserError();
         }
     }
 
