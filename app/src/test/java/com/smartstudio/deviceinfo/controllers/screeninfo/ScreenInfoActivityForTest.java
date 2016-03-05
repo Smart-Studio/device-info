@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers;
+package com.smartstudio.deviceinfo.controllers.screeninfo;
 
-import com.smartstudio.deviceinfo.injection.components.ScreenInfoComponent;
-import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 
-import dagger.Component;
+public class ScreenInfoActivityForTest extends ScreenInfoActivity {
+    ScreenInfoActivityTestComponent mComponent;
 
-@PerActivity
-@Component(modules = ScreenInfoActivityTestModule.class)
-public interface ScreenInfoActivityTestComponent extends ScreenInfoComponent {
-    void inject(ScreenInfoActivityUnitTest test);
+    @Override
+    protected void initComponent() {
+        mComponent = DaggerScreenInfoActivityTestComponent.builder()
+                .screenInfoActivityTestModule(new ScreenInfoActivityTestModule())
+                .build();
+        mComponent.inject(this);
+    }
+
+    public ScreenInfoActivityTestComponent getComponent() {
+        return mComponent;
+    }
 }
-
