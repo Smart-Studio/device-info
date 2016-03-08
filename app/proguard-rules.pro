@@ -29,3 +29,5 @@
 -keep class com.crashlytics.** { *; }
 -keep class com.crashlytics.android.**
 -keepattributes SourceFile,LineNumberTable,*Annotation*
+
+-keep class android.support.v7.widget.RecyclerView { *; }
