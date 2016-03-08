@@ -45,8 +45,8 @@ public class AttributionsProviderImpl implements AttributionsProvider {
         addAttribution("Timber", "Jake Wharton", description, APACHE_LICENSE, "https://github.com/JakeWharton/timber", attributions);
         description = mResources.getString(R.string.attribution_leakcanary_description);
         addAttribution("LeakCanary", "Square", description, APACHE_LICENSE, "https://github.com/square/leakcanary", attributions);
-        description = mResources.getString(R.string.attribution_timber_description);
-        addAttribution("Dagger 2", "Square", description, APACHE_LICENSE, "https://github.com/google/dagger", attributions);
+        description = mResources.getString(R.string.attribution_dagger_description);
+        addAttribution("Dagger 2", "Google", description, APACHE_LICENSE, "https://github.com/google/dagger", attributions);
         description = mResources.getString(R.string.attribution_stetho_description);
         addAttribution("Stetho", "Facebook", description, "BSD License", "https://github.com/facebook/stetho", attributions);
         description = mResources.getString(R.string.attribution_mockito_description);

@@ -16,8 +16,10 @@
 
 package com.smartstudio.deviceinfo.controllers.about;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.test.espresso.intent.Intents;
+import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.ActivityTestRule;
 
 import com.smartstudio.deviceinfo.BuildConfig;
@@ -36,25 +38,30 @@ import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasAction;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasData;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.toPackage;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.core.AllOf.allOf;
 
 public class AboutActivityTest {
-    private Resources mResources;
-
     @Rule
-    public ActivityTestRule<ScreenInfoActivity> activityRule = new ActivityTestRule<>(ScreenInfoActivity.class);
+    public IntentsTestRule<ScreenInfoActivity> activityRule = new IntentsTestRule<>(ScreenInfoActivity.class);
+
+    private Resources mResources;
 
     @Before
     public void setUp() throws Exception {
         mResources = activityRule.getActivity().getResources();
-        Intents.init();}
+        navigateToAboutActivity();
+    }
+
 
     @Test
-    public void testAboutActivity() throws Exception {
-        navigateToAboutActivity();
+    public void testAboutActivityUI() throws Exception {
         String toolbarTitle = mResources.getString(R.string.about_title);
         EspressoUtils.matchToolbarTitle(toolbarTitle);
         String version = mResources.getString(R.string.about_version, BuildConfig.VERSION_NAME);
@@ -65,22 +72,21 @@ public class AboutActivityTest {
     }
 
     @Test
+    public void testOpenSourceClick() throws Exception {
+        onView(withId(R.id.txt_about_open_source)).perform(click());
+        intended(allOf(hasAction(Intent.ACTION_VIEW), hasData(BuildConfig.REPOSITORY_URL)));
+    }
+
+    @Test
     public void testAboutActivityPressBack() throws Exception {
-        navigateToAboutActivity();
         pressBack();
         checkMainToolbarTitle();
     }
 
     @Test
     public void testAboutActivityNavigateUp() throws Exception {
-        navigateToAboutActivity();
         onView(withContentDescription("Navigate up")).perform(click());
         checkMainToolbarTitle();
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        Intents.release();
     }
 
     private void navigateToAboutActivity() {

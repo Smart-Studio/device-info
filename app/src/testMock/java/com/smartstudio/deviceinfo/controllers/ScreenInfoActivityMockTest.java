@@ -16,9 +16,6 @@
 
 package com.smartstudio.deviceinfo.controllers;
 
-/**
- * TODO Add a class header comment
- */
 public class ScreenInfoActivityMockTest {
 
 }

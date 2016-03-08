@@ -16,14 +16,15 @@
 
 package com.smartstudio.deviceinfo.ui.screeninfo;
 
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.controllers.BaseController;
 import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.ui.BaseView;
+import com.smartstudio.deviceinfo.ui.BaseViewImplTest;
 import com.smartstudio.deviceinfo.ui.PropertyLayout;
-import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoViewImpl;
 import com.smartstudio.deviceinfo.utils.Utils;
 
 import org.junit.Before;
@@ -43,7 +44,7 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ButterKnife.class, Utils.class})
-public class ScreenInfoViewImplTest {
+public class ScreenInfoViewImplTest extends BaseViewImplTest {
     private static final String MODEL = "Nexus 4";
     private static final String MANUFACTURER = "LGE";
     private static final String ANDROID_VERSION = "4.3";
@@ -85,10 +86,10 @@ public class ScreenInfoViewImplTest {
     private static final int CONTENT_HEIGHT = 1134;
     private static final int CONTENT_HEIGHT_DP = 567;
 
-    private ScreenInfoViewImpl mView;
-
     @Mock
-    ScreenInfoController mController;
+    private ScreenInfoController mController;
+
+    private ScreenInfoViewImpl mView;
 
     @Before
     public void setUp() throws Exception {
@@ -100,13 +101,14 @@ public class ScreenInfoViewImplTest {
         assertThat(mView.getLayoutResourceId()).isEqualTo(R.layout.activity_screen_info);
     }
 
-    @Test
-    public void testInit() throws Exception {
-        View view = mock(View.class);
-        mView.mToolbar = mock(Toolbar.class);
-        mockStatic(ButterKnife.class);
-        mView.init(view);
-        verify(mController).setUpToolbar(mView.mToolbar);
+    @Override
+    public BaseController getBaseController() {
+        return mController;
+    }
+
+    @Override
+    public BaseView getBaseView() {
+        return mView;
     }
 
     @Test

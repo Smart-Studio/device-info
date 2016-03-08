@@ -60,11 +60,11 @@ public class UtilsTest {
     private static final String OPEN_URL = "http://wwww.google.com";
 
     @Mock
-    Resources mResources;
+    private Resources mResources;
     @Mock
-    DisplayMetrics mDisplayMetrics;
+    private DisplayMetrics mDisplayMetrics;
     @Mock
-    List<ResolveInfo> mResolveInfoList;
+    private List<ResolveInfo> mResolveInfoList;
 
     @Before
     public void setUp() throws Exception {

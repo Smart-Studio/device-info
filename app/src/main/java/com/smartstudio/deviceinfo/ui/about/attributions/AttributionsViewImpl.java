@@ -34,7 +34,6 @@ public class AttributionsViewImpl extends BaseViewImpl implements AttributionsVi
     @Bind(R.id.list_attributions)
     RecyclerView mListAttributions;
 
-    private final AttributionsController mController;
     private final AttributionsAdapter mAdapter;
     private final RecyclerView.LayoutManager mLayoutManager;
 
@@ -42,7 +41,6 @@ public class AttributionsViewImpl extends BaseViewImpl implements AttributionsVi
     public AttributionsViewImpl(AttributionsController controller, AttributionsAdapter adapter,
                                 RecyclerView.LayoutManager layoutManager) {
         super(controller);
-        mController = controller;
         mAdapter = adapter;
         mLayoutManager = layoutManager;
     }

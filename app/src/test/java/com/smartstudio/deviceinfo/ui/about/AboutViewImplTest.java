@@ -18,13 +18,15 @@ package com.smartstudio.deviceinfo.ui.about;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.controllers.BaseController;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
+import com.smartstudio.deviceinfo.ui.BaseView;
+import com.smartstudio.deviceinfo.ui.BaseViewImplTest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,16 +50,16 @@ import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ButterKnife.class, Toast.class})
-public class AboutViewImplTest {
+public class AboutViewImplTest extends BaseViewImplTest {
     private static final String VERSION = "v1.0.0";
     private static final String NO_BROWSER_ERROR = "No browser!";
 
     @Mock
-    AboutController mController;
+    private AboutController mController;
     @Mock
-    Context mContext;
+    private Context mContext;
     @Mock
-    Resources mResources;
+    private Resources mResources;
 
     private AboutViewImpl mView;
 
@@ -75,18 +77,23 @@ public class AboutViewImplTest {
 
     @Test
     public void testInit() throws Exception {
-        mockStatic(ButterKnife.class);
-        View view = mock(View.class);
         when(mResources.getString(eq(R.string.about_version), anyString())).thenReturn(VERSION);
         mockViews();
-        ActionBar actionBar = mock(ActionBar.class);
-        when(mController.setUpToolbar(anyObject())).thenReturn(actionBar);
-
-        mView.init(view);
-        verify(actionBar).setDisplayHomeAsUpEnabled(true);
+        super.testInit();
+        verify(mActionBar).setDisplayHomeAsUpEnabled(true);
         verify(mView.mTxtVersion).setText(VERSION);
         verify(mView.mTxtOpenSource).setOnClickListener(anyObject());
         verify(mView.mTxtAttributions).setOnClickListener(anyObject());
+    }
+
+    @Override
+    public BaseController getBaseController() {
+        return mController;
+    }
+
+    @Override
+    public BaseView getBaseView() {
+        return mView;
     }
 
     @Test

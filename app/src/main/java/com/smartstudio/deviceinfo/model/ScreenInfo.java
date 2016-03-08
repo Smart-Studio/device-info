@@ -16,9 +16,6 @@
 
 package com.smartstudio.deviceinfo.model;
 
-/**
- * TODO Add a class header comment
- */
 public class ScreenInfo {
     private String deviceModel;
     private String manufacturer;

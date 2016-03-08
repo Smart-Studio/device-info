@@ -86,23 +86,23 @@ public class ScreenInfoManagerImplTest {
     private static final double INCHES = 4.679136319266059;
 
     @Mock
-    Display mDisplay;
+    private Display mDisplay;
     @Mock
-    DisplayMetrics mDisplayMetrics;
+    private DisplayMetrics mDisplayMetrics;
     @Mock
-    ScreenInfo mScreenInfo;
+    private ScreenInfo mScreenInfo;
     @Mock
-    Context mContext;
+    private Context mContext;
     @Mock
-    Resources mResources;
+    private Resources mResources;
     @Mock
-    ViewConfiguration mViewConfiguration;
+    private ViewConfiguration mViewConfiguration;
     @Mock
-    Configuration mConfiguration;
+    private Configuration mConfiguration;
     @Mock
-    Resources.Theme mTheme;
+    private Resources.Theme mTheme;
     @Mock
-    TypedArray mAttrs;
+    private TypedArray mAttrs;
 
     private ScreenInfoManagerImpl mScreenInfoManager;
 

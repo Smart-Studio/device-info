@@ -16,7 +16,6 @@
 
 package com.smartstudio.deviceinfo.ui.screeninfo;
 
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.smartstudio.deviceinfo.R;
@@ -33,10 +32,6 @@ import javax.inject.Inject;
 import butterknife.Bind;
 
 public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
-    private final ScreenInfoController mController;
-
-    @Bind(R.id.toolbar_screen_info)
-    Toolbar mToolbar;
 
     @Bind(R.id.view_device_name)
     PropertyLayout mViewDeviceName;
@@ -95,18 +90,11 @@ public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
     @Inject
     public ScreenInfoViewImpl(ScreenInfoController controller) {
         super(controller);
-        mController = controller;
     }
 
     @Override
     public int getLayoutResourceId() {
         return R.layout.activity_screen_info;
-    }
-
-    @Override
-    public void init(View view) {
-        super.init(view);
-        mController.setUpToolbar(mToolbar);
     }
 
     @Override
