@@ -179,7 +179,7 @@ dependencies {
     // Android Testing Support Library's runner and rules
     androidTestCompile "com.android.support.test:runner:$rootProject.ext.testingSupportVersion"
     androidTestCompile "com.android.support.test:rules:$rootProject.ext.testingSupportVersion"
-    androidTestCompile 'com.squareup.assertj:assertj-android:1.1.1'
+    androidTestCompile "com.squareup.assertj:assertj-android:$rootProject.ext.assertJAndroidVersion"
 
     // Dependencies for local unit tests
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
@@ -191,7 +191,7 @@ dependencies {
     testCompile "org.powermock:powermock-classloading-xstream:$rootProject.powerMockitoVersion"
     testCompile "org.robolectric:robolectric:$rootProject.robolectricVersion"
     testCompile "org.assertj:assertj-core:$rootProject.assertjVersion"
-    testCompile 'com.squareup.assertj:assertj-android:1.1.1'
+    testCompile "com.squareup.assertj:assertj-android:$rootProject.ext.assertJAndroidVersion"
     testCompile "com.google.dagger:dagger:$rootProject.dagger2Version"
     testCompile "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
 }
@@ -261,7 +261,8 @@ project.afterEvaluate {
                                    '**/*Provider*.class',
                                    '**/*_MembersInjector.class',
                                    '**/BuildConfig.*',
-                                   '**/Manifest*.*']
+                                   '**/Manifest*.*',
+                                   '**/*Lambda*.*']
                 )
 
                 def coverageSourceDirs = [

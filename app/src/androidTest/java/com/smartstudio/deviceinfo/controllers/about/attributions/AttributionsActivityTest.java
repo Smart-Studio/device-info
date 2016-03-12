@@ -111,7 +111,6 @@ public class AttributionsActivityTest {
     @Test
     public void testOpenLinkDagger2() throws Exception {
         checkOpenedLink(3, "https://github.com/google/dagger");
-
     }
 
     @Test

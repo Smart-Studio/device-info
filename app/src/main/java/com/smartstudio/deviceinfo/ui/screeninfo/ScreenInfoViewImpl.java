@@ -110,12 +110,14 @@ public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
         mViewOsCodename.setValue(screenInfo.getAndroidCodename());
         mViewOsApi.setValue(String.valueOf(screenInfo.getAndroidApi()));
 
+        double density = screenInfo.getDensity();
+
         String screenRes = String.format(Locale.getDefault(), "%dx%d px (%dx%d dp)", screenInfo.getWidthPixels(),
-                screenInfo.getHeightPixels(), Utils.pxToDp(screenInfo.getWidthPixels()), Utils.pxToDp(screenInfo.getHeightPixels()));
+                screenInfo.getHeightPixels(), Utils.pxToDp(screenInfo.getWidthPixels(), density), Utils.pxToDp(screenInfo.getHeightPixels(), density));
         mViewScreenRes.setValue(screenRes);
 
         String statusBarHeight = String.format(Locale.getDefault(), "%d px (%d dp)",
-                screenInfo.getStatusBarHeight(), Utils.pxToDp(screenInfo.getStatusBarHeight()));
+                screenInfo.getStatusBarHeight(), Utils.pxToDp(screenInfo.getStatusBarHeight(), density));
         mViewScreenStatus.setValue(statusBarHeight);
 
         int navBarHeight = screenInfo.getNavigationBarHeight();
@@ -123,7 +125,7 @@ public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
             mViewScreenNavigation.setVisibility(View.GONE);
         } else {
             String navigationBarHeight = String.format(Locale.getDefault(), "%d px (%d dp)",
-                    screenInfo.getNavigationBarHeight(), Utils.pxToDp(screenInfo.getNavigationBarHeight()));
+                    screenInfo.getNavigationBarHeight(), Utils.pxToDp(screenInfo.getNavigationBarHeight(), density));
             mViewScreenNavigation.setValue(navigationBarHeight);
         }
 
@@ -131,9 +133,9 @@ public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
 
         String inches = String.format(Locale.getDefault(), "%.1f\"", screenInfo.getInches());
         mViewScreenInches.setValue(inches);
-        String density = String.format(Locale.getDefault(), "%d dp (x%.1f)", screenInfo.getDensityDpi()
+        String densityText = String.format(Locale.getDefault(), "%d dp (x%.1f)", screenInfo.getDensityDpi()
                 , screenInfo.getDensity());
-        mViewScreenDensity.setValue(density);
+        mViewScreenDensity.setValue(densityText);
         mViewScreenDensityCode.setValue(screenInfo.getDensityCode());
         String densityX = String.format(Locale.getDefault(), "%.2f dp", screenInfo.getDensityX());
         mViewScreenDensityX.setValue(densityX);
@@ -141,16 +143,16 @@ public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
         mViewScreenDensityY.setValue(densityY);
 
         String actionBarHeight = String.format(Locale.getDefault(), "%d px (%d dp)", screenInfo.getActionBarHeight(),
-                Utils.pxToDp(screenInfo.getActionBarHeight()));
+                Utils.pxToDp(screenInfo.getActionBarHeight(), density));
         mViewActionBarHeight.setValue(String.valueOf(actionBarHeight));
         String contentHeight = String.format(Locale.getDefault(), "%d px (%d dp)", screenInfo.getContentHeight(),
-                Utils.pxToDp(screenInfo.getContentHeight()));
+                Utils.pxToDp(screenInfo.getContentHeight(), density));
         mViewContentHeight.setValue(contentHeight);
         String contentTop = String.format(Locale.getDefault(), "%d px (%d dp)", screenInfo.getContentTop(),
-                Utils.pxToDp(screenInfo.getContentTop()));
+                Utils.pxToDp(screenInfo.getContentTop(), density));
         mViewContentTop.setValue(String.valueOf(contentTop));
         String contentBottom = String.format(Locale.getDefault(), "%d px (%d dp)", screenInfo.getContentBottom(),
-                Utils.pxToDp(screenInfo.getContentBottom()));
+                Utils.pxToDp(screenInfo.getContentBottom(), density));
         mViewContentBottom.setValue(String.valueOf(contentBottom));
     }
 }

@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.net.Uri;
 
 import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
@@ -28,8 +27,8 @@ import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
 import java.util.List;
 
 public final class Utils {
-    public static int pxToDp(int pixels) {
-        return Math.round(pixels / Resources.getSystem().getDisplayMetrics().density);
+    public static int pxToDp(int pixels, double density) {
+        return (int) Math.round(pixels / density);
     }
 
     public static void openUrl(Context context, String url) throws BrowserNotFoundException {

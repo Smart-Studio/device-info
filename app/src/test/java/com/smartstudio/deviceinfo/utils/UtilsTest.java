@@ -54,7 +54,7 @@ public class UtilsTest {
     private static final int DPS_EVEN = 2;
     private static final int PIXELS_ODD = 5;
     private static final int DPS_ODD = 3;
-    private static final float DENSITY = 2.0f;
+    private static final double DENSITY = 2.0;
     private static final int PIXELS_ZERO = 0;
     private static final int DPS_ZERO = 0;
     private static final String OPEN_URL = "http://wwww.google.com";
@@ -66,23 +66,15 @@ public class UtilsTest {
     @Mock
     private List<ResolveInfo> mResolveInfoList;
 
-    @Before
-    public void setUp() throws Exception {
-        mockStatic(Resources.class);
-        when(mResources.getDisplayMetrics()).thenReturn(mDisplayMetrics);
-        mDisplayMetrics.density = DENSITY;
-        when(Resources.getSystem()).thenReturn(mResources);
-    }
-
     @Test
     public void testPxToDp() throws Exception {
-        int result = Utils.pxToDp(PIXELS_EVEN);
+        int result = Utils.pxToDp(PIXELS_EVEN, DENSITY);
         assertThat(result).isEqualTo(DPS_EVEN);
 
-        result = Utils.pxToDp(PIXELS_ODD);
+        result = Utils.pxToDp(PIXELS_ODD, DENSITY);
         assertThat(result).isEqualTo(DPS_ODD);
 
-        result = Utils.pxToDp(PIXELS_ZERO);
+        result = Utils.pxToDp(PIXELS_ZERO, DENSITY);
         assertThat(result).isEqualTo(DPS_ZERO);
     }
 

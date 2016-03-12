@@ -114,7 +114,7 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     @Test
     public void testShowScreenInfo() throws Exception {
         mockStatic(Utils.class);
-        mockUtils();
+        mockUtils(DENSITY_DOWN);
         mockViews();
         ScreenInfo info = mockScreenInfo(INCHES_DOWN, DENSITY_DOWN, DENSITY_X_DOWN, DENSITY_Y_DOWN);
         mView.showScreenInfo(info);
@@ -124,8 +124,8 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     @Test
     public void testShowScreenInfoRoundUp() throws Exception {
         mockStatic(Utils.class);
-        mockUtils();
         mockViews();
+        mockUtils(DENSITY_UP);
         ScreenInfo info = mockScreenInfo(INCHES_UP, DENSITY_UP, DENSITY_X_UP, DENSITY_Y_UP);
         mView.showScreenInfo(info);
         verifyViewMocks(INCHES_ROUND_UP, DENSITY_ROUND_UP, DENSITY_X_ROUND_UP, DENSITY_Y_ROUND_UP);
@@ -134,7 +134,7 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     @Test
     public void testShowScreenInfoNoNavigationBar() throws Exception {
         mockStatic(Utils.class);
-        mockUtils();
+        mockUtils(DENSITY_UP);
         mockViews();
         ScreenInfo info = mockScreenInfo(INCHES_UP, DENSITY_UP, DENSITY_X_UP, DENSITY_Y_UP);
         when(info.getNavigationBarHeight()).thenReturn(0);
@@ -143,15 +143,15 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
 
     }
 
-    private void mockUtils() {
-        when(Utils.pxToDp(WIDTH)).thenReturn(WIDTH_DP);
-        when(Utils.pxToDp(HEIGHT)).thenReturn(HEIGHT_DP);
-        when(Utils.pxToDp(STATUS_HEIGHT)).thenReturn(STATUS_HEIGHT_DP);
-        when(Utils.pxToDp(NAVIGATION_BAR_HEIGHT)).thenReturn(NAVIGATION_BAR_HEIGHT_DP);
-        when(Utils.pxToDp(CONTENT_HEIGHT)).thenReturn(CONTENT_HEIGHT_DP);
-        when(Utils.pxToDp(ACTION_BAR_HEIGHT)).thenReturn(ACTION_BAR_HEIGHT_DP);
-        when(Utils.pxToDp(CONTENT_TOP)).thenReturn(CONTENT_TOP_DP);
-        when(Utils.pxToDp(CONTENT_BOTTOM)).thenReturn(CONTENT_BOTTOM_DP);
+    private void mockUtils(double density) {
+        when(Utils.pxToDp(WIDTH, density)).thenReturn(WIDTH_DP);
+        when(Utils.pxToDp(HEIGHT, density)).thenReturn(HEIGHT_DP);
+        when(Utils.pxToDp(STATUS_HEIGHT, density)).thenReturn(STATUS_HEIGHT_DP);
+        when(Utils.pxToDp(NAVIGATION_BAR_HEIGHT, density)).thenReturn(NAVIGATION_BAR_HEIGHT_DP);
+        when(Utils.pxToDp(CONTENT_HEIGHT, density)).thenReturn(CONTENT_HEIGHT_DP);
+        when(Utils.pxToDp(ACTION_BAR_HEIGHT, density)).thenReturn(ACTION_BAR_HEIGHT_DP);
+        when(Utils.pxToDp(CONTENT_TOP, density)).thenReturn(CONTENT_TOP_DP);
+        when(Utils.pxToDp(CONTENT_BOTTOM, density)).thenReturn(CONTENT_BOTTOM_DP);
     }
 
     private ScreenInfo mockScreenInfo(double inches, double density, double densityX, double densityY) {
