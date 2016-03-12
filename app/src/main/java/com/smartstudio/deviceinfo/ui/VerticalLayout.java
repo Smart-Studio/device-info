@@ -25,7 +25,6 @@ import android.view.ViewGroup;
  * TODO Add a class header comment
  */
 public class VerticalLayout extends ViewGroup {
-    private boolean mIsLayoutFinished;
 
     public VerticalLayout(Context context) {
         super(context);
@@ -66,10 +65,6 @@ public class VerticalLayout extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        if (mIsLayoutFinished) {
-            return;
-        }
-
         int height = getPaddingTop();
 
         for (int i = 0; i < getChildCount(); i++) {
@@ -82,17 +77,10 @@ public class VerticalLayout extends ViewGroup {
                 height += child.getMeasuredHeight() + params.bottomMargin;
             }
         }
-
-        mIsLayoutFinished = true;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if (mIsLayoutFinished) {
-            setMeasuredDimension(getMeasuredWidth(), getMeasuredHeight());
-            return;
-        }
-
         int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
         int height = getPaddingTop() + getPaddingBottom();
 

@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.ui;
+package com.smartstudio.deviceinfo.ui.screeninfo;
 
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.controllers.ScreenInfoController;
+import com.smartstudio.deviceinfo.controllers.BaseController;
+import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.ui.BaseView;
+import com.smartstudio.deviceinfo.ui.BaseViewImplTest;
+import com.smartstudio.deviceinfo.ui.PropertyLayout;
 import com.smartstudio.deviceinfo.utils.Utils;
 
 import org.junit.Before;
@@ -41,7 +44,7 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ButterKnife.class, Utils.class})
-public class ScreenInfoViewImplTest {
+public class ScreenInfoViewImplTest extends BaseViewImplTest {
     private static final String MODEL = "Nexus 4";
     private static final String MANUFACTURER = "LGE";
     private static final String ANDROID_VERSION = "4.3";
@@ -83,10 +86,10 @@ public class ScreenInfoViewImplTest {
     private static final int CONTENT_HEIGHT = 1134;
     private static final int CONTENT_HEIGHT_DP = 567;
 
-    private ScreenInfoViewImpl mView;
-
     @Mock
-    ScreenInfoController mController;
+    private ScreenInfoController mController;
+
+    private ScreenInfoViewImpl mView;
 
     @Before
     public void setUp() throws Exception {
@@ -95,22 +98,23 @@ public class ScreenInfoViewImplTest {
 
     @Test
     public void testGetLayoutResource() throws Exception {
-        assertThat(mView.getLayoutResource()).isEqualTo(R.layout.activity_screen_info);
+        assertThat(mView.getLayoutResourceId()).isEqualTo(R.layout.activity_screen_info);
     }
 
-    @Test
-    public void testInit() throws Exception {
-        View view = mock(View.class);
-        mView.mToolbar = mock(Toolbar.class);
-        mockStatic(ButterKnife.class);
-        mView.init(view);
-        verify(mController).setUpToolBar(mView.mToolbar);
+    @Override
+    public BaseController getBaseController() {
+        return mController;
+    }
+
+    @Override
+    public BaseView getBaseView() {
+        return mView;
     }
 
     @Test
     public void testShowScreenInfo() throws Exception {
         mockStatic(Utils.class);
-        mockUtils();
+        mockUtils(DENSITY_DOWN);
         mockViews();
         ScreenInfo info = mockScreenInfo(INCHES_DOWN, DENSITY_DOWN, DENSITY_X_DOWN, DENSITY_Y_DOWN);
         mView.showScreenInfo(info);
@@ -120,8 +124,8 @@ public class ScreenInfoViewImplTest {
     @Test
     public void testShowScreenInfoRoundUp() throws Exception {
         mockStatic(Utils.class);
-        mockUtils();
         mockViews();
+        mockUtils(DENSITY_UP);
         ScreenInfo info = mockScreenInfo(INCHES_UP, DENSITY_UP, DENSITY_X_UP, DENSITY_Y_UP);
         mView.showScreenInfo(info);
         verifyViewMocks(INCHES_ROUND_UP, DENSITY_ROUND_UP, DENSITY_X_ROUND_UP, DENSITY_Y_ROUND_UP);
@@ -130,7 +134,7 @@ public class ScreenInfoViewImplTest {
     @Test
     public void testShowScreenInfoNoNavigationBar() throws Exception {
         mockStatic(Utils.class);
-        mockUtils();
+        mockUtils(DENSITY_UP);
         mockViews();
         ScreenInfo info = mockScreenInfo(INCHES_UP, DENSITY_UP, DENSITY_X_UP, DENSITY_Y_UP);
         when(info.getNavigationBarHeight()).thenReturn(0);
@@ -139,15 +143,15 @@ public class ScreenInfoViewImplTest {
 
     }
 
-    private void mockUtils() {
-        when(Utils.pxToDp(WIDTH)).thenReturn(WIDTH_DP);
-        when(Utils.pxToDp(HEIGHT)).thenReturn(HEIGHT_DP);
-        when(Utils.pxToDp(STATUS_HEIGHT)).thenReturn(STATUS_HEIGHT_DP);
-        when(Utils.pxToDp(NAVIGATION_BAR_HEIGHT)).thenReturn(NAVIGATION_BAR_HEIGHT_DP);
-        when(Utils.pxToDp(CONTENT_HEIGHT)).thenReturn(CONTENT_HEIGHT_DP);
-        when(Utils.pxToDp(ACTION_BAR_HEIGHT)).thenReturn(ACTION_BAR_HEIGHT_DP);
-        when(Utils.pxToDp(CONTENT_TOP)).thenReturn(CONTENT_TOP_DP);
-        when(Utils.pxToDp(CONTENT_BOTTOM)).thenReturn(CONTENT_BOTTOM_DP);
+    private void mockUtils(double density) {
+        when(Utils.pxToDp(WIDTH, density)).thenReturn(WIDTH_DP);
+        when(Utils.pxToDp(HEIGHT, density)).thenReturn(HEIGHT_DP);
+        when(Utils.pxToDp(STATUS_HEIGHT, density)).thenReturn(STATUS_HEIGHT_DP);
+        when(Utils.pxToDp(NAVIGATION_BAR_HEIGHT, density)).thenReturn(NAVIGATION_BAR_HEIGHT_DP);
+        when(Utils.pxToDp(CONTENT_HEIGHT, density)).thenReturn(CONTENT_HEIGHT_DP);
+        when(Utils.pxToDp(ACTION_BAR_HEIGHT, density)).thenReturn(ACTION_BAR_HEIGHT_DP);
+        when(Utils.pxToDp(CONTENT_TOP, density)).thenReturn(CONTENT_TOP_DP);
+        when(Utils.pxToDp(CONTENT_BOTTOM, density)).thenReturn(CONTENT_BOTTOM_DP);
     }
 
     private ScreenInfo mockScreenInfo(double inches, double density, double densityX, double densityY) {

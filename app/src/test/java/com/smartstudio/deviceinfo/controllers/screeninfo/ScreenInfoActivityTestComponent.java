@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers;
+package com.smartstudio.deviceinfo.controllers.screeninfo;
 
-import android.support.v7.widget.Toolbar;
+import com.smartstudio.deviceinfo.injection.components.ScreenInfoComponent;
+import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 
-/**
- * TODO Add a class header comment
- */
-public interface ScreenInfoController {
+import dagger.Component;
 
-    void setUpToolBar(Toolbar toolbar);
+@PerActivity
+@Component(modules = ScreenInfoActivityTestModule.class)
+public interface ScreenInfoActivityTestComponent extends ScreenInfoComponent {
+    void inject(ScreenInfoActivityUnitTest test);
 }
+

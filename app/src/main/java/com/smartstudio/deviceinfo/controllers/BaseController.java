@@ -16,14 +16,9 @@
 
 package com.smartstudio.deviceinfo.controllers;
 
-import com.smartstudio.deviceinfo.injection.components.ScreenInfoComponent;
-import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 
-import dagger.Component;
-
-@PerActivity
-@Component(modules = ScreenInfoActivityTestModule.class)
-public interface ScreenInfoActivityTestComponent extends ScreenInfoComponent {
-    void inject(ScreenInfoActivityUnitTest test);
+public interface BaseController {
+    ActionBar setUpToolbar(Toolbar toolbar);
 }
-

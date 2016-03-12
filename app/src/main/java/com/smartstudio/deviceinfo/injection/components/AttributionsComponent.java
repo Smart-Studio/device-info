@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.ui;
+package com.smartstudio.deviceinfo.injection.components;
 
-import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsActivity;
+import com.smartstudio.deviceinfo.injection.modules.AttributionsModule;
+import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 
-/**
- * TODO Add a class header comment
- */
-public interface ScreenInfoView extends BaseView{
-    void showScreenInfo(ScreenInfo screenInfo);
+import dagger.Subcomponent;
+
+@PerActivity
+@Subcomponent(modules = AttributionsModule.class)
+public interface AttributionsComponent {
+    void inject(AttributionsActivity activity);
 }

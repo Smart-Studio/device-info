@@ -19,13 +19,14 @@ package com.smartstudio.deviceinfo.injection.modules;
 import android.util.DisplayMetrics;
 import android.view.Display;
 
-import com.smartstudio.deviceinfo.controllers.ScreenInfoController;
+import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
-import com.smartstudio.deviceinfo.ui.ScreenInfoView;
-import com.smartstudio.deviceinfo.ui.ScreenInfoViewImpl;
+import com.smartstudio.deviceinfo.ui.BaseView;
+import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
+import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoViewImpl;
 
 import dagger.Module;
 import dagger.Provides;
@@ -71,6 +72,12 @@ public class ScreenInfoModule {
     @Provides
     @PerActivity
     ScreenInfoView provideView(ScreenInfoViewImpl view) {
+        return view;
+    }
+
+    @Provides
+    @PerActivity
+    BaseView provideBaseView(ScreenInfoView view) {
         return view;
     }
 }

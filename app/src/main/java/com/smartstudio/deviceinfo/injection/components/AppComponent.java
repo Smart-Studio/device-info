@@ -17,7 +17,9 @@
 package com.smartstudio.deviceinfo.injection.components;
 
 import com.smartstudio.deviceinfo.DeviceInfoApp;
+import com.smartstudio.deviceinfo.injection.modules.AboutModule;
 import com.smartstudio.deviceinfo.injection.modules.AppModule;
+import com.smartstudio.deviceinfo.injection.modules.AttributionsModule;
 import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
 import com.smartstudio.deviceinfo.injection.scopes.PerApplication;
 
@@ -29,4 +31,8 @@ public interface AppComponent {
     void inject(DeviceInfoApp app);
 
     ScreenInfoComponent plus(ScreenInfoModule module);
+
+    AboutComponent plus(AboutModule module);
+
+    AttributionsComponent plus(AttributionsModule module);
 }

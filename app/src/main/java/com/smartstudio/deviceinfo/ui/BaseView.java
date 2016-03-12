@@ -21,7 +21,7 @@ import android.view.View;
 
 public interface BaseView {
     @LayoutRes
-    int getLayoutResource();
+    int getLayoutResourceId();
 
     void init(View view);
 }

@@ -16,7 +16,7 @@
 
 package com.smartstudio.deviceinfo.injection.components;
 
-import com.smartstudio.deviceinfo.controllers.ScreenInfoActivity;
+import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoActivity;
 import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 

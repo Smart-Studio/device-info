@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers;
+package com.smartstudio.deviceinfo.controllers.screeninfo;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
-import com.smartstudio.deviceinfo.ui.ScreenInfoView;
+import com.smartstudio.deviceinfo.ui.BaseView;
+import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -35,7 +36,13 @@ public class ScreenInfoActivityTestModule {
     @PerActivity
     ScreenInfoView provideView() {
         ScreenInfoView view = mock(ScreenInfoView.class);
-        when(view.getLayoutResource()).thenReturn(R.layout.activity_screen_info);
+        when(view.getLayoutResourceId()).thenReturn(R.layout.activity_screen_info);
+        return view;
+    }
+
+    @Provides
+    @PerActivity
+    BaseView provideBaseView(ScreenInfoView view) {
         return view;
     }
 

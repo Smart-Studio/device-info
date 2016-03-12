@@ -2,23 +2,27 @@
     package="com.smartstudio.deviceinfo">
 
     <application
-        android:allowBackup="true"
         android:name=".DeviceInfoApp"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".controllers.ScreenInfoActivity" />
+        <activity android:name=".controllers.screeninfo.ScreenInfoActivity" />
 
         <activity-alias
             android:name=".Launcher"
-            android:targetActivity=".controllers.ScreenInfoActivity" >
+            android:targetActivity=".controllers.screeninfo.ScreenInfoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
+
+        <activity android:name=".controllers.about.AboutActivity" />
+
+        <activity android:name=".controllers.about.attributions.AttributionsActivity"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers;
+package com.smartstudio.deviceinfo.controllers.screeninfo;
 
 import android.support.v7.widget.Toolbar;
 
@@ -22,7 +22,7 @@ import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
-import com.smartstudio.deviceinfo.ui.ScreenInfoView;
+import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,12 +52,12 @@ public class ScreenInfoActivityUnitTest {
     @Before
     public void setUp() throws Exception {
         mActivity = Robolectric.setupActivity(ScreenInfoActivityForTest.class);
-        mActivity.getComponent().inject(this);
+        mActivity.mComponent.inject(this);
     }
 
     @Test
     public void testOnCreate() throws Exception {
-        verify(mView).getLayoutResource();
+        verify(mView).getLayoutResourceId();
         verify(mScreenInfoManager).getScreenInfo();
         verify(mView).showScreenInfo(mScreenInfo);
     }
@@ -68,7 +68,7 @@ public class ScreenInfoActivityUnitTest {
         Toolbar toolbar = mock(Toolbar.class);
         when(toolbar.getContext()).thenReturn(mActivity);
 
-        mActivity.setUpToolBar(toolbar);
+        mActivity.setUpToolbar(toolbar);
         verify(mActivity).setSupportActionBar(toolbar);
     }
 }
