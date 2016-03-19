@@ -16,6 +16,12 @@
 
 package com.smartstudio.deviceinfo.ui.about.attributions;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
 import com.smartstudio.deviceinfo.model.Attribution;
 
@@ -25,20 +31,28 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
 
 import java.util.List;
 
+import butterknife.ButterKnife;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mock;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.spy;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(AttributionsAdapterImpl.class)
+@PrepareForTest({AttributionsAdapterImpl.class, AttributionViewHolder.class,
+        LayoutInflater.class, ButterKnife.class})
 public class AttributionsAdapterImplTest {
     private static final int ATTRIBUTION_COUNT = 10;
+    private static final int POSITION = 4;
+    private static final String REPO_URL = "repo_url";
 
     @Mock
     private AttributionsController mController;
@@ -54,7 +68,18 @@ public class AttributionsAdapterImplTest {
 
     @Test
     public void testOnCreateViewHolder() throws Exception {
+        mockStatic(LayoutInflater.class, ButterKnife.class);
+        Context context = mock(Context.class);
+        ViewGroup parent = mock(ViewGroup.class);
+        when(parent.getContext()).thenReturn(context);
+        LayoutInflater layoutInflater = mock(LayoutInflater.class);
+        when(LayoutInflater.from(context)).thenReturn(layoutInflater);
+        View view = mock(View.class);
+        when(layoutInflater.inflate(R.layout.view_attribution, parent, false)).thenReturn(view);
 
+        AttributionViewHolder holder = mAdapter.onCreateViewHolder(parent, 0);
+        verify(view).setOnClickListener(anyObject());
+        assertThat(holder.itemView).isEqualTo(view);
     }
 
     @Test
@@ -97,5 +122,22 @@ public class AttributionsAdapterImplTest {
         mAdapter.showAttributions(mAttributions);
         assertThat(mAdapter.getItemCount()).isEqualTo(ATTRIBUTION_COUNT);
         verify(mAdapter).notifyDataSetChanged();
+    }
+
+    @Test
+    public void testOnAttributionClicked() throws Exception {
+        AttributionViewHolder viewHolder = mock(AttributionViewHolder.class);
+        when(viewHolder.getAdapterPosition()).thenReturn(POSITION);
+        Attribution attribution = mock(Attribution.class);
+        when(attribution.getRepoUrl()).thenReturn(REPO_URL);
+        when(mAttributions.get(POSITION)).thenReturn(attribution);
+        Whitebox.setInternalState(mAdapter, "mAttributions", mAttributions);
+
+        Whitebox.invokeMethod(mAdapter, "onAttributionClicked", viewHolder);
+
+        verify(mAttributions).get(POSITION);
+        verify(attribution).getRepoUrl();
+        verify(mController).onAttributionClicked(REPO_URL);
+
     }
 }

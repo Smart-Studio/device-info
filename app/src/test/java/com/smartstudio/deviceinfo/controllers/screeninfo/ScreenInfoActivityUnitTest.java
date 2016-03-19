@@ -16,9 +16,16 @@
 
 package com.smartstudio.deviceinfo.controllers.screeninfo;
 
+import android.content.Intent;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.smartstudio.deviceinfo.BuildConfig;
+import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.controllers.about.AboutActivity;
+import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsActivity;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
@@ -29,17 +36,25 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.ShadowIntent;
 
 import javax.inject.Inject;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.verifyStatic;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(CustomRobolectricGradleTestRunner.class)
 @Config(sdk = 21, constants = BuildConfig.class)
 public class ScreenInfoActivityUnitTest {
+
     @Inject
     ScreenInfoView mView;
     @Inject
@@ -70,5 +85,45 @@ public class ScreenInfoActivityUnitTest {
 
         mActivity.setUpToolbar(toolbar);
         verify(mActivity).setSupportActionBar(toolbar);
+    }
+
+    @Test
+    public void testOnCreateOptionsMenu() throws Exception {
+        Menu menu = mock(Menu.class);
+        mActivity = spy(mActivity);
+        MenuInflater menuInflater = mock(MenuInflater.class);
+        doReturn(menuInflater).when(mActivity).getMenuInflater();
+
+        boolean result = mActivity.onCreateOptionsMenu(menu);
+        verify(mActivity).getMenuInflater();
+        verify(menuInflater).inflate(R.menu.menu_settings, menu);
+
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    public void testOnOptionsItemSelectedAboutClicked() throws Exception {
+        mockStatic(AboutActivity.class);
+        MenuItem item = mock(MenuItem.class);
+        when(item.getItemId()).thenReturn(R.id.about);
+
+        mActivity.onOptionsItemSelected(item);
+
+        ShadowActivity shadowActivity = shadowOf(mActivity);
+        Intent startedIntent = shadowActivity.getNextStartedActivity();
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
+        assertThat(shadowIntent.getComponent().getClassName()).isEqualTo(AboutActivity.class.getName());
+    }
+
+    @Test
+    public void testOnOptionsItemSelectedNotHandleId() throws Exception {
+        MenuItem item = mock(MenuItem.class);
+        when(item.getItemId()).thenReturn(-3);
+
+        mActivity.onOptionsItemSelected(item);
+
+        ShadowActivity shadowActivity = shadowOf(mActivity);
+        Intent startedIntent = shadowActivity.getNextStartedActivity();
+        assertThat(startedIntent).isNull();
     }
 }

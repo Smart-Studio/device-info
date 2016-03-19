@@ -26,7 +26,6 @@ import android.util.DisplayMetrics;
 
 import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -37,19 +36,14 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-import static org.assertj.core.api.Assertions.in;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.stub;
-import static org.powermock.api.mockito.PowerMockito.doReturn;
 import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.spy;
 import static org.powermock.api.mockito.PowerMockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Resources.class, Utils.class, Uri.class})
 public class UtilsTest {
+    private static final String METHOD_INTENT_AVAILABLE = "mIsIntentAvailable";
     private static final int PIXELS_EVEN = 4;
     private static final int DPS_EVEN = 2;
     private static final int PIXELS_ODD = 5;
@@ -59,6 +53,7 @@ public class UtilsTest {
     private static final int DPS_ZERO = 0;
     private static final String OPEN_URL = "http://wwww.google.com";
 
+
     @Mock
     private Resources mResources;
     @Mock
@@ -67,46 +62,86 @@ public class UtilsTest {
     private List<ResolveInfo> mResolveInfoList;
 
     @Test
-    public void testPxToDp() throws Exception {
+    public void testPxToDpEven() throws Exception {
         int result = Utils.pxToDp(PIXELS_EVEN, DENSITY);
         assertThat(result).isEqualTo(DPS_EVEN);
+    }
 
-        result = Utils.pxToDp(PIXELS_ODD, DENSITY);
+    @Test
+    public void testPxToDpOdd() throws Exception {
+        int result = Utils.pxToDp(PIXELS_ODD, DENSITY);
         assertThat(result).isEqualTo(DPS_ODD);
+    }
 
-        result = Utils.pxToDp(PIXELS_ZERO, DENSITY);
+    @Test
+    public void testPxToDpZero() throws Exception {
+        int result = Utils.pxToDp(PIXELS_ZERO, DENSITY);
         assertThat(result).isEqualTo(DPS_ZERO);
     }
 
     @Test
     public void testOpenUrl() throws Exception {
+        Context context = mockContext();
+        setupOpenUrlMocks(true);
+        Utils.openUrl(context, OPEN_URL);
+    }
+
+    @Test(expected = BrowserNotFoundException.class)
+    public void testOpenUrlNoBrowser() throws Exception {
+        Context context = mockContext();
+        setupOpenUrlMocks(false);
+        Utils.openUrl(context, OPEN_URL);
+    }
+
+    private void setupOpenUrlMocks(boolean isIntentAvailable) {
         mockStatic(Uri.class);
-        Context context = mock(Context.class);
-        PowerMockito.stub(PowerMockito.method(Utils.class, "isIntentAvailable")).toReturn(true);
+        PowerMockito.stub(PowerMockito.method(Utils.class, METHOD_INTENT_AVAILABLE)).toReturn(isIntentAvailable);
         Uri uri = mock(Uri.class);
         when(Uri.parse(OPEN_URL)).thenReturn(uri);
-
-        Utils.openUrl(context, OPEN_URL);
-        PowerMockito.stub(PowerMockito.method(Utils.class, "isIntentAvailable")).toReturn(false);
-
-        try {
-            Utils.openUrl(context, OPEN_URL);
-            fail("BrowserNotFound exception expected");
-        }catch (BrowserNotFoundException ignored){}
     }
 
     @Test
-    public void testIsIntentAvailable() throws Exception {
-        Context context = mock(Context.class);
-        Intent intent = mock(Intent.class);
-        PackageManager packageManager = mock(PackageManager.class);
-        when(context.getPackageManager()).thenReturn(packageManager);
-        when(mResolveInfoList.isEmpty()).thenReturn(true, false);
-        when(packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)).thenReturn(mResolveInfoList);
+    public void testIsIntentAvailableTrue() throws Exception {
+        Context context = mockContext();
+        Intent intent = mockIntent();
+        PackageManager packageManager = mockPackageManager();
+        setupIsIntentAvailableMocks(false, context, packageManager, intent);
 
-        boolean result = Utils.isIntentAvailable(context, intent);
-        assertThat(result).isFalse();
-        result = Utils.isIntentAvailable(context, intent);
+        boolean result = isIntentAvailable(context, intent);
         assertThat(result).isTrue();
+    }
+
+    @Test
+    public void testIsIntentAvailableFalse() throws Exception {
+        Context context = mockContext();
+        Intent intent = mockIntent();
+        PackageManager packageManager = mockPackageManager();
+        setupIsIntentAvailableMocks(true, context, packageManager, intent);
+
+        boolean result = isIntentAvailable(context, intent);
+        assertThat(result).isFalse();
+    }
+
+    private void setupIsIntentAvailableMocks(boolean infoListEmpty, Context context,
+                                             PackageManager packageManager, Intent intent) {
+        when(context.getPackageManager()).thenReturn(packageManager);
+        when(mResolveInfoList.isEmpty()).thenReturn(infoListEmpty);
+        when(packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)).thenReturn(mResolveInfoList);
+    }
+
+    private boolean isIntentAvailable(Context context, Intent intent) {
+        return Utils.isIntentAvailable(context, intent);
+    }
+
+    private Context mockContext() {
+        return mock(Context.class);
+    }
+
+    private Intent mockIntent() {
+        return mock(Intent.class);
+    }
+
+    private PackageManager mockPackageManager() {
+        return mock(PackageManager.class);
     }
 }

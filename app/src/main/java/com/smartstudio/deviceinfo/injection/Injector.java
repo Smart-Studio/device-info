@@ -28,7 +28,7 @@ import com.smartstudio.deviceinfo.injection.modules.AppModule;
 import com.smartstudio.deviceinfo.injection.modules.AttributionsModule;
 import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
 
-public class Injector {
+public final class Injector {
     public static AppModule provideAppModule(Application app) {
         return new AppModule(app);
     }
@@ -42,7 +42,11 @@ public class Injector {
         return new AboutModule(controller, context);
     }
 
-    public static AttributionsModule provideAttributionsModule(AttributionsController controller) {
-        return new AttributionsModule(controller);
+    public static AttributionsModule provideAttributionsModule(AttributionsController controller, Context context) {
+        return new AttributionsModule(controller, context);
+    }
+
+    private Injector() {
+
     }
 }

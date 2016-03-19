@@ -17,7 +17,6 @@
 package com.smartstudio.deviceinfo.ui.about;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +26,7 @@ import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.ui.BaseViewImpl;
+import com.smartstudio.deviceinfo.utils.ViewUtils;
 
 import javax.inject.Inject;
 
@@ -44,7 +44,6 @@ public class AboutViewImpl extends BaseViewImpl implements AboutView {
 
     private final AboutController mController;
     private final Context mContext;
-    private final Resources mResources;
     private Toast mToast;
 
     @Inject
@@ -52,7 +51,6 @@ public class AboutViewImpl extends BaseViewImpl implements AboutView {
         super(controller);
         mController = controller;
         mContext = context;
-        mResources = context.getResources();
     }
 
     @Override
@@ -64,7 +62,7 @@ public class AboutViewImpl extends BaseViewImpl implements AboutView {
     public void init(View view) {
         super.init(view);
         mActionBar.setDisplayHomeAsUpEnabled(true);
-        String version = mResources.getString(R.string.about_version, BuildConfig.VERSION_NAME);
+        String version = mContext.getString(R.string.about_version, BuildConfig.VERSION_NAME);
         mTxtVersion.setText(version);
         mTxtOpenSource.setOnClickListener(v -> mController.onOpenSourceClicked());
         mTxtAttributions.setOnClickListener(v -> mController.onAttributionsClicked());
@@ -77,13 +75,6 @@ public class AboutViewImpl extends BaseViewImpl implements AboutView {
 
     @Override
     public void showNoBrowserError() {
-        String message = mResources.getString(R.string.error_no_browser);
-
-        if (mToast != null && mToast.getView().isShown()) {
-            return;
-        }
-
-        mToast = Toast.makeText(mContext, message, Toast.LENGTH_LONG);
-        mToast.show();
+        mToast = ViewUtils.showNoBrowserToast(mContext, mToast);
     }
 }

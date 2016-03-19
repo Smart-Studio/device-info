@@ -17,6 +17,7 @@
 package com.smartstudio.deviceinfo.ui.about.attributions;
 
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.smartstudio.deviceinfo.R;
@@ -25,6 +26,7 @@ import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsCon
 import com.smartstudio.deviceinfo.model.Attribution;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.BaseViewImplTest;
+import com.smartstudio.deviceinfo.utils.ViewUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,12 +40,17 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.powermock.api.mockito.PowerMockito.mock;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(ButterKnife.class)
+@PrepareForTest({ButterKnife.class, ViewUtils.class})
 public class AttributionsViewImplTest extends BaseViewImplTest {
+
     @Mock
     private AttributionsController mController;
     @Mock
@@ -52,12 +59,14 @@ public class AttributionsViewImplTest extends BaseViewImplTest {
     private RecyclerView.LayoutManager mLayoutManager;
     @Mock
     private List<Attribution> mAttributions;
+    @Mock
+    private Context mContext;
 
     private AttributionsViewImpl mView;
 
     @Before
     public void setUp() throws Exception {
-        mView = new AttributionsViewImpl(mController, mAdapter, mLayoutManager);
+        mView = new AttributionsViewImpl(mController, mAdapter, mLayoutManager, mContext);
     }
 
     @Test
@@ -93,6 +102,15 @@ public class AttributionsViewImplTest extends BaseViewImplTest {
     public void testShowAttributions() throws Exception {
         mView.showAttributions(mAttributions);
         verify(mAdapter).showAttributions(mAttributions);
+    }
+
+    @Test
+    public void testShowNoBrowserErrorAlreadyShown() throws Exception {
+        mockStatic(ViewUtils.class);
+        mView.showNoBrowserError();
+
+        verifyStatic();
+        ViewUtils.showNoBrowserToast(eq(mContext), anyObject());
     }
 
     private void mockViews() {

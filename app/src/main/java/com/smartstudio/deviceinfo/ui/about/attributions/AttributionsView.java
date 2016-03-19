@@ -21,9 +21,8 @@ import com.smartstudio.deviceinfo.ui.BaseView;
 
 import java.util.List;
 
-/**
- * TODO Add a class header comment
- */
 public interface AttributionsView extends BaseView {
     void showAttributions(List<Attribution> attributions);
+
+    void showNoBrowserError();
 }
