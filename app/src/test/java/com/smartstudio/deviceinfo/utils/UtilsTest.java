@@ -43,7 +43,7 @@ import static org.powermock.api.mockito.PowerMockito.when;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Resources.class, Utils.class, Uri.class})
 public class UtilsTest {
-    private static final String METHOD_INTENT_AVAILABLE = "mIsIntentAvailable";
+    private static final String METHOD_INTENT_AVAILABLE = "isIntentAvailable";
     private static final int PIXELS_EVEN = 4;
     private static final int DPS_EVEN = 2;
     private static final int PIXELS_ODD = 5;
