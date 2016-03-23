@@ -151,6 +151,12 @@ android {
     }
 }
 
+// config for NimbleDroid Gradle plugin
+nimbledroid {
+    apiKey config.props.nimbledroid_api_key
+    variant "prodRelease"
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
