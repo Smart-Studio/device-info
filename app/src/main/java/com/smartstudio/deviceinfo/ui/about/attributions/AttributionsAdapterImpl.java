@@ -23,15 +23,11 @@ import android.view.ViewGroup;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
-import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
 import com.smartstudio.deviceinfo.model.Attribution;
-import com.smartstudio.deviceinfo.utils.Utils;
 
 import java.util.List;
 
 import javax.inject.Inject;
-
-import timber.log.Timber;
 
 public class AttributionsAdapterImpl extends AttributionsAdapter {
     private final AttributionsController mController;
@@ -49,11 +45,7 @@ public class AttributionsAdapterImpl extends AttributionsAdapter {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.view_attribution, parent, false);
         AttributionViewHolder viewHolder = new AttributionViewHolderImpl(view);
-        view.setOnClickListener(v -> {
-            int pos = viewHolder.getAdapterPosition();
-            String repoUrl = mAttributions.get(pos).getRepoUrl();
-            mController.onAttributionClicked(repoUrl);
-        });
+        view.setOnClickListener(v -> onAttributionClicked(viewHolder));
         return viewHolder;
     }
 
@@ -72,5 +64,12 @@ public class AttributionsAdapterImpl extends AttributionsAdapter {
         mAttributions = attributions;
         mCount = attributions.size();
         notifyDataSetChanged();
+    }
+
+
+    private void onAttributionClicked(AttributionViewHolder viewHolder) {
+        int pos = viewHolder.getAdapterPosition();
+        String repoUrl = mAttributions.get(pos).getRepoUrl();
+        mController.onAttributionClicked(repoUrl);
     }
 }

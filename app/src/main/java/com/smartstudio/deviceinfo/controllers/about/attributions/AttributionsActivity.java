@@ -57,7 +57,7 @@ public class AttributionsActivity extends BaseActivity implements AttributionsCo
     protected void initComponent() {
         DeviceInfoApp.get()
                 .getComponent()
-                .plus(Injector.provideAttributionsModule(this))
+                .plus(Injector.provideAttributionsModule(this, this))
                 .inject(this);
     }
 
@@ -78,6 +78,7 @@ public class AttributionsActivity extends BaseActivity implements AttributionsCo
             Utils.openUrl(this, repoUrl);
         } catch (BrowserNotFoundException e) {
             Timber.e(e, "Error opening link to %s", repoUrl);
+            mView.showNoBrowserError();
         }
     }
 }

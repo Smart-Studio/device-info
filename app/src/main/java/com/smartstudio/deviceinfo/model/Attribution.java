@@ -16,6 +16,9 @@
 
 package com.smartstudio.deviceinfo.model;
 
+/**
+ * Represents an attribution to be made due to a third party open source library used in the app
+ **/
 public class Attribution {
     private String library;
     private String author;

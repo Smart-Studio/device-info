@@ -20,6 +20,14 @@ import com.smartstudio.deviceinfo.model.Attribution;
 
 import java.util.List;
 
+/**
+ * Provides the attributions to make due to the use of third party libraries
+ **/
 public interface AttributionsProvider {
+    /**
+     * Return the list of attributions to be made
+     *
+     * @return List of attributions
+     **/
     List<Attribution> getAttributions();
 }

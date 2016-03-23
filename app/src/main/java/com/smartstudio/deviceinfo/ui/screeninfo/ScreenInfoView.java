@@ -20,8 +20,13 @@ import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.ui.BaseView;
 
 /**
- * TODO Add a class header comment
- */
+ * Manages all the view logic for the screen info screen
+ **/
 public interface ScreenInfoView extends BaseView {
+    /**
+     * Shows the screen info
+     *
+     * @param screenInfo Contains the device screen info
+     **/
     void showScreenInfo(ScreenInfo screenInfo);
 }

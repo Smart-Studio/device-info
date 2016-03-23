@@ -1,12 +1,14 @@
 buildscript {
     repositories {
         jcenter()
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath "org.jacoco:org.jacoco.core:0.7.6.201602180812"
-        classpath 'com.android.tools.build:gradle:2.1.0-alpha1'
+        classpath 'com.android.tools.build:gradle:2.1.0-alpha3'
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.github.JakeWharton:sdk-manager-plugin:1d07987217120fffdc0ce1291d73e974310d7d92'
     }
 }
 
@@ -21,7 +23,7 @@ task clean(type: Delete) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.10'
+    gradleVersion = '2.13-20160228000026+0000'
     distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 }
 
@@ -34,7 +36,7 @@ ext {
     buildToolsVersion = '23.0.2'
 
     // App dependencies
-    supportLibraryVersion = '23.2.0'
+    supportLibraryVersion = '23.2.1'
     playServicesVersion = '8.4.0'
     guavaVersion = '18.0'
     butterknifeVersion = '7.0.1'

@@ -17,16 +17,14 @@
 package com.smartstudio.deviceinfo.ui.about;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.BaseController;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.BaseViewImplTest;
+import com.smartstudio.deviceinfo.utils.ViewUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,30 +40,25 @@ import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ButterKnife.class, Toast.class})
+@PrepareForTest({ButterKnife.class, ViewUtils.class})
 public class AboutViewImplTest extends BaseViewImplTest {
     private static final String VERSION = "v1.0.0";
-    private static final String NO_BROWSER_ERROR = "No browser!";
 
     @Mock
     private AboutController mController;
     @Mock
     private Context mContext;
-    @Mock
-    private Resources mResources;
 
     private AboutViewImpl mView;
 
     @Before
     public void setUp() throws Exception {
-        when(mContext.getResources()).thenReturn(mResources);
         mView = new AboutViewImpl(mController, mContext);
     }
 
@@ -77,7 +70,7 @@ public class AboutViewImplTest extends BaseViewImplTest {
 
     @Test
     public void testInit() throws Exception {
-        when(mResources.getString(eq(R.string.about_version), anyString())).thenReturn(VERSION);
+        when(mContext.getString(eq(R.string.about_version), anyString())).thenReturn(VERSION);
         mockViews();
         super.testInit();
         verify(mActionBar).setDisplayHomeAsUpEnabled(true);
@@ -104,62 +97,11 @@ public class AboutViewImplTest extends BaseViewImplTest {
 
     @Test
     public void testShowNoBrowserError() throws Exception {
-        mockStatic(Toast.class);
-        Toast toast = mock(Toast.class);
-        when(Toast.makeText(mContext, NO_BROWSER_ERROR, Toast.LENGTH_LONG)).thenReturn(toast);
-        when(mResources.getString(R.string.error_no_browser)).thenReturn(NO_BROWSER_ERROR);
-
+        mockStatic(ViewUtils.class);
         mView.showNoBrowserError();
-        verify(mResources).getString(R.string.error_no_browser);
+
         verifyStatic();
-        Toast.makeText(mContext, NO_BROWSER_ERROR, Toast.LENGTH_LONG);
-        verify(toast).show();
-    }
-
-    @Test
-    public void testShowNoBrowserErrorAlreadyShown() throws Exception {
-        mockStatic(Toast.class);
-        Toast toast = mock(Toast.class);
-        View view = mock(View.class);
-        when(view.isShown()).thenReturn(true);
-        when(toast.getView()).thenReturn(view);
-        when(Toast.makeText(mContext, NO_BROWSER_ERROR, Toast.LENGTH_LONG)).thenReturn(toast);
-        when(mResources.getString(R.string.error_no_browser)).thenReturn(NO_BROWSER_ERROR);
-
-        mView.showNoBrowserError();
-        verify(mResources).getString(R.string.error_no_browser);
-        verifyStatic();
-        Toast.makeText(mContext, NO_BROWSER_ERROR, Toast.LENGTH_LONG);
-        verify(toast).show();
-
-        mView.showNoBrowserError();
-        verify(toast).getView();
-        verify(view).isShown();
-        verify(toast).show();
-    }
-
-    @Test
-    public void testShowNoBrowserErrorNotShown() throws Exception {
-        mockStatic(Toast.class);
-        Toast toast = mock(Toast.class);
-        View view = mock(View.class);
-        when(view.isShown()).thenReturn(false);
-        when(toast.getView()).thenReturn(view);
-        when(Toast.makeText(mContext, NO_BROWSER_ERROR, Toast.LENGTH_LONG)).thenReturn(toast);
-        when(mResources.getString(R.string.error_no_browser)).thenReturn(NO_BROWSER_ERROR);
-
-        mView.showNoBrowserError();
-        verify(mResources).getString(R.string.error_no_browser);
-        verifyStatic();
-        Toast.makeText(mContext, NO_BROWSER_ERROR, Toast.LENGTH_LONG);
-        verify(toast).show();
-
-        mView.showNoBrowserError();
-        verify(toast).getView();
-        verify(view).isShown();
-        verifyStatic(times(2));
-        Toast.makeText(mContext, NO_BROWSER_ERROR, Toast.LENGTH_LONG);
-        verify(toast, times(2)).show();
+        ViewUtils.showNoBrowserToast(eq(mContext), anyObject());
     }
 
     private void mockViews() {

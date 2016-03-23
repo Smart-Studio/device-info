@@ -16,5 +16,8 @@
 
 package com.smartstudio.deviceinfo.exceptions;
 
+/**
+ * Exception thrown the there isn't a web browser installed on the device and a url is opened
+ **/
 public class BrowserNotFoundException extends Exception {
 }

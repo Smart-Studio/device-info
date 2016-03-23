@@ -16,13 +16,18 @@
 
 package com.smartstudio.deviceinfo.ui.about.attributions;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.model.Attribution;
 import com.smartstudio.deviceinfo.ui.BaseViewImpl;
+import com.smartstudio.deviceinfo.utils.ViewUtils;
 
 import java.util.List;
 
@@ -36,13 +41,16 @@ public class AttributionsViewImpl extends BaseViewImpl implements AttributionsVi
 
     private final AttributionsAdapter mAdapter;
     private final RecyclerView.LayoutManager mLayoutManager;
+    private final Context mContext;
+    private Toast mToast;
 
     @Inject
     public AttributionsViewImpl(AttributionsController controller, AttributionsAdapter adapter,
-                                RecyclerView.LayoutManager layoutManager) {
+                                RecyclerView.LayoutManager layoutManager, @ForActivity Context context) {
         super(controller);
         mAdapter = adapter;
         mLayoutManager = layoutManager;
+        mContext = context;
     }
 
     @Override
@@ -66,5 +74,10 @@ public class AttributionsViewImpl extends BaseViewImpl implements AttributionsVi
     @Override
     public void showAttributions(List<Attribution> attributions) {
         mAdapter.showAttributions(attributions);
+    }
+
+    @Override
+    public void showNoBrowserError() {
+        mToast = ViewUtils.showNoBrowserToast(mContext, mToast);
     }
 }

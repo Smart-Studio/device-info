@@ -12,17 +12,23 @@ buildscript {
     }
 }
 
+plugins {
+    id "com.nimbledroid.profiler" version "1.0.8"
+}
+
 repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
+apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 apply plugin: 'testfairy'
 apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'jacoco'
+apply from: 'jacoco.gradle'
+
 
 def versionMajor = 1
 def versionMinor = 0
@@ -145,6 +151,12 @@ android {
     }
 }
 
+// config for NimbleDroid Gradle plugin
+nimbledroid {
+    apiKey config.props.nimbledroid_api_key
+    variant "prodRelease"
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
@@ -218,73 +230,4 @@ configurations.compile.dependencies.each { compileDependency ->
 
 def getGitSha() {
     return 'git rev-parse --short HEAD'.execute().text.trim()
-}
-
-project.afterEvaluate {
-    // Grab all build types and product flavors
-    def buildTypes = android.buildTypes.collect { type -> type.name }
-    def productFlavors = android.productFlavors.collect { flavor -> flavor.name }
-
-    // When no product flavors defined, use empty
-    if (!productFlavors) productFlavors.add('')
-
-    productFlavors.each { productFlavorName ->
-        buildTypes.each { buildTypeName ->
-            def sourceName, sourcePath
-            if (!productFlavorName) {
-                sourceName = sourcePath = "${buildTypeName}"
-            } else {
-                sourceName = "${productFlavorName}${buildTypeName.capitalize()}"
-                sourcePath = "${productFlavorName}/${buildTypeName}"
-            }
-            def unitTestTaskName = "test${sourceName.capitalize()}UnitTest"
-            def connectedTestTaskName = "connected${sourceName.capitalize()}AndroidTest"
-            if (productFlavorName == "prod" && buildTypeName == "release") {
-                connectedTestTaskName = "connectedAndroidTest"
-            }
-
-            // Create coverage task of form 'testFlavorTypeCoverage' depending on 'testFlavorTypeUnitTest'
-            task "${unitTestTaskName}Coverage"(type: JacocoReport) {
-                dependsOn "$unitTestTaskName"
-                dependsOn "$connectedTestTaskName"
-                group = "Reporting"
-                description = "Generate Jacoco coverage reports on the ${sourceName.capitalize()} build."
-
-                classDirectories = fileTree(
-                        dir: "${project.buildDir}/intermediates/classes/${sourcePath}",
-                        excludes: ['**/R.class',
-                                   '**/R$*.class',
-                                   '**/*$ViewInjector*.*',
-                                   '**/*$ViewBinder*.*',
-                                   '**/*Factory*.class',
-                                   '**/injection/components/*.*',
-                                   '**/*Provider*.class',
-                                   '**/*_MembersInjector.class',
-                                   '**/BuildConfig.*',
-                                   '**/Manifest*.*',
-                                   '**/*Lambda*.*']
-                )
-
-                def coverageSourceDirs = [
-                        "src/main/java",
-                        "src/$productFlavorName/java",
-                        "src/$buildTypeName/java"
-                ]
-                additionalSourceDirs = files(coverageSourceDirs)
-                sourceDirectories = files(coverageSourceDirs)
-                executionData = fileTree(dir: project.projectDir, includes: ['**/*.exec', '**/*.ec'])
-
-                reports {
-                    xml.enabled = true
-                    xml.destination = "${buildDir}/reports/jacoco/jacocoTestReport.xml"
-                    html.enabled = true
-                    html.destination = "${buildDir}/reports/jacoco"
-                }
-            }
-        }
-    }
-}
-
-jacoco {
-    toolVersion = "$rootProject.jacocoVersion"
 }

@@ -23,6 +23,14 @@ import com.smartstudio.deviceinfo.model.Attribution;
 
 import java.util.List;
 
+/**
+ * Attributions recycler view adapter
+ **/
 public abstract class AttributionsAdapter extends RecyclerView.Adapter<AttributionViewHolder> {
+    /**
+     * Shows a list of attributions on a {@link RecyclerView}
+     *
+     * @param attributions List of attributions to display
+     **/
     public abstract void showAttributions(@NonNull List<Attribution> attributions);
 }

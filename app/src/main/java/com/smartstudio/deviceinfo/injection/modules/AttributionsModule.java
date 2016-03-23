@@ -21,6 +21,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.logic.AttributionsProvider;
@@ -38,14 +39,22 @@ import dagger.Provides;
 public class AttributionsModule {
 
     private final AttributionsController mController;
+    private final Context mContext;
 
-    public AttributionsModule(AttributionsController controller) {
+    public AttributionsModule(AttributionsController controller, Context context) {
         mController = controller;
+        mContext = context;
     }
 
     @Provides
     AttributionsController provideController() {
         return mController;
+    }
+
+    @Provides
+    @ForActivity
+    Context provideContext() {
+        return mContext;
     }
 
     @Provides
