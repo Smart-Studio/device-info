@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.verification.VerificationMode;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.rule.PowerMockRule;
@@ -26,8 +27,8 @@ import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.doThrow;
@@ -40,6 +41,7 @@ import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 @PrepareForTest({Utils.class})
 public class AttributionsActivityUnitTest {
     private static final String ATTRIBUTION_URL = "https://github.com/google/dagger";
+    private static final String METHOD_OPEN_URL = "openUrl";
 
     @Rule
     public PowerMockRule rule = new PowerMockRule();
@@ -65,17 +67,22 @@ public class AttributionsActivityUnitTest {
     }
 
     @Test
-    public void testOnOptionsItemSelected() throws Exception {
+    public void testOnOptionsItemSelectedHome() throws Exception {
+        onOptionsMenuSelectedTest(android.R.id.home, times(1));
+    }
+
+    @Test
+    public void testOnOptionsItemSelectedNotHandled() throws Exception {
+        onOptionsMenuSelectedTest(-3, never());
+    }
+
+    private void onOptionsMenuSelectedTest(int itemId, VerificationMode verify) {
         MenuItem item = mock(MenuItem.class);
-        when(item.getItemId()).thenReturn(android.R.id.home, -3);
+        when(item.getItemId()).thenReturn(itemId);
         mActivity = spy(mActivity);
 
         mActivity.onOptionsItemSelected(item);
-        verify(mActivity).onBackPressed();
-        reset(mActivity);
-
-        mActivity.onOptionsItemSelected(item);
-        verify(mActivity, never()).onBackPressed();
+        verify(mActivity, verify).onBackPressed();
     }
 
     @Test
@@ -90,7 +97,7 @@ public class AttributionsActivityUnitTest {
     @Test
     public void testOnAttributionClickedNoBrowserIntentTest() throws Exception {
         mockStatic(Utils.class);
-        doThrow(new BrowserNotFoundException()).when(Utils.class, "openUrl", mActivity, ATTRIBUTION_URL);
+        doThrow(new BrowserNotFoundException()).when(Utils.class, METHOD_OPEN_URL, mActivity, ATTRIBUTION_URL);
 
         mActivity.onAttributionClicked(ATTRIBUTION_URL);
         verifyStatic();

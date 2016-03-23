@@ -53,6 +53,8 @@ public class AttributionsAdapterImplTest {
     private static final int ATTRIBUTION_COUNT = 10;
     private static final int POSITION = 4;
     private static final String REPO_URL = "repo_url";
+    private static final String FIELD_ATTRIBUTIONS = "mAttributions";
+    private static final String METHOD_ON_ATTRIBUTION_CLICKED = "onAttributionClicked";
 
     @Mock
     private AttributionsController mController;
@@ -78,6 +80,7 @@ public class AttributionsAdapterImplTest {
         when(layoutInflater.inflate(R.layout.view_attribution, parent, false)).thenReturn(view);
 
         AttributionViewHolder holder = mAdapter.onCreateViewHolder(parent, 0);
+
         verify(view).setOnClickListener(anyObject());
         assertThat(holder.itemView).isEqualTo(view);
     }
@@ -131,13 +134,12 @@ public class AttributionsAdapterImplTest {
         Attribution attribution = mock(Attribution.class);
         when(attribution.getRepoUrl()).thenReturn(REPO_URL);
         when(mAttributions.get(POSITION)).thenReturn(attribution);
-        Whitebox.setInternalState(mAdapter, "mAttributions", mAttributions);
+        Whitebox.setInternalState(mAdapter, FIELD_ATTRIBUTIONS, mAttributions);
 
-        Whitebox.invokeMethod(mAdapter, "onAttributionClicked", viewHolder);
+        Whitebox.invokeMethod(mAdapter, METHOD_ON_ATTRIBUTION_CLICKED, viewHolder);
 
         verify(mAttributions).get(POSITION);
         verify(attribution).getRepoUrl();
         verify(mController).onAttributionClicked(REPO_URL);
-
     }
 }

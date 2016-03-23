@@ -25,7 +25,6 @@ import android.view.MenuItem;
 import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.about.AboutActivity;
-import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsActivity;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
@@ -48,7 +47,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(CustomRobolectricGradleTestRunner.class)
@@ -104,8 +102,7 @@ public class ScreenInfoActivityUnitTest {
     @Test
     public void testOnOptionsItemSelectedAboutClicked() throws Exception {
         mockStatic(AboutActivity.class);
-        MenuItem item = mock(MenuItem.class);
-        when(item.getItemId()).thenReturn(R.id.about);
+        MenuItem item = mockMenuItem(R.id.about);
 
         mActivity.onOptionsItemSelected(item);
 
@@ -116,14 +113,20 @@ public class ScreenInfoActivityUnitTest {
     }
 
     @Test
-    public void testOnOptionsItemSelectedNotHandleId() throws Exception {
-        MenuItem item = mock(MenuItem.class);
-        when(item.getItemId()).thenReturn(-3);
+    public void testOnOptionsItemSelectedNotHandledId() throws Exception {
+        MenuItem item = mockMenuItem(-3);
 
         mActivity.onOptionsItemSelected(item);
 
         ShadowActivity shadowActivity = shadowOf(mActivity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
         assertThat(startedIntent).isNull();
+    }
+
+    private MenuItem mockMenuItem(int itemId) {
+        MenuItem item = mock(MenuItem.class);
+        when(item.getItemId()).thenReturn(itemId);
+
+        return item;
     }
 }

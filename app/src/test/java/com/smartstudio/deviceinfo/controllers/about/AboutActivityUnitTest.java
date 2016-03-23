@@ -30,6 +30,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.verification.VerificationMode;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.rule.PowerMockRule;
@@ -41,14 +42,14 @@ import org.robolectric.shadows.ShadowIntent;
 import javax.inject.Inject;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.doThrow;
+import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(CustomRobolectricGradleTestRunner.class)
@@ -56,6 +57,8 @@ import static org.robolectric.Shadows.shadowOf;
 @PowerMockIgnore({"org.mockito.*", "org.robolectric.*", "android.*"})
 @PrepareForTest({Utils.class})
 public class AboutActivityUnitTest {
+    private static final String METHOD_OPEN_URL = "openUrl";
+
     @Rule
     public PowerMockRule rule = new PowerMockRule();
 
@@ -77,17 +80,22 @@ public class AboutActivityUnitTest {
     }
 
     @Test
-    public void testOnOptionsItemSelected() throws Exception {
+    public void testOnOptionsItemSelectedHome() throws Exception {
+        onCreateOptionsItemSelectedTest(android.R.id.home, times(1));
+    }
+
+    @Test
+    public void testOnOptionsItemSelectedNotHandled() throws Exception {
+        onCreateOptionsItemSelectedTest(-3, never());
+    }
+
+    private void onCreateOptionsItemSelectedTest(int itemId, VerificationMode mode) {
         MenuItem item = mock(MenuItem.class);
-        when(item.getItemId()).thenReturn(android.R.id.home, -3);
+        when(item.getItemId()).thenReturn(itemId);
         mActivity = spy(mActivity);
 
         mActivity.onOptionsItemSelected(item);
-        verify(mActivity).onBackPressed();
-        reset(mActivity);
-
-        mActivity.onOptionsItemSelected(item);
-        verify(mActivity, never()).onBackPressed();
+        verify(mActivity, mode).onBackPressed();
     }
 
     @Test
@@ -101,7 +109,7 @@ public class AboutActivityUnitTest {
     public void testOnOpenSourceClickedNoBrowser() throws Exception {
         mockStatic(Utils.class);
 
-        doThrow(new BrowserNotFoundException()).when(Utils.class, "openUrl", mActivity, BuildConfig.REPOSITORY_URL);
+        doThrow(new BrowserNotFoundException()).when(Utils.class, METHOD_OPEN_URL, mActivity, BuildConfig.REPOSITORY_URL);
         mActivity.onOpenSourceClicked();
         verify(mView).showNoBrowserError();
     }
