@@ -21,8 +21,19 @@ import com.smartstudio.deviceinfo.ui.BaseView;
 
 import java.util.List;
 
+/**
+ * Manages all the view logic for the attributions screen
+ **/
 public interface AttributionsView extends BaseView {
+    /**
+     * Shows the attributions due to open source third party libraries used in the app
+     *
+     * @param attributions List of attributions to make
+     **/
     void showAttributions(List<Attribution> attributions);
 
+    /**
+     * Shows a message to the user when a web browser is not available on the device
+     **/
     void showNoBrowserError();
 }

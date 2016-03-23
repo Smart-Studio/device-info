@@ -7,8 +7,17 @@ import android.widget.Toast;
 import com.smartstudio.deviceinfo.R;
 
 public final class ViewUtils {
-    public static Toast showNoBrowserToast(Context context, @Nullable Toast toast){
+
+    /**
+     * Displays a toast to notify the user that the web browser is not available on the device
+     *
+     * @param context Context The application's environment.
+     * @param toast   Reference to the toast, if it's null the toast will be created otherwise it will
+     *                be checked if is still displayed.
+     **/
+    public static Toast showNoBrowserToast(Context context, @Nullable Toast toast) {
         if (toast != null && toast.getView().isShown()) {
+            //TODO Try to call toast.show again instead of creating a new one
             return toast;
         }
 
@@ -19,7 +28,7 @@ public final class ViewUtils {
     }
 
 
-    private ViewUtils(){
+    private ViewUtils() {
 
     }
 }

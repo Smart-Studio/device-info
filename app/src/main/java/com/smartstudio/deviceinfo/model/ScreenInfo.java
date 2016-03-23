@@ -16,6 +16,9 @@
 
 package com.smartstudio.deviceinfo.model;
 
+/**
+ * Represents information about the device screen like resolution, density, etc
+ **/
 public class ScreenInfo {
     private String deviceModel;
     private String manufacturer;

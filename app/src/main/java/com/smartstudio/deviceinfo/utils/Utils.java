@@ -27,10 +27,24 @@ import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
 import java.util.List;
 
 public final class Utils {
+    /**
+     * Converts pixels into dps
+     *
+     * @param pixels  Pixels to be converted
+     * @param density Device density
+     * @return Dps equivalence to the pixels input
+     **/
     public static int pxToDp(int pixels, double density) {
         return (int) Math.round(pixels / density);
     }
 
+    /**
+     * Opens an url in a web browser
+     *
+     * @param context The application's environment
+     * @param url     Url to open
+     * @throws BrowserNotFoundException If a web browser is not installed on the device
+     **/
     public static void openUrl(Context context, String url) throws BrowserNotFoundException {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         if (!isIntentAvailable(context, intent)) {

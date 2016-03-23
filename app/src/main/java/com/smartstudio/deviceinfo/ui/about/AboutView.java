@@ -19,8 +19,11 @@ package com.smartstudio.deviceinfo.ui.about;
 import com.smartstudio.deviceinfo.ui.BaseView;
 
 /**
- * TODO Add a class header comment
- */
-public interface AboutView extends BaseView{
+ * Manages all the view logic for the about screen
+ **/
+public interface AboutView extends BaseView {
+    /**
+     * Shows a message to the user when a web browser is not available on the device
+     **/
     void showNoBrowserError();
 }

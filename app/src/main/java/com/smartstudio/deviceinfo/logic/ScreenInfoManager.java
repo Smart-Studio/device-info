@@ -18,6 +18,14 @@ package com.smartstudio.deviceinfo.logic;
 
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 
+/**
+ * Obtains all the needed information about the device screen
+ **/
 public interface ScreenInfoManager {
+    /**
+     * Obtains all the needed information about the device screen
+     *
+     * @return Device screen info
+     **/
     ScreenInfo getScreenInfo();
 }

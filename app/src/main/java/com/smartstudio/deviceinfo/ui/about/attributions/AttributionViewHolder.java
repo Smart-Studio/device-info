@@ -21,11 +21,19 @@ import android.view.View;
 
 import com.smartstudio.deviceinfo.model.Attribution;
 
+/**
+ * {@link RecyclerView.ViewHolder} for an attribution
+ **/
 public abstract class AttributionViewHolder extends RecyclerView.ViewHolder {
 
     public AttributionViewHolder(View itemView) {
         super(itemView);
     }
 
+    /**
+     * Binds the attributions data to the viewholder view
+     *
+     * @param attribution Attribution to be displayed on the view
+     **/
     public abstract void onBind(Attribution attribution);
 }
