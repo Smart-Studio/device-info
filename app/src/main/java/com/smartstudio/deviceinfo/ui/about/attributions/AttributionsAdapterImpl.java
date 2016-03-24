@@ -69,7 +69,6 @@ public class AttributionsAdapterImpl extends AttributionsAdapter {
 
     private void onAttributionClicked(AttributionViewHolder viewHolder) {
         int pos = viewHolder.getAdapterPosition();
-        String repoUrl = mAttributions.get(pos).getRepoUrl();
-        mController.onAttributionClicked(repoUrl);
+        mController.onAttributionClicked(mAttributions.get(pos));
     }
 }

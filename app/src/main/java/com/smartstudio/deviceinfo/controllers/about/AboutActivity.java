@@ -22,6 +22,7 @@ import android.view.MenuItem;
 
 import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.DeviceInfoApp;
+import com.smartstudio.deviceinfo.analytics.about.AboutAnalytics;
 import com.smartstudio.deviceinfo.controllers.BaseActivity;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsActivity;
 import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
@@ -43,6 +44,8 @@ public class AboutActivity extends BaseActivity implements AboutController {
 
     @Inject
     AboutView mView;
+    @Inject
+    AboutAnalytics mAnalytics;
 
     @Override
     protected void initComponent() {
@@ -52,9 +55,16 @@ public class AboutActivity extends BaseActivity implements AboutController {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mAnalytics.reportScreen();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                mAnalytics.reportActionBarBackTap();
                 onBackPressed();
                 break;
         }
@@ -63,6 +73,7 @@ public class AboutActivity extends BaseActivity implements AboutController {
 
     @Override
     public void onOpenSourceClicked() {
+        mAnalytics.reportOpenSourceTap();
         try {
             Utils.openUrl(this, BuildConfig.REPOSITORY_URL);
         } catch (BrowserNotFoundException e) {
@@ -73,6 +84,7 @@ public class AboutActivity extends BaseActivity implements AboutController {
 
     @Override
     public void onAttributionsClicked() {
+        mAnalytics.reportAttributionsTap();
         AttributionsActivity.launch(this);
     }
 }

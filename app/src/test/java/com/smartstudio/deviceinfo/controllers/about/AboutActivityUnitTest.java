@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.view.MenuItem;
 
 import com.smartstudio.deviceinfo.BuildConfig;
+import com.smartstudio.deviceinfo.analytics.about.AboutAnalytics;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsActivity;
 import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
@@ -64,6 +65,8 @@ public class AboutActivityUnitTest {
 
     @Inject
     AboutView mView;
+    @Inject
+    AboutAnalytics mAnalytics;
 
     private AboutActivityForTest mActivity;
 
@@ -80,8 +83,14 @@ public class AboutActivityUnitTest {
     }
 
     @Test
+    public void testOnResume() throws Exception {
+        verify(mAnalytics).reportScreen();
+    }
+
+    @Test
     public void testOnOptionsItemSelectedHome() throws Exception {
         onCreateOptionsItemSelectedTest(android.R.id.home, times(1));
+        verify(mAnalytics).reportActionBarBackTap();
     }
 
     @Test
@@ -121,5 +130,6 @@ public class AboutActivityUnitTest {
         Intent startedIntent = shadowActivity.getNextStartedActivity();
         ShadowIntent shadowIntent = shadowOf(startedIntent);
         assertThat(shadowIntent.getComponent().getClassName()).isEqualTo(AttributionsActivity.class.getName());
+        verify(mAnalytics).reportAttributionsTap();
     }
 }

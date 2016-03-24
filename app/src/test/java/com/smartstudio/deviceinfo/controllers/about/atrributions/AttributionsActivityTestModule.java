@@ -1,6 +1,7 @@
 package com.smartstudio.deviceinfo.controllers.about.atrributions;
 
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsAnalytics;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.logic.AttributionsProvider;
 import com.smartstudio.deviceinfo.ui.BaseView;
@@ -33,5 +34,11 @@ public class AttributionsActivityTestModule {
     @PerActivity
     AttributionsProvider provideAttributionProvider() {
         return mock(AttributionsProvider.class);
+    }
+
+    @Provides
+    @PerActivity
+    AttributionsAnalytics provideAnalytics() {
+        return mock(AttributionsAnalytics.class);
     }
 }

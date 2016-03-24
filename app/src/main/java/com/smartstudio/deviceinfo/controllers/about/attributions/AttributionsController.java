@@ -17,6 +17,7 @@
 package com.smartstudio.deviceinfo.controllers.about.attributions;
 
 import com.smartstudio.deviceinfo.controllers.BaseController;
+import com.smartstudio.deviceinfo.model.Attribution;
 
 /**
  * Controller for the attributions screen
@@ -25,7 +26,7 @@ public interface AttributionsController extends BaseController {
     /**
      * Called when an attributions is clicked
      *
-     * @param repoUrl Url of the clicked attribution to the library repository
+     * @param attribution Attribution clicked
      **/
-    void onAttributionClicked(String repoUrl);
+    void onAttributionClicked(Attribution attribution);
 }

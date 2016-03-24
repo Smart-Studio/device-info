@@ -17,6 +17,7 @@
 package com.smartstudio.deviceinfo.controllers.about;
 
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.analytics.about.AboutAnalytics;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.about.AboutView;
@@ -42,5 +43,11 @@ public class AboutActivityTestModule {
     @PerActivity
     BaseView provideBaseView(AboutView view) {
         return view;
+    }
+
+    @Provides
+    @PerActivity
+    AboutAnalytics provideAnalytics() {
+        return mock(AboutAnalytics.class);
     }
 }

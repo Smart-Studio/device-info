@@ -19,6 +19,8 @@ package com.smartstudio.deviceinfo.injection.modules;
 import android.util.DisplayMetrics;
 import android.view.Display;
 
+import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
+import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalyticsImpl;
 import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
@@ -79,5 +81,11 @@ public class ScreenInfoModule {
     @PerActivity
     BaseView provideBaseView(ScreenInfoView view) {
         return view;
+    }
+
+    @Provides
+    @PerActivity
+    ScreenInfoAnalytics provideAnalytics(ScreenInfoAnalyticsImpl analytics) {
+        return analytics;
     }
 }
