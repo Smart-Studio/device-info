@@ -18,6 +18,8 @@ package com.smartstudio.deviceinfo.injection.modules;
 
 import android.content.Context;
 
+import com.smartstudio.deviceinfo.analytics.about.AboutAnalytics;
+import com.smartstudio.deviceinfo.analytics.about.AboutAnalyticsImpl;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
@@ -61,5 +63,11 @@ public class AboutModule {
     @PerActivity
     BaseView provideBaseView(AboutView view) {
         return view;
+    }
+
+    @Provides
+    @PerActivity
+    AboutAnalytics provideAnalytics(AboutAnalyticsImpl analytics) {
+        return analytics;
     }
 }
