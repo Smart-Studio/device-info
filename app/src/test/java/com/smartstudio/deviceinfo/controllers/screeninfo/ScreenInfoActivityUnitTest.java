@@ -24,6 +24,7 @@ import android.view.MenuItem;
 
 import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.controllers.about.AboutActivity;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
@@ -60,6 +61,8 @@ public class ScreenInfoActivityUnitTest {
     ScreenInfoManager mScreenInfoManager;
     @Inject
     ScreenInfo mScreenInfo;
+    @Inject
+    ScreenInfoAnalytics mAnalytics;
 
     private ScreenInfoActivityForTest mActivity;
 
@@ -78,18 +81,18 @@ public class ScreenInfoActivityUnitTest {
 
     @Test
     public void testOnStart() throws Exception {
-        verify(mActivity.mAnalytics).reportActivityStart(mActivity);
+        verify(mAnalytics).reportActivityStart(mActivity);
     }
 
     @Test
     public void testOnResume() throws Exception {
-        verify(mActivity.mAnalytics).reportScreen();
+        verify(mAnalytics).reportScreen();
     }
 
     @Test
     public void testOnStop() throws Exception {
         mActivity.onStop();
-        verify(mActivity.mAnalytics).reportActivityStop(mActivity);
+        verify(mAnalytics).reportActivityStop(mActivity);
     }
 
     @Test
@@ -127,7 +130,7 @@ public class ScreenInfoActivityUnitTest {
         Intent startedIntent = shadowActivity.getNextStartedActivity();
         ShadowIntent shadowIntent = shadowOf(startedIntent);
         assertThat(shadowIntent.getComponent().getClassName()).isEqualTo(AboutActivity.class.getName());
-        verify(mActivity.mAnalytics).reportAboutTap();
+        verify(mAnalytics).reportAboutTap();
     }
 
     @Test
@@ -139,7 +142,7 @@ public class ScreenInfoActivityUnitTest {
         ShadowActivity shadowActivity = shadowOf(mActivity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
         assertThat(startedIntent).isNull();
-        verify(mActivity.mAnalytics, never()).reportAboutTap();
+        verify(mAnalytics, never()).reportAboutTap();
     }
 
     private MenuItem mockMenuItem(int itemId) {
@@ -152,12 +155,12 @@ public class ScreenInfoActivityUnitTest {
     @Test
     public void testOnMenuVisibilityChangedVisible() throws Exception {
         mActivity.onMenuVisibilityChanged(true);
-        verify(mActivity.mAnalytics).reportOptionsMenuOpened();
+        verify(mAnalytics).reportOptionsMenuOpened();
     }
 
     @Test
     public void testOnMenuVisibilityChangedNotVisible() throws Exception {
         mActivity.onMenuVisibilityChanged(false);
-        verify(mActivity.mAnalytics).reportOptionsMenuClosed();
+        verify(mAnalytics).reportOptionsMenuClosed();
     }
 }

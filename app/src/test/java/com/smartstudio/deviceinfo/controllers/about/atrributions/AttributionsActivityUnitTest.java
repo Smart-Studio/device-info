@@ -4,8 +4,10 @@ package com.smartstudio.deviceinfo.controllers.about.atrributions;
 import android.view.MenuItem;
 
 import com.smartstudio.deviceinfo.BuildConfig;
+import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsAnalytics;
 import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
 import com.smartstudio.deviceinfo.logic.AttributionsProvider;
+import com.smartstudio.deviceinfo.model.Attribution;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
 import com.smartstudio.deviceinfo.ui.about.attributions.AttributionsView;
 import com.smartstudio.deviceinfo.utils.Utils;
@@ -40,6 +42,7 @@ import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 @PowerMockIgnore({"org.mockito.*", "org.robolectric.*", "android.*"})
 @PrepareForTest({Utils.class})
 public class AttributionsActivityUnitTest {
+    private static final String ATTRIBUTION_LIBRARY = "Dagger 2";
     private static final String ATTRIBUTION_URL = "https://github.com/google/dagger";
     private static final String METHOD_OPEN_URL = "openUrl";
 
@@ -50,6 +53,8 @@ public class AttributionsActivityUnitTest {
     AttributionsView mView;
     @Inject
     AttributionsProvider mAttributionsProvider;
+    @Inject
+    AttributionsAnalytics mAnalytics;
 
     private AttributionsActivityForTest mActivity;
 
@@ -67,8 +72,14 @@ public class AttributionsActivityUnitTest {
     }
 
     @Test
+    public void testOnResume() throws Exception {
+        verify(mAnalytics).reportScreen();
+    }
+
+    @Test
     public void testOnOptionsItemSelectedHome() throws Exception {
         onOptionsMenuSelectedTest(android.R.id.home, times(1));
+        verify(mAnalytics).reportActionBarBackTap();
     }
 
     @Test
@@ -89,9 +100,10 @@ public class AttributionsActivityUnitTest {
     public void testOnAttributionClickedTest() throws Exception {
         mockStatic(Utils.class);
 
-        mActivity.onAttributionClicked(ATTRIBUTION_URL);
+        mActivity.onAttributionClicked(mockAttribution());
         verifyStatic();
         Utils.openUrl(anyObject(), eq(ATTRIBUTION_URL));
+        verify(mAnalytics).reportAttributionTap(ATTRIBUTION_LIBRARY);
     }
 
     @Test
@@ -99,9 +111,17 @@ public class AttributionsActivityUnitTest {
         mockStatic(Utils.class);
         doThrow(new BrowserNotFoundException()).when(Utils.class, METHOD_OPEN_URL, mActivity, ATTRIBUTION_URL);
 
-        mActivity.onAttributionClicked(ATTRIBUTION_URL);
+        mActivity.onAttributionClicked(mockAttribution());
         verifyStatic();
         Utils.openUrl(anyObject(), eq(ATTRIBUTION_URL));
         verify(mView).showNoBrowserError();
+        verify(mAnalytics).reportAttributionTap(ATTRIBUTION_LIBRARY);
+    }
+
+    private Attribution mockAttribution() {
+        Attribution attribution = mock(Attribution.class);
+        when(attribution.getLibrary()).thenReturn(ATTRIBUTION_LIBRARY);
+        when(attribution.getRepoUrl()).thenReturn(ATTRIBUTION_URL);
+        return attribution;
     }
 }

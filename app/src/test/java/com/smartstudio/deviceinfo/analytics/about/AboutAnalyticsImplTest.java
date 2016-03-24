@@ -28,24 +28,20 @@ public class AboutAnalyticsImplTest extends AnalyticsManagerImplTest {
     public void testReportOpenSourceTap() throws Exception {
         setScreenName();
         mAboutAnalytics.reportOpenSourceTap();
-        verifyEvent(AboutAnalyticsImpl.SCREEN_NAME, AboutAnalyticsImpl.OPEN_SOURCE_TAP);
+        verifyEvent(AboutAnalyticsImpl.SCREEN_NAME, AboutAnalyticsImpl.TAP_OPEN_SOURCE);
     }
 
     @Test
     public void testReportAttributionsTap() throws Exception {
         setScreenName();
         mAboutAnalytics.reportAttributionsTap();
-        verifyEvent(AboutAnalyticsImpl.SCREEN_NAME, AboutAnalyticsImpl.ATTRIBUTIONS_TAP);
+        verifyEvent(AboutAnalyticsImpl.SCREEN_NAME, AboutAnalyticsImpl.TAP_ATTRIBUTIONS);
     }
 
     @Test
     public void testReportActionBarBackTap() throws Exception {
         setScreenName();
         mAboutAnalytics.reportActionBarBackTap();
-        verifyEvent(AboutAnalyticsImpl.SCREEN_NAME, AboutAnalyticsImpl.ACTION_BAR_BACK_TAP);
-    }
-
-    private void setScreenName() throws Exception {
-        Whitebox.invokeMethod(mAboutAnalytics, "setScreenName");
+        verifyEvent(AboutAnalyticsImpl.SCREEN_NAME, AboutAnalyticsImpl.TAP_ACTION_BAR_BACK);
     }
 }

@@ -10,7 +10,7 @@ import javax.inject.Provider;
 
 public class ScreenInfoAnalyticsImpl extends AnalyticsManagerImpl implements ScreenInfoAnalytics {
     static final String SCREEN_NAME = "Screen info";
-    static final String ABOUT_TAPPED = "Tap menu about";
+    static final String TAP_ABOUT = "Tap menu about";
     static final String MENU_OPTIONS_OPENED = "Menu options opened";
     static final String MENU_OPTIONS_CLOSED = "Menu options closed";
 
@@ -35,7 +35,7 @@ public class ScreenInfoAnalyticsImpl extends AnalyticsManagerImpl implements Scr
 
     @Override
     public void reportAboutTap() {
-        reportEvent(ABOUT_TAPPED);
+        reportEvent(TAP_ABOUT);
     }
 
     @Override

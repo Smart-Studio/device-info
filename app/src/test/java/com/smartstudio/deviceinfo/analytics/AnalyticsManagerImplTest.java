@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
 
 import java.util.Map;
 
@@ -89,6 +90,15 @@ public abstract class AnalyticsManagerImplTest {
         verify(mEventBuilder).setCategory(category);
         verify(mEventBuilder).setAction(action);
         verify(mTracker).send(mEventMap);
+    }
+
+    protected void verifyEventWithLabel(String category, String action, String label) {
+        verifyEvent(category, action);
+        verify(mEventBuilder).setLabel(label);
+    }
+
+    protected void setScreenName() throws Exception {
+        Whitebox.invokeMethod(mAnalyticsManager, "setScreenName");
     }
 
     private void verifyScreenName() {

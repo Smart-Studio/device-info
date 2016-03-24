@@ -23,7 +23,7 @@ public class ScreenInfoAnalyticsImplTest extends AnalyticsManagerImplTest {
     public void testReportAboutTap() throws Exception {
         setScreenName();
         mScreenInfoAnalytics.reportAboutTap();
-        verifyEvent(ScreenInfoAnalyticsImpl.SCREEN_NAME, ScreenInfoAnalyticsImpl.ABOUT_TAPPED);
+        verifyEvent(ScreenInfoAnalyticsImpl.SCREEN_NAME, ScreenInfoAnalyticsImpl.TAP_ABOUT);
     }
 
     @Test
@@ -45,9 +45,5 @@ public class ScreenInfoAnalyticsImplTest extends AnalyticsManagerImplTest {
         mScreenInfoAnalytics = new ScreenInfoAnalyticsImpl(mAnalytics, mTracker,
                 mScreenViewBuilderProvider, mEventBuilderProvider);
         return mScreenInfoAnalytics;
-    }
-
-    private void setScreenName() throws Exception {
-        Whitebox.invokeMethod(mScreenInfoAnalytics, "setScreenName");
     }
 }

@@ -55,6 +55,12 @@ public class AboutActivity extends BaseActivity implements AboutController {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mAnalytics.reportScreen();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:

@@ -23,10 +23,12 @@ import android.support.annotation.Nullable;
 import android.view.MenuItem;
 
 import com.smartstudio.deviceinfo.DeviceInfoApp;
+import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsAnalytics;
 import com.smartstudio.deviceinfo.controllers.BaseActivity;
 import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
 import com.smartstudio.deviceinfo.injection.Injector;
 import com.smartstudio.deviceinfo.logic.AttributionsProvider;
+import com.smartstudio.deviceinfo.model.Attribution;
 import com.smartstudio.deviceinfo.ui.about.attributions.AttributionsView;
 import com.smartstudio.deviceinfo.utils.Utils;
 
@@ -43,9 +45,10 @@ public class AttributionsActivity extends BaseActivity implements AttributionsCo
 
     @Inject
     AttributionsView mView;
-
     @Inject
     AttributionsProvider mAttributionsProvider;
+    @Inject
+    AttributionsAnalytics mAnalytics;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,9 +65,16 @@ public class AttributionsActivity extends BaseActivity implements AttributionsCo
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mAnalytics.reportScreen();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                mAnalytics.reportActionBarBackTap();
                 onBackPressed();
                 break;
         }
@@ -73,7 +83,9 @@ public class AttributionsActivity extends BaseActivity implements AttributionsCo
     }
 
     @Override
-    public void onAttributionClicked(String repoUrl) {
+    public void onAttributionClicked(Attribution attribution) {
+        mAnalytics.reportAttributionTap(attribution.getLibrary());
+        String repoUrl = attribution.getRepoUrl();
         try {
             Utils.openUrl(this, repoUrl);
         } catch (BrowserNotFoundException e) {

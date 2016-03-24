@@ -20,6 +20,8 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsAnalytics;
+import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsAnalyticsImpl;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
@@ -84,5 +86,11 @@ public class AttributionsModule {
     @Provides
     RecyclerView.LayoutManager provideLayoutManager(@ForApplication Context context) {
         return new LinearLayoutManager(context);
+    }
+
+    @Provides
+    @PerActivity
+    AttributionsAnalytics provideAnalytics(AttributionsAnalyticsImpl analytics) {
+        return analytics;
     }
 }
