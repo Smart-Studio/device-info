@@ -17,6 +17,7 @@
 package com.smartstudio.deviceinfo.controllers.screeninfo;
 
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
@@ -58,5 +59,11 @@ public class ScreenInfoActivityTestModule {
     @PerActivity
     ScreenInfo provideScreenInfo() {
         return mock(ScreenInfo.class);
+    }
+
+    @Provides
+    @PerActivity
+    ScreenInfoAnalytics provideAnalytics() {
+        return mock(ScreenInfoAnalytics.class);
     }
 }

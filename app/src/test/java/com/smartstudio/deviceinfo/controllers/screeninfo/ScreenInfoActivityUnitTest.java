@@ -43,6 +43,7 @@ import javax.inject.Inject;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -73,6 +74,22 @@ public class ScreenInfoActivityUnitTest {
         verify(mView).getLayoutResourceId();
         verify(mScreenInfoManager).getScreenInfo();
         verify(mView).showScreenInfo(mScreenInfo);
+    }
+
+    @Test
+    public void testOnStart() throws Exception {
+        verify(mActivity.mAnalytics).reportActivityStart(mActivity);
+    }
+
+    @Test
+    public void testOnResume() throws Exception {
+        verify(mActivity.mAnalytics).reportScreen();
+    }
+
+    @Test
+    public void testOnStop() throws Exception {
+        mActivity.onStop();
+        verify(mActivity.mAnalytics).reportActivityStop(mActivity);
     }
 
     @Test
@@ -110,6 +127,7 @@ public class ScreenInfoActivityUnitTest {
         Intent startedIntent = shadowActivity.getNextStartedActivity();
         ShadowIntent shadowIntent = shadowOf(startedIntent);
         assertThat(shadowIntent.getComponent().getClassName()).isEqualTo(AboutActivity.class.getName());
+        verify(mActivity.mAnalytics).reportAboutTap();
     }
 
     @Test
@@ -121,6 +139,7 @@ public class ScreenInfoActivityUnitTest {
         ShadowActivity shadowActivity = shadowOf(mActivity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
         assertThat(startedIntent).isNull();
+        verify(mActivity.mAnalytics, never()).reportAboutTap();
     }
 
     private MenuItem mockMenuItem(int itemId) {
@@ -128,5 +147,17 @@ public class ScreenInfoActivityUnitTest {
         when(item.getItemId()).thenReturn(itemId);
 
         return item;
+    }
+
+    @Test
+    public void testOnMenuVisibilityChangedVisible() throws Exception {
+        mActivity.onMenuVisibilityChanged(true);
+        verify(mActivity.mAnalytics).reportOptionsMenuOpened();
+    }
+
+    @Test
+    public void testOnMenuVisibilityChangedNotVisible() throws Exception {
+        mActivity.onMenuVisibilityChanged(false);
+        verify(mActivity.mAnalytics).reportOptionsMenuClosed();
     }
 }

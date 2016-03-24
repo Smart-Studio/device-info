@@ -18,12 +18,14 @@ package com.smartstudio.deviceinfo.controllers.screeninfo;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.smartstudio.deviceinfo.DeviceInfoApp;
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.controllers.BaseActivity;
 import com.smartstudio.deviceinfo.controllers.about.AboutActivity;
 import com.smartstudio.deviceinfo.injection.Injector;
@@ -33,11 +35,13 @@ import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
 
 import javax.inject.Inject;
 
-public class ScreenInfoActivity extends BaseActivity implements ScreenInfoController {
+public class ScreenInfoActivity extends BaseActivity implements ScreenInfoController, ActionBar.OnMenuVisibilityListener {
     @Inject
     ScreenInfoView mView;
     @Inject
     ScreenInfoManager mScreenInfoManager;
+    @Inject
+    ScreenInfoAnalytics mAnalytics;
 
 
     @Override
@@ -45,6 +49,20 @@ public class ScreenInfoActivity extends BaseActivity implements ScreenInfoContro
         super.onCreate(savedInstanceState);
         ScreenInfo screenInfo = mScreenInfoManager.getScreenInfo();
         mView.showScreenInfo(screenInfo);
+    }
+
+    @Override
+    protected void initComponent() {
+        DeviceInfoApp.get().getComponent()
+                .plus(Injector.provideScreenInfoModule(this, getWindowManager().getDefaultDisplay()))
+                .inject(this);
+    }
+
+    @Override
+    public ActionBar setUpToolbar(Toolbar toolbar) {
+        ActionBar actionBar =  super.setUpToolbar(toolbar);
+        actionBar.addOnMenuVisibilityListener(this);
+        return actionBar;
     }
 
     @Override
@@ -58,15 +76,36 @@ public class ScreenInfoActivity extends BaseActivity implements ScreenInfoContro
         switch (item.getItemId()) {
             case R.id.about:
                 AboutActivity.launch(this);
+                mAnalytics.reportAboutTap();
                 break;
         }
         return true;
     }
 
     @Override
-    protected void initComponent() {
-        DeviceInfoApp.get().getComponent()
-                .plus(Injector.provideScreenInfoModule(this, getWindowManager().getDefaultDisplay()))
-                .inject(this);
+    protected void onStart() {
+        super.onStart();
+        mAnalytics.reportActivityStart(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAnalytics.reportScreen();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAnalytics.reportActivityStop(this);
+    }
+
+    @Override
+    public void onMenuVisibilityChanged(boolean isVisible) {
+        if (isVisible){
+            mAnalytics.reportOptionsMenuOpened();
+        }else{
+            mAnalytics.reportOptionsMenuClosed();
+        }
     }
 }
