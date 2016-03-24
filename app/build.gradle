@@ -73,6 +73,8 @@ android {
         ]
 
         buildConfigField "String", "REPOSITORY_URL", "\"${config.props.repository_url}\""
+        buildConfigField "String", "ANALYTICS_TRACKING_ID", "\"${config.props.analytics_tracking_id}\""
+        buildConfigField "String", "ANALYTICS_DEBUG_TRACKING_ID", "\"${config.props.analytics_debug_tracking_id}\""
         ext.betaDistributionGroupAliasesFilePath = config.props.fabric_testers_file
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
