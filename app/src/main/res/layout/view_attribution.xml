@@ -22,6 +22,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/gap_normal"
     android:layout_marginRight="@dimen/gap_normal"
+    android:foreground="@drawable/background_attribution"
     app:cardCornerRadius="5dp"
     app:cardElevation="5dp"
     app:cardPreventCornerOverlap="false"
@@ -43,18 +44,20 @@
             <TextView
                 android:id="@+id/txt_attribution_library"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                app:layout_widthPercent="70%"
+                android:textColor="@color/attribution_text"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_widthPercent="60%"
                 tools:text="Dagger 2" />
 
             <TextView
                 android:id="@+id/txt_attribution_author"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:layout_gravity="end|center_vertical"
                 android:gravity="end"
-                android:textColor="@android:color/black"
-                app:layout_widthPercent="30%"
-                tools:text="Google" />
+                android:textColor="@color/attribution_text"
+                app:layout_widthPercent="40%"
+                tools:text="Jake Wharton" />
         </android.support.percent.PercentFrameLayout>
 
         <TextView
@@ -63,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/gap_normal"
             android:layout_marginTop="@dimen/gap_normal"
-            android:textColor="@android:color/black"
+            android:textColor="@color/attribution_text"
             tools:text="A fast dependency injector for Android and Java" />
 
         <TextView
@@ -72,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/gap_normal"
-            android:textColor="@android:color/black"
+            android:textColor="@color/attribution_text"
             tools:text="Apache Version 2.0" />
     </LinearLayout>
 
