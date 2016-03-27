@@ -6,19 +6,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="BaseToolbar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">?android:attr/actionBarSize</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:elevation">5dp</item>
-        <item name="theme">@style/ToolbarTheme</item>
+        <item name="android:theme">@style/ToolbarTheme</item>
     </style>
 
-    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-
-    </style>
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="ScreenInfoProperty">
         <item name="android:layout_marginBottom">10dp</item>
