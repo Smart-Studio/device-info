@@ -20,13 +20,14 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.annotation.DimenRes;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.ViewConfiguration;
 
+import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 
 import org.junit.Before;
@@ -41,7 +42,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -50,9 +50,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ViewConfiguration.class, Build.class})
+@PrepareForTest({ViewConfiguration.class, Build.class, TypedValue.class})
 public class ScreenInfoManagerImplTest {
     private static final String MODEL = "Nexus 4";
     private static final String MANUFACTURER = "LGE";
@@ -102,18 +103,19 @@ public class ScreenInfoManagerImplTest {
     @Mock
     private Resources.Theme mTheme;
     @Mock
-    private TypedArray mAttrs;
+    private TypedValue mTypedValue;
 
     private ScreenInfoManagerImpl mScreenInfoManager;
 
     @Before
     public void setUp() throws Exception {
         when(mContext.getResources()).thenReturn(mResources);
-        mockStatic(ViewConfiguration.class, Build.class);
+        mockStatic(ViewConfiguration.class, Build.class, TypedValue.class);
         when(ViewConfiguration.get(mContext)).thenReturn(mViewConfiguration);
         when(mResources.getConfiguration()).thenReturn(mConfiguration);
-        when(mTheme.obtainStyledAttributes(any())).thenReturn(mAttrs);
         when(mContext.getTheme()).thenReturn(mTheme);
+        when(mTheme.resolveAttribute(R.attr.actionBarSize, mTypedValue, true)).thenReturn(true);
+        when(TypedValue.complexToDimensionPixelSize(mTypedValue.data, mDisplayMetrics)).thenReturn(ACTION_BAR_HEIGHT);
 
         mockStaticField(Build.class, "MODEL", MODEL);
         mockStaticField(Build.class, "MANUFACTURER", MANUFACTURER);
@@ -125,7 +127,7 @@ public class ScreenInfoManagerImplTest {
 
         mockStatusBarHeight();
 
-        mScreenInfoManager = new ScreenInfoManagerImpl(mDisplay, mDisplayMetrics, mScreenInfo, mContext);
+        mScreenInfoManager = new ScreenInfoManagerImpl(mDisplay, mDisplayMetrics, mTypedValue, mScreenInfo, mContext);
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -135,7 +137,6 @@ public class ScreenInfoManagerImplTest {
         mockJellyBeanAndAboveResolution();
         mockNavigationBarHeight();
         mockScreenLayout();
-
 
         ScreenInfo screenInfo = mScreenInfoManager.getScreenInfo();
         verify(mDisplay).getRealMetrics(mDisplayMetrics);
@@ -196,7 +197,6 @@ public class ScreenInfoManagerImplTest {
     private void mockStatusBarHeight() {
         when(mResources.getIdentifier(ScreenInfoManagerImpl.STATUS_BAR_HEIGHT, ScreenInfoManagerImpl.DIMEN, ScreenInfoManagerImpl.ANDROID)).thenReturn(STATUS_BAR_ID);
         when(mResources.getDimensionPixelSize(STATUS_BAR_ID)).thenReturn(STATUS_HEIGHT);
-        when(mAttrs.getDimension(0, 0)).thenReturn((float) ACTION_BAR_HEIGHT);
     }
 
     private void mockHasNavigationBar(boolean enabled) {
@@ -254,8 +254,9 @@ public class ScreenInfoManagerImplTest {
 
     private void verifyCommon(ScreenInfo screenInfo) {
         assertThat(screenInfo).isEqualTo(mScreenInfo);
-        verify(mAttrs).getDimension(0, 0);
-        verify(mAttrs).recycle();
+        verify(mTheme).resolveAttribute(R.attr.actionBarSize, mTypedValue, true);
+        verifyStatic();
+        TypedValue.complexToDimensionPixelSize(mTypedValue.data, mDisplayMetrics);
 
         verify(mScreenInfo).setScreenSize(SCREEN_SIZE);
         verify(mScreenInfo).setDeviceModel(MODEL);
