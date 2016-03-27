@@ -80,19 +80,8 @@ public class ScreenInfoActivityUnitTest {
     }
 
     @Test
-    public void testOnStart() throws Exception {
-        verify(mAnalytics).reportActivityStart(mActivity);
-    }
-
-    @Test
     public void testOnResume() throws Exception {
         verify(mAnalytics).reportScreen();
-    }
-
-    @Test
-    public void testOnStop() throws Exception {
-        mActivity.onStop();
-        verify(mAnalytics).reportActivityStop(mActivity);
     }
 
     @Test

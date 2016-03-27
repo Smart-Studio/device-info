@@ -27,8 +27,6 @@ public abstract class AnalyticsManagerImplTest {
     private static final String LABEL = "label";
 
     @Mock
-    protected GoogleAnalytics mAnalytics;
-    @Mock
     protected Tracker mTracker;
     @Mock
     protected Provider<HitBuilders.ScreenViewBuilder> mScreenViewBuilderProvider;

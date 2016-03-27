@@ -54,13 +54,13 @@ public class ScreenInfoActivity extends BaseActivity implements ScreenInfoContro
     @Override
     protected void initComponent() {
         DeviceInfoApp.get().getComponent()
-                .plus(Injector.provideScreenInfoModule(this, getWindowManager().getDefaultDisplay()))
+                .plus(Injector.provideScreenInfoModule(this, this, getWindowManager().getDefaultDisplay()))
                 .inject(this);
     }
 
     @Override
     public ActionBar setUpToolbar(Toolbar toolbar) {
-        ActionBar actionBar =  super.setUpToolbar(toolbar);
+        ActionBar actionBar = super.setUpToolbar(toolbar);
         actionBar.addOnMenuVisibilityListener(this);
         return actionBar;
     }
@@ -83,28 +83,16 @@ public class ScreenInfoActivity extends BaseActivity implements ScreenInfoContro
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        mAnalytics.reportActivityStart(this);
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         mAnalytics.reportScreen();
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        mAnalytics.reportActivityStop(this);
-    }
-
-    @Override
     public void onMenuVisibilityChanged(boolean isVisible) {
-        if (isVisible){
+        if (isVisible) {
             mAnalytics.reportOptionsMenuOpened();
-        }else{
+        } else {
             mAnalytics.reportOptionsMenuClosed();
         }
     }

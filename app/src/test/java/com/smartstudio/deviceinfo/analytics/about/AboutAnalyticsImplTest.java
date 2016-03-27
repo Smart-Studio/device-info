@@ -4,7 +4,6 @@ import com.smartstudio.deviceinfo.analytics.AnalyticsManagerImpl;
 import com.smartstudio.deviceinfo.analytics.AnalyticsManagerImplTest;
 
 import org.junit.Test;
-import org.powermock.reflect.Whitebox;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,7 +12,7 @@ public class AboutAnalyticsImplTest extends AnalyticsManagerImplTest {
 
     @Override
     protected AnalyticsManagerImpl createAnalyticsManager() {
-        mAboutAnalytics = new AboutAnalyticsImpl(mAnalytics, mTracker,
+        mAboutAnalytics = new AboutAnalyticsImpl(mTracker,
                 mScreenViewBuilderProvider, mEventBuilderProvider);
         return mAboutAnalytics;
     }

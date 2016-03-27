@@ -16,12 +16,15 @@
 
 package com.smartstudio.deviceinfo.injection.modules;
 
+import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Display;
 
 import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalyticsImpl;
 import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl;
@@ -36,10 +39,12 @@ import dagger.Provides;
 @Module
 public class ScreenInfoModule {
     private final ScreenInfoController mController;
+    private final Context mContext;
     private final Display mDisplay;
 
-    public ScreenInfoModule(ScreenInfoController controller, Display display) {
+    public ScreenInfoModule(ScreenInfoController controller, Context context, Display display) {
         mController = controller;
+        mContext = context;
         mDisplay = display;
     }
 
@@ -47,6 +52,12 @@ public class ScreenInfoModule {
     @PerActivity
     ScreenInfoController provideController() {
         return mController;
+    }
+
+    @Provides
+    @ForActivity
+    Context provideContext() {
+        return mContext;
     }
 
     @Provides
@@ -87,5 +98,10 @@ public class ScreenInfoModule {
     @PerActivity
     ScreenInfoAnalytics provideAnalytics(ScreenInfoAnalyticsImpl analytics) {
         return analytics;
+    }
+
+    @Provides
+    TypedValue provideTypedValue() {
+        return new TypedValue();
     }
 }

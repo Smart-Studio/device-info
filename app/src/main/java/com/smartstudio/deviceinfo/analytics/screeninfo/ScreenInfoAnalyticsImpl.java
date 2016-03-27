@@ -1,6 +1,5 @@
 package com.smartstudio.deviceinfo.analytics.screeninfo;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.smartstudio.deviceinfo.analytics.AnalyticsManagerImpl;
@@ -22,10 +21,10 @@ public class ScreenInfoAnalyticsImpl extends AnalyticsManagerImpl implements Scr
      * @param eventBuilderProvider      Provides an event builder to track events
      **/
     @Inject
-    public ScreenInfoAnalyticsImpl(GoogleAnalytics analytics, Tracker tracker,
+    public ScreenInfoAnalyticsImpl(Tracker tracker,
                                    Provider<HitBuilders.ScreenViewBuilder> screenViewBuilderProvider,
                                    Provider<HitBuilders.EventBuilder> eventBuilderProvider) {
-        super(analytics, tracker, screenViewBuilderProvider, eventBuilderProvider);
+        super(tracker, screenViewBuilderProvider, eventBuilderProvider);
     }
 
     @Override

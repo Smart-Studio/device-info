@@ -34,8 +34,9 @@ public final class Injector {
     }
 
     public static ScreenInfoModule provideScreenInfoModule(ScreenInfoController controller,
+                                                           Context context,
                                                            Display display) {
-        return new ScreenInfoModule(controller, display);
+        return new ScreenInfoModule(controller, context, display);
     }
 
     public static AboutModule provideAboutModule(AboutController controller, Context context) {
