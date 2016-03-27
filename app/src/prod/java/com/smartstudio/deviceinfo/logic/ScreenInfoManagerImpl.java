@@ -19,14 +19,15 @@ package com.smartstudio.deviceinfo.logic;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.annotation.VisibleForTesting;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.ViewConfiguration;
 
-import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
+import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 
 import java.lang.reflect.InvocationTargetException;
@@ -83,15 +84,18 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
 
     private final Display mDisplay;
     private final DisplayMetrics mDisplayMetrics;
+    private final TypedValue mTypedValue;
     private final ScreenInfo mScreenInfo;
     private final Context mContext;
     private final Resources mResources;
 
     @Inject
     public ScreenInfoManagerImpl(Display display, DisplayMetrics displayMetrics,
-                                 ScreenInfo screenInfo, @ForApplication Context context) {
+                                 TypedValue typedValue, ScreenInfo screenInfo,
+                                 @ForActivity Context context) {
         mDisplay = display;
         mDisplayMetrics = displayMetrics;
+        mTypedValue = typedValue;
         mScreenInfo = screenInfo;
         mContext = context;
         mResources = context.getResources();
@@ -146,10 +150,10 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
         mScreenInfo.setDensityX(mDisplayMetrics.xdpi);
         mScreenInfo.setDensityY(mDisplayMetrics.ydpi);
 
-        TypedArray attrs = mContext.getTheme().obtainStyledAttributes(
-                new int[]{android.R.attr.actionBarSize});
-        int actionBarHeight = (int) attrs.getDimension(0, 0);
-        attrs.recycle();
+        int actionBarHeight = 0;
+        if (mContext.getTheme().resolveAttribute(R.attr.actionBarSize, mTypedValue, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(mTypedValue.data, mDisplayMetrics);
+        }
 
         mScreenInfo.setActionBarHeight(actionBarHeight);
         int contentTop = statusBarHeight + actionBarHeight;

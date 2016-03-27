@@ -24,6 +24,7 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.annotation.DimenRes;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.ViewConfiguration;
 
@@ -103,6 +104,8 @@ public class ScreenInfoManagerImplTest {
     private Resources.Theme mTheme;
     @Mock
     private TypedArray mAttrs;
+    @Mock
+    private TypedValue mTypedValue;
 
     private ScreenInfoManagerImpl mScreenInfoManager;
 
@@ -125,7 +128,7 @@ public class ScreenInfoManagerImplTest {
 
         mockStatusBarHeight();
 
-        mScreenInfoManager = new ScreenInfoManagerImpl(mDisplay, mDisplayMetrics, mScreenInfo, mContext);
+        mScreenInfoManager = new ScreenInfoManagerImpl(mDisplay, mDisplayMetrics, mTypedValue, mScreenInfo, mContext);
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -135,7 +138,6 @@ public class ScreenInfoManagerImplTest {
         mockJellyBeanAndAboveResolution();
         mockNavigationBarHeight();
         mockScreenLayout();
-
 
         ScreenInfo screenInfo = mScreenInfoManager.getScreenInfo();
         verify(mDisplay).getRealMetrics(mDisplayMetrics);
