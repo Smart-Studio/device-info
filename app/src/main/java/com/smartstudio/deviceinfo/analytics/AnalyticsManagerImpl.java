@@ -1,8 +1,5 @@
 package com.smartstudio.deviceinfo.analytics;
 
-import android.app.Activity;
-
-import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -15,7 +12,6 @@ import timber.log.Timber;
  */
 public abstract class AnalyticsManagerImpl implements AnalyticsManager {
     protected final Tracker mTracker;
-    private final GoogleAnalytics mAnalytics;
     private Provider<HitBuilders.ScreenViewBuilder> mScreenViewBuilderProvider;
     private Provider<HitBuilders.EventBuilder> mEventBuilderProvider;
     protected String mScreenName;
@@ -27,10 +23,9 @@ public abstract class AnalyticsManagerImpl implements AnalyticsManager {
      * @param screenViewBuilderProvider Provides a screen view builder to track screens
      * @param eventBuilderProvider      Provides an event builder to track events
      **/
-    public AnalyticsManagerImpl(GoogleAnalytics analytics, Tracker tracker,
+    public AnalyticsManagerImpl(Tracker tracker,
                                 Provider<HitBuilders.ScreenViewBuilder> screenViewBuilderProvider,
                                 Provider<HitBuilders.EventBuilder> eventBuilderProvider) {
-        mAnalytics = analytics;
         mTracker = tracker;
         mScreenViewBuilderProvider = screenViewBuilderProvider;
         mEventBuilderProvider = eventBuilderProvider;
@@ -41,16 +36,6 @@ public abstract class AnalyticsManagerImpl implements AnalyticsManager {
         setScreenName();
         mTracker.send(mScreenViewBuilderProvider.get().build());
         Timber.d("GAnalytics Screen tracked: %s", mScreenName);
-    }
-
-    @Override
-    public void reportActivityStart(Activity activity) {
-        mAnalytics.reportActivityStart(activity);
-    }
-
-    @Override
-    public void reportActivityStop(Activity activity) {
-        mAnalytics.reportActivityStop(activity);
     }
 
     /**

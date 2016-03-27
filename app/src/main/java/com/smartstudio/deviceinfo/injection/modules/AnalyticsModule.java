@@ -24,9 +24,7 @@ public class AnalyticsModule {
         String trackingId = BuildConfig.DEBUG ?
                 BuildConfig.ANALYTICS_DEBUG_TRACKING_ID : BuildConfig.ANALYTICS_TRACKING_ID;
 
-
         Tracker tracker = analytics.newTracker(trackingId);
-        tracker.enableAutoActivityTracking(true);
         tracker.enableExceptionReporting(true);
         tracker.enableAdvertisingIdCollection(true);
         tracker.setUseSecure(!BuildConfig.DEBUG);
@@ -37,10 +35,7 @@ public class AnalyticsModule {
     @Provides
     @PerApplication
     GoogleAnalytics provideAnalytics(Application app) {
-        GoogleAnalytics analytics = GoogleAnalytics.getInstance(app);
-        analytics.enableAutoActivityReports(app);
-
-        return analytics;
+        return GoogleAnalytics.getInstance(app);
     }
 
     @Provides

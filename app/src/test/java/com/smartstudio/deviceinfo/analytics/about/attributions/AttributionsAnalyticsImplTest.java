@@ -14,7 +14,7 @@ public class AttributionsAnalyticsImplTest extends AnalyticsManagerImplTest {
 
     @Override
     protected AnalyticsManagerImpl createAnalyticsManager() {
-        mAttributionsAnalytics = new AttributionsAnalyticsImpl(mAnalytics, mTracker,
+        mAttributionsAnalytics = new AttributionsAnalyticsImpl(mTracker,
                 mScreenViewBuilderProvider, mEventBuilderProvider);
         return mAttributionsAnalytics;
     }

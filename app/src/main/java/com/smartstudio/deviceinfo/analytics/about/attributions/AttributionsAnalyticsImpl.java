@@ -1,7 +1,6 @@
 package com.smartstudio.deviceinfo.analytics.about.attributions;
 
 
-import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.smartstudio.deviceinfo.analytics.AnalyticsManagerImpl;
@@ -17,16 +16,15 @@ public class AttributionsAnalyticsImpl extends AnalyticsManagerImpl implements A
     /**
      * Creates an instance of the AnalyticsManagerImpl
      *
-     * @param analytics
      * @param tracker                   Google analytics tracker singleton instance
      * @param screenViewBuilderProvider Provides a screen view builder to track screens
      * @param eventBuilderProvider      Provides an event builder to track events
      **/
     @Inject
-    public AttributionsAnalyticsImpl(GoogleAnalytics analytics, Tracker tracker,
+    public AttributionsAnalyticsImpl(Tracker tracker,
                                      Provider<HitBuilders.ScreenViewBuilder> screenViewBuilderProvider,
                                      Provider<HitBuilders.EventBuilder> eventBuilderProvider) {
-        super(analytics, tracker, screenViewBuilderProvider, eventBuilderProvider);
+        super(tracker, screenViewBuilderProvider, eventBuilderProvider);
     }
 
     @Override

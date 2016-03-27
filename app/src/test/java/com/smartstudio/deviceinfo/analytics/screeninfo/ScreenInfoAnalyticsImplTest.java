@@ -5,7 +5,6 @@ import com.smartstudio.deviceinfo.analytics.AnalyticsManagerImpl;
 import com.smartstudio.deviceinfo.analytics.AnalyticsManagerImplTest;
 
 import org.junit.Test;
-import org.powermock.reflect.Whitebox;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,8 +41,7 @@ public class ScreenInfoAnalyticsImplTest extends AnalyticsManagerImplTest {
 
     @Override
     protected AnalyticsManagerImpl createAnalyticsManager() {
-        mScreenInfoAnalytics = new ScreenInfoAnalyticsImpl(mAnalytics, mTracker,
-                mScreenViewBuilderProvider, mEventBuilderProvider);
+        mScreenInfoAnalytics = new ScreenInfoAnalyticsImpl(mTracker, mScreenViewBuilderProvider, mEventBuilderProvider);
         return mScreenInfoAnalytics;
     }
 }
