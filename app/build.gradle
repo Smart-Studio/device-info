@@ -22,6 +22,7 @@ repositories {
 
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.application'
+apply plugin: 'spoon'
 apply plugin: 'io.fabric'
 apply plugin: 'testfairy'
 apply plugin: 'com.jakewharton.hugo'
@@ -160,6 +161,12 @@ nimbledroid {
     variant "prodRelease"
 }
 
+spoon {
+    // for debug output
+    debug = true
+    adbTimeout = 60
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
@@ -195,6 +202,7 @@ dependencies {
     androidTestCompile "com.android.support.test:runner:$rootProject.ext.testingSupportVersion"
     androidTestCompile "com.android.support.test:rules:$rootProject.ext.testingSupportVersion"
     androidTestCompile "com.squareup.assertj:assertj-android:$rootProject.ext.assertJAndroidVersion"
+    androidTestCompile 'com.squareup.spoon:spoon-client:1.3.2'
 
     // Dependencies for local unit tests
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
