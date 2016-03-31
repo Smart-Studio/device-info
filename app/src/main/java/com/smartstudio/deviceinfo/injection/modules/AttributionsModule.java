@@ -22,9 +22,12 @@ import android.support.v7.widget.RecyclerView;
 
 import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsAnalytics;
 import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsAnalyticsImpl;
+import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsFabricAnalytics;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.logic.AttributionsProvider;
 import com.smartstudio.deviceinfo.logic.AttributionsProviderImpl;
@@ -90,7 +93,15 @@ public class AttributionsModule {
 
     @Provides
     @PerActivity
+    @ForGoogle
     AttributionsAnalytics provideAnalytics(AttributionsAnalyticsImpl analytics) {
+        return analytics;
+    }
+
+    @Provides
+    @PerActivity
+    @ForFabric
+    AttributionsAnalytics provideFabricAnalytics(AttributionsFabricAnalytics analytics) {
         return analytics;
     }
 }

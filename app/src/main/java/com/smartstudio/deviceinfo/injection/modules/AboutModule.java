@@ -20,8 +20,11 @@ import android.content.Context;
 
 import com.smartstudio.deviceinfo.analytics.about.AboutAnalytics;
 import com.smartstudio.deviceinfo.analytics.about.AboutAnalyticsImpl;
+import com.smartstudio.deviceinfo.analytics.about.AboutFabricAnalytics;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.about.AboutView;
@@ -67,7 +70,15 @@ public class AboutModule {
 
     @Provides
     @PerActivity
+    @ForGoogle
     AboutAnalytics provideAnalytics(AboutAnalyticsImpl analytics) {
+        return analytics;
+    }
+
+    @Provides
+    @PerActivity
+    @ForFabric
+    AboutAnalytics provideFabricAnalytics(AboutFabricAnalytics analytics){
         return analytics;
     }
 }

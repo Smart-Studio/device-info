@@ -3,6 +3,8 @@ package com.smartstudio.deviceinfo.injection.modules;
 
 import android.app.Application;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -46,5 +48,16 @@ public class AnalyticsModule {
     @Provides
     HitBuilders.EventBuilder provideEventViewBuilder() {
         return new HitBuilders.EventBuilder();
+    }
+
+    @Provides
+    @PerApplication
+    Answers provideFabricAnswers() {
+        return Answers.getInstance();
+    }
+
+    @Provides
+    ContentViewEvent provideContentViewEvent() {
+        return new ContentViewEvent();
     }
 }

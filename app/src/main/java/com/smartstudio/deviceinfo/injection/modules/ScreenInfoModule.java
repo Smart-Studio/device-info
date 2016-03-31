@@ -23,8 +23,11 @@ import android.view.Display;
 
 import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalyticsImpl;
+import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoFabricAnalytics;
 import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl;
@@ -96,7 +99,15 @@ public class ScreenInfoModule {
 
     @Provides
     @PerActivity
+    @ForGoogle
     ScreenInfoAnalytics provideAnalytics(ScreenInfoAnalyticsImpl analytics) {
+        return analytics;
+    }
+
+    @Provides
+    @PerActivity
+    @ForFabric
+    ScreenInfoAnalytics provideFabricAnalytics(ScreenInfoFabricAnalytics analytics) {
         return analytics;
     }
 
