@@ -27,6 +27,8 @@ import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsAnaly
 import com.smartstudio.deviceinfo.controllers.BaseActivity;
 import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
 import com.smartstudio.deviceinfo.injection.Injector;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.logic.AttributionsProvider;
 import com.smartstudio.deviceinfo.model.Attribution;
 import com.smartstudio.deviceinfo.ui.about.attributions.AttributionsView;
@@ -48,7 +50,11 @@ public class AttributionsActivity extends BaseActivity implements AttributionsCo
     @Inject
     AttributionsProvider mAttributionsProvider;
     @Inject
+    @ForGoogle
     AttributionsAnalytics mAnalytics;
+    @Inject
+    @ForFabric
+    AttributionsAnalytics mFabricAnalytics;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +74,7 @@ public class AttributionsActivity extends BaseActivity implements AttributionsCo
     protected void onResume() {
         super.onResume();
         mAnalytics.reportScreen();
+        mFabricAnalytics.reportScreen();
     }
 
     @Override
@@ -75,6 +82,7 @@ public class AttributionsActivity extends BaseActivity implements AttributionsCo
         switch (item.getItemId()) {
             case android.R.id.home:
                 mAnalytics.reportActionBarBackTap();
+                mFabricAnalytics.reportActionBarBackTap();
                 onBackPressed();
                 break;
         }
@@ -85,6 +93,7 @@ public class AttributionsActivity extends BaseActivity implements AttributionsCo
     @Override
     public void onAttributionClicked(Attribution attribution) {
         mAnalytics.reportAttributionTap(attribution.getLibrary());
+        mFabricAnalytics.reportAttributionTap(attribution.getLibrary());
         String repoUrl = attribution.getRepoUrl();
         try {
             Utils.openUrl(this, repoUrl);

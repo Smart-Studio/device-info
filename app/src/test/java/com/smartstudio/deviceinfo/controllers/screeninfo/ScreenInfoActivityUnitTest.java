@@ -26,6 +26,8 @@ import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.controllers.about.AboutActivity;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
@@ -62,7 +64,11 @@ public class ScreenInfoActivityUnitTest {
     @Inject
     ScreenInfo mScreenInfo;
     @Inject
+    @ForGoogle
     ScreenInfoAnalytics mAnalytics;
+    @Inject
+    @ForFabric
+    ScreenInfoAnalytics mFabricAnalytics;
 
     private ScreenInfoActivityForTest mActivity;
 
@@ -82,6 +88,7 @@ public class ScreenInfoActivityUnitTest {
     @Test
     public void testOnResume() throws Exception {
         verify(mAnalytics).reportScreen();
+        verify(mFabricAnalytics).reportScreen();
     }
 
     @Test
@@ -120,6 +127,7 @@ public class ScreenInfoActivityUnitTest {
         ShadowIntent shadowIntent = shadowOf(startedIntent);
         assertThat(shadowIntent.getComponent().getClassName()).isEqualTo(AboutActivity.class.getName());
         verify(mAnalytics).reportAboutTap();
+        verify(mFabricAnalytics).reportAboutTap();
     }
 
     @Test
@@ -132,6 +140,7 @@ public class ScreenInfoActivityUnitTest {
         Intent startedIntent = shadowActivity.getNextStartedActivity();
         assertThat(startedIntent).isNull();
         verify(mAnalytics, never()).reportAboutTap();
+        verify(mFabricAnalytics, never()).reportAboutTap();
     }
 
     private MenuItem mockMenuItem(int itemId) {
@@ -145,11 +154,13 @@ public class ScreenInfoActivityUnitTest {
     public void testOnMenuVisibilityChangedVisible() throws Exception {
         mActivity.onMenuVisibilityChanged(true);
         verify(mAnalytics).reportOptionsMenuOpened();
+        verify(mFabricAnalytics).reportOptionsMenuOpened();
     }
 
     @Test
     public void testOnMenuVisibilityChangedNotVisible() throws Exception {
         mActivity.onMenuVisibilityChanged(false);
         verify(mAnalytics).reportOptionsMenuClosed();
+        verify(mFabricAnalytics).reportOptionsMenuClosed();
     }
 }

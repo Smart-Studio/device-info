@@ -18,6 +18,8 @@ package com.smartstudio.deviceinfo.controllers.about;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.analytics.about.AboutAnalytics;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.about.AboutView;
@@ -46,8 +48,16 @@ public class AboutActivityTestModule {
     }
 
     @Provides
+    @ForGoogle
     @PerActivity
     AboutAnalytics provideAnalytics() {
+        return mock(AboutAnalytics.class);
+    }
+
+    @Provides
+    @ForFabric
+    @PerActivity
+    AboutAnalytics provideFabricAnalytics() {
         return mock(AboutAnalytics.class);
     }
 }

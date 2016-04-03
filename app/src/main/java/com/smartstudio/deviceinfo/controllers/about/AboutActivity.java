@@ -27,6 +27,8 @@ import com.smartstudio.deviceinfo.controllers.BaseActivity;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsActivity;
 import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
 import com.smartstudio.deviceinfo.injection.Injector;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.ui.about.AboutView;
 import com.smartstudio.deviceinfo.utils.Utils;
 
@@ -45,7 +47,11 @@ public class AboutActivity extends BaseActivity implements AboutController {
     @Inject
     AboutView mView;
     @Inject
+    @ForGoogle
     AboutAnalytics mAnalytics;
+    @Inject
+    @ForFabric
+    AboutAnalytics mFabricAnalytics;
 
     @Override
     protected void initComponent() {
@@ -58,6 +64,7 @@ public class AboutActivity extends BaseActivity implements AboutController {
     protected void onResume() {
         super.onResume();
         mAnalytics.reportScreen();
+        mFabricAnalytics.reportScreen();
     }
 
     @Override
@@ -65,6 +72,7 @@ public class AboutActivity extends BaseActivity implements AboutController {
         switch (item.getItemId()) {
             case android.R.id.home:
                 mAnalytics.reportActionBarBackTap();
+                mFabricAnalytics.reportActionBarBackTap();
                 onBackPressed();
                 break;
         }
@@ -74,6 +82,7 @@ public class AboutActivity extends BaseActivity implements AboutController {
     @Override
     public void onOpenSourceClicked() {
         mAnalytics.reportOpenSourceTap();
+        mFabricAnalytics.reportOpenSourceTap();
         try {
             Utils.openUrl(this, BuildConfig.REPOSITORY_URL);
         } catch (BrowserNotFoundException e) {
@@ -85,6 +94,7 @@ public class AboutActivity extends BaseActivity implements AboutController {
     @Override
     public void onAttributionsClicked() {
         mAnalytics.reportAttributionsTap();
+        mFabricAnalytics.reportAttributionsTap();
         AttributionsActivity.launch(this);
     }
 }

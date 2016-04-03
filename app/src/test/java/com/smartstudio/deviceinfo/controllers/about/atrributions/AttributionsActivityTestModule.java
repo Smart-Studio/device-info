@@ -2,6 +2,8 @@ package com.smartstudio.deviceinfo.controllers.about.atrributions;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsAnalytics;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.logic.AttributionsProvider;
 import com.smartstudio.deviceinfo.ui.BaseView;
@@ -37,8 +39,16 @@ public class AttributionsActivityTestModule {
     }
 
     @Provides
+    @ForGoogle
     @PerActivity
     AttributionsAnalytics provideAnalytics() {
+        return mock(AttributionsAnalytics.class);
+    }
+
+    @Provides
+    @ForFabric
+    @PerActivity
+    AttributionsAnalytics provideFabricAnalytics() {
         return mock(AttributionsAnalytics.class);
     }
 }

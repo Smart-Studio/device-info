@@ -29,6 +29,8 @@ import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.controllers.BaseActivity;
 import com.smartstudio.deviceinfo.controllers.about.AboutActivity;
 import com.smartstudio.deviceinfo.injection.Injector;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
@@ -41,7 +43,11 @@ public class ScreenInfoActivity extends BaseActivity implements ScreenInfoContro
     @Inject
     ScreenInfoManager mScreenInfoManager;
     @Inject
+    @ForGoogle
     ScreenInfoAnalytics mAnalytics;
+    @Inject
+    @ForFabric
+    ScreenInfoAnalytics mFabricAnalytics;
 
 
     @Override
@@ -77,6 +83,7 @@ public class ScreenInfoActivity extends BaseActivity implements ScreenInfoContro
             case R.id.about:
                 AboutActivity.launch(this);
                 mAnalytics.reportAboutTap();
+                mFabricAnalytics.reportAboutTap();
                 break;
         }
         return true;
@@ -86,14 +93,17 @@ public class ScreenInfoActivity extends BaseActivity implements ScreenInfoContro
     protected void onResume() {
         super.onResume();
         mAnalytics.reportScreen();
+        mFabricAnalytics.reportScreen();
     }
 
     @Override
     public void onMenuVisibilityChanged(boolean isVisible) {
         if (isVisible) {
             mAnalytics.reportOptionsMenuOpened();
+            mFabricAnalytics.reportOptionsMenuOpened();
         } else {
             mAnalytics.reportOptionsMenuClosed();
+            mFabricAnalytics.reportOptionsMenuClosed();
         }
     }
 }
