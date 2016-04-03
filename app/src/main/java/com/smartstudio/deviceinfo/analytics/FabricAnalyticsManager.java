@@ -8,7 +8,7 @@ import com.crashlytics.android.answers.CustomEvent;
 import timber.log.Timber;
 
 public abstract class FabricAnalyticsManager implements AnalyticsManager {
-    private static final String SCREEN = "Screen";
+    static final String SCREEN = "Screen";
 
     private final Answers mAnswers;
     protected final String mScreenName;
@@ -19,7 +19,6 @@ public abstract class FabricAnalyticsManager implements AnalyticsManager {
         mAnswers = answers;
         mScreenName = getScreenName();
         mContentViewEvent = contentViewEvent;
-        mContentViewEvent.putContentName(mScreenName);
     }
 
     @Override

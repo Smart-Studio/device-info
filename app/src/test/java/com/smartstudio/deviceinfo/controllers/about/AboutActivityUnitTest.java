@@ -23,6 +23,8 @@ import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.analytics.about.AboutAnalytics;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsActivity;
 import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
 import com.smartstudio.deviceinfo.ui.about.AboutView;
 import com.smartstudio.deviceinfo.utils.Utils;
@@ -66,7 +68,11 @@ public class AboutActivityUnitTest {
     @Inject
     AboutView mView;
     @Inject
+    @ForGoogle
     AboutAnalytics mAnalytics;
+    @Inject
+    @ForFabric
+    AboutAnalytics mFabricAnalytics;
 
     private AboutActivityForTest mActivity;
 
@@ -85,12 +91,14 @@ public class AboutActivityUnitTest {
     @Test
     public void testOnResume() throws Exception {
         verify(mAnalytics).reportScreen();
+        verify(mFabricAnalytics).reportScreen();
     }
 
     @Test
     public void testOnOptionsItemSelectedHome() throws Exception {
         onCreateOptionsItemSelectedTest(android.R.id.home, times(1));
         verify(mAnalytics).reportActionBarBackTap();
+        verify(mFabricAnalytics).reportActionBarBackTap();
     }
 
     @Test
@@ -131,5 +139,6 @@ public class AboutActivityUnitTest {
         ShadowIntent shadowIntent = shadowOf(startedIntent);
         assertThat(shadowIntent.getComponent().getClassName()).isEqualTo(AttributionsActivity.class.getName());
         verify(mAnalytics).reportAttributionsTap();
+        verify(mFabricAnalytics).reportAttributionsTap();
     }
 }

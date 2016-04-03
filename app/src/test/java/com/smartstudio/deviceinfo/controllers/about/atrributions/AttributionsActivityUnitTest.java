@@ -6,6 +6,8 @@ import android.view.MenuItem;
 import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsAnalytics;
 import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.logic.AttributionsProvider;
 import com.smartstudio.deviceinfo.model.Attribution;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
@@ -54,7 +56,12 @@ public class AttributionsActivityUnitTest {
     @Inject
     AttributionsProvider mAttributionsProvider;
     @Inject
+    @ForGoogle
     AttributionsAnalytics mAnalytics;
+    @Inject
+    @ForFabric
+    AttributionsAnalytics mFabricAnalytics;
+
 
     private AttributionsActivityForTest mActivity;
 
@@ -74,12 +81,14 @@ public class AttributionsActivityUnitTest {
     @Test
     public void testOnResume() throws Exception {
         verify(mAnalytics).reportScreen();
+        verify(mFabricAnalytics).reportScreen();
     }
 
     @Test
     public void testOnOptionsItemSelectedHome() throws Exception {
         onOptionsMenuSelectedTest(android.R.id.home, times(1));
         verify(mAnalytics).reportActionBarBackTap();
+        verify(mFabricAnalytics).reportActionBarBackTap();
     }
 
     @Test
@@ -104,6 +113,7 @@ public class AttributionsActivityUnitTest {
         verifyStatic();
         Utils.openUrl(anyObject(), eq(ATTRIBUTION_URL));
         verify(mAnalytics).reportAttributionTap(ATTRIBUTION_LIBRARY);
+        verify(mFabricAnalytics).reportAttributionTap(ATTRIBUTION_LIBRARY);
     }
 
     @Test
@@ -116,6 +126,7 @@ public class AttributionsActivityUnitTest {
         Utils.openUrl(anyObject(), eq(ATTRIBUTION_URL));
         verify(mView).showNoBrowserError();
         verify(mAnalytics).reportAttributionTap(ATTRIBUTION_LIBRARY);
+        verify(mFabricAnalytics).reportAttributionTap(ATTRIBUTION_LIBRARY);
     }
 
     private Attribution mockAttribution() {

@@ -26,9 +26,9 @@ public class ScreenInfoFabricAnalytics extends FabricAnalyticsManager implements
 
     @Override
     protected void setupContentViewEvent(ContentViewEvent event) {
-        event.putContentName(mScreenName);
-        event.putContentId(String.valueOf(mScreenName.hashCode()));
-        event.putContentType(CONTENT_TYPE);
+        event.putContentName(mScreenName)
+                .putContentId(String.valueOf(mScreenName.hashCode()))
+                .putContentType(CONTENT_TYPE);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.smartstudio.deviceinfo.analytics.about.attributions;
 
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
+import com.crashlytics.android.answers.CustomEvent;
 import com.smartstudio.deviceinfo.analytics.FabricAnalyticsManager;
 
 import javax.inject.Inject;
@@ -21,13 +22,14 @@ public class AttributionsFabricAnalytics extends FabricAnalyticsManager implemen
 
     @Override
     public void reportAttributionTap(String library) {
-        buildCustomEvent(TAP_ATTRIBUTION)
+        CustomEvent event = buildCustomEvent(TAP_ATTRIBUTION)
                 .putCustomAttribute(ATTRIBUTION_LIBRARY, library);
+        reportEvent(event);
     }
 
     @Override
     public void reportActionBarBackTap() {
-        reportAttributionTap(TAP_ACTION_BAR_BACK);
+        reportEvent(TAP_ACTION_BAR_BACK);
     }
 
     @Override
