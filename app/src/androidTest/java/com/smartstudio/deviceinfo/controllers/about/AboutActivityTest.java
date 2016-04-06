@@ -96,7 +96,7 @@ public class AboutActivityTest {
     }
 
     private void checkMainToolbarTitle() {
-        String toolbarTitle = mResources.getString(R.string.device_info_title);
+        String toolbarTitle = mResources.getString(R.string.app_name);
         EspressoUtils.matchToolbarTitle(toolbarTitle);
     }
 }

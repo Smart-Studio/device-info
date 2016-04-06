@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Device Info</string>
+    <string name="app_name">My Droid Info</string>
     <string name="menu_about">About</string>
     <string name="error_no_browser">It seems you don\'t have a browser app installed to open the link</string>
 </resources>

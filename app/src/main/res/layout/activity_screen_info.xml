@@ -22,7 +22,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_screen_info"
         style="@style/BaseToolbar"
-        app:title="@string/device_info_title" />
+        app:title="@string/app_name" />
 
     <ScrollView
         android:layout_width="match_parent"
