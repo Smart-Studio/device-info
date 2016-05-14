@@ -28,6 +28,7 @@ import android.view.ViewConfiguration;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 
 import java.lang.reflect.InvocationTargetException;
@@ -92,7 +93,7 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
     @Inject
     public ScreenInfoManagerImpl(Display display, DisplayMetrics displayMetrics,
                                  TypedValue typedValue, ScreenInfo screenInfo,
-                                 @ForActivity Context context) {
+                                 @ForApplication Context context) {
         mDisplay = display;
         mDisplayMetrics = displayMetrics;
         mTypedValue = typedValue;

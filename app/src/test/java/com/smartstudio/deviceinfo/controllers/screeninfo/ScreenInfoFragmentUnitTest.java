@@ -55,7 +55,7 @@ import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(CustomRobolectricGradleTestRunner.class)
 @Config(sdk = 21, constants = BuildConfig.class)
-public class ScreenInfoActivityUnitTest {
+public class ScreenInfoFragmentUnitTest {
 
     @Inject
     ScreenInfoView mView;
@@ -70,11 +70,11 @@ public class ScreenInfoActivityUnitTest {
     @ForFabric
     ScreenInfoAnalytics mFabricAnalytics;
 
-    private ScreenInfoActivityForTest mActivity;
+    private ScreenInfoFragmentForTest mActivity;
 
     @Before
     public void setUp() throws Exception {
-        mActivity = Robolectric.setupActivity(ScreenInfoActivityForTest.class);
+        mActivity = Robolectric.setupActivity(ScreenInfoFragmentForTest.class);
         mActivity.mComponent.inject(this);
     }
 

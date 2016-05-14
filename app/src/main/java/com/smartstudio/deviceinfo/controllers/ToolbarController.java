@@ -14,19 +14,11 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.about.attributions;
+package com.smartstudio.deviceinfo.controllers;
 
-import com.smartstudio.deviceinfo.controllers.ToolbarController;
-import com.smartstudio.deviceinfo.model.Attribution;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 
-/**
- * Controller for the attributions screen
- **/
-public interface AttributionsController extends ToolbarController {
-    /**
-     * Called when an attributions is clicked
-     *
-     * @param attribution Attribution clicked
-     **/
-    void onAttributionClicked(Attribution attribution);
+public interface ToolbarController {
+    ActionBar setUpToolbar(Toolbar toolbar);
 }

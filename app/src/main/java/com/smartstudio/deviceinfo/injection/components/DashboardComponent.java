@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.about.attributions;
+package com.smartstudio.deviceinfo.injection.components;
 
-import com.smartstudio.deviceinfo.controllers.ToolbarController;
-import com.smartstudio.deviceinfo.model.Attribution;
+import com.smartstudio.deviceinfo.controllers.dashboard.DashboardActivity;
+import com.smartstudio.deviceinfo.injection.modules.DashboardModule;
+import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
+import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 
-/**
- * Controller for the attributions screen
- **/
-public interface AttributionsController extends ToolbarController {
-    /**
-     * Called when an attributions is clicked
-     *
-     * @param attribution Attribution clicked
-     **/
-    void onAttributionClicked(Attribution attribution);
+import dagger.Subcomponent;
+
+@PerActivity
+@Subcomponent(modules = DashboardModule.class)
+public interface DashboardComponent {
+    void inject(DashboardActivity activity);
+
+    ScreenInfoComponent plus(ScreenInfoModule module);
 }

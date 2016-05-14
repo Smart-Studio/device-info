@@ -24,6 +24,6 @@ import dagger.Component;
 @PerActivity
 @Component(modules = ScreenInfoActivityTestModule.class)
 public interface ScreenInfoActivityTestComponent extends ScreenInfoComponent {
-    void inject(ScreenInfoActivityUnitTest test);
+    void inject(ScreenInfoFragmentUnitTest test);
 }
 

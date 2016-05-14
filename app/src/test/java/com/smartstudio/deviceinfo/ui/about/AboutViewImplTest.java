@@ -20,7 +20,7 @@ import android.content.Context;
 import android.widget.TextView;
 
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.controllers.BaseController;
+import com.smartstudio.deviceinfo.controllers.ToolbarController;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.BaseViewImplTest;
@@ -80,7 +80,7 @@ public class AboutViewImplTest extends BaseViewImplTest {
     }
 
     @Override
-    public BaseController getBaseController() {
+    public ToolbarController getBaseController() {
         return mController;
     }
 

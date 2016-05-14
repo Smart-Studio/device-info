@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers;
+package com.smartstudio.deviceinfo.ui.dashboard;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
-public interface BaseController {
-    ActionBar setUpToolbar(Toolbar toolbar);
+public abstract class DashboardPagerAdapter extends FragmentStatePagerAdapter{
+
+    public DashboardPagerAdapter(FragmentManager fm) {
+        super(fm);
+    }
 }

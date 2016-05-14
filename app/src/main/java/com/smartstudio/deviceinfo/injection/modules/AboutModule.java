@@ -64,6 +64,7 @@ public class AboutModule {
 
     @Provides
     @PerActivity
+    @ForActivity
     BaseView provideBaseView(AboutView view) {
         return view;
     }

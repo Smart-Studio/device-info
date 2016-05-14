@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.about.attributions;
+package com.smartstudio.deviceinfo.injection.qualifiers;
 
-import com.smartstudio.deviceinfo.controllers.ToolbarController;
-import com.smartstudio.deviceinfo.model.Attribution;
+import java.lang.annotation.Retention;
 
-/**
- * Controller for the attributions screen
- **/
-public interface AttributionsController extends ToolbarController {
-    /**
-     * Called when an attributions is clicked
-     *
-     * @param attribution Attribution clicked
-     **/
-    void onAttributionClicked(Attribution attribution);
+import javax.inject.Qualifier;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+@Qualifier
+@Retention(RUNTIME)
+public @interface ForFragment {
 }

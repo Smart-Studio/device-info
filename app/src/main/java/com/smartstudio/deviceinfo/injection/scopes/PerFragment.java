@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.about.attributions;
+package com.smartstudio.deviceinfo.injection.scopes;
 
-import com.smartstudio.deviceinfo.controllers.ToolbarController;
-import com.smartstudio.deviceinfo.model.Attribution;
+import java.lang.annotation.Retention;
+
+import javax.inject.Scope;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Controller for the attributions screen
- **/
-public interface AttributionsController extends ToolbarController {
-    /**
-     * Called when an attributions is clicked
-     *
-     * @param attribution Attribution clicked
-     **/
-    void onAttributionClicked(Attribution attribution);
+ * Dagger application scope
+ */
+@Scope
+@Retention(RUNTIME)
+public @interface PerFragment {
 }

@@ -22,18 +22,20 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.ui.BaseView;
 
 import javax.inject.Inject;
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseController {
+public abstract class BaseActivity extends AppCompatActivity implements ToolbarController {
     @Inject
+    @ForActivity
     BaseView mView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         initComponent();
+        super.onCreate(savedInstanceState);
         setContentView(mView.getLayoutResourceId());
         mView.init(getWindow().getDecorView());
     }

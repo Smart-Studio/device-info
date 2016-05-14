@@ -21,7 +21,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.controllers.BaseController;
+import com.smartstudio.deviceinfo.controllers.ToolbarController;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
 import com.smartstudio.deviceinfo.model.Attribution;
 import com.smartstudio.deviceinfo.ui.BaseView;
@@ -84,7 +84,7 @@ public class AttributionsViewImplTest extends BaseViewImplTest {
     }
 
     @Override
-    public BaseController getBaseController() {
+    public ToolbarController getBaseController() {
         return mController;
     }
 

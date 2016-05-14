@@ -70,6 +70,7 @@ public class AttributionsModule {
 
     @Provides
     @PerActivity
+    @ForActivity
     BaseView provideBaseView(AttributionsView view) {
         return view;
     }

@@ -16,12 +16,12 @@
 
 package com.smartstudio.deviceinfo.controllers.about;
 
-import com.smartstudio.deviceinfo.controllers.BaseController;
+import com.smartstudio.deviceinfo.controllers.ToolbarController;
 
 /**
  * Controller for the about screen
  **/
-public interface AboutController extends BaseController {
+public interface AboutController extends ToolbarController {
     /**
      * Called when the open source button is clicked
      **/

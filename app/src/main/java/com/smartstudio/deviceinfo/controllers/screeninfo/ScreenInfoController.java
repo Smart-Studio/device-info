@@ -16,10 +16,8 @@
 
 package com.smartstudio.deviceinfo.controllers.screeninfo;
 
-import com.smartstudio.deviceinfo.controllers.BaseController;
-
 /**
  * Controller for the screen info screen
  **/
-public interface ScreenInfoController extends BaseController {
+public interface ScreenInfoController {
 }

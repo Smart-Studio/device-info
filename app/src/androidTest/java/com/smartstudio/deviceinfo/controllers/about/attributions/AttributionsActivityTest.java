@@ -23,7 +23,8 @@ import android.support.test.espresso.intent.rule.IntentsTestRule;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.about.AboutActivity;
-import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoActivity;
+import com.smartstudio.deviceinfo.controllers.dashboard.DashboardActivity;
+import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoFragment;
 import com.smartstudio.deviceinfo.utils.EspressoUtils;
 
 import org.junit.Before;
@@ -44,7 +45,7 @@ import static org.hamcrest.core.AllOf.allOf;
 
 public class AttributionsActivityTest {
     @Rule
-    public IntentsTestRule<ScreenInfoActivity> activityRule = new IntentsTestRule<>(ScreenInfoActivity.class);
+    public IntentsTestRule<DashboardActivity> activityRule = new IntentsTestRule<>(DashboardActivity.class);
 
     private Resources mResources;
 

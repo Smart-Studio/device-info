@@ -21,6 +21,7 @@ import com.smartstudio.deviceinfo.injection.modules.AboutModule;
 import com.smartstudio.deviceinfo.injection.modules.AnalyticsModule;
 import com.smartstudio.deviceinfo.injection.modules.AppModule;
 import com.smartstudio.deviceinfo.injection.modules.AttributionsModule;
+import com.smartstudio.deviceinfo.injection.modules.DashboardModule;
 import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
 import com.smartstudio.deviceinfo.injection.scopes.PerApplication;
 
@@ -31,7 +32,7 @@ import dagger.Component;
 public interface AppComponent {
     void inject(DeviceInfoApp app);
 
-    ScreenInfoComponent plus(ScreenInfoModule module);
+    DashboardComponent plus(DashboardModule module);
 
     AboutComponent plus(AboutModule module);
 

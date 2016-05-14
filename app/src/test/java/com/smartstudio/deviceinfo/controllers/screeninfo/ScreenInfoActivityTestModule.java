@@ -39,7 +39,7 @@ public class ScreenInfoActivityTestModule {
     @PerActivity
     ScreenInfoView provideView() {
         ScreenInfoView view = mock(ScreenInfoView.class);
-        when(view.getLayoutResourceId()).thenReturn(R.layout.activity_screen_info);
+        when(view.getLayoutResourceId()).thenReturn(R.layout.fragment_screen_info);
         return view;
     }
 

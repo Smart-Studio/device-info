@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.about.attributions;
+package com.smartstudio.deviceinfo.controllers.screeninfo;
 
-import com.smartstudio.deviceinfo.controllers.ToolbarController;
-import com.smartstudio.deviceinfo.model.Attribution;
 
-/**
- * Controller for the attributions screen
- **/
-public interface AttributionsController extends ToolbarController {
-    /**
-     * Called when an attributions is clicked
-     *
-     * @param attribution Attribution clicked
-     **/
-    void onAttributionClicked(Attribution attribution);
+import android.content.Context;
+
+public class ScreenInfoFragmentForTest extends ScreenInfoFragment {
+    ScreenInfoActivityTestComponent mComponent;
+
+    @Override
+    protected void initComponent(Context context) {
+        mComponent = DaggerScreenInfoActivityTestComponent.builder()
+                .screenInfoActivityTestModule(new ScreenInfoActivityTestModule())
+                .build();
+        mComponent.inject(this);
+    }
 }

@@ -20,7 +20,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.smartstudio.deviceinfo.controllers.BaseController;
+import com.smartstudio.deviceinfo.controllers.ToolbarController;
 
 import org.junit.Test;
 import org.mockito.Mock;
@@ -45,14 +45,14 @@ public abstract class BaseViewImplTest {
     public void testInit() throws Exception {
         mockStatic(ButterKnife.class);
         when(ButterKnife.findById(eq(mView), anyInt())).thenReturn(mToolbar);
-        BaseController controller = getBaseController();
+        ToolbarController controller = getBaseController();
         when(controller.setUpToolbar(mToolbar)).thenReturn(mActionBar);
 
         getBaseView().init(mView);
         verify(controller).setUpToolbar(mToolbar);
     }
 
-    public abstract BaseController getBaseController();
+    public abstract ToolbarController getBaseController();
 
     public abstract BaseView getBaseView();
 }

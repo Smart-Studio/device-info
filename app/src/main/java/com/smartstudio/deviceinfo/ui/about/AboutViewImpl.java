@@ -25,21 +25,21 @@ import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
-import com.smartstudio.deviceinfo.ui.BaseViewImpl;
+import com.smartstudio.deviceinfo.ui.BaseActionBarView;
 import com.smartstudio.deviceinfo.utils.ViewUtils;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
-public class AboutViewImpl extends BaseViewImpl implements AboutView {
-    @Bind(R.id.txt_about_version)
+public class AboutViewImpl extends BaseActionBarView implements AboutView {
+    @BindView(R.id.txt_about_version)
     TextView mTxtVersion;
 
-    @Bind(R.id.txt_about_open_source)
+    @BindView(R.id.txt_about_open_source)
     TextView mTxtOpenSource;
 
-    @Bind(R.id.txt_about_attributions)
+    @BindView(R.id.txt_about_attributions)
     TextView mTxtAttributions;
 
     private final AboutController mController;

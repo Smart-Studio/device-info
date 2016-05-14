@@ -14,17 +14,10 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.screeninfo;
+package com.smartstudio.deviceinfo.ui.dashboard;
 
+import com.smartstudio.deviceinfo.ui.BaseView;
 
-public class ScreenInfoActivityForTest extends ScreenInfoActivity {
-    ScreenInfoActivityTestComponent mComponent;
+public interface DashboardView extends BaseView {
 
-    @Override
-    protected void initComponent() {
-        mComponent = DaggerScreenInfoActivityTestComponent.builder()
-                .screenInfoActivityTestModule(new ScreenInfoActivityTestModule())
-                .build();
-        mComponent.inject(this);
-    }
 }
