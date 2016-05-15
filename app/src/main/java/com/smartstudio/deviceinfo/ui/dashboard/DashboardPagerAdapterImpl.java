@@ -21,7 +21,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoFragment;
+import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoFragment;
 
 import javax.inject.Inject;
 

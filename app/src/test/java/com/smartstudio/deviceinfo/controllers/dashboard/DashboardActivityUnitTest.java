@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.screeninfo;
+package com.smartstudio.deviceinfo.controllers.dashboard;
 
-public class ScreenInfoActivityMockTest {
+
+public class DashboardActivityUnitTest {
 
 }

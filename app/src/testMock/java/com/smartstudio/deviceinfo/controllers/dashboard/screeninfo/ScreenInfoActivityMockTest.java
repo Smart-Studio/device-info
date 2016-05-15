@@ -14,19 +14,8 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.screeninfo;
+package com.smartstudio.deviceinfo.controllers.dashboard.screeninfo;
 
+public class ScreenInfoActivityMockTest {
 
-import android.content.Context;
-
-public class ScreenInfoFragmentForTest extends ScreenInfoFragment {
-    ScreenInfoActivityTestComponent mComponent;
-
-    @Override
-    protected void initComponent(Context context) {
-        mComponent = DaggerScreenInfoActivityTestComponent.builder()
-                .screenInfoActivityTestModule(new ScreenInfoActivityTestModule())
-                .build();
-        mComponent.inject(this);
-    }
 }

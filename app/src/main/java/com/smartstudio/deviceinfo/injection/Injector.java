@@ -25,7 +25,7 @@ import android.view.Display;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
 import com.smartstudio.deviceinfo.controllers.dashboard.DashboardController;
-import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
+import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.injection.modules.AboutModule;
 import com.smartstudio.deviceinfo.injection.modules.AppModule;
 import com.smartstudio.deviceinfo.injection.modules.AttributionsModule;

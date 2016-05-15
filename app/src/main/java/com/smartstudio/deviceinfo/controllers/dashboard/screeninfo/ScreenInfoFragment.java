@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.screeninfo;
+package com.smartstudio.deviceinfo.controllers.dashboard.screeninfo;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -63,7 +63,7 @@ public class ScreenInfoFragment extends BaseFragment implements ScreenInfoContro
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_screen_info, container, false);
+        return inflater.inflate(mView.getLayoutResourceId(), container, false);
     }
 
     @Override

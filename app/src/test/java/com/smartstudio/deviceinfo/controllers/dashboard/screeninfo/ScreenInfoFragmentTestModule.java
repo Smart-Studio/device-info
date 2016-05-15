@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.screeninfo;
+package com.smartstudio.deviceinfo.controllers.dashboard.screeninfo;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFragment;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
-import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
+import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.ui.BaseView;
@@ -33,10 +34,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @Module
-public class ScreenInfoActivityTestModule {
+public class ScreenInfoFragmentTestModule {
 
     @Provides
-    @PerActivity
+    @PerFragment
     ScreenInfoView provideView() {
         ScreenInfoView view = mock(ScreenInfoView.class);
         when(view.getLayoutResourceId()).thenReturn(R.layout.fragment_screen_info);
@@ -44,13 +45,14 @@ public class ScreenInfoActivityTestModule {
     }
 
     @Provides
-    @PerActivity
+    @PerFragment
+    @ForFragment
     BaseView provideBaseView(ScreenInfoView view) {
         return view;
     }
 
     @Provides
-    @PerActivity
+    @PerFragment
     ScreenInfoManager provideScreenInfoManager(ScreenInfo screenInfo) {
         ScreenInfoManager screenInfoManager = mock(ScreenInfoManager.class);
         when(screenInfoManager.getScreenInfo()).thenReturn(screenInfo);
@@ -58,21 +60,21 @@ public class ScreenInfoActivityTestModule {
     }
 
     @Provides
-    @PerActivity
+    @PerFragment
     ScreenInfo provideScreenInfo() {
         return mock(ScreenInfo.class);
     }
 
     @Provides
+    @PerFragment
     @ForGoogle
-    @PerActivity
     ScreenInfoAnalytics provideAnalytics() {
         return mock(ScreenInfoAnalytics.class);
     }
 
     @Provides
+    @PerFragment
     @ForFabric
-    @PerActivity
     ScreenInfoAnalytics provideFabricAnalytics() {
         return mock(ScreenInfoAnalytics.class);
     }

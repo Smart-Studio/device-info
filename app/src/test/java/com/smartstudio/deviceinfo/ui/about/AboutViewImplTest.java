@@ -23,7 +23,7 @@ import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.ToolbarController;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.ui.BaseView;
-import com.smartstudio.deviceinfo.ui.BaseViewImplTest;
+import com.smartstudio.deviceinfo.ui.ActionBarViewImplTest;
 import com.smartstudio.deviceinfo.utils.ViewUtils;
 
 import org.junit.Before;
@@ -36,6 +36,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import butterknife.ButterKnife;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -47,7 +48,7 @@ import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ButterKnife.class, ViewUtils.class})
-public class AboutViewImplTest extends BaseViewImplTest {
+public class AboutViewImplTest extends ActionBarViewImplTest {
     private static final String VERSION = "v1.0.0";
 
     @Mock
@@ -70,8 +71,7 @@ public class AboutViewImplTest extends BaseViewImplTest {
 
     @Test
     public void testInit() throws Exception {
-        when(mContext.getString(eq(R.string.about_version), anyString())).thenReturn(VERSION);
-        mockViews();
+        initMocks();
         super.testInit();
         verify(mActionBar).setDisplayHomeAsUpEnabled(true);
         verify(mView.mTxtVersion).setText(VERSION);
@@ -87,6 +87,13 @@ public class AboutViewImplTest extends BaseViewImplTest {
     @Override
     public BaseView getBaseView() {
         return mView;
+    }
+
+    @Override
+    protected void initMocks() {
+        super.initMocks();
+        when(mContext.getString(eq(R.string.about_version), anyString())).thenReturn(VERSION);
+        mockViews();
     }
 
     @Test

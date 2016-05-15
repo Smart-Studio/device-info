@@ -16,43 +16,34 @@
 
 package com.smartstudio.deviceinfo.ui;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
-import com.smartstudio.deviceinfo.controllers.ToolbarController;
+import android.view.View;
 
 import org.junit.Test;
 import org.mockito.Mock;
 
 import butterknife.ButterKnife;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 
 public abstract class BaseViewImplTest {
     @Mock
-    private View mView;
-    @Mock
-    private Toolbar mToolbar;
-    @Mock
-    protected ActionBar mActionBar;
+    protected View mView;
 
     @Test
     public void testInit() throws Exception {
-        mockStatic(ButterKnife.class);
-        when(ButterKnife.findById(eq(mView), anyInt())).thenReturn(mToolbar);
-        ToolbarController controller = getBaseController();
-        when(controller.setUpToolbar(mToolbar)).thenReturn(mActionBar);
+        initMocks();
+        BaseView baseView = getBaseView();
+        baseView.init(mView);
 
-        getBaseView().init(mView);
-        verify(controller).setUpToolbar(mToolbar);
+        verifyStatic();
+        ButterKnife.bind(baseView, mView);
     }
 
-    public abstract ToolbarController getBaseController();
-
     public abstract BaseView getBaseView();
+
+    protected void initMocks(){
+        mockStatic(ButterKnife.class);
+    }
 }

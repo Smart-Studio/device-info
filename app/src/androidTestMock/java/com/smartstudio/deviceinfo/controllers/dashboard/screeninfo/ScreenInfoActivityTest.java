@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.screeninfo;
+package com.smartstudio.deviceinfo.controllers.dashboard.screeninfo;
 
 import android.support.annotation.IdRes;
 import android.support.test.espresso.matcher.ViewMatchers;

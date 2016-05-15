@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.injection.components;
+package com.smartstudio.deviceinfo.controllers.dashboard;
 
-import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoFragment;
-import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
-import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
+public class DashboardActivityForTest extends DashboardActivity {
+    DashboardActivityTestComponent mComponent;
 
-import dagger.Subcomponent;
-
-@PerFragment
-@Subcomponent(modules = ScreenInfoModule.class)
-public interface ScreenInfoComponent {
-    void inject(ScreenInfoFragment activity);
+    @Override
+    protected void initComponent() {
+        mComponent = DaggerDashboardActivityTestComponent.builder()
+                .dashboardActivityTestModule(new DashboardActivityTestModule())
+                .build();
+    }
 }

@@ -14,8 +14,12 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.about;
+package com.smartstudio.deviceinfo.controllers.dashboard;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.analytics.about.AboutAnalytics;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
@@ -23,7 +27,7 @@ import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.ui.BaseView;
-import com.smartstudio.deviceinfo.ui.about.AboutView;
+import com.smartstudio.deviceinfo.ui.dashboard.DashboardView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -32,20 +36,20 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @Module
-public class AboutActivityTestModule {
+public class DashboardActivityTestModule {
 
     @Provides
     @PerActivity
-    AboutView provideView() {
-        AboutView view = mock(AboutView.class);
-        when(view.getLayoutResourceId()).thenReturn(R.layout.activity_about);
+    DashboardView provideView() {
+        DashboardView view = mock(DashboardView.class);
+        when(view.getLayoutResourceId()).thenReturn(R.layout.activity_dashboard);
         return view;
     }
 
     @Provides
     @PerActivity
     @ForActivity
-    BaseView provideBaseView(AboutView view) {
+    BaseView provideBaseView(DashboardView view) {
         return view;
     }
 
@@ -61,5 +65,31 @@ public class AboutActivityTestModule {
     @PerActivity
     AboutAnalytics provideFabricAnalytics() {
         return mock(AboutAnalytics.class);
+    }
+
+    @Provides
+    @PerActivity
+    Tracker provideTracker() {
+        return mock(Tracker.class);
+    }
+
+    @Provides
+    HitBuilders.ScreenViewBuilder provideScreenViewBuilder() {
+        return new HitBuilders.ScreenViewBuilder();
+    }
+
+    @Provides
+    HitBuilders.EventBuilder provideEventBuilder() {
+        return new HitBuilders.EventBuilder();
+    }
+
+    @Provides
+    ContentViewEvent provideContentViewEvent(){
+        return new ContentViewEvent();
+    }
+
+    @Provides
+    Answers provideAnswers(){
+        return new Answers();
     }
 }

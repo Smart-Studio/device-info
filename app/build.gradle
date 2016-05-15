@@ -236,6 +236,7 @@ dependencies {
     testCompile "org.powermock:powermock-api-mockito:$powerMockitoVersion"
     testCompile "org.powermock:powermock-classloading-xstream:$powerMockitoVersion"
     testCompile "org.robolectric:robolectric:$robolectricVersion"
+    testCompile "org.robolectric:shadows-support-v4:$robolectricVersion"
     testCompile "org.assertj:assertj-core:$assertjVersion"
     testCompile "com.squareup.assertj:assertj-android:$assertJAndroidVersion"
     testCompile "com.google.dagger:dagger:$dagger2Version"
