@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.injection.components;
+package com.smartstudio.deviceinfo.controllers.dashboard.screeninfo;
 
-import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoFragment;
-import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
-import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
 
-import dagger.Subcomponent;
+import android.content.Context;
 
-@PerFragment
-@Subcomponent(modules = ScreenInfoModule.class)
-public interface ScreenInfoComponent {
-    void inject(ScreenInfoFragment activity);
+public class ScreenInfoFragmentForTest extends ScreenInfoFragment {
+    ScreenInfoFragmentTestComponent mComponent;
+
+    @Override
+    protected void initComponent(Context context) {
+        mComponent = DaggerScreenInfoFragmentTestComponent.builder()
+                .screenInfoFragmentTestModule(new ScreenInfoFragmentTestModule())
+                .build();
+        mComponent.inject(this);
+    }
 }

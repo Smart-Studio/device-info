@@ -2,6 +2,7 @@ package com.smartstudio.deviceinfo.controllers.about.atrributions;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsAnalytics;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
@@ -28,6 +29,7 @@ public class AttributionsActivityTestModule {
 
     @Provides
     @PerActivity
+    @ForActivity
     BaseView provideBaseView(AttributionsView view) {
         return view;
     }

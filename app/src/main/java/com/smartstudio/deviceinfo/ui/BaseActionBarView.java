@@ -17,33 +17,31 @@
 package com.smartstudio.deviceinfo.ui;
 
 
+import android.support.annotation.IdRes;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import org.junit.Test;
-import org.mockito.Mock;
+import com.smartstudio.deviceinfo.controllers.ToolbarController;
 
 import butterknife.ButterKnife;
 
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.verifyStatic;
+public abstract class BaseActionBarView extends BaseViewImpl implements BaseView {
+    private final ToolbarController mController;
 
-public abstract class BaseViewImplTest {
-    @Mock
-    protected View mView;
+    protected ActionBar mActionBar;
 
-    @Test
-    public void testInit() throws Exception {
-        initMocks();
-        BaseView baseView = getBaseView();
-        baseView.init(mView);
-
-        verifyStatic();
-        ButterKnife.bind(baseView, mView);
+    public BaseActionBarView(ToolbarController controller) {
+        mController = controller;
     }
 
-    public abstract BaseView getBaseView();
-
-    protected void initMocks(){
-        mockStatic(ButterKnife.class);
+    @Override
+    public void init(View view) {
+        super.init(view);
+        Toolbar toolbar = ButterKnife.findById(view, getToolbarId());
+        mActionBar = mController.setUpToolbar(toolbar);
     }
+
+    @IdRes
+    protected abstract int getToolbarId();
 }

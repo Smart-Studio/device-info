@@ -19,7 +19,6 @@ package com.smartstudio.deviceinfo.ui.screeninfo;
 import android.view.View;
 
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.ui.BaseViewImpl;
 import com.smartstudio.deviceinfo.ui.PropertyLayout;
@@ -29,77 +28,77 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
 
-    @Bind(R.id.view_device_name)
+    @BindView(R.id.view_device_name)
     PropertyLayout mViewDeviceName;
 
-    @Bind(R.id.view_device_manufacturer)
+    @BindView(R.id.view_device_manufacturer)
     PropertyLayout mViewManufacturer;
 
-    @Bind(R.id.view_os)
+    @BindView(R.id.view_os)
     PropertyLayout mViewOs;
 
-    @Bind(R.id.view_os_codename)
+    @BindView(R.id.view_os_codename)
     PropertyLayout mViewOsCodename;
 
-    @Bind(R.id.view_os_api)
+    @BindView(R.id.view_os_api)
     PropertyLayout mViewOsApi;
 
-    @Bind(R.id.view_screen_res)
+    @BindView(R.id.view_screen_res)
     PropertyLayout mViewScreenRes;
 
-    @Bind(R.id.view_screen_status)
+    @BindView(R.id.view_screen_status)
     PropertyLayout mViewScreenStatus;
 
-    @Bind(R.id.view_screen_navigation)
+    @BindView(R.id.view_screen_navigation)
     PropertyLayout mViewScreenNavigation;
 
-    @Bind(R.id.view_screen_size)
+    @BindView(R.id.view_screen_size)
     PropertyLayout mViewScreenSize;
 
-    @Bind(R.id.view_screen_inches)
+    @BindView(R.id.view_screen_inches)
     PropertyLayout mViewScreenInches;
 
-    @Bind(R.id.view_screen_density)
+    @BindView(R.id.view_screen_density)
     PropertyLayout mViewScreenDensity;
 
-    @Bind(R.id.view_screen_density_code)
+    @BindView(R.id.view_screen_density_code)
     PropertyLayout mViewScreenDensityCode;
 
-    @Bind(R.id.view_screen_density_x)
+    @BindView(R.id.view_screen_density_x)
     PropertyLayout mViewScreenDensityX;
 
-    @Bind(R.id.view_screen_density_y)
+    @BindView(R.id.view_screen_density_y)
     PropertyLayout mViewScreenDensityY;
 
-    @Bind(R.id.view_screen_action_bar)
+    @BindView(R.id.view_screen_action_bar)
     PropertyLayout mViewActionBarHeight;
 
-    @Bind(R.id.view_screen_content_top)
+    @BindView(R.id.view_screen_content_top)
     PropertyLayout mViewContentTop;
 
-    @Bind(R.id.view_screen_content_bottom)
+    @BindView(R.id.view_screen_content_bottom)
     PropertyLayout mViewContentBottom;
 
-    @Bind(R.id.view_screen_content_height)
+    @BindView(R.id.view_screen_content_height)
     PropertyLayout mViewContentHeight;
 
     @Inject
-    public ScreenInfoViewImpl(ScreenInfoController controller) {
-        super(controller);
+    public ScreenInfoViewImpl() {
+
     }
 
     @Override
     public int getLayoutResourceId() {
-        return R.layout.activity_screen_info;
+        return R.layout.fragment_screen_info;
     }
 
     @Override
-    protected int getToolbarId() {
-        return R.id.toolbar_screen_info;
+    public void init(View view) {
+        super.init(view);
     }
 
     @Override

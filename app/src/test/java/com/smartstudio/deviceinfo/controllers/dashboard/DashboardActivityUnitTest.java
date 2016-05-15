@@ -14,11 +14,9 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers;
+package com.smartstudio.deviceinfo.controllers.dashboard;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 
-public interface BaseController {
-    ActionBar setUpToolbar(Toolbar toolbar);
+public class DashboardActivityUnitTest {
+
 }

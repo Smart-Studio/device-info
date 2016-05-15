@@ -17,7 +17,6 @@
 package com.smartstudio.deviceinfo.ui.about.attributions;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
@@ -26,17 +25,17 @@ import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.model.Attribution;
-import com.smartstudio.deviceinfo.ui.BaseViewImpl;
+import com.smartstudio.deviceinfo.ui.BaseActionBarView;
 import com.smartstudio.deviceinfo.utils.ViewUtils;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
-public class AttributionsViewImpl extends BaseViewImpl implements AttributionsView {
-    @Bind(R.id.list_attributions)
+public class AttributionsViewImpl extends BaseActionBarView implements AttributionsView {
+    @BindView(R.id.list_attributions)
     RecyclerView mListAttributions;
 
     private final AttributionsAdapter mAdapter;

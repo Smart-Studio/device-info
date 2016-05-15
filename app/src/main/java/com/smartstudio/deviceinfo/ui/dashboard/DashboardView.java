@@ -14,16 +14,10 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.injection.components;
+package com.smartstudio.deviceinfo.ui.dashboard;
 
-import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoFragment;
-import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
-import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
+import com.smartstudio.deviceinfo.ui.BaseView;
 
-import dagger.Subcomponent;
+public interface DashboardView extends BaseView {
 
-@PerFragment
-@Subcomponent(modules = ScreenInfoModule.class)
-public interface ScreenInfoComponent {
-    void inject(ScreenInfoFragment activity);
 }

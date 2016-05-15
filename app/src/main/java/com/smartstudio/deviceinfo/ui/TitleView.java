@@ -26,9 +26,6 @@ import android.widget.TextView;
 
 import com.smartstudio.deviceinfo.R;
 
-/**
- * TODO Add a class header comment
- */
 public class TitleView extends TextView {
     private int mColor;
     private int mIndicatorHeight;

@@ -16,16 +16,20 @@
 
 package com.smartstudio.deviceinfo.injection;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.view.Display;
 
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
-import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
+import com.smartstudio.deviceinfo.controllers.dashboard.DashboardController;
+import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.injection.modules.AboutModule;
 import com.smartstudio.deviceinfo.injection.modules.AppModule;
 import com.smartstudio.deviceinfo.injection.modules.AttributionsModule;
+import com.smartstudio.deviceinfo.injection.modules.DashboardModule;
 import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
 
 public final class Injector {
@@ -34,9 +38,8 @@ public final class Injector {
     }
 
     public static ScreenInfoModule provideScreenInfoModule(ScreenInfoController controller,
-                                                           Context context,
                                                            Display display) {
-        return new ScreenInfoModule(controller, context, display);
+        return new ScreenInfoModule(controller, display);
     }
 
     public static AboutModule provideAboutModule(AboutController controller, Context context) {
@@ -45,6 +48,10 @@ public final class Injector {
 
     public static AttributionsModule provideAttributionsModule(AttributionsController controller, Context context) {
         return new AttributionsModule(controller, context);
+    }
+
+    public static DashboardModule provideDashboardModule(DashboardController controller, Activity activity, FragmentManager fragmentManager) {
+        return new DashboardModule(controller, activity, fragmentManager);
     }
 
     private Injector() {

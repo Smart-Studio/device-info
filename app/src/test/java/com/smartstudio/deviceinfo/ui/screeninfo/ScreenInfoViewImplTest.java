@@ -19,8 +19,7 @@ package com.smartstudio.deviceinfo.ui.screeninfo;
 import android.view.View;
 
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.controllers.BaseController;
-import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
+import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.BaseViewImplTest;
@@ -93,17 +92,12 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
 
     @Before
     public void setUp() throws Exception {
-        mView = new ScreenInfoViewImpl(mController);
+        mView = new ScreenInfoViewImpl();
     }
 
     @Test
     public void testGetLayoutResource() throws Exception {
-        assertThat(mView.getLayoutResourceId()).isEqualTo(R.layout.activity_screen_info);
-    }
-
-    @Override
-    public BaseController getBaseController() {
-        return mController;
+        assertThat(mView.getLayoutResourceId()).isEqualTo(R.layout.fragment_screen_info);
     }
 
     @Override

@@ -19,11 +19,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_screen_info"
-        style="@style/BaseToolbar"
-        app:title="@string/app_name" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -32,8 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:paddingTop="10dp">
+            android:layout_marginRight="10dp">
 
             <com.smartstudio.deviceinfo.ui.TitleView
                 style="@style/ScreenInfoProperty.Title"

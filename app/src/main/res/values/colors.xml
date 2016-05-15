@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#4CAF50</color>
     <color name="ripple_transparent_black">#1A000000</color>
     <color name="attribution_text">@android:color/black</color>
 </resources>

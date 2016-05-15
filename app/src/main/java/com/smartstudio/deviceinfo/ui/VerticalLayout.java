@@ -21,9 +21,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * TODO Add a class header comment
- */
 public class VerticalLayout extends ViewGroup {
 
     public VerticalLayout(Context context) {

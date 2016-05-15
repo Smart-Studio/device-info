@@ -16,13 +16,13 @@
 
 package com.smartstudio.deviceinfo.controllers.about.attributions;
 
-import com.smartstudio.deviceinfo.controllers.BaseController;
+import com.smartstudio.deviceinfo.controllers.ToolbarController;
 import com.smartstudio.deviceinfo.model.Attribution;
 
 /**
  * Controller for the attributions screen
  **/
-public interface AttributionsController extends BaseController {
+public interface AttributionsController extends ToolbarController {
     /**
      * Called when an attributions is clicked
      *

@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.injection.components;
+package com.smartstudio.deviceinfo.injection.scopes;
 
-import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoFragment;
-import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
-import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
+import java.lang.annotation.Retention;
 
-import dagger.Subcomponent;
+import javax.inject.Scope;
 
-@PerFragment
-@Subcomponent(modules = ScreenInfoModule.class)
-public interface ScreenInfoComponent {
-    void inject(ScreenInfoFragment activity);
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+/**
+ * Dagger application scope
+ */
+@Scope
+@Retention(RUNTIME)
+public @interface PerFragment {
 }

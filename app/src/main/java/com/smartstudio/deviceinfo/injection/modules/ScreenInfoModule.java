@@ -16,7 +16,6 @@
 
 package com.smartstudio.deviceinfo.injection.modules;
 
-import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
@@ -24,11 +23,11 @@ import android.view.Display;
 import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalyticsImpl;
 import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoFabricAnalytics;
-import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoController;
-import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
+import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFragment;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
-import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
+import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
@@ -42,29 +41,21 @@ import dagger.Provides;
 @Module
 public class ScreenInfoModule {
     private final ScreenInfoController mController;
-    private final Context mContext;
     private final Display mDisplay;
 
-    public ScreenInfoModule(ScreenInfoController controller, Context context, Display display) {
+    public ScreenInfoModule(ScreenInfoController controller, Display display) {
         mController = controller;
-        mContext = context;
         mDisplay = display;
     }
 
     @Provides
-    @PerActivity
+    @PerFragment
     ScreenInfoController provideController() {
         return mController;
     }
 
     @Provides
-    @ForActivity
-    Context provideContext() {
-        return mContext;
-    }
-
-    @Provides
-    @PerActivity
+    @PerFragment
     Display provideDisplay() {
         return mDisplay;
     }
@@ -80,32 +71,33 @@ public class ScreenInfoModule {
     }
 
     @Provides
-    @PerActivity
+    @PerFragment
     ScreenInfoManager provideScreenInfoManager(ScreenInfoManagerImpl screenInfoManager) {
         return screenInfoManager;
     }
 
     @Provides
-    @PerActivity
+    @PerFragment
     ScreenInfoView provideView(ScreenInfoViewImpl view) {
         return view;
     }
 
     @Provides
-    @PerActivity
+    @PerFragment
+    @ForFragment
     BaseView provideBaseView(ScreenInfoView view) {
         return view;
     }
 
     @Provides
-    @PerActivity
+    @PerFragment
     @ForGoogle
     ScreenInfoAnalytics provideAnalytics(ScreenInfoAnalyticsImpl analytics) {
         return analytics;
     }
 
     @Provides
-    @PerActivity
+    @PerFragment
     @ForFabric
     ScreenInfoAnalytics provideFabricAnalytics(ScreenInfoFabricAnalytics analytics) {
         return analytics;

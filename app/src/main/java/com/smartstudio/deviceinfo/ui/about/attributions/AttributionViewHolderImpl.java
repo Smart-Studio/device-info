@@ -24,20 +24,20 @@ import com.smartstudio.deviceinfo.model.Attribution;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AttributionViewHolderImpl extends AttributionViewHolder {
-    @Bind(R.id.txt_attribution_library)
+    @BindView(R.id.txt_attribution_library)
     TextView txtLibrary;
 
-    @Bind(R.id.txt_attribution_author)
+    @BindView(R.id.txt_attribution_author)
     TextView txtAuthor;
 
-    @Bind(R.id.txt_attribution_description)
+    @BindView(R.id.txt_attribution_description)
     TextView txtDescription;
 
-    @Bind(R.id.txt_attribution_license)
+    @BindView(R.id.txt_attribution_license)
     TextView txtLicense;
 
     @Inject

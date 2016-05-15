@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.screeninfo;
+package com.smartstudio.deviceinfo.controllers.dashboard.screeninfo;
 
 import android.support.annotation.IdRes;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.controllers.dashboard.DashboardActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -64,7 +65,7 @@ public class ScreenInfoActivityTest {
     private static final int CONTENT_HEIGHT_DP = 567;
 
     @Rule
-    public ActivityTestRule<ScreenInfoActivity> activityRule = new ActivityTestRule<>(ScreenInfoActivity.class);
+    public ActivityTestRule<DashboardActivity> activityRule = new ActivityTestRule<>(DashboardActivity.class);
 
     @Test
     public void testProperties() throws Exception {

@@ -18,16 +18,13 @@ package com.smartstudio.deviceinfo.controllers.about;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
-import android.support.test.rule.ActivityTestRule;
 
 import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.controllers.screeninfo.ScreenInfoActivity;
+import com.smartstudio.deviceinfo.controllers.dashboard.DashboardActivity;
 import com.smartstudio.deviceinfo.utils.EspressoUtils;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -41,7 +38,6 @@ import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasAction;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasData;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.toPackage;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -49,7 +45,7 @@ import static org.hamcrest.core.AllOf.allOf;
 
 public class AboutActivityTest {
     @Rule
-    public IntentsTestRule<ScreenInfoActivity> activityRule = new IntentsTestRule<>(ScreenInfoActivity.class);
+    public IntentsTestRule<DashboardActivity> activityRule = new IntentsTestRule<>(DashboardActivity.class);
 
     private Resources mResources;
 

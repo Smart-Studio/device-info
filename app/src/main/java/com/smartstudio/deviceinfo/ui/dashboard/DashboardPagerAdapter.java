@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.screeninfo;
+package com.smartstudio.deviceinfo.ui.dashboard;
 
-import com.smartstudio.deviceinfo.controllers.BaseController;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
-/**
- * Controller for the screen info screen
- **/
-public interface ScreenInfoController extends BaseController {
+public abstract class DashboardPagerAdapter extends FragmentStatePagerAdapter{
+
+    public DashboardPagerAdapter(FragmentManager fm) {
+        super(fm);
+    }
 }

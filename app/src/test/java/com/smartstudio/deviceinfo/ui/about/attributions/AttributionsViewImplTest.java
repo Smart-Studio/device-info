@@ -21,11 +21,11 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.controllers.BaseController;
+import com.smartstudio.deviceinfo.controllers.ToolbarController;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
 import com.smartstudio.deviceinfo.model.Attribution;
 import com.smartstudio.deviceinfo.ui.BaseView;
-import com.smartstudio.deviceinfo.ui.BaseViewImplTest;
+import com.smartstudio.deviceinfo.ui.ActionBarViewImplTest;
 import com.smartstudio.deviceinfo.utils.ViewUtils;
 
 import org.junit.Before;
@@ -49,7 +49,7 @@ import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ButterKnife.class, ViewUtils.class})
-public class AttributionsViewImplTest extends BaseViewImplTest {
+public class AttributionsViewImplTest extends ActionBarViewImplTest {
 
     @Mock
     private AttributionsController mController;
@@ -84,7 +84,7 @@ public class AttributionsViewImplTest extends BaseViewImplTest {
     }
 
     @Override
-    public BaseController getBaseController() {
+    public ToolbarController getBaseController() {
         return mController;
     }
 

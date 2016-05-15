@@ -16,31 +16,13 @@
 
 package com.smartstudio.deviceinfo.ui;
 
-import android.support.annotation.IdRes;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-
-import com.smartstudio.deviceinfo.controllers.BaseController;
 
 import butterknife.ButterKnife;
 
 public abstract class BaseViewImpl implements BaseView {
-    protected ActionBar mActionBar;
-
-    private final BaseController mController;
-
-    public BaseViewImpl(BaseController controller) {
-        mController = controller;
-    }
-
     @Override
     public void init(View view) {
         ButterKnife.bind(this, view);
-        Toolbar toolbar = ButterKnife.findById(view, getToolbarId());
-        mActionBar = mController.setUpToolbar(toolbar);
     }
-
-    @IdRes
-    protected abstract int getToolbarId();
 }

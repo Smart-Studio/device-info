@@ -16,14 +16,17 @@
 
 package com.smartstudio.deviceinfo.injection.components;
 
-import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoFragment;
+import com.smartstudio.deviceinfo.controllers.dashboard.DashboardActivity;
+import com.smartstudio.deviceinfo.injection.modules.DashboardModule;
 import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
-import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
+import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 
 import dagger.Subcomponent;
 
-@PerFragment
-@Subcomponent(modules = ScreenInfoModule.class)
-public interface ScreenInfoComponent {
-    void inject(ScreenInfoFragment activity);
+@PerActivity
+@Subcomponent(modules = DashboardModule.class)
+public interface DashboardComponent {
+    void inject(DashboardActivity activity);
+
+    ScreenInfoComponent plus(ScreenInfoModule module);
 }
