@@ -16,6 +16,8 @@
 
 package com.smartstudio.deviceinfo.controllers.dashboard;
 
+import android.content.Context;
+
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
 import com.google.android.gms.analytics.HitBuilders;
@@ -23,6 +25,7 @@ import com.google.android.gms.analytics.Tracker;
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.analytics.about.AboutAnalytics;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
@@ -84,12 +87,20 @@ public class DashboardActivityTestModule {
     }
 
     @Provides
-    ContentViewEvent provideContentViewEvent(){
+    ContentViewEvent provideContentViewEvent() {
         return new ContentViewEvent();
     }
 
     @Provides
-    Answers provideAnswers(){
+    Answers provideAnswers() {
         return new Answers();
     }
+
+    @Provides
+    @ForApplication
+    Context provideContext() {
+        return mock(Context.class);
+    }
+
+
 }
