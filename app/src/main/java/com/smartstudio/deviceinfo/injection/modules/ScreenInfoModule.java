@@ -20,9 +20,9 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 
-import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
-import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalyticsImpl;
-import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoFabricAnalytics;
+import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoAnalytics;
+import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoAnalyticsImpl;
+import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoFabricAnalytics;
 import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFragment;
@@ -90,6 +90,11 @@ public class ScreenInfoModule {
     }
 
     @Provides
+    TypedValue provideTypedValue() {
+        return new TypedValue();
+    }
+
+    @Provides
     @PerFragment
     @ForGoogle
     ScreenInfoAnalytics provideAnalytics(ScreenInfoAnalyticsImpl analytics) {
@@ -101,10 +106,5 @@ public class ScreenInfoModule {
     @ForFabric
     ScreenInfoAnalytics provideFabricAnalytics(ScreenInfoFabricAnalytics analytics) {
         return analytics;
-    }
-
-    @Provides
-    TypedValue provideTypedValue() {
-        return new TypedValue();
     }
 }

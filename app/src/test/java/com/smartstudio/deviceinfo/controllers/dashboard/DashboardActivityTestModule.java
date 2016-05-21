@@ -24,11 +24,13 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.analytics.about.AboutAnalytics;
+import com.smartstudio.deviceinfo.analytics.dashboard.DashboardAnalytics;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
+import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.dashboard.DashboardView;
 
@@ -57,17 +59,17 @@ public class DashboardActivityTestModule {
     }
 
     @Provides
-    @ForGoogle
     @PerActivity
-    AboutAnalytics provideAnalytics() {
-        return mock(AboutAnalytics.class);
+    @ForGoogle
+    DashboardAnalytics provideAnalytics() {
+        return mock(DashboardAnalytics.class);
     }
 
     @Provides
-    @ForFabric
     @PerActivity
-    AboutAnalytics provideFabricAnalytics() {
-        return mock(AboutAnalytics.class);
+    @ForFabric
+    DashboardAnalytics provideFabricAnalytics() {
+        return mock(DashboardAnalytics.class);
     }
 
     @Provides
