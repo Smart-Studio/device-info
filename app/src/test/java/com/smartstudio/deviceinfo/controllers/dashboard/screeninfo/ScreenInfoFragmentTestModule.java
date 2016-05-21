@@ -17,7 +17,7 @@
 package com.smartstudio.deviceinfo.controllers.dashboard.screeninfo;
 
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
+import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFragment;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;

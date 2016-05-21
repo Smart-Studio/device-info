@@ -20,8 +20,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
+import com.smartstudio.deviceinfo.analytics.dashboard.DashboardAnalytics;
+import com.smartstudio.deviceinfo.analytics.dashboard.DashboardAnalyticsImpl;
+import com.smartstudio.deviceinfo.analytics.dashboard.DashboardFabricAnalytics;
 import com.smartstudio.deviceinfo.controllers.dashboard.DashboardController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.dashboard.DashboardPagerAdapter;
@@ -79,5 +84,19 @@ public class DashboardModule {
     @PerActivity
     DashboardPagerAdapter providePagerAdapter(DashboardPagerAdapterImpl adapter) {
         return adapter;
+    }
+
+    @Provides
+    @PerActivity
+    @ForGoogle
+    DashboardAnalytics provideAnalytics(DashboardAnalyticsImpl analytics) {
+        return analytics;
+    }
+
+    @Provides
+    @PerActivity
+    @ForFabric
+    DashboardAnalytics provideFabricAnalytics(DashboardFabricAnalytics analytics) {
+        return analytics;
     }
 }

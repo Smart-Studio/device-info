@@ -8,10 +8,13 @@ import android.view.MenuItem;
 
 import com.smartstudio.deviceinfo.DeviceInfoApp;
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.analytics.dashboard.DashboardAnalytics;
 import com.smartstudio.deviceinfo.controllers.BaseActivity;
 import com.smartstudio.deviceinfo.controllers.about.AboutActivity;
 import com.smartstudio.deviceinfo.injection.Injector;
 import com.smartstudio.deviceinfo.injection.components.DashboardComponent;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
+import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.ui.dashboard.DashboardView;
 
 import javax.inject.Inject;
@@ -19,6 +22,12 @@ import javax.inject.Inject;
 public class DashboardActivity extends BaseActivity implements DashboardController, ActionBar.OnMenuVisibilityListener {
     @Inject
     DashboardView mView;
+    @Inject
+    @ForGoogle
+    DashboardAnalytics mAnalytics;
+    @Inject
+    @ForFabric
+    DashboardAnalytics mFabricAnalytics;
 
     private DashboardComponent mComponent;
 
@@ -41,8 +50,8 @@ public class DashboardActivity extends BaseActivity implements DashboardControll
         switch (item.getItemId()) {
             case R.id.about:
                 AboutActivity.launch(this);
-/*                mAnalytics.reportAboutTap();
-                mFabricAnalytics.reportAboutTap();*/
+                mAnalytics.reportAboutTap();
+                mFabricAnalytics.reportAboutTap();
                 break;
         }
         return true;
@@ -56,13 +65,20 @@ public class DashboardActivity extends BaseActivity implements DashboardControll
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mAnalytics.reportScreen();
+        mFabricAnalytics.reportScreen();
+    }
+
+    @Override
     public void onMenuVisibilityChanged(boolean isVisible) {
         if (isVisible) {
-           /* mAnalytics.reportOptionsMenuOpened();
-            mFabricAnalytics.reportOptionsMenuOpened();*/
+            mAnalytics.reportOptionsMenuOpened();
+            mFabricAnalytics.reportOptionsMenuOpened();
         } else {
-            /*mAnalytics.reportOptionsMenuClosed();
-            mFabricAnalytics.reportOptionsMenuClosed();*/
+            mAnalytics.reportOptionsMenuClosed();
+            mFabricAnalytics.reportOptionsMenuClosed();
         }
     }
 

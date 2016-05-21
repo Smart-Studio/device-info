@@ -23,8 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
+import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.controllers.BaseFragment;
 import com.smartstudio.deviceinfo.controllers.dashboard.DashboardActivity;
 import com.smartstudio.deviceinfo.injection.Injector;

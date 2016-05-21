@@ -20,8 +20,6 @@
             </intent-filter>
         </activity-alias>
 
-        <activity android:name=".controllers.dashboard.screeninfo.ScreenInfoFragment" />
-
         <activity android:name=".controllers.about.AboutActivity" />
 
         <activity android:name=".controllers.about.attributions.AttributionsActivity" />

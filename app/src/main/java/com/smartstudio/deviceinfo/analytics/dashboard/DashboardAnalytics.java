@@ -14,16 +14,23 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.controllers.dashboard;
+package com.smartstudio.deviceinfo.analytics.dashboard;
 
-public class DashboardActivityForTest extends DashboardActivity {
-    DashboardActivityTestComponent mComponent;
+import com.smartstudio.deviceinfo.analytics.AnalyticsManager;
 
-    @Override
-    protected void initComponent() {
-        mComponent = DaggerDashboardActivityTestComponent.builder()
-                .dashboardActivityTestModule(new DashboardActivityTestModule())
-                .build();
-        mComponent.inject(this);
-    }
+public interface DashboardAnalytics extends AnalyticsManager {
+    /**
+     * Reports when the about menu is tapped
+     **/
+    void reportAboutTap();
+
+    /**
+     * Reports when the options menu is opened
+     **/
+    void reportOptionsMenuOpened();
+
+    /**
+     * Reports when the options menu is closed
+     **/
+    void reportOptionsMenuClosed();
 }
