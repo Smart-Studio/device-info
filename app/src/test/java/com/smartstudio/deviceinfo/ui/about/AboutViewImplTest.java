@@ -70,7 +70,6 @@ public class AboutViewImplTest extends ActionBarViewImplTest {
 
     @Test
     public void testInit() throws Exception {
-        initMocks();
         super.testInit();
         verify(mActionBar).setDisplayHomeAsUpEnabled(true);
         verify(mView.mTxtVersion).setText(VERSION);

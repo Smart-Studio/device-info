@@ -67,6 +67,13 @@ public class DashboardActivity extends BaseActivity implements DashboardControll
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mAnalytics.reportScreen();
+        mFabricAnalytics.reportScreen();
+    }
+
+    @Override
     public void onMenuVisibilityChanged(boolean isVisible) {
         if (isVisible) {
             mAnalytics.reportOptionsMenuOpened();

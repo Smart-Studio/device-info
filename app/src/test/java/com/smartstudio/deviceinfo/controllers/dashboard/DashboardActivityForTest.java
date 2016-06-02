@@ -24,5 +24,6 @@ public class DashboardActivityForTest extends DashboardActivity {
         mComponent = DaggerDashboardActivityTestComponent.builder()
                 .dashboardActivityTestModule(new DashboardActivityTestModule())
                 .build();
+        mComponent.inject(this);
     }
 }

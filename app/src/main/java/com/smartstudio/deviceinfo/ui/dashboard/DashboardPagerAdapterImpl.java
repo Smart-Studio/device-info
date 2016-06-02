@@ -27,9 +27,9 @@ import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoFra
 import javax.inject.Inject;
 
 public class DashboardPagerAdapterImpl extends DashboardPagerAdapter {
-    private static final int PAGE_COUNT = 2;
-    private static final int POS_SCREEN_TAB = 0;
-    private static final int POS_OS_TAB = 1;
+    static final int PAGE_COUNT = 2;
+    static final int POS_SCREEN_TAB = 0;
+    static final int POS_OS_TAB = 1;
 
     private final Resources mResources;
 

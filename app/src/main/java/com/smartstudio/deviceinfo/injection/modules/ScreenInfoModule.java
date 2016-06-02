@@ -90,6 +90,11 @@ public class ScreenInfoModule {
     }
 
     @Provides
+    TypedValue provideTypedValue() {
+        return new TypedValue();
+    }
+
+    @Provides
     @PerFragment
     @ForGoogle
     ScreenInfoAnalytics provideAnalytics(ScreenInfoAnalyticsImpl analytics) {
@@ -101,10 +106,5 @@ public class ScreenInfoModule {
     @ForFabric
     ScreenInfoAnalytics provideFabricAnalytics(ScreenInfoFabricAnalytics analytics) {
         return analytics;
-    }
-
-    @Provides
-    TypedValue provideTypedValue() {
-        return new TypedValue();
     }
 }
