@@ -22,9 +22,11 @@ import javax.inject.Inject;
 public class DashboardActivity extends BaseActivity implements DashboardController, ActionBar.OnMenuVisibilityListener {
     @Inject
     DashboardView mView;
+
     @Inject
     @ForGoogle
     DashboardAnalytics mAnalytics;
+
     @Inject
     @ForFabric
     DashboardAnalytics mFabricAnalytics;

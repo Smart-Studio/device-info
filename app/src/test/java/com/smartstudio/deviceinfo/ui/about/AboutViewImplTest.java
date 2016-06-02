@@ -22,8 +22,8 @@ import android.widget.TextView;
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.ToolbarController;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
-import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.ActionBarViewImplTest;
+import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.utils.ViewUtils;
 
 import org.junit.Before;
@@ -36,7 +36,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import butterknife.ButterKnife;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -61,12 +60,12 @@ public class AboutViewImplTest extends ActionBarViewImplTest {
     @Before
     public void setUp() throws Exception {
         mView = new AboutViewImpl(mController, mContext);
+        super.setUp();
     }
 
-    @Test
-    public void testGetLayoutResourceId() throws Exception {
-        int layoutId = mView.getLayoutResourceId();
-        assertThat(layoutId).isEqualTo(R.layout.activity_about);
+    @Override
+    public int getLayoutResource() {
+        return R.layout.activity_about;
     }
 
     @Test

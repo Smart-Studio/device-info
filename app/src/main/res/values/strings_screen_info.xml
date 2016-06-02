@@ -15,12 +15,9 @@
   -->
 
 <resources>
-    <string name="device_info_title">Device Info</string>
+    <string name="device_info_title">Device</string>
     <string name="model">Model</string>
     <string name="manufacturer">Manufacturer</string>
-    <string name="os_version">Android version</string>
-    <string name="os_codename">Android codename</string>
-    <string name="os_api">Android API</string>
     <string name="screen_size_title">Screen size</string>
     <string name="screen_resolution">Resolution</string>
     <string name="screen_inches">Inches</string>

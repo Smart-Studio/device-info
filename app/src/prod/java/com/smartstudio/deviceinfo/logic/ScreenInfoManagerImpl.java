@@ -46,28 +46,6 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
     protected static final String DIMEN = "dimen";
     protected static final String ANDROID = "android";
 
-    //Android versions codenames
-    protected static final String CUPCAKE = "Cupcake";
-    protected static final String DONUT = "Donut";
-    protected static final String ECLAIR = "Eclair";
-    protected static final String ECLAIR_0_1 = "Eclair 0 1";
-    protected static final String ECLAIR_MR1 = "Eclair MR1";
-    protected static final String FROYO = "Froyo";
-    protected static final String GINGERBREAD = "Gingerbread";
-    protected static final String GINGERBREAD_MR1 = "Gingerbread MR1";
-    protected static final String HONEYCOMB = "Honeycomb";
-    protected static final String HONEYCOMB_MR1 = "Honeycomb MR1";
-    protected static final String HONEYCOMB_MR2 = "Honeycomb MR2";
-    protected static final String ICE_CREAM_SANDWICH = "Ice Cream Sandwich";
-    protected static final String ICE_CREAM_SANDWICH_MR1 = "Ice Cream Sandwich MR1";
-    protected static final String JELLY_BEAN = "Jelly Bean";
-    protected static final String JELLY_BEAN_MR1 = "Jelly Bean MR1";
-    protected static final String JELLY_BEAN_MR2 = "Jelly Bean MR2";
-    protected static final String KITKAT = "Kitkat";
-    protected static final String LOLLIPOP = "Lollipop";
-    protected static final String LOLLIPOP_MR1 = "Lollipop MR1";
-    protected static final String MARSHMALLOW = "Marshmallow";
-
     //Device screen size
     protected static final String SCREEN_SIZE_SMALL = "small";
     protected static final String SCREEN_SIZE_NORMAL = "normal";
@@ -93,7 +71,7 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
     @Inject
     public ScreenInfoManagerImpl(Display display, DisplayMetrics displayMetrics,
                                  TypedValue typedValue, ScreenInfo screenInfo,
-                                 @ForApplication Context context) {
+                                 @ForActivity Context context) {
         mDisplay = display;
         mDisplayMetrics = displayMetrics;
         mTypedValue = typedValue;
@@ -136,9 +114,6 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
 
         mScreenInfo.setDeviceModel(Build.MODEL);
         mScreenInfo.setManufacturer(Build.MANUFACTURER);
-        mScreenInfo.setAndroidVersion(Build.VERSION.RELEASE);
-        mScreenInfo.setAndroidCodename(getAndroidCodename());
-        mScreenInfo.setAndroidApi(Build.VERSION.SDK_INT);
         mScreenInfo.setWidthPixels(width);
         mScreenInfo.setHeightPixels(height);
 
@@ -163,54 +138,6 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
         mScreenInfo.setContentBottom(height - navigationBarHeight);
 
         return mScreenInfo;
-    }
-
-    private String getAndroidCodename() {
-        int api = Build.VERSION.SDK_INT;
-        switch (api) {
-            case Build.VERSION_CODES.CUPCAKE:
-                return CUPCAKE;
-            case Build.VERSION_CODES.DONUT:
-                return DONUT;
-            case Build.VERSION_CODES.ECLAIR:
-                return ECLAIR;
-            case Build.VERSION_CODES.ECLAIR_0_1:
-                return ECLAIR_0_1;
-            case Build.VERSION_CODES.ECLAIR_MR1:
-                return ECLAIR_MR1;
-            case Build.VERSION_CODES.FROYO:
-                return FROYO;
-            case Build.VERSION_CODES.GINGERBREAD:
-                return GINGERBREAD;
-            case Build.VERSION_CODES.GINGERBREAD_MR1:
-                return GINGERBREAD_MR1;
-            case Build.VERSION_CODES.HONEYCOMB:
-                return HONEYCOMB;
-            case Build.VERSION_CODES.HONEYCOMB_MR1:
-                return HONEYCOMB_MR1;
-            case Build.VERSION_CODES.HONEYCOMB_MR2:
-                return HONEYCOMB_MR2;
-            case Build.VERSION_CODES.ICE_CREAM_SANDWICH:
-                return ICE_CREAM_SANDWICH;
-            case Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1:
-                return ICE_CREAM_SANDWICH_MR1;
-            case Build.VERSION_CODES.JELLY_BEAN:
-                return JELLY_BEAN;
-            case Build.VERSION_CODES.JELLY_BEAN_MR1:
-                return JELLY_BEAN_MR1;
-            case Build.VERSION_CODES.JELLY_BEAN_MR2:
-                return JELLY_BEAN_MR2;
-            case Build.VERSION_CODES.KITKAT:
-                return KITKAT;
-            case Build.VERSION_CODES.LOLLIPOP:
-                return LOLLIPOP;
-            case Build.VERSION_CODES.LOLLIPOP_MR1:
-                return LOLLIPOP_MR1;
-            case Build.VERSION_CODES.M:
-                return MARSHMALLOW;
-            default:
-                return UNKNOWN;
-        }
     }
 
     private double calculateScreenSizeInches(int width, int height) {

@@ -33,9 +33,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.ACTION_BAR_HEIGHT;
-import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.ANDROID_API;
-import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.ANDROID_CODENAME;
-import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.ANDROID_VERSION;
 import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.CONTENT_BOTTOM;
 import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.CONTENT_HEIGHT;
 import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.CONTENT_TOP;
@@ -54,7 +51,7 @@ import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.STATUS_BAR_
 import static com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl.WIDTH;
 import static org.hamcrest.CoreMatchers.allOf;
 
-public class ScreenInfoActivityTest {
+public class ScreenInfoFragmentTest {
     private static final int WIDTH_DP = 384;
     private static final int HEIGHT_DP = 640;
     private static final int STATUS_HEIGHT_DP = 25;
@@ -71,9 +68,6 @@ public class ScreenInfoActivityTest {
     public void testProperties() throws Exception {
         assertPropertyText(R.id.view_device_name, DEVICE_MODEL);
         assertPropertyText(R.id.view_device_manufacturer, MANUFACTURER);
-        assertPropertyText(R.id.view_os, ANDROID_VERSION);
-        assertPropertyText(R.id.view_os_codename, ANDROID_CODENAME);
-        assertPropertyText(R.id.view_os_api, String.valueOf(ANDROID_API));
         assertPropertyText(R.id.view_screen_res, WIDTH + "x" + HEIGHT + " px (" + WIDTH_DP + "x" + HEIGHT_DP + " dp)");
         assertPropertyText(R.id.view_screen_inches, INCHES + "\"");
         assertPropertyText(R.id.view_screen_size, SCREEN_SIZE);

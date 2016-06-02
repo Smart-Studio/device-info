@@ -25,21 +25,18 @@ import android.view.Display;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
 import com.smartstudio.deviceinfo.controllers.dashboard.DashboardController;
+import com.smartstudio.deviceinfo.controllers.dashboard.system.SystemController;
 import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.injection.modules.AboutModule;
 import com.smartstudio.deviceinfo.injection.modules.AppModule;
 import com.smartstudio.deviceinfo.injection.modules.AttributionsModule;
 import com.smartstudio.deviceinfo.injection.modules.DashboardModule;
+import com.smartstudio.deviceinfo.injection.modules.SystemModule;
 import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
 
 public final class Injector {
     public static AppModule provideAppModule(Application app) {
         return new AppModule(app);
-    }
-
-    public static ScreenInfoModule provideScreenInfoModule(ScreenInfoController controller,
-                                                           Display display) {
-        return new ScreenInfoModule(controller, display);
     }
 
     public static AboutModule provideAboutModule(AboutController controller, Context context) {
@@ -52,6 +49,14 @@ public final class Injector {
 
     public static DashboardModule provideDashboardModule(DashboardController controller, Activity activity, FragmentManager fragmentManager) {
         return new DashboardModule(controller, activity, fragmentManager);
+    }
+
+    public static ScreenInfoModule provideScreenInfoModule(ScreenInfoController controller, Display display) {
+        return new ScreenInfoModule(controller, display);
+    }
+
+    public static SystemModule provideSystemModule(SystemController controller){
+        return new SystemModule(controller);
     }
 
     private Injector() {

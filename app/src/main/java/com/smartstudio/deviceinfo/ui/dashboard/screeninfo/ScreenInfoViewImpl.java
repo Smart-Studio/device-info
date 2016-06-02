@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.ui.screeninfo;
+package com.smartstudio.deviceinfo.ui.dashboard.screeninfo;
 
 import android.view.View;
 
@@ -37,15 +37,6 @@ public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
 
     @BindView(R.id.view_device_manufacturer)
     PropertyLayout mViewManufacturer;
-
-    @BindView(R.id.view_os)
-    PropertyLayout mViewOs;
-
-    @BindView(R.id.view_os_codename)
-    PropertyLayout mViewOsCodename;
-
-    @BindView(R.id.view_os_api)
-    PropertyLayout mViewOsApi;
 
     @BindView(R.id.view_screen_res)
     PropertyLayout mViewScreenRes;
@@ -105,9 +96,6 @@ public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
     public void showScreenInfo(ScreenInfo screenInfo) {
         mViewDeviceName.setValue(screenInfo.getDeviceModel());
         mViewManufacturer.setValue(screenInfo.getManufacturer());
-        mViewOs.setValue(screenInfo.getAndroidVersion());
-        mViewOsCodename.setValue(screenInfo.getAndroidCodename());
-        mViewOsApi.setValue(String.valueOf(screenInfo.getAndroidApi()));
 
         double density = screenInfo.getDensity();
 

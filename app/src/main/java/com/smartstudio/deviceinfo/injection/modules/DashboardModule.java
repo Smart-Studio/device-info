@@ -89,7 +89,7 @@ public class DashboardModule {
     @Provides
     @PerActivity
     @ForGoogle
-    DashboardAnalytics provideAnalytics(DashboardAnalyticsImpl analytics) {
+    DashboardAnalytics provideGoogleAnalytics(DashboardAnalyticsImpl analytics) {
         return analytics;
     }
 

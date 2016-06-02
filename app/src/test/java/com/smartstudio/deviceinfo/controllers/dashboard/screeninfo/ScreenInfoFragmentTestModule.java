@@ -25,7 +25,7 @@ import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.ui.BaseView;
-import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
+import com.smartstudio.deviceinfo.ui.dashboard.screeninfo.ScreenInfoView;
 
 import dagger.Module;
 import dagger.Provides;

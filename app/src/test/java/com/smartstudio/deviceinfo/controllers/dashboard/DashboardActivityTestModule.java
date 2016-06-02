@@ -30,7 +30,6 @@ import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
-import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.dashboard.DashboardView;
 
@@ -61,15 +60,29 @@ public class DashboardActivityTestModule {
     @Provides
     @PerActivity
     @ForGoogle
-    DashboardAnalytics provideAnalytics() {
+    DashboardAnalytics provideDashboardAnalytics() {
         return mock(DashboardAnalytics.class);
     }
 
     @Provides
     @PerActivity
     @ForFabric
-    DashboardAnalytics provideFabricAnalytics() {
+    DashboardAnalytics provideDashboardFabricAnalytics() {
         return mock(DashboardAnalytics.class);
+    }
+
+    @Provides
+    @ForGoogle
+    @PerActivity
+    AboutAnalytics provideAnalytics() {
+        return mock(AboutAnalytics.class);
+    }
+
+    @Provides
+    @ForFabric
+    @PerActivity
+    AboutAnalytics provideFabricAnalytics() {
+        return mock(AboutAnalytics.class);
     }
 
     @Provides
@@ -99,8 +112,14 @@ public class DashboardActivityTestModule {
     }
 
     @Provides
-    @ForApplication
+    @ForActivity
     Context provideContext() {
+        return mock(Context.class);
+    }
+
+    @Provides
+    @ForApplication
+    Context provideAppContext() {
         return mock(Context.class);
     }
 

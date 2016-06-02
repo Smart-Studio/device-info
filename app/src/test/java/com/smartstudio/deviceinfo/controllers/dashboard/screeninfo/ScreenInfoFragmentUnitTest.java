@@ -16,6 +16,8 @@
 
 package com.smartstudio.deviceinfo.controllers.dashboard.screeninfo;
 
+import android.view.View;
+
 import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
@@ -23,7 +25,7 @@ import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
-import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
+import com.smartstudio.deviceinfo.ui.dashboard.screeninfo.ScreenInfoView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +35,7 @@ import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
 import javax.inject.Inject;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 
 @RunWith(CustomRobolectricGradleTestRunner.class)
@@ -66,6 +69,7 @@ public class ScreenInfoFragmentUnitTest {
 
     @Test
     public void testOnViewCreated() throws Exception {
+        verify(mView).init(any(View.class));
         verify(mScreenInfoManager).getScreenInfo();
         verify(mView).showScreenInfo(mScreenInfo);
     }

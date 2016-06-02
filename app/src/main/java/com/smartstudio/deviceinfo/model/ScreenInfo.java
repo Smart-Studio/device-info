@@ -22,9 +22,6 @@ package com.smartstudio.deviceinfo.model;
 public class ScreenInfo {
     private String deviceModel;
     private String manufacturer;
-    private String androidVersion;
-    private String androidCodename;
-    private int androidApi;
     private int widthPixels;
     private int heightPixels;
     private double inches;
@@ -59,30 +56,6 @@ public class ScreenInfo {
 
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
-    }
-
-    public String getAndroidVersion() {
-        return androidVersion;
-    }
-
-    public void setAndroidVersion(String androidVersion) {
-        this.androidVersion = androidVersion;
-    }
-
-    public String getAndroidCodename() {
-        return androidCodename;
-    }
-
-    public void setAndroidCodename(String androidCodename) {
-        this.androidCodename = androidCodename;
-    }
-
-    public int getAndroidApi() {
-        return androidApi;
-    }
-
-    public void setAndroidApi(int androidApi) {
-        this.androidApi = androidApi;
     }
 
     public int getWidthPixels() {

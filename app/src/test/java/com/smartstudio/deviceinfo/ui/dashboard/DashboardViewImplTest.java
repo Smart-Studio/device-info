@@ -53,18 +53,23 @@ public class DashboardViewImplTest extends ActionBarViewImplTest {
     @Before
     public void setUp() throws Exception {
         mView = new DashboardViewImpl(mMockController, mMockAdapter);
+        super.setUp();
+    }
+
+    @Override
+    public int getLayoutResource() {
+        return R.layout.activity_dashboard;
+    }
+
+    @Override
+    public BaseView getBaseView() {
+        return mView;
     }
 
     @Test
     public void testGetToolbarId() throws Exception {
         int toolbarId = mView.getToolbarId();
         assertThat(toolbarId).isEqualTo(R.id.toolbar_dashboard);
-    }
-
-    @Test
-    public void testGetLayoutResourceId() throws Exception {
-        int layoutRes = mView.getLayoutResourceId();
-        assertThat(layoutRes).isEqualTo(R.layout.activity_dashboard);
     }
 
     @Test
@@ -79,11 +84,6 @@ public class DashboardViewImplTest extends ActionBarViewImplTest {
         super.initMocks();
         mView.mTabs = mock(TabLayout.class);
         mView.mPager = mock(ViewPager.class);
-    }
-
-    @Override
-    public BaseView getBaseView() {
-        return mView;
     }
 
     @Override

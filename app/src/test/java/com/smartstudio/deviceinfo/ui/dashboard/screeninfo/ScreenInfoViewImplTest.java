@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.ui.screeninfo;
+package com.smartstudio.deviceinfo.ui.dashboard.screeninfo;
 
 import android.view.View;
 
@@ -46,9 +46,6 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
 public class ScreenInfoViewImplTest extends BaseViewImplTest {
     private static final String MODEL = "Nexus 4";
     private static final String MANUFACTURER = "LGE";
-    private static final String ANDROID_VERSION = "4.3";
-    private static final String ANDROID_CODENAME = "Jelly Bean MR2";
-    private static final int ANDROID_API = 18;
     private static final int WIDTH = 768;
     private static final int WIDTH_DP = 384;
     private static final int HEIGHT = 1280;
@@ -93,16 +90,17 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     @Before
     public void setUp() throws Exception {
         mView = new ScreenInfoViewImpl();
-    }
-
-    @Test
-    public void testGetLayoutResource() throws Exception {
-        assertThat(mView.getLayoutResourceId()).isEqualTo(R.layout.fragment_screen_info);
+        super.setUp();
     }
 
     @Override
     public BaseView getBaseView() {
         return mView;
+    }
+
+    @Override
+    public int getLayoutResource() {
+        return R.layout.fragment_screen_info;
     }
 
     @Test
@@ -152,9 +150,6 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
         ScreenInfo info = mock(ScreenInfo.class);
         when(info.getDeviceModel()).thenReturn(MODEL);
         when(info.getManufacturer()).thenReturn(MANUFACTURER);
-        when(info.getAndroidVersion()).thenReturn(ANDROID_VERSION);
-        when(info.getAndroidCodename()).thenReturn(ANDROID_CODENAME);
-        when(info.getAndroidApi()).thenReturn(ANDROID_API);
         when(info.getWidthPixels()).thenReturn(WIDTH);
         when(info.getHeightPixels()).thenReturn(HEIGHT);
         when(info.getInches()).thenReturn(inches);
@@ -176,9 +171,6 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     private void mockViews() {
         mView.mViewDeviceName = mock(PropertyLayout.class);
         mView.mViewManufacturer = mock(PropertyLayout.class);
-        mView.mViewOs = mock(PropertyLayout.class);
-        mView.mViewOsCodename = mock(PropertyLayout.class);
-        mView.mViewOsApi = mock(PropertyLayout.class);
         mView.mViewScreenRes = mock(PropertyLayout.class);
         mView.mViewScreenStatus = mock(PropertyLayout.class);
         mView.mViewScreenNavigation = mock(PropertyLayout.class);
@@ -197,9 +189,6 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     private void verifyViewMocks(double inches, double density, double densityX, double densityY) {
         verify(mView.mViewDeviceName).setValue(MODEL);
         verify(mView.mViewManufacturer).setValue(MANUFACTURER);
-        verify(mView.mViewOs).setValue(ANDROID_VERSION);
-        verify(mView.mViewOsCodename).setValue(ANDROID_CODENAME);
-        verify(mView.mViewOsApi).setValue(String.valueOf(ANDROID_API));
         verify(mView.mViewScreenRes).setValue(WIDTH + "x" + HEIGHT + " px (" + WIDTH_DP + "x" + HEIGHT_DP + " dp)");
         verify(mView.mViewScreenInches).setValue(inches + "\"");
         verify(mView.mViewScreenSize).setValue(SCREEN_SIZE);

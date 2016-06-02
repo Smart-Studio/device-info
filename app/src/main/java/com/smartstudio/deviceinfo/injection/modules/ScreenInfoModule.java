@@ -32,8 +32,8 @@ import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.ui.BaseView;
-import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
-import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoViewImpl;
+import com.smartstudio.deviceinfo.ui.dashboard.screeninfo.ScreenInfoView;
+import com.smartstudio.deviceinfo.ui.dashboard.screeninfo.ScreenInfoViewImpl;
 
 import dagger.Module;
 import dagger.Provides;

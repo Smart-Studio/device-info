@@ -21,12 +21,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.controllers.dashboard.system.SystemFragment;
 import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoFragment;
 
 import javax.inject.Inject;
 
 public class DashboardPagerAdapterImpl extends DashboardPagerAdapter {
-    static final int PAGE_COUNT = 1;
+    static final int PAGE_COUNT = 2;
     static final int POS_SCREEN_TAB = 0;
     static final int POS_OS_TAB = 1;
 
@@ -44,18 +45,26 @@ public class DashboardPagerAdapterImpl extends DashboardPagerAdapter {
             case POS_SCREEN_TAB:
                 return ScreenInfoFragment.newInstance();
             case POS_OS_TAB:
-                break;
+                return SystemFragment.newInstance();
             default:
                 throw new IllegalStateException("Page not supported");
         }
-
-
-        return null;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mResources.getString(R.string.tab_screen_info);
+        int titleResId = 0;
+
+        switch (position){
+            case POS_SCREEN_TAB:
+                titleResId = R.string.tab_screen_info;
+                break;
+            case POS_OS_TAB:
+                titleResId = R.string.tab_system;
+                break;
+        }
+
+        return mResources.getString(titleResId);
     }
 
     @Override

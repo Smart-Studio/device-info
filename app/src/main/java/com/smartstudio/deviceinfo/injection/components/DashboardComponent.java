@@ -18,6 +18,7 @@ package com.smartstudio.deviceinfo.injection.components;
 
 import com.smartstudio.deviceinfo.controllers.dashboard.DashboardActivity;
 import com.smartstudio.deviceinfo.injection.modules.DashboardModule;
+import com.smartstudio.deviceinfo.injection.modules.SystemModule;
 import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 
@@ -29,4 +30,6 @@ public interface DashboardComponent {
     void inject(DashboardActivity activity);
 
     ScreenInfoComponent plus(ScreenInfoModule module);
+
+    SystemComponent plus(SystemModule module);
 }

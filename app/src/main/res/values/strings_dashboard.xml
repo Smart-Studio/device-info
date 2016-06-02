@@ -16,4 +16,5 @@
 
 <resources>
     <string name="tab_screen_info">Screen</string>
+    <string name="tab_system">System</string>
 </resources>
