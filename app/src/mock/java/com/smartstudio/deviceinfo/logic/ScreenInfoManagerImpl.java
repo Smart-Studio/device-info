@@ -23,9 +23,6 @@ import javax.inject.Inject;
 public class ScreenInfoManagerImpl implements ScreenInfoManager {
     public static final String DEVICE_MODEL = "Nexus 4";
     public static final String MANUFACTURER = "LGE";
-    public static final String ANDROID_VERSION = "4.3";
-    public static final String ANDROID_CODENAME = "Jelly Bean MR2";
-    public static final int ANDROID_API = 18;
     public static final int WIDTH = 768;
     public static final int HEIGHT = 1280;
     public static final double INCHES = 4.7;
@@ -43,7 +40,8 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
     public static final int CONTENT_HEIGHT = 1134;
 
     @Inject
-    public ScreenInfoManagerImpl() {
+    ScreenInfoManagerImpl() {
+
     }
 
     @Override
@@ -51,9 +49,6 @@ public class ScreenInfoManagerImpl implements ScreenInfoManager {
         ScreenInfo screenInfo = new ScreenInfo();
         screenInfo.setDeviceModel(DEVICE_MODEL);
         screenInfo.setManufacturer(MANUFACTURER);
-        screenInfo.setAndroidVersion(ANDROID_VERSION);
-        screenInfo.setAndroidCodename(ANDROID_CODENAME);
-        screenInfo.setAndroidApi(ANDROID_API);
         screenInfo.setWidthPixels(WIDTH);
         screenInfo.setHeightPixels(HEIGHT);
         screenInfo.setInches(INCHES);

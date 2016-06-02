@@ -19,11 +19,11 @@
 
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="ScreenInfoProperty">
+    <style name="Property">
         <item name="android:layout_marginBottom">10dp</item>
     </style>
 
-    <style name="ScreenInfoProperty.Title">
+    <style name="Property.Title">
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:textStyle">bold|italic</item>
         <item name="android:textSize">16sp</item>

@@ -24,8 +24,8 @@ import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.ToolbarController;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
 import com.smartstudio.deviceinfo.model.Attribution;
-import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.ActionBarViewImplTest;
+import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.utils.ViewUtils;
 
 import org.junit.Before;
@@ -67,11 +67,12 @@ public class AttributionsViewImplTest extends ActionBarViewImplTest {
     @Before
     public void setUp() throws Exception {
         mView = new AttributionsViewImpl(mController, mAdapter, mLayoutManager, mContext);
+        super.setUp();
     }
 
-    @Test
-    public void testGetLayoutResourceId() throws Exception {
-        assertThat(mView.getLayoutResourceId()).isEqualTo(R.layout.activity_attributions);
+    @Override
+    public int getLayoutResource() {
+        return R.layout.activity_attributions;
     }
 
     @Test

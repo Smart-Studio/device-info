@@ -20,9 +20,9 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 
-import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
-import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalyticsImpl;
-import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoFabricAnalytics;
+import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoAnalytics;
+import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoAnalyticsImpl;
+import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoFabricAnalytics;
 import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFragment;
@@ -32,8 +32,8 @@ import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.ui.BaseView;
-import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
-import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoViewImpl;
+import com.smartstudio.deviceinfo.ui.dashboard.screeninfo.ScreenInfoView;
+import com.smartstudio.deviceinfo.ui.dashboard.screeninfo.ScreenInfoViewImpl;
 
 import dagger.Module;
 import dagger.Provides;

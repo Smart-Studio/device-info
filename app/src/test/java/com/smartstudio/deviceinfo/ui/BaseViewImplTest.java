@@ -17,33 +17,49 @@
 package com.smartstudio.deviceinfo.ui;
 
 
+import android.support.annotation.LayoutRes;
 import android.view.View;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
 import butterknife.ButterKnife;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 
 public abstract class BaseViewImplTest {
     @Mock
-    protected View mView;
+    protected View mMockView;
+    protected BaseView mBaseView;
+
+    @Before
+    public void setUp() throws Exception {
+        mBaseView = getBaseView();
+    }
+
+    @Test
+    public void testGetLayoutResource() throws Exception {
+        assertThat(mBaseView.getLayoutResourceId()).isEqualTo(getLayoutResource());
+    }
 
     @Test
     public void testInit() throws Exception {
         initMocks();
-        BaseView baseView = getBaseView();
-        baseView.init(mView);
+        mBaseView.init(mMockView);
 
         verifyStatic();
-        ButterKnife.bind(baseView, mView);
+        ButterKnife.bind(mBaseView, mMockView);
+    }
+
+    protected void initMocks() {
+        mockStatic(ButterKnife.class);
     }
 
     public abstract BaseView getBaseView();
 
-    protected void initMocks(){
-        mockStatic(ButterKnife.class);
-    }
+    @LayoutRes
+    public abstract int getLayoutResource();
 }

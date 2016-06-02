@@ -29,6 +29,7 @@ import android.view.ViewConfiguration;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.utils.TestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -117,9 +118,9 @@ public class ScreenInfoManagerImplTest {
         when(mTheme.resolveAttribute(R.attr.actionBarSize, mTypedValue, true)).thenReturn(true);
         when(TypedValue.complexToDimensionPixelSize(mTypedValue.data, mDisplayMetrics)).thenReturn(ACTION_BAR_HEIGHT);
 
-        mockStaticField(Build.class, "MODEL", MODEL);
-        mockStaticField(Build.class, "MANUFACTURER", MANUFACTURER);
-        mockStaticField(Build.VERSION.class, "RELEASE", ANDROID_VERSION);
+        TestUtils.mockStaticField(Build.class, "MODEL", MODEL);
+        TestUtils.mockStaticField(Build.class, "MANUFACTURER", MANUFACTURER);
+        TestUtils.mockStaticField(Build.VERSION.class, "RELEASE", ANDROID_VERSION);
         mDisplayMetrics.densityDpi = DENSITY_DPI;
         mDisplayMetrics.density = DENSITY;
         mDisplayMetrics.xdpi = DENSITY_X;
@@ -141,7 +142,6 @@ public class ScreenInfoManagerImplTest {
         ScreenInfo screenInfo = mScreenInfoManager.getScreenInfo();
         verify(mDisplay).getRealMetrics(mDisplayMetrics);
         verifyNavigationBar(true);
-        verifyAndroidApiAndCodename(false);
         verifyCommon(screenInfo);
         verifyContentBottomAndHeight(true);
     }
@@ -155,7 +155,6 @@ public class ScreenInfoManagerImplTest {
 
         ScreenInfo screenInfo = mScreenInfoManager.getScreenInfo();
         verify(mDisplay).getRealMetrics(mDisplayMetrics);
-        verifyAndroidApiAndCodename(false);
         verifyStatusBar();
         verifyNavigationBar(false);
         verifyCommon(screenInfo);
@@ -174,7 +173,6 @@ public class ScreenInfoManagerImplTest {
         verifyCommon(screenInfo);
         verifyStatusBar();
         verifyNavigationBar(true);
-        verifyAndroidApiAndCodename(true);
         verifyCommon(screenInfo);
         verifyContentBottomAndHeight(true);
     }
@@ -189,7 +187,6 @@ public class ScreenInfoManagerImplTest {
         verify(mDisplay).getMetrics(mDisplayMetrics);
         verifyStatusBar();
         verifyNavigationBar(false);
-        verifyAndroidApiAndCodename(true);
         verifyCommon(screenInfo);
         verifyContentBottomAndHeight(false);
     }
@@ -213,13 +210,13 @@ public class ScreenInfoManagerImplTest {
     }
 
     private void mockJellyBeanAndAboveResolution() throws IllegalAccessException {
-        mockStaticField(Build.VERSION.class, "SDK_INT", ANDROID_API_JELLY_BEAN_AND_ABOVE);
+        TestUtils.mockStaticField(Build.VERSION.class, "SDK_INT", ANDROID_API_JELLY_BEAN_AND_ABOVE);
         mDisplayMetrics.widthPixels = WIDTH;
         mDisplayMetrics.heightPixels = HEIGHT;
     }
 
     private void mockPreJellyBeanResolution() throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-        mockStaticField(Build.VERSION.class, "SDK_INT", ANDROID_API_PRE_JELLY_BEAN);
+        TestUtils.mockStaticField(Build.VERSION.class, "SDK_INT", ANDROID_API_PRE_JELLY_BEAN);
         mScreenInfoManager = spy(mScreenInfoManager);
         doReturn(WIDTH).when(mScreenInfoManager).getWidth();
         doReturn(HEIGHT).when(mScreenInfoManager).getHeight();
@@ -242,16 +239,6 @@ public class ScreenInfoManagerImplTest {
         }
     }
 
-    private void verifyAndroidApiAndCodename(boolean preJellyBean) {
-        if (preJellyBean) {
-            verify(mScreenInfo).setAndroidApi(ANDROID_API_PRE_JELLY_BEAN);
-            verify(mScreenInfo).setAndroidCodename(ScreenInfoManagerImpl.HONEYCOMB_MR1);
-        } else {
-            verify(mScreenInfo).setAndroidApi(ANDROID_API_JELLY_BEAN_AND_ABOVE);
-            verify(mScreenInfo).setAndroidCodename(ScreenInfoManagerImpl.JELLY_BEAN_MR2);
-        }
-    }
-
     private void verifyCommon(ScreenInfo screenInfo) {
         assertThat(screenInfo).isEqualTo(mScreenInfo);
         verify(mTheme).resolveAttribute(R.attr.actionBarSize, mTypedValue, true);
@@ -261,7 +248,6 @@ public class ScreenInfoManagerImplTest {
         verify(mScreenInfo).setScreenSize(SCREEN_SIZE);
         verify(mScreenInfo).setDeviceModel(MODEL);
         verify(mScreenInfo).setManufacturer(MANUFACTURER);
-        verify(mScreenInfo).setAndroidVersion(ANDROID_VERSION);
         verify(mScreenInfo).setWidthPixels(WIDTH);
         verify(mScreenInfo).setHeightPixels(HEIGHT);
         verify(mScreenInfo).setInches(INCHES);
@@ -276,12 +262,6 @@ public class ScreenInfoManagerImplTest {
         int height = navigationBar ? CONTENT_HEIGHT : CONTENT_HEIGHT_NO_NAV;
         verify(mScreenInfo).setContentBottom(bottom);
         verify(mScreenInfo).setContentHeight(height);
-    }
-
-
-    private void mockStaticField(Class clazz, String field, Object value) throws IllegalAccessException {
-        Field f = PowerMockito.field(clazz, field);
-        f.set(clazz, value);
     }
 
     @Test
@@ -321,40 +301,4 @@ public class ScreenInfoManagerImplTest {
         mScreenInfoManager.getScreenInfo();
         verify(mScreenInfo, times(times)).setDensityCode(expectedDensity);
     }
-
-    @Test
-    public void testGetAndroidCodename() throws Exception {
-        getAndroidCodename(Build.VERSION_CODES.CUPCAKE, ScreenInfoManagerImpl.CUPCAKE, 1);
-        getAndroidCodename(Build.VERSION_CODES.DONUT, ScreenInfoManagerImpl.DONUT, 1);
-        getAndroidCodename(Build.VERSION_CODES.ECLAIR, ScreenInfoManagerImpl.ECLAIR, 1);
-        getAndroidCodename(Build.VERSION_CODES.ECLAIR_0_1, ScreenInfoManagerImpl.ECLAIR_0_1, 1);
-        getAndroidCodename(Build.VERSION_CODES.ECLAIR_MR1, ScreenInfoManagerImpl.ECLAIR_MR1, 1);
-        getAndroidCodename(Build.VERSION_CODES.FROYO, ScreenInfoManagerImpl.FROYO, 1);
-        getAndroidCodename(Build.VERSION_CODES.GINGERBREAD, ScreenInfoManagerImpl.GINGERBREAD, 1);
-        getAndroidCodename(Build.VERSION_CODES.GINGERBREAD_MR1, ScreenInfoManagerImpl.GINGERBREAD_MR1, 1);
-        getAndroidCodename(Build.VERSION_CODES.HONEYCOMB, ScreenInfoManagerImpl.HONEYCOMB, 1);
-        getAndroidCodename(Build.VERSION_CODES.HONEYCOMB_MR1, ScreenInfoManagerImpl.HONEYCOMB_MR1, 1);
-        getAndroidCodename(Build.VERSION_CODES.HONEYCOMB_MR2, ScreenInfoManagerImpl.HONEYCOMB_MR2, 1);
-        getAndroidCodename(Build.VERSION_CODES.ICE_CREAM_SANDWICH, ScreenInfoManagerImpl.ICE_CREAM_SANDWICH, 1);
-        getAndroidCodename(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1, ScreenInfoManagerImpl.ICE_CREAM_SANDWICH_MR1, 1);
-        getAndroidCodename(Build.VERSION_CODES.JELLY_BEAN, ScreenInfoManagerImpl.JELLY_BEAN, 1);
-        getAndroidCodename(Build.VERSION_CODES.JELLY_BEAN_MR1, ScreenInfoManagerImpl.JELLY_BEAN_MR1, 1);
-        getAndroidCodename(Build.VERSION_CODES.JELLY_BEAN_MR2, ScreenInfoManagerImpl.JELLY_BEAN_MR2, 1);
-        getAndroidCodename(Build.VERSION_CODES.KITKAT, ScreenInfoManagerImpl.KITKAT, 1);
-        getAndroidCodename(Build.VERSION_CODES.LOLLIPOP, ScreenInfoManagerImpl.LOLLIPOP, 1);
-        getAndroidCodename(Build.VERSION_CODES.LOLLIPOP_MR1, ScreenInfoManagerImpl.LOLLIPOP_MR1, 1);
-        getAndroidCodename(Build.VERSION_CODES.M, ScreenInfoManagerImpl.MARSHMALLOW, 1);
-        getAndroidCodename(50, ScreenInfoManagerImpl.UNKNOWN, 1);
-        getAndroidCodename(0, ScreenInfoManagerImpl.UNKNOWN, 2);
-        getAndroidCodename(-20, ScreenInfoManagerImpl.UNKNOWN, 3);
-
-    }
-
-    private void getAndroidCodename(int sdkInt, String expectedCodename, int times) throws IllegalAccessException {
-        mockStaticField(Build.VERSION.class, "SDK_INT", sdkInt);
-        mScreenInfoManager.getScreenInfo();
-        verify(mScreenInfo).setAndroidApi(sdkInt);
-        verify(mScreenInfo, times(times)).setAndroidCodename(expectedCodename);
-    }
-
 }

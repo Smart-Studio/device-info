@@ -1,4 +1,4 @@
-package com.smartstudio.deviceinfo.analytics.screeninfo;
+package com.smartstudio.deviceinfo.analytics.dashboard.screeninfo;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -9,9 +9,6 @@ import javax.inject.Provider;
 
 public class ScreenInfoAnalyticsImpl extends AnalyticsManagerImpl implements ScreenInfoAnalytics {
     static final String SCREEN_NAME = "Screen info";
-    static final String TAP_ABOUT = "Tap menu about";
-    static final String MENU_OPTIONS_OPENED = "Menu options opened";
-    static final String MENU_OPTIONS_CLOSED = "Menu options closed";
 
     /**
      * Creates an instance of the AnalyticsManagerImpl
@@ -32,18 +29,5 @@ public class ScreenInfoAnalyticsImpl extends AnalyticsManagerImpl implements Scr
         return SCREEN_NAME;
     }
 
-    @Override
-    public void reportAboutTap() {
-        reportEvent(TAP_ABOUT);
-    }
 
-    @Override
-    public void reportOptionsMenuOpened() {
-        reportEvent(MENU_OPTIONS_OPENED);
-    }
-
-    @Override
-    public void reportOptionsMenuClosed() {
-        reportEvent(MENU_OPTIONS_CLOSED);
-    }
 }

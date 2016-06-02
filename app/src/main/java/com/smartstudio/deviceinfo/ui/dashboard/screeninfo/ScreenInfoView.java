@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.ui.screeninfo;
+package com.smartstudio.deviceinfo.ui.dashboard.screeninfo;
 
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.ui.BaseView;

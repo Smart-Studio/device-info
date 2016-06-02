@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.smartstudio.deviceinfo.ui.VerticalLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <com.smartstudio.deviceinfo.ui.TitleView
+            style="@style/Property.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Android" />
+
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_os"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/os_version" />
+
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_os_codename"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/os_codename" />
+
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_os_api"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/os_api" />
+
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_java_vm"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/java_vm" />
+
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_build_id"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/build_id" />
+
+
+        <com.smartstudio.deviceinfo.ui.TitleView
+            style="@style/Property.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Others" />
+
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_opengl"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/opengl" />
+
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_abi"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/abi" />
+
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_bootloader"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/bootloader" />
+
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_kernel"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/kernel" />
+
+    </com.smartstudio.deviceinfo.ui.VerticalLayout>
+
+</ScrollView>

@@ -1,8 +1,8 @@
-package com.smartstudio.deviceinfo.analytics.screeninfo;
+package com.smartstudio.deviceinfo.analytics.dashboard;
 
 import com.smartstudio.deviceinfo.analytics.AnalyticsManager;
 
-public interface ScreenInfoAnalytics extends AnalyticsManager {
+public interface DashboardAnalytics extends AnalyticsManager{
     /**
      * Reports when the about menu is tapped
      **/

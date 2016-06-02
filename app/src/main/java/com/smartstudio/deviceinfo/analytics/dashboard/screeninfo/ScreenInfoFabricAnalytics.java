@@ -1,4 +1,4 @@
-package com.smartstudio.deviceinfo.analytics.screeninfo;
+package com.smartstudio.deviceinfo.analytics.dashboard.screeninfo;
 
 
 import com.crashlytics.android.answers.Answers;
@@ -12,7 +12,7 @@ public class ScreenInfoFabricAnalytics extends FabricAnalyticsManager implements
     static final String TAP_ABOUT = "Tap menu about";
     static final String MENU_OPTIONS_OPENED = "Menu options opened";
     static final String MENU_OPTIONS_CLOSED = "Menu options closed";
-    static final String CONTENT_TYPE = "Activity";
+    static final String CONTENT_TYPE = "Fragment";
 
     @Inject
     public ScreenInfoFabricAnalytics(Answers answers, ContentViewEvent contentViewEvent) {
@@ -29,20 +29,5 @@ public class ScreenInfoFabricAnalytics extends FabricAnalyticsManager implements
         event.putContentName(mScreenName)
                 .putContentId(String.valueOf(mScreenName.hashCode()))
                 .putContentType(CONTENT_TYPE);
-    }
-
-    @Override
-    public void reportAboutTap() {
-        reportEvent(TAP_ABOUT);
-    }
-
-    @Override
-    public void reportOptionsMenuOpened() {
-        reportEvent(MENU_OPTIONS_OPENED);
-    }
-
-    @Override
-    public void reportOptionsMenuClosed() {
-        reportEvent(MENU_OPTIONS_CLOSED);
     }
 }

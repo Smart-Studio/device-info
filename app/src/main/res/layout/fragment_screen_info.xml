@@ -14,171 +14,145 @@
   ~ limitations under the License.
   -->
 
-<com.smartstudio.deviceinfo.ui.VerticalLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <com.smartstudio.deviceinfo.ui.VerticalLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
-        <com.smartstudio.deviceinfo.ui.VerticalLayout
+        <com.smartstudio.deviceinfo.ui.TitleView
+            style="@style/Property.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:text="@string/device_info_title" />
 
-            <com.smartstudio.deviceinfo.ui.TitleView
-                style="@style/ScreenInfoProperty.Title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/device_info_title" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_device_name"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/model" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_device_name"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/model" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_device_manufacturer"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/manufacturer" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_device_manufacturer"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/manufacturer" />
+        <com.smartstudio.deviceinfo.ui.TitleView
+            style="@style/Property.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/screen_density_title" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_os"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/os_version" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_screen_density"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/screen_density" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_os_codename"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/os_codename" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_screen_density_code"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/screen_density_code" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_os_api"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/os_api" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_screen_density_x"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/screen_density_x" />
 
-            <com.smartstudio.deviceinfo.ui.TitleView
-                style="@style/ScreenInfoProperty.Title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/screen_density_title" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_screen_density_y"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/screen_density_y" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_screen_density"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/screen_density" />
+        <com.smartstudio.deviceinfo.ui.TitleView
+            style="@style/Property.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/screen_size_title" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_screen_density_code"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/screen_density_code" />
-
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_screen_density_x"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/screen_density_x" />
-
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_screen_density_y"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/screen_density_y" />
-
-            <com.smartstudio.deviceinfo.ui.TitleView
-                style="@style/ScreenInfoProperty.Title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/screen_size_title" />
-
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_screen_res"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/screen_resolution" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_screen_res"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/screen_resolution" />
 
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_screen_inches"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/screen_inches" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_screen_inches"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/screen_inches" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_screen_size"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/screen_size" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_screen_size"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/screen_size" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_screen_status"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/status_bar_height" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_screen_status"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/status_bar_height" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_screen_navigation"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="@string/navigation_bar_height" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_screen_navigation"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="@string/navigation_bar_height" />
 
-            <com.smartstudio.deviceinfo.ui.TitleView
-                style="@style/ScreenInfoProperty.Title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/screen_content_title" />
+        <com.smartstudio.deviceinfo.ui.TitleView
+            style="@style/Property.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/screen_content_title" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_screen_content_height"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="Height" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_screen_content_height"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="Height" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_screen_action_bar"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="Action bar height" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_screen_action_bar"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="Action bar height" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_screen_content_top"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="Top" />
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_screen_content_top"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="Top" />
 
-            <com.smartstudio.deviceinfo.ui.PropertyLayout
-                android:id="@+id/view_screen_content_bottom"
-                style="@style/ScreenInfoProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title_text="Bottom" />
-        </com.smartstudio.deviceinfo.ui.VerticalLayout>
-    </ScrollView>
-</com.smartstudio.deviceinfo.ui.VerticalLayout>
+        <com.smartstudio.deviceinfo.ui.PropertyLayout
+            android:id="@+id/view_screen_content_bottom"
+            style="@style/Property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title_text="Bottom" />
+    </com.smartstudio.deviceinfo.ui.VerticalLayout>
+</ScrollView>

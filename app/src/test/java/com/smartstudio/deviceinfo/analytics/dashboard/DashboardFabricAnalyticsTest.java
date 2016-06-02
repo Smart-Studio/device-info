@@ -1,4 +1,4 @@
-package com.smartstudio.deviceinfo.analytics.screeninfo;
+package com.smartstudio.deviceinfo.analytics.dashboard;
 
 import com.crashlytics.android.answers.CustomEvent;
 import com.smartstudio.deviceinfo.analytics.FabricAnalyticsManager;
@@ -9,49 +9,48 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
-public class ScreenInfoFabricAnalyticsTest extends FabricAnalyticsManagerTest {
-
-    private ScreenInfoFabricAnalytics mAnalytics;
+public class DashboardFabricAnalyticsTest extends FabricAnalyticsManagerTest {
+    private DashboardFabricAnalytics mAnalytics;
 
     @Test
     public void testGetScreenName() throws Exception {
         String screenName = mAnalytics.getScreenName();
-        assertThat(screenName).isEqualTo(ScreenInfoFabricAnalytics.SCREEN_NAME);
+        assertThat(screenName).isEqualTo(DashboardFabricAnalytics.SCREEN_NAME);
     }
 
     @Test
     public void testSetupContentViewEvent() throws Exception {
         mAnalytics.setupContentViewEvent(mContentViewEvent);
-        String screenName = ScreenInfoFabricAnalytics.SCREEN_NAME;
+        String screenName = DashboardFabricAnalytics.SCREEN_NAME;
         verify(mContentViewEvent).putContentName(screenName);
         verify(mContentViewEvent).putContentId(String.valueOf(screenName.hashCode()));
-        verify(mContentViewEvent).putContentType(ScreenInfoFabricAnalytics.CONTENT_TYPE);
+        verify(mContentViewEvent).putContentType(DashboardFabricAnalytics.CONTENT_TYPE);
     }
 
     @Test
     public void testReportAboutTap() throws Exception {
         CustomEvent event = mockCustomEvent();
         mAnalytics.reportAboutTap();
-        verifyEvent(event, ScreenInfoFabricAnalytics.TAP_ABOUT);
+        verifyEvent(event, DashboardFabricAnalytics.TAP_ABOUT);
     }
 
     @Test
     public void testReportOptionsMenuOpened() throws Exception {
         CustomEvent event = mockCustomEvent();
         mAnalytics.reportOptionsMenuOpened();
-        verifyEvent(event, ScreenInfoFabricAnalytics.MENU_OPTIONS_OPENED);
+        verifyEvent(event, DashboardFabricAnalytics.MENU_OPTIONS_OPENED);
     }
 
     @Test
     public void testReportOptionsMenuClosed() throws Exception {
         CustomEvent event = mockCustomEvent();
         mAnalytics.reportOptionsMenuClosed();
-        verifyEvent(event, ScreenInfoFabricAnalytics.MENU_OPTIONS_CLOSED);
+        verifyEvent(event, DashboardFabricAnalytics.MENU_OPTIONS_CLOSED);
     }
 
     @Override
     protected FabricAnalyticsManager createAnalyticsManager() {
-        mAnalytics = new ScreenInfoFabricAnalytics(mAnswers, mContentViewEvent);
+        mAnalytics = new DashboardFabricAnalytics(mAnswers, mContentViewEvent);
         return mAnalytics;
     }
 }

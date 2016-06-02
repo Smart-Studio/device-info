@@ -16,42 +16,27 @@
 
 package com.smartstudio.deviceinfo.controllers.dashboard.screeninfo;
 
-import android.content.Intent;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.View;
 
 import com.smartstudio.deviceinfo.BuildConfig;
-import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
-import com.smartstudio.deviceinfo.controllers.about.AboutActivity;
+import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
-import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
+import com.smartstudio.deviceinfo.ui.dashboard.screeninfo.ScreenInfoView;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowIntent;
 import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
 import javax.inject.Inject;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(CustomRobolectricGradleTestRunner.class)
 @Config(sdk = 21, constants = BuildConfig.class)
@@ -70,18 +55,28 @@ public class ScreenInfoFragmentUnitTest {
     @ForFabric
     ScreenInfoAnalytics mFabricAnalytics;
 
-    private ScreenInfoFragmentForTest mFragment;
-
     @Before
     public void setUp() throws Exception {
-        mFragment = new ScreenInfoFragmentForTest();
-        SupportFragmentTestUtil.startFragment(mFragment);
-        mFragment.mComponent.inject(this);
+        ScreenInfoFragmentForTest fragment = new ScreenInfoFragmentForTest();
+        SupportFragmentTestUtil.startFragment(fragment);
+        fragment.mComponent.inject(this);
     }
 
     @Test
     public void testOnCreateView() throws Exception {
+        verify(mView).getLayoutResourceId();
+    }
 
+    @Test
+    public void testOnViewCreated() throws Exception {
+        verify(mView).init(any(View.class));
+        verify(mScreenInfoManager).getScreenInfo();
+        verify(mView).showScreenInfo(mScreenInfo);
+    }
 
+    @Test
+    public void testOnResume() throws Exception {
+        verify(mAnalytics).reportScreen();
+        verify(mFabricAnalytics).reportScreen();
     }
 }

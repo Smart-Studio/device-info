@@ -17,7 +17,7 @@
 package com.smartstudio.deviceinfo.controllers.dashboard.screeninfo;
 
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.analytics.screeninfo.ScreenInfoAnalytics;
+import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFragment;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
@@ -25,7 +25,7 @@ import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.ui.BaseView;
-import com.smartstudio.deviceinfo.ui.screeninfo.ScreenInfoView;
+import com.smartstudio.deviceinfo.ui.dashboard.screeninfo.ScreenInfoView;
 
 import dagger.Module;
 import dagger.Provides;

@@ -18,7 +18,6 @@ package com.smartstudio.deviceinfo.ui;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.smartstudio.deviceinfo.controllers.ToolbarController;
 
@@ -49,7 +48,7 @@ public abstract class ActionBarViewImplTest extends BaseViewImplTest {
     @Override
     protected void initMocks() {
         super.initMocks();
-        when(ButterKnife.findById(eq(mView), anyInt())).thenReturn(mToolbar);
+        when(ButterKnife.findById(eq(mMockView), anyInt())).thenReturn(mToolbar);
         ToolbarController controller = getBaseController();
         when(controller.setUpToolbar(mToolbar)).thenReturn(mActionBar);
     }
