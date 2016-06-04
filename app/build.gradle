@@ -9,6 +9,7 @@ buildscript {
         classpath 'io.fabric.tools:gradle:1.21.6'
         classpath 'com.testfairy.plugins.gradle:testfairy:1.12'
         classpath "com.jakewharton.hugo:hugo-plugin:1.2.1"
+        classpath 'com.genymotion:plugin:1.0'
     }
 }
 
@@ -20,6 +21,7 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
+apply plugin: "genymotion"
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.application'
 apply plugin: 'spoon'
@@ -156,6 +158,17 @@ android {
     }
 }
 
+genymotion {
+    devices {
+        nexus5 {
+            template "Google Nexus 5 - 4.4.4 - API 19 - 1080x1920"
+        }
+        nexus6 {
+            template "Google Nexus 6 - 6.0.0 - API 23 - 1440x2560"
+        }
+    }
+}
+
 // config for NimbleDroid Gradle plugin
 nimbledroid {
     apiKey config.props.nimbledroid_api_key
@@ -169,7 +182,7 @@ spoon {
 ext {
     // App dependencies
     supportLibraryVersion = '23.4.0'
-    playServicesVersion = '9.0.1'
+    playServicesVersion = '9.0.2'
     guavaVersion = '19.0'
     butterknifeVersion = '8.0.1'
     timberVersion = '4.1.2'
