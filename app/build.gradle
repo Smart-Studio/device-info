@@ -9,7 +9,7 @@ buildscript {
         classpath 'io.fabric.tools:gradle:1.21.6'
         classpath 'com.testfairy.plugins.gradle:testfairy:1.12'
         classpath "com.jakewharton.hugo:hugo-plugin:1.2.1"
-        classpath 'com.genymotion:plugin:1.0'
+        classpath 'com.genymotion:plugin:1.1'
     }
 }
 
