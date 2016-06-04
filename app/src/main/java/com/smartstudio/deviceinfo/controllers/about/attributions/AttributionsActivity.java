@@ -29,7 +29,7 @@ import com.smartstudio.deviceinfo.exceptions.BrowserNotFoundException;
 import com.smartstudio.deviceinfo.injection.Injector;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
-import com.smartstudio.deviceinfo.logic.AttributionsProvider;
+import com.smartstudio.deviceinfo.logic.attributions.AttributionsProvider;
 import com.smartstudio.deviceinfo.model.Attribution;
 import com.smartstudio.deviceinfo.ui.about.attributions.AttributionsView;
 import com.smartstudio.deviceinfo.utils.Utils;

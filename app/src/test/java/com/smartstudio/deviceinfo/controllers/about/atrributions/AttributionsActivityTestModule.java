@@ -6,7 +6,7 @@ import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
-import com.smartstudio.deviceinfo.logic.AttributionsProvider;
+import com.smartstudio.deviceinfo.logic.attributions.AttributionsProvider;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.about.attributions.AttributionsView;
 

@@ -50,11 +50,15 @@ public class DashboardActivity extends BaseActivity implements DashboardControll
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.share:
+                mView.showShareDialog();
+                break;
             case R.id.about:
                 AboutActivity.launch(this);
                 mAnalytics.reportAboutTap();
                 mFabricAnalytics.reportAboutTap();
                 break;
+
         }
         return true;
     }

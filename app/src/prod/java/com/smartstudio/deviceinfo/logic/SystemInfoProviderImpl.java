@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Build;
 
 import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
+import com.smartstudio.deviceinfo.logic.dashboard.SystemInfoProvider;
 import com.smartstudio.deviceinfo.model.SystemInfo;
 
 import javax.inject.Inject;

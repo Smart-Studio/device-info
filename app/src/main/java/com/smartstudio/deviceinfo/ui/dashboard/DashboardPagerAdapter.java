@@ -19,9 +19,13 @@ package com.smartstudio.deviceinfo.ui.dashboard;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.smartstudio.deviceinfo.controllers.dashboard.DashboardContentController;
+
 public abstract class DashboardPagerAdapter extends FragmentStatePagerAdapter{
 
     public DashboardPagerAdapter(FragmentManager fm) {
         super(fm);
     }
+
+    public abstract DashboardContentController getCurrent(int position);
 }

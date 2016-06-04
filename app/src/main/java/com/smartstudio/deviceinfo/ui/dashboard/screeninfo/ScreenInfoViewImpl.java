@@ -19,7 +19,9 @@ package com.smartstudio.deviceinfo.ui.dashboard.screeninfo;
 import android.view.View;
 
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoSharer;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.model.ScreenInfoViewModel;
 import com.smartstudio.deviceinfo.ui.BaseViewImpl;
 import com.smartstudio.deviceinfo.ui.PropertyLayout;
 import com.smartstudio.deviceinfo.utils.Utils;
@@ -77,9 +79,13 @@ public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
     @BindView(R.id.view_screen_content_height)
     PropertyLayout mViewContentHeight;
 
-    @Inject
-    public ScreenInfoViewImpl() {
+    private final ScreenInfoSharer mSharer;
+    private final ScreenInfoViewModel mScreenInfo;
 
+    @Inject
+    public ScreenInfoViewImpl(ScreenInfoSharer sharer, ScreenInfoViewModel screenInfo) {
+        mSharer = sharer;
+        mScreenInfo = screenInfo;
     }
 
     @Override
@@ -94,52 +100,132 @@ public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
 
     @Override
     public void showScreenInfo(ScreenInfo screenInfo) {
-        mViewDeviceName.setValue(screenInfo.getDeviceModel());
-        mViewManufacturer.setValue(screenInfo.getManufacturer());
-
+        setModel(screenInfo);
+        setManufacturer(screenInfo);
         double density = screenInfo.getDensity();
 
+        setScreenRes(density, screenInfo);
+        setStatusBarHeight(density, screenInfo);
+        setNavBarHeight(density, screenInfo);
+        setScreenSize(screenInfo);
+        setScreenSize(screenInfo);
+        setInches(screenInfo);
+        setDensity(screenInfo);
+        setDensityCode(screenInfo);
+        setDensityX(screenInfo);
+        setDensityY(screenInfo);
+        setActionBarHeight(density, screenInfo);
+        setContentHeight(density, screenInfo);
+        setContentTop(density, screenInfo);
+        setContentBottom(density, screenInfo);
+    }
+
+    @Override
+    public void showShareDialog() {
+        mSharer.share(mScreenInfo);
+    }
+
+    private void setModel(ScreenInfo screenInfo) {
+        String model = screenInfo.getDeviceModel();
+        mViewDeviceName.setValue(model);
+        mScreenInfo.setModel(model);
+    }
+
+    private void setManufacturer(ScreenInfo screenInfo) {
+        String manufacturer = screenInfo.getManufacturer();
+        mViewManufacturer.setValue(manufacturer);
+        mScreenInfo.setManufacturer(manufacturer);
+    }
+
+    private void setScreenRes(double density, ScreenInfo screenInfo) {
         String screenRes = String.format(Locale.getDefault(), "%dx%d px (%dx%d dp)", screenInfo.getWidthPixels(),
                 screenInfo.getHeightPixels(), Utils.pxToDp(screenInfo.getWidthPixels(), density), Utils.pxToDp(screenInfo.getHeightPixels(), density));
         mViewScreenRes.setValue(screenRes);
+        mScreenInfo.setResolution(screenRes);
+    }
 
+    private void setStatusBarHeight(double density, ScreenInfo screenInfo) {
         String statusBarHeight = String.format(Locale.getDefault(), "%d px (%d dp)",
                 screenInfo.getStatusBarHeight(), Utils.pxToDp(screenInfo.getStatusBarHeight(), density));
         mViewScreenStatus.setValue(statusBarHeight);
+        mScreenInfo.setStatusBarHeight(statusBarHeight);
+    }
 
+    private void setNavBarHeight(double density, ScreenInfo screenInfo) {
         int navBarHeight = screenInfo.getNavigationBarHeight();
+
         if (navBarHeight == 0) {
             mViewScreenNavigation.setVisibility(View.GONE);
         } else {
             String navigationBarHeight = String.format(Locale.getDefault(), "%d px (%d dp)",
                     screenInfo.getNavigationBarHeight(), Utils.pxToDp(screenInfo.getNavigationBarHeight(), density));
             mViewScreenNavigation.setValue(navigationBarHeight);
+            mScreenInfo.setNavBarHeight(navigationBarHeight);
         }
+    }
 
-        mViewScreenSize.setValue(screenInfo.getScreenSize());
+    private void setScreenSize(ScreenInfo screenInfo) {
+        String screenSize = screenInfo.getScreenSize();
+        mViewScreenSize.setValue(screenSize);
+        mScreenInfo.setScreenSize(screenSize);
+    }
 
+    private void setInches(ScreenInfo screenInfo) {
         String inches = String.format(Locale.getDefault(), "%.1f\"", screenInfo.getInches());
         mViewScreenInches.setValue(inches);
+        mScreenInfo.setInches(inches);
+    }
+
+    private void setDensity(ScreenInfo screenInfo) {
         String densityText = String.format(Locale.getDefault(), "%d dp (x%.1f)", screenInfo.getDensityDpi()
                 , screenInfo.getDensity());
         mViewScreenDensity.setValue(densityText);
-        mViewScreenDensityCode.setValue(screenInfo.getDensityCode());
+        mScreenInfo.setDensity(densityText);
+    }
+
+    private void setDensityCode(ScreenInfo screenInfo) {
+        String densityCode = screenInfo.getDensityCode();
+        mViewScreenDensityCode.setValue(densityCode);
+        mScreenInfo.setDensityCode(densityCode);
+    }
+
+    private void setDensityX(ScreenInfo screenInfo) {
         String densityX = String.format(Locale.getDefault(), "%.2f dp", screenInfo.getDensityX());
         mViewScreenDensityX.setValue(densityX);
+        mScreenInfo.setDensityX(densityX);
+    }
+
+    private void setDensityY(ScreenInfo screenInfo) {
         String densityY = String.format(Locale.getDefault(), "%.2f dp", screenInfo.getDensityY());
         mViewScreenDensityY.setValue(densityY);
+        mScreenInfo.setDensityY(densityY);
+    }
 
+    private void setActionBarHeight(double density, ScreenInfo screenInfo) {
         String actionBarHeight = String.format(Locale.getDefault(), "%d px (%d dp)", screenInfo.getActionBarHeight(),
                 Utils.pxToDp(screenInfo.getActionBarHeight(), density));
         mViewActionBarHeight.setValue(String.valueOf(actionBarHeight));
+        mScreenInfo.setActionBarHeight(actionBarHeight);
+    }
+
+    private void setContentHeight(double density, ScreenInfo screenInfo) {
         String contentHeight = String.format(Locale.getDefault(), "%d px (%d dp)", screenInfo.getContentHeight(),
                 Utils.pxToDp(screenInfo.getContentHeight(), density));
         mViewContentHeight.setValue(contentHeight);
+        mScreenInfo.setContentHeight(contentHeight);
+    }
+
+    private void setContentTop(double density, ScreenInfo screenInfo) {
         String contentTop = String.format(Locale.getDefault(), "%d px (%d dp)", screenInfo.getContentTop(),
                 Utils.pxToDp(screenInfo.getContentTop(), density));
         mViewContentTop.setValue(String.valueOf(contentTop));
+        mScreenInfo.setContentTop(contentTop);
+    }
+
+    private void setContentBottom(double density, ScreenInfo screenInfo) {
         String contentBottom = String.format(Locale.getDefault(), "%d px (%d dp)", screenInfo.getContentBottom(),
                 Utils.pxToDp(screenInfo.getContentBottom(), density));
         mViewContentBottom.setValue(String.valueOf(contentBottom));
+        mScreenInfo.setContentBottom(contentBottom);
     }
 }

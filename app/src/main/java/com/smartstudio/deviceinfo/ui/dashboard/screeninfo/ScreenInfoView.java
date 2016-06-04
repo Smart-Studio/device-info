@@ -29,4 +29,6 @@ public interface ScreenInfoView extends BaseView {
      * @param screenInfo Contains the device screen info
      **/
     void showScreenInfo(ScreenInfo screenInfo);
+
+    void showShareDialog();
 }

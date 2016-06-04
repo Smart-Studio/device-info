@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.logic;
+package com.smartstudio.deviceinfo.logic.attributions;
 
 import android.content.res.Resources;
 

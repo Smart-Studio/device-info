@@ -18,6 +18,7 @@ package com.smartstudio.deviceinfo.injection.modules;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 
 import com.crashlytics.android.Crashlytics;
@@ -70,5 +71,13 @@ public class AppModule {
         return new Crashlytics();
     }
 
+    @Provides
+    Intent provideIntent() {
+        return new Intent();
+    }
 
+    @Provides
+    StringBuilder provideStringBuilder() {
+        return new StringBuilder();
+    }
 }

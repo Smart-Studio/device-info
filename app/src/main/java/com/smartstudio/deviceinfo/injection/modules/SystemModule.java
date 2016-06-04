@@ -8,7 +8,7 @@ import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFragment;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
-import com.smartstudio.deviceinfo.logic.SystemInfoProvider;
+import com.smartstudio.deviceinfo.logic.dashboard.SystemInfoProvider;
 import com.smartstudio.deviceinfo.logic.SystemInfoProviderImpl;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.dashboard.system.SystemView;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.logic;
+package com.smartstudio.deviceinfo.logic.attributions;
 
 import com.smartstudio.deviceinfo.model.Attribution;
 
