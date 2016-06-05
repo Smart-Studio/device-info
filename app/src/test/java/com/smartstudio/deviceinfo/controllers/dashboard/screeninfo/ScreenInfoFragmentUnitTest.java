@@ -55,11 +55,13 @@ public class ScreenInfoFragmentUnitTest {
     @ForFabric
     ScreenInfoAnalytics mFabricAnalytics;
 
+    private ScreenInfoFragmentForTest mFragment;
+
     @Before
     public void setUp() throws Exception {
-        ScreenInfoFragmentForTest fragment = new ScreenInfoFragmentForTest();
-        SupportFragmentTestUtil.startFragment(fragment);
-        fragment.mComponent.inject(this);
+        mFragment = new ScreenInfoFragmentForTest();
+        SupportFragmentTestUtil.startFragment(mFragment);
+        mFragment.mComponent.inject(this);
     }
 
     @Test
@@ -78,5 +80,14 @@ public class ScreenInfoFragmentUnitTest {
     public void testOnResume() throws Exception {
         verify(mAnalytics).reportScreen();
         verify(mFabricAnalytics).reportScreen();
+    }
+
+    @Test
+    public void testOnShareClicked() throws Exception {
+        mFragment.onSharedClicked();
+
+        verify(mView).showShareDialog();
+        verify(mAnalytics).reportShare();
+        verify(mFabricAnalytics).reportShare();
     }
 }

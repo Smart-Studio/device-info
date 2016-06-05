@@ -1,7 +1,9 @@
 package com.smartstudio.deviceinfo.analytics.dashboard.screeninfo;
 
+import com.crashlytics.android.answers.CustomEvent;
 import com.smartstudio.deviceinfo.analytics.FabricAnalyticsManager;
 import com.smartstudio.deviceinfo.analytics.FabricAnalyticsManagerTest;
+import com.smartstudio.deviceinfo.analytics.dashboard.system.SystemFabricAnalytics;
 
 import org.junit.Test;
 
@@ -25,6 +27,13 @@ public class ScreenInfoFabricAnalyticsTest extends FabricAnalyticsManagerTest {
         verify(mContentViewEvent).putContentName(screenName);
         verify(mContentViewEvent).putContentId(String.valueOf(screenName.hashCode()));
         verify(mContentViewEvent).putContentType(ScreenInfoFabricAnalytics.CONTENT_TYPE);
+    }
+
+    @Test
+    public void testShare() throws Exception {
+        CustomEvent event = mockCustomEvent();
+        mAnalytics.reportShare();
+        verifyEvent(event, ScreenInfoFabricAnalytics.SHARE);
     }
 
     @Override

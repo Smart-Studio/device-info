@@ -17,22 +17,31 @@
 package com.smartstudio.deviceinfo.ui.dashboard;
 
 import android.content.res.Resources;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.controllers.dashboard.DashboardContentController;
+import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoFragment;
+import com.smartstudio.deviceinfo.controllers.dashboard.system.SystemFragment;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(PowerMockRunner.class)
 public class DashboardPagerAdapterImplTest {
     private static final String TITLE_SCREEN = "screen";
     private static final int POS_INVALID = 860;
@@ -50,8 +59,15 @@ public class DashboardPagerAdapterImplTest {
     }
 
     @Test
-    public void testGetItem() throws Exception {
-        mAdapter.getItem(DashboardPagerAdapterImpl.POS_SCREEN_TAB);
+    public void testGetItemScreenInfo() throws Exception {
+        Fragment fragment = mAdapter.getItem(DashboardPagerAdapterImpl.POS_SCREEN_TAB);
+        assertThat(fragment).isInstanceOf(ScreenInfoFragment.class);
+    }
+
+    @Test
+    public void testGetItemSystem() throws Exception {
+        Fragment fragment = mAdapter.getItem(DashboardPagerAdapterImpl.POS_SYSTEM_TAB);
+        assertThat(fragment).isInstanceOf(SystemFragment.class);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -60,7 +76,7 @@ public class DashboardPagerAdapterImplTest {
     }
 
     @Test
-    public void testGetPageTitle() throws Exception {
+    public void testGetPageTitleScreenInfo() throws Exception {
         when(mMockResources.getString(R.string.tab_screen_info)).thenReturn(TITLE_SCREEN);
 
         CharSequence title = mAdapter.getPageTitle(DashboardPagerAdapterImpl.POS_SCREEN_TAB);
@@ -70,7 +86,28 @@ public class DashboardPagerAdapterImplTest {
     }
 
     @Test
+    public void testGetPageTitleSystem() throws Exception {
+        when(mMockResources.getString(R.string.tab_system)).thenReturn(TITLE_SCREEN);
+
+        CharSequence title = mAdapter.getPageTitle(DashboardPagerAdapterImpl.POS_SYSTEM_TAB);
+
+        verify(mMockResources).getString(R.string.tab_system);
+        assertThat(title).isEqualTo(TITLE_SCREEN);
+    }
+
+    @Test
     public void testGetCount() throws Exception {
         assertThat(mAdapter.getCount()).isEqualTo(DashboardPagerAdapterImpl.PAGE_COUNT);
+    }
+
+    @Test
+    public void testGetItemAt() throws Exception {
+        mAdapter = spy(mAdapter);
+        DashboardContentController mockContentController = mock(DashboardContentController.class);
+        doReturn(mockContentController).when(mAdapter).instantiateItem(eq(null), anyInt());
+
+        mAdapter.getItemAt(anyInt());
+
+        verify(mAdapter).getItemAt(anyInt());
     }
 }

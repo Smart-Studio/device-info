@@ -30,7 +30,7 @@ import javax.inject.Inject;
 public class DashboardPagerAdapterImpl extends DashboardPagerAdapter {
     static final int PAGE_COUNT = 2;
     static final int POS_SCREEN_TAB = 0;
-    static final int POS_OS_TAB = 1;
+    static final int POS_SYSTEM_TAB = 1;
 
     private final Resources mResources;
 
@@ -45,7 +45,7 @@ public class DashboardPagerAdapterImpl extends DashboardPagerAdapter {
         switch (position) {
             case POS_SCREEN_TAB:
                 return ScreenInfoFragment.newInstance();
-            case POS_OS_TAB:
+            case POS_SYSTEM_TAB:
                 return SystemFragment.newInstance();
             default:
                 throw new IllegalStateException("Page not supported");
@@ -60,7 +60,7 @@ public class DashboardPagerAdapterImpl extends DashboardPagerAdapter {
             case POS_SCREEN_TAB:
                 titleResId = R.string.tab_screen_info;
                 break;
-            case POS_OS_TAB:
+            case POS_SYSTEM_TAB:
                 titleResId = R.string.tab_system;
                 break;
         }
@@ -74,7 +74,7 @@ public class DashboardPagerAdapterImpl extends DashboardPagerAdapter {
     }
 
     @Override
-    public DashboardContentController getCurrent(int position) {
+    public DashboardContentController getItemAt(int position) {
         return (DashboardContentController) instantiateItem(null, position);
     }
 }

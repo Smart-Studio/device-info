@@ -63,6 +63,6 @@ public class DashboardViewImpl extends BaseActionBarView implements DashboardVie
 
     @Override
     public void showShareDialog() {
-        mPagerAdapter.getCurrent(mPager.getCurrentItem()).onSharedClicked();
+        mPagerAdapter.getItemAt(mPager.getCurrentItem()).onSharedClicked();
     }
 }

@@ -61,6 +61,16 @@ public class SystemViewImplTest extends BaseViewImplTest {
         verifyViewMocks();
     }
 
+    @Test
+    public void testShowShareDialog() throws Exception {
+        SystemInfo info = mock(SystemInfo.class);
+        mView.showSystemInfo(info);
+
+        mView.showShareDialog();
+
+        verify(mMockShareManager).share(info);
+    }
+
     private void mockViews() {
         mView.mViewOs = mockPropertyLayout();
         mView.mViewOsCodename = mockPropertyLayout();

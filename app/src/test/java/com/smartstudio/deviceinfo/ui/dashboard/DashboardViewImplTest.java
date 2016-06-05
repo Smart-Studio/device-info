@@ -21,6 +21,7 @@ import android.support.v4.view.ViewPager;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.ToolbarController;
+import com.smartstudio.deviceinfo.controllers.dashboard.DashboardContentController;
 import com.smartstudio.deviceinfo.controllers.dashboard.DashboardController;
 import com.smartstudio.deviceinfo.ui.ActionBarViewImplTest;
 import com.smartstudio.deviceinfo.ui.BaseView;
@@ -35,8 +36,10 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import butterknife.ButterKnife;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.powermock.api.mockito.PowerMockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ButterKnife.class)
@@ -77,6 +80,18 @@ public class DashboardViewImplTest extends ActionBarViewImplTest {
         super.testInit();
         verify(mView.mPager).setAdapter(mMockAdapter);
         verify(mView.mTabs).setupWithViewPager(mView.mPager);
+    }
+
+    @Test
+    public void testShowShareDialog() throws Exception {
+        initMocks();
+        DashboardContentController mockController = mock(DashboardContentController.class);
+        when(mMockAdapter.getItemAt(anyInt())).thenReturn(mockController);
+
+        mView.showShareDialog();
+
+        verify(mMockAdapter).getItemAt(anyInt());
+        verify(mockController).onSharedClicked();
     }
 
     @Override

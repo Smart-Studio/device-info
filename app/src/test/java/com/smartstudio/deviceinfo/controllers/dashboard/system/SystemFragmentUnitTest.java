@@ -38,12 +38,13 @@ public class SystemFragmentUnitTest {
     @ForFabric
     SystemAnalytics mFabricAnalytics;
 
+    private SystemFragmentForTest mFragment;
 
     @Before
     public void setUp() throws Exception {
-        SystemFragmentForTest fragment = new SystemFragmentForTest();
-        SupportFragmentTestUtil.startFragment(fragment);
-        fragment.mComponent.inject(this);
+        mFragment = new SystemFragmentForTest();
+        SupportFragmentTestUtil.startFragment(mFragment);
+        mFragment.mComponent.inject(this);
     }
 
     @Test
@@ -62,5 +63,14 @@ public class SystemFragmentUnitTest {
     public void testOnResume() throws Exception {
         verify(mAnalytics).reportScreen();
         verify(mFabricAnalytics).reportScreen();
+    }
+
+    @Test
+    public void testOnShareClicked() throws Exception {
+        mFragment.onSharedClicked();
+
+        verify(mView).showShareDialog();
+        verify(mAnalytics).reportShare();
+        verify(mFabricAnalytics).reportShare();
     }
 }

@@ -27,5 +27,5 @@ public abstract class DashboardPagerAdapter extends FragmentStatePagerAdapter{
         super(fm);
     }
 
-    public abstract DashboardContentController getCurrent(int position);
+    public abstract DashboardContentController getItemAt(int position);
 }

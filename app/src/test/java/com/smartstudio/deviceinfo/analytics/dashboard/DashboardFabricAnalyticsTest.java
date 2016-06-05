@@ -28,6 +28,13 @@ public class DashboardFabricAnalyticsTest extends FabricAnalyticsManagerTest {
     }
 
     @Test
+    public void testReportShareTap() throws Exception {
+        CustomEvent event = mockCustomEvent();
+        mAnalytics.reportShareTap();
+        verifyEvent(event, DashboardFabricAnalytics.TAP_SHARE);
+    }
+
+    @Test
     public void testReportAboutTap() throws Exception {
         CustomEvent event = mockCustomEvent();
         mAnalytics.reportAboutTap();

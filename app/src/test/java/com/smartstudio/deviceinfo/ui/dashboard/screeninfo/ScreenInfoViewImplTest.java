@@ -96,6 +96,7 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     public void setUp() throws Exception {
         mView = new ScreenInfoViewImpl(mMockShareManager, mMockScreenInfo);
         super.setUp();
+        mockViews();
     }
 
     @Override
@@ -112,7 +113,6 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     public void testShowScreenInfo() throws Exception {
         mockStatic(Utils.class);
         mockUtils(DENSITY_DOWN);
-        mockViews();
         ScreenInfo info = mockScreenInfo(INCHES_DOWN, DENSITY_DOWN, DENSITY_X_DOWN, DENSITY_Y_DOWN);
         mView.showScreenInfo(info);
         verifyViewMocks(INCHES_ROUND_DOWN, DENSITY_ROUND_DOWN, DENSITY_X_ROUND_DOWN, DENSITY_Y_ROUND_DOWN);
@@ -121,7 +121,6 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     @Test
     public void testShowScreenInfoRoundUp() throws Exception {
         mockStatic(Utils.class);
-        mockViews();
         mockUtils(DENSITY_UP);
         ScreenInfo info = mockScreenInfo(INCHES_UP, DENSITY_UP, DENSITY_X_UP, DENSITY_Y_UP);
         mView.showScreenInfo(info);
@@ -132,12 +131,21 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     public void testShowScreenInfoNoNavigationBar() throws Exception {
         mockStatic(Utils.class);
         mockUtils(DENSITY_UP);
-        mockViews();
         ScreenInfo info = mockScreenInfo(INCHES_UP, DENSITY_UP, DENSITY_X_UP, DENSITY_Y_UP);
         when(info.getNavigationBarHeight()).thenReturn(0);
         mView.showScreenInfo(info);
         verify(mView.mViewScreenNavigation).setVisibility(View.GONE);
 
+    }
+
+    @Test
+    public void testShowShareDialog() throws Exception {
+        ScreenInfo info = mock(ScreenInfo.class);
+        mView.showScreenInfo(info);
+
+        mView.showShareDialog();
+
+        verify(mMockShareManager).share(mMockScreenInfo);
     }
 
     private void mockUtils(double density) {

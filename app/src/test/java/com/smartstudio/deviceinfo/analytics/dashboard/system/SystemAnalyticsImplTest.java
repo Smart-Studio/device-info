@@ -16,6 +16,13 @@ public class SystemAnalyticsImplTest extends AnalyticsManagerImplTest {
         assertThat(screenName).isEqualTo(SystemAnalyticsImpl.SCREEN_NAME);
     }
 
+    @Test
+    public void testShare() throws Exception {
+        setScreenName();
+        mAnalytics.reportShare();
+        verifyEvent(SystemAnalyticsImpl.SCREEN_NAME, SystemAnalyticsImpl.SHARE);
+    }
+
     @Override
     protected AnalyticsManagerImpl createAnalyticsManager() {
         mAnalytics = new SystemAnalyticsImpl(mTracker, mScreenViewBuilderProvider, mEventBuilderProvider);
