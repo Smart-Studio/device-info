@@ -52,13 +52,14 @@ public class DashboardActivity extends BaseActivity implements DashboardControll
         switch (item.getItemId()) {
             case R.id.share:
                 mView.showShareDialog();
+                mAnalytics.reportShareTap();
+                mFabricAnalytics.reportShareTap();
                 break;
             case R.id.about:
                 AboutActivity.launch(this);
                 mAnalytics.reportAboutTap();
                 mFabricAnalytics.reportAboutTap();
                 break;
-
         }
         return true;
     }

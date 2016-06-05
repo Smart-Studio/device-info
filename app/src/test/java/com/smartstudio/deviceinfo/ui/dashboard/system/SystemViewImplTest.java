@@ -1,6 +1,7 @@
 package com.smartstudio.deviceinfo.ui.dashboard.system;
 
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.logic.dashboard.system.SystemInfoShareManager;
 import com.smartstudio.deviceinfo.model.SystemInfo;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.BaseViewImplTest;
@@ -8,6 +9,7 @@ import com.smartstudio.deviceinfo.ui.BaseViewImplTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -31,11 +33,13 @@ public class SystemViewImplTest extends BaseViewImplTest {
     private static final String BOOTLOADER = "BHZ10m";
     private static final String KERNEL = "Linux 3.10";
 
+    @Mock
+    private SystemInfoShareManager mMockShareManager;
     private SystemViewImpl mView;
 
     @Before
     public void setUp() throws Exception {
-        mView = new SystemViewImpl();
+        mView = new SystemViewImpl(mMockShareManager);
         super.setUp();
         mockViews();
     }

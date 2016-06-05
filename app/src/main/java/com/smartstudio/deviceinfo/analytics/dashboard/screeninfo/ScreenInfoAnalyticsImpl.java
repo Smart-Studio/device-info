@@ -9,6 +9,7 @@ import javax.inject.Provider;
 
 public class ScreenInfoAnalyticsImpl extends AnalyticsManagerImpl implements ScreenInfoAnalytics {
     static final String SCREEN_NAME = "Screen info";
+    static final String SHARE = "Share screen info";
 
     /**
      * Creates an instance of the AnalyticsManagerImpl
@@ -30,4 +31,8 @@ public class ScreenInfoAnalyticsImpl extends AnalyticsManagerImpl implements Scr
     }
 
 
+    @Override
+    public void reportShare() {
+        reportEvent(SHARE);
+    }
 }

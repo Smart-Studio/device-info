@@ -20,7 +20,9 @@ import android.view.View;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoController;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoShareManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.model.ScreenInfoViewModel;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.BaseViewImplTest;
 import com.smartstudio.deviceinfo.ui.PropertyLayout;
@@ -35,7 +37,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import butterknife.ButterKnife;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -83,13 +84,17 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     private static final int CONTENT_HEIGHT_DP = 567;
 
     @Mock
-    private ScreenInfoController mController;
+    private ScreenInfoController mMockController;
+    @Mock
+    private ScreenInfoShareManager mMockShareManager;
+    @Mock
+    private ScreenInfoViewModel mMockScreenInfo;
 
     private ScreenInfoViewImpl mView;
 
     @Before
     public void setUp() throws Exception {
-        mView = new ScreenInfoViewImpl();
+        mView = new ScreenInfoViewImpl(mMockShareManager, mMockScreenInfo);
         super.setUp();
     }
 

@@ -67,6 +67,8 @@ public class SystemFragment extends BaseFragment implements SystemController {
 
     @Override
     public void onSharedClicked() {
-
+        mView.showShareDialog();
+        mAnalytics.reportShare();
+        mFabricAnalytics.reportShare();
     }
 }

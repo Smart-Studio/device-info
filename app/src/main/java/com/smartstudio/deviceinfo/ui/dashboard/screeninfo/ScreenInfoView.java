@@ -18,17 +18,16 @@ package com.smartstudio.deviceinfo.ui.dashboard.screeninfo;
 
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.ui.BaseView;
+import com.smartstudio.deviceinfo.ui.dashboard.DashboardContentView;
 
 /**
  * Manages all the view logic for the screen info screen
  **/
-public interface ScreenInfoView extends BaseView {
+public interface ScreenInfoView extends DashboardContentView {
     /**
      * Shows the screen info
      *
      * @param screenInfo Contains the device screen info
      **/
     void showScreenInfo(ScreenInfo screenInfo);
-
-    void showShareDialog();
 }

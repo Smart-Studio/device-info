@@ -10,6 +10,7 @@ import javax.inject.Provider;
 
 public class SystemAnalyticsImpl extends AnalyticsManagerImpl implements SystemAnalytics {
     static final String SCREEN_NAME = "System info";
+    static final String SHARE = "Share system info";
 
     /**
      * Creates an instance of the AnalyticsManagerImpl
@@ -27,5 +28,10 @@ public class SystemAnalyticsImpl extends AnalyticsManagerImpl implements SystemA
     @Override
     protected String getScreenName() {
         return SCREEN_NAME;
+    }
+
+    @Override
+    public void reportShare() {
+        reportEvent(SHARE);
     }
 }

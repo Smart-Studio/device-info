@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="android_title">Android</string>
     <string name="os_version">Android version</string>
     <string name="os_codename">Android codename</string>
     <string name="os_api">Android API</string>
     <string name="java_vm">Java VM</string>
+    <string name="build_id">Build Id</string>
+    <string name="others">Others</string>
     <string name="abi">ABI</string>
     <string name="bootloader">Bootloader</string>
     <string name="opengl">OpenGL ES</string>
-    <string name="build_id">Build Id</string>
     <string name="kernel">Kernel</string>
+    <string name="share_system_title">Share system info</string>
 </resources>

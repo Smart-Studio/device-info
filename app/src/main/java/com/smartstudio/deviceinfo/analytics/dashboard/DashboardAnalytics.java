@@ -2,7 +2,12 @@ package com.smartstudio.deviceinfo.analytics.dashboard;
 
 import com.smartstudio.deviceinfo.analytics.AnalyticsManager;
 
-public interface DashboardAnalytics extends AnalyticsManager{
+public interface DashboardAnalytics extends AnalyticsManager {
+    /**
+     * Reports when share is tapped
+     **/
+    void reportShareTap();
+
     /**
      * Reports when the about menu is tapped
      **/

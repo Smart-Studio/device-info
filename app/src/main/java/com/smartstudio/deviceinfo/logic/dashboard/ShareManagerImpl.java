@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.StringRes;
 
-public abstract class SharerImpl<SHARE_TYPE> implements Sharer<SHARE_TYPE> {
+public abstract class ShareManagerImpl<SHARE_TYPE> implements ShareManager<SHARE_TYPE> {
     private static final String CONTENT_TYPE = "text/plain";
     private static final String NEW_LINE = "\n";
     private static final String TAB = "\t\t";
@@ -14,7 +14,7 @@ public abstract class SharerImpl<SHARE_TYPE> implements Sharer<SHARE_TYPE> {
     private final StringBuilder mTextBuilder;
     protected SHARE_TYPE mSharedObject;
 
-    public SharerImpl(Intent intent, Context context, StringBuilder textBuilder) {
+    public ShareManagerImpl(Intent intent, Context context, StringBuilder textBuilder) {
         mIntent = intent;
         mIntent.setAction(Intent.ACTION_SEND);
         mContext = context;

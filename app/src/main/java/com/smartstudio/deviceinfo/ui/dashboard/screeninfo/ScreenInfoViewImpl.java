@@ -19,7 +19,7 @@ package com.smartstudio.deviceinfo.ui.dashboard.screeninfo;
 import android.view.View;
 
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoSharer;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoShareManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.model.ScreenInfoViewModel;
 import com.smartstudio.deviceinfo.ui.BaseViewImpl;
@@ -79,12 +79,12 @@ public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
     @BindView(R.id.view_screen_content_height)
     PropertyLayout mViewContentHeight;
 
-    private final ScreenInfoSharer mSharer;
+    private final ScreenInfoShareManager mShareManager;
     private final ScreenInfoViewModel mScreenInfo;
 
     @Inject
-    public ScreenInfoViewImpl(ScreenInfoSharer sharer, ScreenInfoViewModel screenInfo) {
-        mSharer = sharer;
+    public ScreenInfoViewImpl(ScreenInfoShareManager shareManager, ScreenInfoViewModel screenInfo) {
+        mShareManager = shareManager;
         mScreenInfo = screenInfo;
     }
 
@@ -108,7 +108,6 @@ public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
         setStatusBarHeight(density, screenInfo);
         setNavBarHeight(density, screenInfo);
         setScreenSize(screenInfo);
-        setScreenSize(screenInfo);
         setInches(screenInfo);
         setDensity(screenInfo);
         setDensityCode(screenInfo);
@@ -122,7 +121,7 @@ public class ScreenInfoViewImpl extends BaseViewImpl implements ScreenInfoView {
 
     @Override
     public void showShareDialog() {
-        mSharer.share(mScreenInfo);
+        mShareManager.share(mScreenInfo);
     }
 
     private void setModel(ScreenInfo screenInfo) {

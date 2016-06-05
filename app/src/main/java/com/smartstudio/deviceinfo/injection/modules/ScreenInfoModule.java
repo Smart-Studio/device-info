@@ -30,8 +30,8 @@ import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
 import com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl;
 import com.smartstudio.deviceinfo.logic.dashboard.ScreenInfoManager;
-import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoSharer;
-import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoSharerImpl;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoShareManager;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoShareManagerImpl;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.model.ScreenInfoViewModel;
 import com.smartstudio.deviceinfo.ui.BaseView;
@@ -113,8 +113,8 @@ public class ScreenInfoModule {
 
     @Provides
     @PerFragment
-    ScreenInfoSharer provideScreenInfoSharer(ScreenInfoSharerImpl sharer) {
-        return sharer;
+    ScreenInfoShareManager provideScreenInfoSharer(ScreenInfoShareManagerImpl shareManager) {
+        return shareManager;
     }
 
     @Provides

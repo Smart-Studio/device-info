@@ -30,7 +30,6 @@ import com.smartstudio.deviceinfo.injection.Injector;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.logic.dashboard.ScreenInfoManager;
-import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoSharer;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.ui.dashboard.screeninfo.ScreenInfoView;
 
@@ -88,5 +87,7 @@ public class ScreenInfoFragment extends BaseFragment implements ScreenInfoContro
     @Override
     public void onSharedClicked() {
         mView.showShareDialog();
+        mAnalytics.reportShare();
+        mFabricAnalytics.reportShare();
     }
 }

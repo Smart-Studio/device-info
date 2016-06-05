@@ -8,8 +8,11 @@ import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFragment;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
-import com.smartstudio.deviceinfo.logic.dashboard.SystemInfoProvider;
 import com.smartstudio.deviceinfo.logic.SystemInfoProviderImpl;
+import com.smartstudio.deviceinfo.logic.dashboard.SystemInfoProvider;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoShareManager;
+import com.smartstudio.deviceinfo.logic.dashboard.system.SystemInfoShareManager;
+import com.smartstudio.deviceinfo.logic.dashboard.system.SystemInfoShareManagerImpl;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.dashboard.system.SystemView;
 import com.smartstudio.deviceinfo.ui.dashboard.system.SystemViewImpl;
@@ -63,5 +66,11 @@ public class SystemModule {
     @ForFabric
     SystemAnalytics provideFabricAnalytics(SystemFabricAnalytics analytics) {
         return analytics;
+    }
+
+    @Provides
+    @PerFragment
+    SystemInfoShareManager provideSharer(SystemInfoShareManagerImpl shareManager) {
+        return shareManager;
     }
 }

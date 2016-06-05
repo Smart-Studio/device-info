@@ -5,15 +5,15 @@ import android.content.Intent;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
-import com.smartstudio.deviceinfo.logic.dashboard.SharerImpl;
+import com.smartstudio.deviceinfo.logic.dashboard.ShareManagerImpl;
 import com.smartstudio.deviceinfo.model.ScreenInfoViewModel;
 
 import javax.inject.Inject;
 
-public class ScreenInfoSharerImpl extends SharerImpl<ScreenInfoViewModel> implements ScreenInfoSharer {
+public class ScreenInfoShareManagerImpl extends ShareManagerImpl<ScreenInfoViewModel> implements ScreenInfoShareManager {
 
     @Inject
-    public ScreenInfoSharerImpl(Intent intent, @ForActivity Context context, StringBuilder textBuilder) {
+    public ScreenInfoShareManagerImpl(Intent intent, @ForActivity Context context, StringBuilder textBuilder) {
         super(intent, context, textBuilder);
     }
 
