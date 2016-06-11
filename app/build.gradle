@@ -161,7 +161,7 @@ android {
 genymotion {
     devices {
         nexus5 {
-            template "Google Nexus 5 - 5.0.0 - API 19 - 1080x1920"
+            template "Google Nexus 5 - 5.0.0 - API 21 - 1080x1920"
         }
         lgOptimusL3II {
             template "LG Optimus L3 II - 4.1.1 - API 16 - 240x320"
