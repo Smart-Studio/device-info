@@ -6,7 +6,7 @@ import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.analytics.dashboard.system.SystemAnalytics;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
-import com.smartstudio.deviceinfo.logic.dashboard.SystemInfoProvider;
+import com.smartstudio.deviceinfo.logic.dashboard.system.SystemInfoProvider;
 import com.smartstudio.deviceinfo.model.SystemInfo;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
 import com.smartstudio.deviceinfo.ui.dashboard.system.SystemView;

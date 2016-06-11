@@ -28,6 +28,7 @@ import android.view.Display;
 import android.view.ViewConfiguration;
 
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoManagerImpl;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.utils.TestUtils;
 
@@ -35,11 +36,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 import static org.assertj.core.api.Assertions.assertThat;

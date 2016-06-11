@@ -1,4 +1,4 @@
-package com.smartstudio.deviceinfo.logic;
+package com.smartstudio.deviceinfo.logic.dashboard.system;
 
 import android.app.ActivityManager;
 import android.app.Application;
@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Build;
 
 import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
-import com.smartstudio.deviceinfo.logic.dashboard.SystemInfoProvider;
 import com.smartstudio.deviceinfo.model.SystemInfo;
 
 import javax.inject.Inject;

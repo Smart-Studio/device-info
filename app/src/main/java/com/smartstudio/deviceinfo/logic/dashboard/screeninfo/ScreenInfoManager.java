@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.logic.dashboard;
+package com.smartstudio.deviceinfo.logic.dashboard.screeninfo;
 
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 

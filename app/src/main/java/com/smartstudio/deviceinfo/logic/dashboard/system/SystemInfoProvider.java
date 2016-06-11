@@ -1,4 +1,4 @@
-package com.smartstudio.deviceinfo.logic.dashboard;
+package com.smartstudio.deviceinfo.logic.dashboard.system;
 
 import com.smartstudio.deviceinfo.model.SystemInfo;
 
