@@ -166,6 +166,8 @@ genymotion {
         nexus6 {
             template "Google Nexus 6 - 6.0.0 - API 23 - 1440x2560"
         }
+    }.each {
+        it.deleteWhenFinish false // keep the device after test
     }
 }
 
