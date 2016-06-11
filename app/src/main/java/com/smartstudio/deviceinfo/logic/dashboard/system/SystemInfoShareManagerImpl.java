@@ -14,13 +14,13 @@ import javax.inject.Inject;
 public class SystemInfoShareManagerImpl extends ShareManagerImpl<SystemInfo> implements SystemInfoShareManager {
 
     @Inject
-    public SystemInfoShareManagerImpl(Intent intent, @ForActivity Context context, StringBuilder textBuilder) {
-        super(intent, context, textBuilder);
+    public SystemInfoShareManagerImpl(Intent intent, @ForActivity Context context) {
+        super(intent, context);
     }
 
     @Override
     protected String getSubject() {
-        return Build.DEVICE;
+        return Build.MODEL;
     }
 
     @Override

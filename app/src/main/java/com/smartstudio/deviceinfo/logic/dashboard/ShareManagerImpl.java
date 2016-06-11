@@ -5,32 +5,31 @@ import android.content.Intent;
 import android.support.annotation.StringRes;
 
 public abstract class ShareManagerImpl<SHARE_TYPE> implements ShareManager<SHARE_TYPE> {
-    private static final String CONTENT_TYPE = "text/plain";
-    private static final String NEW_LINE = "\n";
-    private static final String TAB = "\t\t";
+    public static final String CONTENT_TYPE = "text/plain";
+    public static final String NEW_LINE = "\n";
+    public static final String TAB = "\t\t";
 
     private final Intent mIntent;
     protected final Context mContext;
-    private final StringBuilder mTextBuilder;
+    private String mText = "";
     protected SHARE_TYPE mSharedObject;
 
-    public ShareManagerImpl(Intent intent, Context context, StringBuilder textBuilder) {
+    public ShareManagerImpl(Intent intent, Context context) {
         mIntent = intent;
         mIntent.setAction(Intent.ACTION_SEND);
         mContext = context;
-        mTextBuilder = textBuilder;
     }
 
     @Override
     public void share(SHARE_TYPE share) {
-        mTextBuilder.setLength(0);
+        mText = "";
         mSharedObject = share;
         buildText();
-        launchShare(getTitle(), getSubject(), mTextBuilder.toString());
+        launchShare(getTitle(), getSubject(), mText);
         mSharedObject = null;
     }
 
-    protected void launchShare(String title, String subject, String text) {
+    void launchShare(String title, String subject, String text) {
         mIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
         mIntent.putExtra(Intent.EXTRA_TEXT, text);
         mIntent.setType(CONTENT_TYPE);
@@ -44,21 +43,14 @@ public abstract class ShareManagerImpl<SHARE_TYPE> implements ShareManager<SHARE
     protected abstract String getTitle();
 
     protected void addTitle(String title) {
-        mTextBuilder.append(NEW_LINE)
-                .append(title)
-                .append(NEW_LINE)
-                .append(NEW_LINE);
+        mText += NEW_LINE + title + NEW_LINE + NEW_LINE;
     }
 
     protected void addProperty(String name, String value) {
-        mTextBuilder.append(name)
-                .append(TAB)
-                .append(value)
-                .append(NEW_LINE);
+        mText += name + TAB + value + NEW_LINE;
     }
 
     protected String getString(@StringRes int stringResId) {
         return mContext.getString(stringResId);
     }
-
 }

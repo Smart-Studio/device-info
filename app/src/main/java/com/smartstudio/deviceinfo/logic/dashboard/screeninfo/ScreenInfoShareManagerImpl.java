@@ -13,8 +13,8 @@ import javax.inject.Inject;
 public class ScreenInfoShareManagerImpl extends ShareManagerImpl<ScreenInfoViewModel> implements ScreenInfoShareManager {
 
     @Inject
-    public ScreenInfoShareManagerImpl(Intent intent, @ForActivity Context context, StringBuilder textBuilder) {
-        super(intent, context, textBuilder);
+    public ScreenInfoShareManagerImpl(Intent intent, @ForActivity Context context) {
+        super(intent, context);
     }
 
     @Override
@@ -28,6 +28,7 @@ public class ScreenInfoShareManagerImpl extends ShareManagerImpl<ScreenInfoViewM
         addProperty(getString(R.string.model), mSharedObject.getModel());
         addProperty(getString(R.string.manufacturer), mSharedObject.getManufacturer());
         addTitle(getString(R.string.screen_density_title));
+        addProperty(getString(R.string.screen_density), mSharedObject.getDensity());
         addProperty(getString(R.string.screen_density_code), mSharedObject.getDensityCode());
         addProperty(getString(R.string.screen_density_x), mSharedObject.getDensityX());
         addProperty(getString(R.string.screen_density_y), mSharedObject.getDensityY());
