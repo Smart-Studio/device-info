@@ -161,10 +161,10 @@ android {
 genymotion {
     devices {
         nexus5 {
-            template "Google Nexus 5 - 4.4.4 - API 19 - 1080x1920"
+            template "Google Nexus 5 - 5.0.0 - API 19 - 1080x1920"
         }
-        nexus6 {
-            template "Google Nexus 6 - 6.0.0 - API 23 - 1440x2560"
+        lgOptimusL3II {
+            template "LG Optimus L3 II - 4.1.1 - API 16 - 240x320"
         }
     }.each {
         it.deleteWhenFinish false // keep the device after test
