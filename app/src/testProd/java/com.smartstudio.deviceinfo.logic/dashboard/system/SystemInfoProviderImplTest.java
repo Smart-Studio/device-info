@@ -1,4 +1,4 @@
-package com.smartstudio.deviceinfo.logic;
+package com.smartstudio.deviceinfo.logic.dashboard.system;
 
 import android.app.ActivityManager;
 import android.app.Application;
