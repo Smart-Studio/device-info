@@ -2,9 +2,12 @@ package com.smartstudio.deviceinfo.injection.modules;
 
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFragment;
 import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
+import com.smartstudio.deviceinfo.logic.dashboard.battery.BatteryShareManager;
+import com.smartstudio.deviceinfo.logic.dashboard.battery.BatteryShareManagerImpl;
 import com.smartstudio.deviceinfo.logic.dashboard.battery.BatteryStateProvider;
 import com.smartstudio.deviceinfo.logic.dashboard.battery.BatteryStateProviderImpl;
 import com.smartstudio.deviceinfo.model.BatteryState;
+import com.smartstudio.deviceinfo.model.BatteryViewModel;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.dashboard.battery.BatteryView;
 import com.smartstudio.deviceinfo.ui.dashboard.battery.BatteryViewImpl;
@@ -42,5 +45,16 @@ public class BatteryModule {
     @Provides
     BatteryState provideBatteryState() {
         return new BatteryState();
+    }
+
+    @Provides
+    @PerFragment
+    BatteryShareManager provideShareManager(BatteryShareManagerImpl shareManager) {
+        return shareManager;
+    }
+
+    @Provides
+    BatteryViewModel provideBatteryViewModel(){
+        return new BatteryViewModel();
     }
 }

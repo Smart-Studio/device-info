@@ -1,11 +1,6 @@
 package com.smartstudio.deviceinfo.controllers.dashboard.battery;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.smartstudio.deviceinfo.controllers.BaseFragment;
 import com.smartstudio.deviceinfo.controllers.dashboard.DashboardActivity;
@@ -24,9 +19,11 @@ public class BatteryFragment extends BaseFragment implements BatteryController, 
     }
 
     @Inject
-    BatteryStateProvider mProvider;
-    @Inject
     BatteryView mView;
+
+    @Inject
+    BatteryStateProvider mProvider;
+
 
     @Override
     protected void initComponent(Context context) {
@@ -52,7 +49,7 @@ public class BatteryFragment extends BaseFragment implements BatteryController, 
 
     @Override
     public void onSharedClicked() {
-
+        mView.showShareDialog();
     }
 
     @Override

@@ -5,7 +5,9 @@ import android.os.BatteryManager;
 import android.support.annotation.StringRes;
 
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.logic.dashboard.battery.BatteryShareManager;
 import com.smartstudio.deviceinfo.model.BatteryState;
+import com.smartstudio.deviceinfo.model.BatteryViewModel;
 import com.smartstudio.deviceinfo.ui.BaseViewImpl;
 import com.smartstudio.deviceinfo.ui.PropertyLayout;
 
@@ -40,12 +42,17 @@ public class BatteryViewImpl extends BaseViewImpl implements BatteryView {
     @BindView(R.id.view_battery_voltage)
     PropertyLayout mViewVoltage;
 
+    @Inject
+    BatteryShareManager mShareManager;
+
     private final Resources mResources;
+    private final BatteryViewModel mBatteryInfo;
 
 
     @Inject
-    public BatteryViewImpl(Resources resources) {
+    public BatteryViewImpl(Resources resources, BatteryViewModel batteryInfo) {
         mResources = resources;
+        mBatteryInfo = batteryInfo;
     }
 
     @Override
@@ -56,21 +63,22 @@ public class BatteryViewImpl extends BaseViewImpl implements BatteryView {
     @Override
     public void showBatteryState(BatteryState state) {
         setLevel(state.getLevel());
-        setViewHealth(state.getHealth());
-        setViewSource(state.getSource(), state.isCharging());
-        setViewStatus(state.getStatus());
-        setViewCapacity(state.getCapacity());
-        setViewType(state.getType());
-        setViewTemperature(state.getTemperature());
-        setViewVoltage(state.getVoltage());
+        setHealth(state.getHealth());
+        setSource(state.getSource(), state.isCharging());
+        setStatus(state.getStatus());
+        setCapacity(state.getCapacity());
+        setType(state.getType());
+        setTemperature(state.getTemperature());
+        setVoltage(state.getVoltage());
     }
 
     private void setLevel(int levelValue) {
         String level = levelValue + " %";
         mViewLevel.setValue(level);
+        mBatteryInfo.setLevel(level);
     }
 
-    private void setViewHealth(int healthValue) {
+    private void setHealth(int healthValue) {
         String health;
 
         switch (healthValue) {
@@ -98,11 +106,14 @@ public class BatteryViewImpl extends BaseViewImpl implements BatteryView {
         }
 
         mViewHealth.setValue(health);
+        mBatteryInfo.setHealth(health);
     }
 
-    private void setViewSource(int sourceValue, boolean isCharging) {
+    private void setSource(int sourceValue, boolean isCharging) {
         if (!isCharging) {
-            mViewSource.setValue(getString(R.string.battery_source_battery));
+            String source = getString(R.string.battery_source_battery);
+            mViewSource.setValue(source);
+            mBatteryInfo.setPowerSource(source);
             return;
         }
 
@@ -123,9 +134,10 @@ public class BatteryViewImpl extends BaseViewImpl implements BatteryView {
         }
 
         mViewSource.setValue(source);
+        mBatteryInfo.setPowerSource(source);
     }
 
-    private void setViewStatus(int statusValue) {
+    private void setStatus(int statusValue) {
         String status;
 
         switch (statusValue) {
@@ -147,25 +159,35 @@ public class BatteryViewImpl extends BaseViewImpl implements BatteryView {
         }
 
         mViewStatus.setValue(status);
+        mBatteryInfo.setStatus(status);
     }
 
-    private void setViewCapacity(double capacityValue) {
+    private void setCapacity(double capacityValue) {
         String capacity = String.format(Locale.getDefault(), "%d mAh", (int) capacityValue);
         mViewCapacity.setValue(capacity);
+        mBatteryInfo.setCapacity(capacity);
     }
 
-    private void setViewType(String type) {
+    private void setType(String type) {
         mViewType.setValue(type);
+        mBatteryInfo.setType(type);
     }
 
-    private void setViewTemperature(double temperatureValue) {
+    private void setTemperature(double temperatureValue) {
         String temperature = String.format(Locale.getDefault(), "%.1f ℃", temperatureValue);
         mViewTemperature.setValue(temperature);
+        mBatteryInfo.setTemperature(temperature);
     }
 
-    private void setViewVoltage(int voltageValue) {
+    private void setVoltage(int voltageValue) {
         String voltage = String.format(Locale.getDefault(), "%d mV", voltageValue);
         mViewVoltage.setValue(voltage);
+        mBatteryInfo.setVoltage(voltage);
+    }
+
+    @Override
+    public void showShareDialog() {
+        mShareManager.share(mBatteryInfo);
     }
 
     private String getString(@StringRes int resId) {

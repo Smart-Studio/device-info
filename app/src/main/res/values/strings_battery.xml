@@ -29,4 +29,6 @@
     <string name="battery_full">Full</string>
     <string name="battery_not_charging">Not charging</string>
 
+    <string name="share_battery_title">Share battery state</string>
+    <string name="share_battery_subject">Battery state</string>
 </resources>
