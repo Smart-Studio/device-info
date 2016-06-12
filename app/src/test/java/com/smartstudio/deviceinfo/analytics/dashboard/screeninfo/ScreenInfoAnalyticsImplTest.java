@@ -3,6 +3,7 @@ package com.smartstudio.deviceinfo.analytics.dashboard.screeninfo;
 
 import com.smartstudio.deviceinfo.analytics.AnalyticsManagerImpl;
 import com.smartstudio.deviceinfo.analytics.AnalyticsManagerImplTest;
+import com.smartstudio.deviceinfo.analytics.dashboard.system.SystemAnalyticsImpl;
 
 import org.junit.Test;
 
@@ -16,6 +17,13 @@ public class ScreenInfoAnalyticsImplTest extends AnalyticsManagerImplTest {
     public void testGetScreenName() throws Exception {
         String screenName = mAnalytics.getScreenName();
         assertThat(screenName).isEqualTo(ScreenInfoAnalyticsImpl.SCREEN_NAME);
+    }
+
+    @Test
+    public void testShare() throws Exception {
+        setScreenName();
+        mAnalytics.reportShare();
+        verifyEvent(ScreenInfoAnalyticsImpl.SCREEN_NAME, ScreenInfoAnalyticsImpl.SHARE);
     }
 
     @Override

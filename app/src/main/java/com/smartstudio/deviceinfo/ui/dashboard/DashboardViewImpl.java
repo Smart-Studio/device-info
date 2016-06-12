@@ -17,7 +17,6 @@
 package com.smartstudio.deviceinfo.ui.dashboard;
 
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -62,4 +61,8 @@ public class DashboardViewImpl extends BaseActionBarView implements DashboardVie
     }
 
 
+    @Override
+    public void showShareDialog() {
+        mPagerAdapter.getItemAt(mPager.getCurrentItem()).onSharedClicked();
+    }
 }

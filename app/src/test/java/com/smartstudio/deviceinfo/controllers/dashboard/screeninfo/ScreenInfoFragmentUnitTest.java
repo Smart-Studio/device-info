@@ -22,7 +22,7 @@ import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
-import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
 import com.smartstudio.deviceinfo.ui.dashboard.screeninfo.ScreenInfoView;
@@ -55,11 +55,13 @@ public class ScreenInfoFragmentUnitTest {
     @ForFabric
     ScreenInfoAnalytics mFabricAnalytics;
 
+    private ScreenInfoFragmentForTest mFragment;
+
     @Before
     public void setUp() throws Exception {
-        ScreenInfoFragmentForTest fragment = new ScreenInfoFragmentForTest();
-        SupportFragmentTestUtil.startFragment(fragment);
-        fragment.mComponent.inject(this);
+        mFragment = new ScreenInfoFragmentForTest();
+        SupportFragmentTestUtil.startFragment(mFragment);
+        mFragment.mComponent.inject(this);
     }
 
     @Test
@@ -78,5 +80,14 @@ public class ScreenInfoFragmentUnitTest {
     public void testOnResume() throws Exception {
         verify(mAnalytics).reportScreen();
         verify(mFabricAnalytics).reportScreen();
+    }
+
+    @Test
+    public void testOnShareClicked() throws Exception {
+        mFragment.onSharedClicked();
+
+        verify(mView).showShareDialog();
+        verify(mAnalytics).reportShare();
+        verify(mFabricAnalytics).reportShare();
     }
 }

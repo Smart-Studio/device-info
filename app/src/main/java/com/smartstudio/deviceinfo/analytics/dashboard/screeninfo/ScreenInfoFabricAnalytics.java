@@ -9,9 +9,7 @@ import javax.inject.Inject;
 
 public class ScreenInfoFabricAnalytics extends FabricAnalyticsManager implements ScreenInfoAnalytics {
     static final String SCREEN_NAME = "Screen info";
-    static final String TAP_ABOUT = "Tap menu about";
-    static final String MENU_OPTIONS_OPENED = "Menu options opened";
-    static final String MENU_OPTIONS_CLOSED = "Menu options closed";
+    static final String SHARE = "Share screen info";
     static final String CONTENT_TYPE = "Fragment";
 
     @Inject
@@ -29,5 +27,10 @@ public class ScreenInfoFabricAnalytics extends FabricAnalyticsManager implements
         event.putContentName(mScreenName)
                 .putContentId(String.valueOf(mScreenName.hashCode()))
                 .putContentType(CONTENT_TYPE);
+    }
+
+    @Override
+    public void reportShare() {
+        reportEvent(SHARE);
     }
 }

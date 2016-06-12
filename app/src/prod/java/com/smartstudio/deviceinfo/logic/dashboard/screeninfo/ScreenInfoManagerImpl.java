@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.smartstudio.deviceinfo.logic;
+package com.smartstudio.deviceinfo.logic.dashboard.screeninfo;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -28,7 +28,6 @@ import android.view.ViewConfiguration;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
-import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 
 import java.lang.reflect.InvocationTargetException;

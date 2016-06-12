@@ -1,4 +1,4 @@
-package com.smartstudio.deviceinfo.logic;
+package com.smartstudio.deviceinfo.logic.dashboard.system;
 
 import android.app.ActivityManager;
 import android.app.Application;
@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.ConfigurationInfo;
 import android.os.Build;
 
+import com.smartstudio.deviceinfo.logic.dashboard.system.SystemInfoProviderImpl;
 import com.smartstudio.deviceinfo.model.SystemInfo;
 
 import org.junit.Before;

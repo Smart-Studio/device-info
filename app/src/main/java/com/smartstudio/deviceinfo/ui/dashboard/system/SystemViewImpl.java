@@ -2,6 +2,7 @@ package com.smartstudio.deviceinfo.ui.dashboard.system;
 
 
 import com.smartstudio.deviceinfo.R;
+import com.smartstudio.deviceinfo.logic.dashboard.system.SystemInfoShareManager;
 import com.smartstudio.deviceinfo.model.SystemInfo;
 import com.smartstudio.deviceinfo.ui.BaseViewImpl;
 import com.smartstudio.deviceinfo.ui.PropertyLayout;
@@ -39,9 +40,12 @@ public class SystemViewImpl extends BaseViewImpl implements SystemView {
     @BindView(R.id.view_kernel)
     PropertyLayout mViewKernel;
 
-    @Inject
-    public SystemViewImpl() {
+    private final SystemInfoShareManager mShareManager;
+    private SystemInfo mSystemInfo;
 
+    @Inject
+    public SystemViewImpl(SystemInfoShareManager shareManager) {
+        mShareManager = shareManager;
     }
 
     @Override
@@ -51,6 +55,7 @@ public class SystemViewImpl extends BaseViewImpl implements SystemView {
 
     @Override
     public void showSystemInfo(SystemInfo info) {
+        mSystemInfo = info;
         mViewOs.setValue(info.getAndroidVersion());
         mViewOsCodename.setValue(info.getAndroidCodename());
         mViewOsApi.setValue(String.valueOf(info.getAndroidApi()));
@@ -60,5 +65,10 @@ public class SystemViewImpl extends BaseViewImpl implements SystemView {
         mViewOpenGL.setValue(info.getOpenGlVersion());
         mViewBuildId.setValue(info.getBuildId());
         mViewKernel.setValue(info.getKernel());
+    }
+
+    @Override
+    public void showShareDialog() {
+        mShareManager.share(mSystemInfo);
     }
 }

@@ -113,6 +113,17 @@ public class DashboardActivityUnitTest {
     }
 
     @Test
+    public void testOnOptionsItemSelectedShareClicked() throws Exception {
+        MenuItem item = mockMenuItem(R.id.share);
+
+        mActivity.onOptionsItemSelected(item);
+
+        verify(mView).showShareDialog();
+        verify(mAnalytics).reportShareTap();
+        verify(mFabricAnalytics).reportShareTap();
+    }
+
+    @Test
     public void testOnOptionsItemSelectedAboutClicked() throws Exception {
         MenuItem item = mockMenuItem(R.id.about);
 

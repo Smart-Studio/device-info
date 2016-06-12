@@ -14,7 +14,7 @@
             style="@style/Property.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Android" />
+            android:text="@string/android_title" />
 
         <com.smartstudio.deviceinfo.ui.PropertyLayout
             android:id="@+id/view_os"
@@ -56,7 +56,7 @@
             style="@style/Property.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Others" />
+            android:text="@string/others" />
 
         <com.smartstudio.deviceinfo.ui.PropertyLayout
             android:id="@+id/view_opengl"

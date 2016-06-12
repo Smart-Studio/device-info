@@ -18,6 +18,13 @@ public class DashboardAnalyticsImplTest extends AnalyticsManagerImplTest {
     }
 
     @Test
+    public void testReportShareTap() throws Exception {
+        setScreenName();
+        mAnalytics.reportShareTap();
+        verifyEvent(DashboardAnalyticsImpl.SCREEN_NAME, DashboardAnalyticsImpl.TAP_SHARE);
+    }
+
+    @Test
     public void testReportAboutTap() throws Exception {
         setScreenName();
         mAnalytics.reportAboutTap();

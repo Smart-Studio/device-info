@@ -6,7 +6,7 @@ import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.analytics.dashboard.system.SystemAnalytics;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
-import com.smartstudio.deviceinfo.logic.SystemInfoProvider;
+import com.smartstudio.deviceinfo.logic.dashboard.system.SystemInfoProvider;
 import com.smartstudio.deviceinfo.model.SystemInfo;
 import com.smartstudio.deviceinfo.robolectric.CustomRobolectricGradleTestRunner;
 import com.smartstudio.deviceinfo.ui.dashboard.system.SystemView;
@@ -38,12 +38,13 @@ public class SystemFragmentUnitTest {
     @ForFabric
     SystemAnalytics mFabricAnalytics;
 
+    private SystemFragmentForTest mFragment;
 
     @Before
     public void setUp() throws Exception {
-        SystemFragmentForTest fragment = new SystemFragmentForTest();
-        SupportFragmentTestUtil.startFragment(fragment);
-        fragment.mComponent.inject(this);
+        mFragment = new SystemFragmentForTest();
+        SupportFragmentTestUtil.startFragment(mFragment);
+        mFragment.mComponent.inject(this);
     }
 
     @Test
@@ -62,5 +63,14 @@ public class SystemFragmentUnitTest {
     public void testOnResume() throws Exception {
         verify(mAnalytics).reportScreen();
         verify(mFabricAnalytics).reportScreen();
+    }
+
+    @Test
+    public void testOnShareClicked() throws Exception {
+        mFragment.onSharedClicked();
+
+        verify(mView).showShareDialog();
+        verify(mAnalytics).reportShare();
+        verify(mFabricAnalytics).reportShare();
     }
 }

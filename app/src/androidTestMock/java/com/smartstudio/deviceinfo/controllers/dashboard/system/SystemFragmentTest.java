@@ -5,7 +5,7 @@ import android.support.test.rule.ActivityTestRule;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.dashboard.DashboardActivity;
-import com.smartstudio.deviceinfo.logic.SystemInfoProviderImpl;
+import com.smartstudio.deviceinfo.logic.dashboard.system.SystemInfoProviderImpl;
 
 import org.junit.Rule;
 import org.junit.Test;

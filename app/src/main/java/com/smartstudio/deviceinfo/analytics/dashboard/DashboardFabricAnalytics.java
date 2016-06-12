@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 public class DashboardFabricAnalytics extends FabricAnalyticsManager implements DashboardAnalytics {
     static final String SCREEN_NAME = "Dashboard";
+    static final String TAP_SHARE = "Tap menu share";
     static final String TAP_ABOUT = "Tap menu about";
     static final String MENU_OPTIONS_OPENED = "Menu options opened";
     static final String MENU_OPTIONS_CLOSED = "Menu options closed";
@@ -28,6 +29,11 @@ public class DashboardFabricAnalytics extends FabricAnalyticsManager implements 
         event.putContentName(mScreenName)
                 .putContentId(String.valueOf(mScreenName.hashCode()))
                 .putContentType(CONTENT_TYPE);
+    }
+
+    @Override
+    public void reportShareTap() {
+        reportEvent(TAP_SHARE);
     }
 
     @Override

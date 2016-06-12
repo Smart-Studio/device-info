@@ -132,27 +132,27 @@
             style="@style/Property"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title_text="Height" />
+            app:title_text="@string/screen_content_height" />
 
         <com.smartstudio.deviceinfo.ui.PropertyLayout
             android:id="@+id/view_screen_action_bar"
             style="@style/Property"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title_text="Action bar height" />
+            app:title_text="@string/screen_action_bar_height" />
 
         <com.smartstudio.deviceinfo.ui.PropertyLayout
             android:id="@+id/view_screen_content_top"
             style="@style/Property"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title_text="Top" />
+            app:title_text="@string/screen_content_top" />
 
         <com.smartstudio.deviceinfo.ui.PropertyLayout
             android:id="@+id/view_screen_content_bottom"
             style="@style/Property"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title_text="Bottom" />
+            app:title_text="@string/screen_content_bottom" />
     </com.smartstudio.deviceinfo.ui.VerticalLayout>
 </ScrollView>

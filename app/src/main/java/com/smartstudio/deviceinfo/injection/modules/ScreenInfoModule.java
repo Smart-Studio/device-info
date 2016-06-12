@@ -28,9 +28,12 @@ import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFragment;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerFragment;
-import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
-import com.smartstudio.deviceinfo.logic.ScreenInfoManagerImpl;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoManagerImpl;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoManager;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoShareManager;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoShareManagerImpl;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.model.ScreenInfoViewModel;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.dashboard.screeninfo.ScreenInfoView;
 import com.smartstudio.deviceinfo.ui.dashboard.screeninfo.ScreenInfoViewImpl;
@@ -106,5 +109,16 @@ public class ScreenInfoModule {
     @ForFabric
     ScreenInfoAnalytics provideFabricAnalytics(ScreenInfoFabricAnalytics analytics) {
         return analytics;
+    }
+
+    @Provides
+    @PerFragment
+    ScreenInfoShareManager provideScreenInfoSharer(ScreenInfoShareManagerImpl shareManager) {
+        return shareManager;
+    }
+
+    @Provides
+    ScreenInfoViewModel provideScreenInfoViewModel() {
+        return new ScreenInfoViewModel();
     }
 }

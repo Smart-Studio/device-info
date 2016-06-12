@@ -10,6 +10,7 @@ import javax.inject.Inject;
 public class SystemFabricAnalytics extends FabricAnalyticsManager implements SystemAnalytics {
     static final String SCREEN_NAME = "System info";
     static final String CONTENT_TYPE = "fragment";
+    static final String SHARE = "Share system info";
 
     @Inject
     public SystemFabricAnalytics(Answers answers, ContentViewEvent contentViewEvent) {
@@ -26,5 +27,10 @@ public class SystemFabricAnalytics extends FabricAnalyticsManager implements Sys
         event.putContentName(mScreenName)
                 .putContentId(String.valueOf(mScreenName.hashCode()))
                 .putContentType(CONTENT_TYPE);
+    }
+
+    @Override
+    public void reportShare() {
+        reportEvent(SHARE);
     }
 }

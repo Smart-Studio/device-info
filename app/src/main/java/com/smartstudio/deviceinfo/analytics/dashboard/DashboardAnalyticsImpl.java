@@ -9,6 +9,7 @@ import javax.inject.Provider;
 
 public class DashboardAnalyticsImpl extends AnalyticsManagerImpl implements DashboardAnalytics {
     static final String SCREEN_NAME = "Dashboard";
+    static final String TAP_SHARE = "Tap menu share";
     static final String TAP_ABOUT = "Tap menu about";
     static final String MENU_OPTIONS_OPENED = "Menu options opened";
     static final String MENU_OPTIONS_CLOSED = "Menu options closed";
@@ -29,6 +30,11 @@ public class DashboardAnalyticsImpl extends AnalyticsManagerImpl implements Dash
     @Override
     protected String getScreenName() {
         return SCREEN_NAME;
+    }
+
+    @Override
+    public void reportShareTap() {
+        reportEvent(TAP_SHARE);
     }
 
     @Override

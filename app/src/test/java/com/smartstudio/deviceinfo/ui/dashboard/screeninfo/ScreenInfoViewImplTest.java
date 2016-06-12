@@ -20,7 +20,9 @@ import android.view.View;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoController;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoShareManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
+import com.smartstudio.deviceinfo.model.ScreenInfoViewModel;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.BaseViewImplTest;
 import com.smartstudio.deviceinfo.ui.PropertyLayout;
@@ -35,7 +37,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import butterknife.ButterKnife;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -83,14 +84,19 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     private static final int CONTENT_HEIGHT_DP = 567;
 
     @Mock
-    private ScreenInfoController mController;
+    private ScreenInfoController mMockController;
+    @Mock
+    private ScreenInfoShareManager mMockShareManager;
+    @Mock
+    private ScreenInfoViewModel mMockScreenInfo;
 
     private ScreenInfoViewImpl mView;
 
     @Before
     public void setUp() throws Exception {
-        mView = new ScreenInfoViewImpl();
+        mView = new ScreenInfoViewImpl(mMockShareManager, mMockScreenInfo);
         super.setUp();
+        mockViews();
     }
 
     @Override
@@ -107,7 +113,6 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     public void testShowScreenInfo() throws Exception {
         mockStatic(Utils.class);
         mockUtils(DENSITY_DOWN);
-        mockViews();
         ScreenInfo info = mockScreenInfo(INCHES_DOWN, DENSITY_DOWN, DENSITY_X_DOWN, DENSITY_Y_DOWN);
         mView.showScreenInfo(info);
         verifyViewMocks(INCHES_ROUND_DOWN, DENSITY_ROUND_DOWN, DENSITY_X_ROUND_DOWN, DENSITY_Y_ROUND_DOWN);
@@ -116,7 +121,6 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     @Test
     public void testShowScreenInfoRoundUp() throws Exception {
         mockStatic(Utils.class);
-        mockViews();
         mockUtils(DENSITY_UP);
         ScreenInfo info = mockScreenInfo(INCHES_UP, DENSITY_UP, DENSITY_X_UP, DENSITY_Y_UP);
         mView.showScreenInfo(info);
@@ -127,12 +131,21 @@ public class ScreenInfoViewImplTest extends BaseViewImplTest {
     public void testShowScreenInfoNoNavigationBar() throws Exception {
         mockStatic(Utils.class);
         mockUtils(DENSITY_UP);
-        mockViews();
         ScreenInfo info = mockScreenInfo(INCHES_UP, DENSITY_UP, DENSITY_X_UP, DENSITY_Y_UP);
         when(info.getNavigationBarHeight()).thenReturn(0);
         mView.showScreenInfo(info);
         verify(mView.mViewScreenNavigation).setVisibility(View.GONE);
 
+    }
+
+    @Test
+    public void testShowShareDialog() throws Exception {
+        ScreenInfo info = mock(ScreenInfo.class);
+        mView.showScreenInfo(info);
+
+        mView.showShareDialog();
+
+        verify(mMockShareManager).share(mMockScreenInfo);
     }
 
     private void mockUtils(double density) {

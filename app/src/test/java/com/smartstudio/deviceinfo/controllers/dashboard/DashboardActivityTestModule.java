@@ -17,6 +17,7 @@
 package com.smartstudio.deviceinfo.controllers.dashboard;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
@@ -124,4 +125,13 @@ public class DashboardActivityTestModule {
     }
 
 
+    @Provides
+    Intent provideIntent() {
+        return new Intent();
+    }
+
+    @Provides
+    StringBuilder provideStringBuilder() {
+        return new StringBuilder();
+    }
 }

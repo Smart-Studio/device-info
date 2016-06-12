@@ -20,4 +20,5 @@ import com.smartstudio.deviceinfo.ui.BaseView;
 
 public interface DashboardView extends BaseView {
 
+    void showShareDialog();
 }

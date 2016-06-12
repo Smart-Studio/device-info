@@ -1,16 +1,15 @@
 package com.smartstudio.deviceinfo.analytics.dashboard.system;
 
+import com.crashlytics.android.answers.CustomEvent;
 import com.smartstudio.deviceinfo.analytics.FabricAnalyticsManager;
 import com.smartstudio.deviceinfo.analytics.FabricAnalyticsManagerTest;
-import com.smartstudio.deviceinfo.analytics.dashboard.DashboardFabricAnalytics;
 
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
-public class SystemFabricAnalyticsTest extends FabricAnalyticsManagerTest{
+public class SystemFabricAnalyticsTest extends FabricAnalyticsManagerTest {
     private SystemFabricAnalytics mAnalytics;
 
     @Test
@@ -26,6 +25,13 @@ public class SystemFabricAnalyticsTest extends FabricAnalyticsManagerTest{
         verify(mContentViewEvent).putContentName(screenName);
         verify(mContentViewEvent).putContentId(String.valueOf(screenName.hashCode()));
         verify(mContentViewEvent).putContentType(SystemFabricAnalytics.CONTENT_TYPE);
+    }
+
+    @Test
+    public void testShare() throws Exception {
+        CustomEvent event = mockCustomEvent();
+        mAnalytics.reportShare();
+        verifyEvent(event, SystemFabricAnalytics.SHARE);
     }
 
     @Override

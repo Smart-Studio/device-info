@@ -29,27 +29,32 @@ import com.smartstudio.deviceinfo.controllers.dashboard.DashboardActivity;
 import com.smartstudio.deviceinfo.injection.Injector;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
-import com.smartstudio.deviceinfo.logic.ScreenInfoManager;
+import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoManager;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.ui.dashboard.screeninfo.ScreenInfoView;
 
 import javax.inject.Inject;
 
 public class ScreenInfoFragment extends BaseFragment implements ScreenInfoController {
-    @Inject
-    ScreenInfoView mView;
-    @Inject
-    ScreenInfoManager mScreenInfoManager;
-    @Inject
-    @ForGoogle
-    ScreenInfoAnalytics mAnalytics;
-    @Inject
-    @ForFabric
-    ScreenInfoAnalytics mFabricAnalytics;
 
     public static ScreenInfoFragment newInstance() {
         return new ScreenInfoFragment();
     }
+
+    @Inject
+    ScreenInfoView mView;
+
+    @Inject
+    ScreenInfoManager mScreenInfoManager;
+
+    @Inject
+    @ForGoogle
+    ScreenInfoAnalytics mAnalytics;
+
+    @Inject
+    @ForFabric
+    ScreenInfoAnalytics mFabricAnalytics;
+
 
     @Override
     protected void initComponent(Context context) {
@@ -77,5 +82,12 @@ public class ScreenInfoFragment extends BaseFragment implements ScreenInfoContro
         super.onResume();
         mAnalytics.reportScreen();
         mFabricAnalytics.reportScreen();
+    }
+
+    @Override
+    public void onSharedClicked() {
+        mView.showShareDialog();
+        mAnalytics.reportShare();
+        mFabricAnalytics.reportShare();
     }
 }

@@ -13,7 +13,7 @@ import com.smartstudio.deviceinfo.controllers.dashboard.DashboardActivity;
 import com.smartstudio.deviceinfo.injection.Injector;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
-import com.smartstudio.deviceinfo.logic.SystemInfoProvider;
+import com.smartstudio.deviceinfo.logic.dashboard.system.SystemInfoProvider;
 import com.smartstudio.deviceinfo.ui.dashboard.system.SystemView;
 
 import javax.inject.Inject;
@@ -63,5 +63,12 @@ public class SystemFragment extends BaseFragment implements SystemController {
         super.onResume();
         mAnalytics.reportScreen();
         mFabricAnalytics.reportScreen();
+    }
+
+    @Override
+    public void onSharedClicked() {
+        mView.showShareDialog();
+        mAnalytics.reportShare();
+        mFabricAnalytics.reportShare();
     }
 }

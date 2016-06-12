@@ -30,4 +30,9 @@
     <string name="screen_density_x">Density x</string>
     <string name="screen_density_y">Density y</string>
     <string name="screen_content_title">Content area</string>
+    <string name="screen_content_height">Height</string>
+    <string name="screen_action_bar_height">Action bar height</string>
+    <string name="screen_content_top">Top</string>
+    <string name="screen_content_bottom">Bottom</string>
+    <string name="share_screen_info_title">Share screen info</string>
 </resources>

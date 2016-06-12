@@ -16,8 +16,10 @@
 
 package com.smartstudio.deviceinfo.controllers.dashboard.screeninfo;
 
+import com.smartstudio.deviceinfo.controllers.dashboard.DashboardContentController;
+
 /**
  * Controller for the screen info screen
  **/
-public interface ScreenInfoController {
+public interface ScreenInfoController extends DashboardContentController {
 }
