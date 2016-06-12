@@ -22,15 +22,17 @@ import android.support.v4.app.FragmentManager;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.controllers.dashboard.DashboardContentController;
+import com.smartstudio.deviceinfo.controllers.dashboard.battery.BatteryFragment;
 import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoFragment;
 import com.smartstudio.deviceinfo.controllers.dashboard.system.SystemFragment;
 
 import javax.inject.Inject;
 
 public class DashboardPagerAdapterImpl extends DashboardPagerAdapter {
-    static final int PAGE_COUNT = 2;
+    static final int PAGE_COUNT = 3;
     static final int POS_SCREEN_TAB = 0;
     static final int POS_SYSTEM_TAB = 1;
+    static final int POS_BATTERY_TAB = 2;
 
     private final Resources mResources;
 
@@ -47,6 +49,8 @@ public class DashboardPagerAdapterImpl extends DashboardPagerAdapter {
                 return ScreenInfoFragment.newInstance();
             case POS_SYSTEM_TAB:
                 return SystemFragment.newInstance();
+            case POS_BATTERY_TAB:
+                return BatteryFragment.newInstance();
             default:
                 throw new IllegalStateException("Page not supported");
         }
@@ -62,6 +66,9 @@ public class DashboardPagerAdapterImpl extends DashboardPagerAdapter {
                 break;
             case POS_SYSTEM_TAB:
                 titleResId = R.string.tab_system;
+                break;
+            case POS_BATTERY_TAB:
+                titleResId = R.string.tab_battery;
                 break;
         }
 

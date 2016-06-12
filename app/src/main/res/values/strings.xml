@@ -3,4 +3,5 @@
     <string name="menu_about">About</string>
     <string name="menu_share">Share</string>
     <string name="error_no_browser">It seems you don\'t have a browser app installed to open the link</string>
+    <string name="unknown">Unknown</string>
 </resources>
