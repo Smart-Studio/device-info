@@ -10,6 +10,7 @@ import com.smartstudio.deviceinfo.model.BatteryState;
 import com.smartstudio.deviceinfo.model.BatteryViewModel;
 import com.smartstudio.deviceinfo.ui.BaseViewImpl;
 import com.smartstudio.deviceinfo.ui.PropertyLayout;
+import com.smartstudio.deviceinfo.utils.Utils;
 
 import java.util.Locale;
 
@@ -42,15 +43,15 @@ public class BatteryViewImpl extends BaseViewImpl implements BatteryView {
     @BindView(R.id.view_battery_voltage)
     PropertyLayout mViewVoltage;
 
-    @Inject
-    BatteryShareManager mShareManager;
 
+    private final BatteryShareManager mShareManager;
     private final Resources mResources;
     private final BatteryViewModel mBatteryInfo;
 
 
     @Inject
-    public BatteryViewImpl(Resources resources, BatteryViewModel batteryInfo) {
+    public BatteryViewImpl(BatteryShareManager shareManager, Resources resources, BatteryViewModel batteryInfo) {
+        mShareManager = shareManager;
         mResources = resources;
         mBatteryInfo = batteryInfo;
     }
@@ -83,26 +84,26 @@ public class BatteryViewImpl extends BaseViewImpl implements BatteryView {
 
         switch (healthValue) {
             case BatteryManager.BATTERY_HEALTH_GOOD:
-                health = getString(R.string.battery_good);
+                health = getString(R.string.battery_health_good);
                 break;
             case BatteryManager.BATTERY_HEALTH_DEAD:
-                health = getString(R.string.battery_dead);
+                health = getString(R.string.battery_health_dead);
                 break;
             case BatteryManager.BATTERY_HEALTH_COLD:
-                health = getString(R.string.battery_cold);
+                health = getString(R.string.battery_health_cold);
                 break;
             case BatteryManager.BATTERY_HEALTH_OVERHEAT:
-                health = getString(R.string.battery_overheat);
+                health = getString(R.string.battery_health_overheat);
                 break;
             case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE:
-                health = getString(R.string.battery_over_voltage);
+                health = getString(R.string.battery_health_over_voltage);
                 break;
             case BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE:
-                health = getString(R.string.battery_unspecified);
+                health = getString(R.string.battery_health_unspecified);
                 break;
             case BatteryManager.BATTERY_HEALTH_UNKNOWN:
             default:
-                health = getString(R.string.unknown);
+                health = getString(R.string.battery_health_unknown);
         }
 
         mViewHealth.setValue(health);
@@ -130,7 +131,7 @@ public class BatteryViewImpl extends BaseViewImpl implements BatteryView {
                 source = getString(R.string.battery_source_wireless);
                 break;
             default:
-                source = getString(R.string.unknown);
+                source = getString(R.string.battery_source_unknown);
         }
 
         mViewSource.setValue(source);
@@ -142,20 +143,20 @@ public class BatteryViewImpl extends BaseViewImpl implements BatteryView {
 
         switch (statusValue) {
             case BatteryManager.BATTERY_STATUS_CHARGING:
-                status = getString(R.string.battery_charging);
+                status = getString(R.string.battery_status_charging);
                 break;
             case BatteryManager.BATTERY_STATUS_DISCHARGING:
-                status = getString(R.string.battery_discharging);
+                status = getString(R.string.battery_status_discharging);
                 break;
             case BatteryManager.BATTERY_STATUS_FULL:
-                status = getString(R.string.battery_full);
+                status = getString(R.string.battery_status_full);
                 break;
             case BatteryManager.BATTERY_STATUS_NOT_CHARGING:
-                status = getString(R.string.battery_not_charging);
+                status = getString(R.string.battery_status_not_charging);
                 break;
             case BatteryManager.BATTERY_STATUS_UNKNOWN:
             default:
-                status = getString(R.string.unknown);
+                status = getString(R.string.battery_status_unknown);
         }
 
         mViewStatus.setValue(status);
@@ -163,7 +164,7 @@ public class BatteryViewImpl extends BaseViewImpl implements BatteryView {
     }
 
     private void setCapacity(double capacityValue) {
-        String capacity = String.format(Locale.getDefault(), "%d mAh", (int) capacityValue);
+        String capacity = String.format(Locale.getDefault(), "%d mAh", Utils.round(capacityValue));
         mViewCapacity.setValue(capacity);
         mBatteryInfo.setCapacity(capacity);
     }

@@ -38,6 +38,10 @@ public final class Utils {
         return (int) Math.round(pixels / density);
     }
 
+    public static long round(double value) {
+        return Math.round(value);
+    }
+
     /**
      * Opens an url in a web browser
      *

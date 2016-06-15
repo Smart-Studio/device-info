@@ -11,7 +11,7 @@ public class BatteryStateProviderImpl implements BatteryStateProvider {
     private static final int HEALTH = BatteryManager.BATTERY_HEALTH_DEAD;
     private static final int POWER_SOURCE = BatteryManager.BATTERY_PLUGGED_AC;
     private static final int STATUS = BatteryManager.BATTERY_STATUS_NOT_CHARGING;
-    private static final int CAPACITIY = 2569;
+    private static final int CAPACITY = 2569;
     private static final String TYPE = "Plutonium";
     private static final int TEMPERATURE = -142;
     private static final int VOLTAGE = 293;
@@ -27,7 +27,7 @@ public class BatteryStateProviderImpl implements BatteryStateProvider {
         mBatteryState.setHealth(HEALTH);
         mBatteryState.setSource(POWER_SOURCE);
         mBatteryState.setStatus(STATUS);
-        mBatteryState.setCapacity(CAPACITIY);
+        mBatteryState.setCapacity(CAPACITY);
         mBatteryState.setType(TYPE);
         mBatteryState.setTemperature(TEMPERATURE);
         mBatteryState.setVoltage(VOLTAGE);
