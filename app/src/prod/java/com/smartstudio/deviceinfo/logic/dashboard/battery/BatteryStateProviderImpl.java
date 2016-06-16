@@ -17,7 +17,7 @@ public class BatteryStateProviderImpl extends BroadcastReceiver implements Batte
     private static final String POWER_PROFILE_CLASS = "com.android.internal.os.PowerProfile";
     private static final String METHOD_AVERAGE_POWER = "getAveragePower";
     private static final String BATTERY_SUBSYSTEM = "battery.capacity";
-    private static final int INVALID = -1;
+    static final int INVALID = -1;
 
     private final Context mContext;
     private final IntentFilter mFilter;
@@ -28,7 +28,7 @@ public class BatteryStateProviderImpl extends BroadcastReceiver implements Batte
     public BatteryStateProviderImpl(@ForApplication Context context, IntentFilter filter, BatteryState batteryState) {
         mContext = context;
         mFilter = filter;
-        mBatteryState = new BatteryState();
+        mBatteryState = batteryState;
         filter.addAction(Intent.ACTION_BATTERY_CHANGED);
     }
 
@@ -74,12 +74,12 @@ public class BatteryStateProviderImpl extends BroadcastReceiver implements Batte
     private double getCapacity() {
         Object powerProfile;
         try {
-            powerProfile = Class.forName(POWER_PROFILE_CLASS)
+            Class<?> powerProfileClass = Class.forName(POWER_PROFILE_CLASS);
+            powerProfile = powerProfileClass
                     .getConstructor(Context.class)
                     .newInstance(mContext);
 
-            return (double) (Double) Class
-                    .forName(POWER_PROFILE_CLASS)
+            return (Double) powerProfileClass
                     .getMethod(METHOD_AVERAGE_POWER, String.class)
                     .invoke(powerProfile, BATTERY_SUBSYSTEM);
         } catch (Exception e) {

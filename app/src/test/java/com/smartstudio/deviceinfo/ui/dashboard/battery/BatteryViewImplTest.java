@@ -31,7 +31,7 @@ public class BatteryViewImplTest extends BaseViewImplTest {
     private static final String TEMPERATURE_EXPECTED = "-142.5";
     private static final int VOLTAGE = 293;
 
-
+    //Health
     private static final String HEALTH_GOOD = "Good";
     private static final String HEALTH_DEAD = "Dead";
     private static final String HEALTH_COLD = "Cold";
@@ -40,19 +40,21 @@ public class BatteryViewImplTest extends BaseViewImplTest {
     private static final String HEALTH_UNSPECIFIED = "unspecified";
     private static final String HEALTH_UNKNOWN = "unknown";
 
-
+    //Source
     private static final String SOURCE_BATTERY = "Battery";
     private static final String SOURCE_USB = "USB";
     private static final String SOURCE_AC = "AC";
     private static final String SOURCE_WIRELESS = "Wireless";
     private static final String SOURCE_UNKNOWN = "Unknown";
 
+    //Status
     private static final String STATUS_CHARGING = "Charging";
     private static final String STATUS_DISCHARGING = "Discharging";
     private static final String STATUS_FULL = "Full";
     private static final String STATUS_NOT_CHARGING = "Not charging";
     private static final String STATUS_UNKNOWN = "Unknown";
 
+    //Capacity
     private static final double CAPACITY_ROUND_UP = 23.6;
     private static final int CAPACITY_ROUND_UP_EXPECTED = 24;
     private static final double CAPACITY_ROUND_UP_FIVE = 28.5;
@@ -60,6 +62,7 @@ public class BatteryViewImplTest extends BaseViewImplTest {
     private static final double CAPACITY_ROUND_DOWN = 120.4;
     private static final int CAPACITY_ROUND_DOWN_EXPECTED = 120;
 
+    //Temperature
     private static final double TEMPERATURE_ROUND_UP = 23.97;
     private static final double TEMPERATURE_ROUND_UP_EXPECTED = 24;
     private static final double TEMPERATURE_ROUND_UP_FIVE = 28.55;
@@ -67,6 +70,7 @@ public class BatteryViewImplTest extends BaseViewImplTest {
     private static final double TEMPERATURE_ROUND_DOWN = 120.42;
     private static final double TEMPERATURE_ROUND_DOWN_EXPECTED = 120.4;
 
+    //Units
     private static final String PERCENTAGE = " %";
     private static final String UNIT_CAPACITY = " mAh";
     private static final String UNIT_TEMPERATURE = " ℃";

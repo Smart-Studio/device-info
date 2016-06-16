@@ -28,7 +28,6 @@ import android.view.Display;
 import android.view.ViewConfiguration;
 
 import com.smartstudio.deviceinfo.R;
-import com.smartstudio.deviceinfo.logic.dashboard.screeninfo.ScreenInfoManagerImpl;
 import com.smartstudio.deviceinfo.model.ScreenInfo;
 import com.smartstudio.deviceinfo.utils.TestUtils;
 

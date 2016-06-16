@@ -2,7 +2,6 @@ package com.smartstudio.deviceinfo.logic.dashboard.system;
 
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.StringRes;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.logic.dashboard.ShareManagerImpl;
@@ -16,8 +15,6 @@ import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static com.smartstudio.deviceinfo.logic.dashboard.ShareManagerImpl.NEW_LINE;
-import static com.smartstudio.deviceinfo.logic.dashboard.ShareManagerImpl.TAB;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;

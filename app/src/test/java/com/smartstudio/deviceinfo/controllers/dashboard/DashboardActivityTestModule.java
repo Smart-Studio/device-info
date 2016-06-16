@@ -18,6 +18,7 @@ package com.smartstudio.deviceinfo.controllers.dashboard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 
 import com.crashlytics.android.answers.Answers;
@@ -134,5 +135,10 @@ public class DashboardActivityTestModule {
     @Provides
     Resources provideResources() {
         return mock(Resources.class);
+    }
+
+    @Provides
+    IntentFilter provideIntentFilter(){
+        return mock(IntentFilter.class);
     }
 }
