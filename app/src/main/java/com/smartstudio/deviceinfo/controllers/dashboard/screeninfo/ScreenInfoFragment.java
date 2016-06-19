@@ -19,9 +19,7 @@ package com.smartstudio.deviceinfo.controllers.dashboard.screeninfo;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoAnalytics;
 import com.smartstudio.deviceinfo.controllers.BaseFragment;
@@ -62,12 +60,6 @@ public class ScreenInfoFragment extends BaseFragment implements ScreenInfoContro
         activity.getComponent()
                 .plus(Injector.provideScreenInfoModule(this, activity.getWindowManager().getDefaultDisplay()))
                 .inject(this);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(mView.getLayoutResourceId(), container, false);
     }
 
     @Override

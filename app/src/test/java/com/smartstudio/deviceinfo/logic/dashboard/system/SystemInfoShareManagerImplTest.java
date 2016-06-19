@@ -2,7 +2,6 @@ package com.smartstudio.deviceinfo.logic.dashboard.system;
 
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.StringRes;
 
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.logic.dashboard.ShareManagerImpl;
@@ -16,8 +15,6 @@ import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static com.smartstudio.deviceinfo.logic.dashboard.ShareManagerImpl.NEW_LINE;
-import static com.smartstudio.deviceinfo.logic.dashboard.ShareManagerImpl.TAB;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
@@ -69,7 +66,7 @@ public class SystemInfoShareManagerImplTest extends ShareManagerImplTest<SystemI
 
     @Override
     public void testShare() throws Exception {
-        mockString(R.string.share_screen_info_title, STRING_SHARE);
+        mockString(R.string.share_system_title, STRING_SHARE);
         mockString(R.string.android_title, STRING_ANDROID);
         mockString(R.string.os_version, STRING_VERSION);
         mockString(R.string.os_codename, STRING_CODENAME);
@@ -87,7 +84,6 @@ public class SystemInfoShareManagerImplTest extends ShareManagerImplTest<SystemI
 
         super.testShare();
 
-        verify(mMockIntent).putExtra(Intent.EXTRA_SUBJECT, MODEL);
         String sharedText = addTitle(STRING_ANDROID) + addProperty(STRING_VERSION, ANDROID_VERSION)
                 + addProperty(STRING_CODENAME, ICE_CREAM_SANDWICH) + addProperty(STRING_API, String.valueOf(ANDROID_API))
                 + addProperty(STRING_JAVA_VM, JAVA_VM) + addProperty(STRING_BUILD_ID, BUILD_ID)

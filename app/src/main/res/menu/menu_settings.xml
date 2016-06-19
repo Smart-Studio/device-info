@@ -22,7 +22,7 @@
         app:showAsAction="withText" />
     <item
         android:id="@+id/share"
-        android:icon="@android:drawable/ic_menu_share"
+        android:icon="@drawable/ic_share"
         android:title="@string/menu_share"
         app:showAsAction="ifRoom" />
 </menu>

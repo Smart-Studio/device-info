@@ -19,6 +19,7 @@ package com.smartstudio.deviceinfo.injection.modules;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 
 import com.crashlytics.android.Crashlytics;
@@ -77,7 +78,7 @@ public class AppModule {
     }
 
     @Provides
-    StringBuilder provideStringBuilder() {
-        return new StringBuilder();
+    IntentFilter provideIntentFilter() {
+        return new IntentFilter();
     }
 }

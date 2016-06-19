@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="battery_level">Level</string>
+    <string name="battery_health">Health</string>
+    <string name="battery_source">Power source</string>
+    <string name="battery_status">Status</string>
+    <string name="battery_capacity">Capacity</string>
+    <string name="battery_type">Type</string>
+    <string name="battery_temperature">Temperature</string>
+    <string name="battery_voltage">Voltage</string>
+
+    <!-- Health -->
+    <string name="battery_health_good">Good</string>
+    <string name="battery_health_dead">Dead</string>
+    <string name="battery_health_cold">Cold</string>
+    <string name="battery_health_overheat">Overheat</string>
+    <string name="battery_health_over_voltage">Over voltage</string>
+    <string name="battery_health_unspecified">Unspecified</string>
+    <string name="battery_health_unknown">Unknown</string>
+
+    <!-- Source -->
+    <string name="battery_source_battery">Battery</string>
+    <string name="battery_source_usb">USB Port</string>
+    <string name="battery_source_ac">AC Charger</string>
+    <string name="battery_source_wireless">Wireless Charger</string>
+    <string name="battery_source_unknown">Unknown</string>
+
+    <!-- Status -->
+    <string name="battery_status_charging">Charging</string>
+    <string name="battery_status_discharging">Discharging</string>
+    <string name="battery_status_full">Full</string>
+    <string name="battery_status_not_charging">Not charging</string>
+    <string name="battery_status_unknown">Unknown</string>
+
+    <string name="share_battery_title">Share battery state</string>
+    <string name="share_battery_subject">Battery state</string>
+</resources>

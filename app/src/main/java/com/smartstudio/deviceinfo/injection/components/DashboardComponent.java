@@ -17,9 +17,10 @@
 package com.smartstudio.deviceinfo.injection.components;
 
 import com.smartstudio.deviceinfo.controllers.dashboard.DashboardActivity;
+import com.smartstudio.deviceinfo.injection.modules.BatteryModule;
 import com.smartstudio.deviceinfo.injection.modules.DashboardModule;
-import com.smartstudio.deviceinfo.injection.modules.SystemModule;
 import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
+import com.smartstudio.deviceinfo.injection.modules.SystemModule;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
 
 import dagger.Subcomponent;
@@ -32,4 +33,6 @@ public interface DashboardComponent {
     ScreenInfoComponent plus(ScreenInfoModule module);
 
     SystemComponent plus(SystemModule module);
+
+    BatteryComponent plus(BatteryModule module);
 }

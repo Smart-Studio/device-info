@@ -25,14 +25,15 @@ import android.view.Display;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
 import com.smartstudio.deviceinfo.controllers.dashboard.DashboardController;
-import com.smartstudio.deviceinfo.controllers.dashboard.system.SystemController;
 import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoController;
+import com.smartstudio.deviceinfo.controllers.dashboard.system.SystemController;
 import com.smartstudio.deviceinfo.injection.modules.AboutModule;
 import com.smartstudio.deviceinfo.injection.modules.AppModule;
 import com.smartstudio.deviceinfo.injection.modules.AttributionsModule;
+import com.smartstudio.deviceinfo.injection.modules.BatteryModule;
 import com.smartstudio.deviceinfo.injection.modules.DashboardModule;
-import com.smartstudio.deviceinfo.injection.modules.SystemModule;
 import com.smartstudio.deviceinfo.injection.modules.ScreenInfoModule;
+import com.smartstudio.deviceinfo.injection.modules.SystemModule;
 
 public final class Injector {
     public static AppModule provideAppModule(Application app) {
@@ -55,8 +56,12 @@ public final class Injector {
         return new ScreenInfoModule(controller, display);
     }
 
-    public static SystemModule provideSystemModule(SystemController controller){
+    public static SystemModule provideSystemModule(SystemController controller) {
         return new SystemModule(controller);
+    }
+
+    public static BatteryModule provideBatteryModule() {
+        return new BatteryModule();
     }
 
     private Injector() {

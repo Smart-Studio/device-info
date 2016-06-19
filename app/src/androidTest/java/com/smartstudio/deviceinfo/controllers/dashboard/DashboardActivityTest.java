@@ -19,6 +19,7 @@ import static android.support.test.espresso.intent.Intents.intending;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasAction;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.AllOf.allOf;
 
@@ -29,8 +30,13 @@ public class DashboardActivityTest {
     @Test
     public void testTabsNavigation() throws Exception {
         onView(withText(R.string.tab_system)).perform(click());
+        onView(withText(R.string.tab_battery)).perform(click());
         onView(withText(R.string.tab_screen_info)).perform(click());
         onView(withId(R.id.pager_dashboard)).perform(swipeLeft());
+        onView(withId(R.id.pager_dashboard)).perform(swipeLeft());
+        onView(withId(R.id.pager_dashboard)).perform(swipeRight());
+        onView(withId(R.id.pager_dashboard)).perform(swipeLeft());
+        onView(withId(R.id.pager_dashboard)).perform(swipeRight());
         onView(withId(R.id.pager_dashboard)).perform(swipeRight());
     }
 
@@ -40,8 +46,8 @@ public class DashboardActivityTest {
 
         onView(withId(R.id.share)).perform(click());
 
-        String a = activityRule.getActivity().getString(R.string.share_screen_info_title);
-        intended(allOf(hasAction(Intent.ACTION_CHOOSER), hasExtra(Intent.EXTRA_TITLE, a)));
+        String shareTitle = activityRule.getActivity().getString(R.string.share_screen_info_title);
+        intended(allOf(hasAction(Intent.ACTION_CHOOSER), hasExtra(Intent.EXTRA_TITLE, shareTitle)));
     }
 
     @Test
@@ -51,8 +57,19 @@ public class DashboardActivityTest {
         onView(withText(R.string.tab_system)).perform(click());
         onView(withId(R.id.share)).perform(click());
 
-        String a = activityRule.getActivity().getString(R.string.share_system_title);
-        intended(allOf(hasAction(Intent.ACTION_CHOOSER), hasExtra(Intent.EXTRA_TITLE, a)));
+        String shareTitle = activityRule.getActivity().getString(R.string.share_system_title);
+        intended(allOf(hasAction(Intent.ACTION_CHOOSER), hasExtra(Intent.EXTRA_TITLE, shareTitle)));
+    }
+
+    @Test
+    public void testShareBatteryState() throws Exception {
+        stubResultIntent();
+
+        onView(withText(R.string.tab_battery)).perform(click());
+        onView(withId(R.id.share)).perform(click());
+
+        String shareTitle = activityRule.getActivity().getString(R.string.share_battery_title);
+        intended(allOf(hasAction(Intent.ACTION_CHOOSER), hasExtra(Intent.EXTRA_TITLE, shareTitle)));
     }
 
     private void stubResultIntent() {
