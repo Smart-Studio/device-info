@@ -82,6 +82,8 @@ android {
         ext.betaDistributionGroupAliasesFilePath = config.props.fabric_testers_file
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
     }
 
     signingConfigs {
