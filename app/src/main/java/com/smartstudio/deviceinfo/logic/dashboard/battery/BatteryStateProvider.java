@@ -2,9 +2,9 @@ package com.smartstudio.deviceinfo.logic.dashboard.battery;
 
 public interface BatteryStateProvider {
 
-    void requestBatteryUpdates();
+    void requestBatteryStateUpdates();
 
-    void stopBatteryUpdates();
+    void stopBatteryStateUpdates();
 
     void setListener(BatteryStateProviderListener listener);
 }

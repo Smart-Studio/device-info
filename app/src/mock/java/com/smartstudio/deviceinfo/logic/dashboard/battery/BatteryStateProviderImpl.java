@@ -10,7 +10,7 @@ public class BatteryStateProviderImpl implements BatteryStateProvider {
     private static final int LEVEL = 59;
     private static final int HEALTH = BatteryManager.BATTERY_HEALTH_DEAD;
     private static final int POWER_SOURCE = BatteryManager.BATTERY_PLUGGED_AC;
-    private static final int STATUS = BatteryManager.BATTERY_STATUS_NOT_CHARGING;
+    private static final int STATUS = BatteryManager.BATTERY_STATUS_CHARGING;
     private static final int CAPACITY = 2569;
     private static final String TYPE = "Plutonium";
     private static final int TEMPERATURE = -142;
@@ -25,6 +25,7 @@ public class BatteryStateProviderImpl implements BatteryStateProvider {
         mBatteryState = new BatteryState();
         mBatteryState.setLevel(LEVEL);
         mBatteryState.setHealth(HEALTH);
+        mBatteryState.setCharging(true);
         mBatteryState.setSource(POWER_SOURCE);
         mBatteryState.setStatus(STATUS);
         mBatteryState.setCapacity(CAPACITY);
@@ -34,12 +35,12 @@ public class BatteryStateProviderImpl implements BatteryStateProvider {
     }
 
     @Override
-    public void requestBatteryUpdates() {
+    public void requestBatteryStateUpdates() {
         mListener.onBatteryStateChanged(mBatteryState);
     }
 
     @Override
-    public void stopBatteryUpdates() {
+    public void stopBatteryStateUpdates() {
 
     }
 

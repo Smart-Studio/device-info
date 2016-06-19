@@ -33,12 +33,12 @@ public class BatteryStateProviderImpl extends BroadcastReceiver implements Batte
     }
 
     @Override
-    public void requestBatteryUpdates() {
+    public void requestBatteryStateUpdates() {
         mContext.registerReceiver(this, mFilter);
     }
 
     @Override
-    public void stopBatteryUpdates() {
+    public void stopBatteryStateUpdates() {
         mContext.unregisterReceiver(this);
     }
 

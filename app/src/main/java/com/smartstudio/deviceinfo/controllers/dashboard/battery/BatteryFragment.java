@@ -24,6 +24,11 @@ public class BatteryFragment extends BaseFragment implements BatteryController, 
     @Inject
     BatteryStateProvider mProvider;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mProvider.setListener(this);
+    }
 
     @Override
     protected void initComponent(Context context) {
@@ -31,20 +36,18 @@ public class BatteryFragment extends BaseFragment implements BatteryController, 
         activity.getComponent()
                 .plus(Injector.provideBatteryModule())
                 .inject(this);
-
-        mProvider.setListener(this);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        mProvider.requestBatteryUpdates();
+        mProvider.requestBatteryStateUpdates();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mProvider.stopBatteryUpdates();
+        mProvider.stopBatteryStateUpdates();
     }
 
     @Override

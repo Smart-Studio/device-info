@@ -54,13 +54,13 @@ public class BatteryStateProviderImplTest {
 
     @Test
     public void testRequestBatteryUpdates() throws Exception {
-        mProvider.requestBatteryUpdates();
+        mProvider.requestBatteryStateUpdates();
         verify(mMockContext).registerReceiver(mProvider, mMockIntentFilter);
     }
 
     @Test
     public void testStopBatteryUpdates() throws Exception {
-        mProvider.stopBatteryUpdates();
+        mProvider.stopBatteryStateUpdates();
         verify(mMockContext).unregisterReceiver(mProvider);
     }
 
