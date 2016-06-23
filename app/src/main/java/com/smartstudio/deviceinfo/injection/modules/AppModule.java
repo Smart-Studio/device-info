@@ -21,8 +21,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.os.Bundle;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.smartstudio.deviceinfo.BuildConfig;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForApplication;
 import com.smartstudio.deviceinfo.injection.scopes.PerApplication;
@@ -80,5 +82,10 @@ public class AppModule {
     @Provides
     IntentFilter provideIntentFilter() {
         return new IntentFilter();
+    }
+
+    @Provides
+    Bundle provideBundle() {
+        return new Bundle();
     }
 }

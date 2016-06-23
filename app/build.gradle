@@ -59,7 +59,7 @@ ext {
 }
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion '23.0.3'
     //TODO To support shadow object in robolectric, remove when fixed https://github.com/robolectric/robolectric/issues/1862
     useLibrary 'org.apache.http.legacy'
@@ -67,7 +67,7 @@ android {
     defaultConfig {
         applicationId "com.smartstudio.deviceinfo"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100 + versionBuild
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         project.archivesBaseName = "device-info-${versionName}"
@@ -185,7 +185,7 @@ spoon {
 
 ext {
     // App dependencies
-    supportLibraryVersion = '23.4.0'
+    supportLibraryVersion = '24.0.0'
     playServicesVersion = '9.0.2'
     guavaVersion = '19.0'
     butterknifeVersion = '8.0.1'
@@ -214,9 +214,9 @@ dependencies {
     compile "com.android.support:cardview-v7:$supportLibraryVersion"
     compile "com.android.support:design:$supportLibraryVersion"
     compile "com.google.guava:guava:$guavaVersion"
-    compile "com.google.android.gms:play-services-analytics:$playServicesVersion"
     compile "com.google.android.gms:play-services-base:$playServicesVersion"
     compile "com.google.android.gms:play-services-ads:$playServicesVersion"
+    compile "com.google.firebase:firebase-core:$playServicesVersion"
     compile "com.jakewharton:butterknife:$butterknifeVersion"
     apt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
     compile "com.jakewharton.timber:timber:$timberVersion"
@@ -259,6 +259,8 @@ dependencies {
     testCompile "com.google.dagger:dagger:$dagger2Version"
     testCompile "com.google.dagger:dagger-compiler:$dagger2Version"
 }
+
+apply plugin: 'com.google.gms.google-services'
 
 /*
 Resolves dependency versions across test and production APKs, specifically, transitive

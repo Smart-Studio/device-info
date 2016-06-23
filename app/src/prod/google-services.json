@@ -1,0 +1,104 @@
+{
+  "project_info": {
+    "project_number": "454850992713",
+    "firebase_url": "https://my-device-info-ca47e.firebaseio.com",
+    "project_id": "my-device-info-ca47e",
+    "storage_bucket": "my-device-info-ca47e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454850992713:android:5e8e4848b516b47c",
+        "android_client_info": {
+          "package_name": "com.smartstudio.deviceinfo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "454850992713-glpkd9918t15e2v6vgd0uoka01nmvu87.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNGbtEI8fP_Eru9vknPE0YAqgb5lAArrU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454850992713:android:f9590f481ef8e10e",
+        "android_client_info": {
+          "package_name": "com.smartstudio.deviceinfo.mock.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "454850992713-glpkd9918t15e2v6vgd0uoka01nmvu87.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNGbtEI8fP_Eru9vknPE0YAqgb5lAArrU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454850992713:android:81c66478f6a0c71e",
+        "android_client_info": {
+          "package_name": "com.smartstudio.deviceinfo.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "454850992713-glpkd9918t15e2v6vgd0uoka01nmvu87.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNGbtEI8fP_Eru9vknPE0YAqgb5lAArrU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

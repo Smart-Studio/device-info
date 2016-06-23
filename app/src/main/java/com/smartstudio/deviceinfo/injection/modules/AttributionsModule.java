@@ -21,7 +21,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsAnalytics;
-import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsAnalyticsImpl;
+import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsFirebaseAnalyticsImpl;
 import com.smartstudio.deviceinfo.analytics.about.attributions.AttributionsFabricAnalytics;
 import com.smartstudio.deviceinfo.controllers.about.attributions.AttributionsController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
@@ -95,7 +95,7 @@ public class AttributionsModule {
     @Provides
     @PerActivity
     @ForGoogle
-    AttributionsAnalytics provideAnalytics(AttributionsAnalyticsImpl analytics) {
+    AttributionsAnalytics provideAnalytics(AttributionsFirebaseAnalyticsImpl analytics) {
         return analytics;
     }
 

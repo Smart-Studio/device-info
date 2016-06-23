@@ -10,6 +10,7 @@ buildscript {
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'com.github.JakeWharton:sdk-manager-plugin:1d07987217120fffdc0ce1291d73e974310d7d92'
+        classpath 'com.google.gms:google-services:3.0.0'
     }
 }
 

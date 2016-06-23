@@ -21,7 +21,7 @@ import android.util.TypedValue;
 import android.view.Display;
 
 import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoAnalytics;
-import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoAnalyticsImpl;
+import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoFirebaseAnalyticsImpl;
 import com.smartstudio.deviceinfo.analytics.dashboard.screeninfo.ScreenInfoFabricAnalytics;
 import com.smartstudio.deviceinfo.controllers.dashboard.screeninfo.ScreenInfoController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
@@ -100,7 +100,7 @@ public class ScreenInfoModule {
     @Provides
     @PerFragment
     @ForGoogle
-    ScreenInfoAnalytics provideAnalytics(ScreenInfoAnalyticsImpl analytics) {
+    ScreenInfoAnalytics provideAnalytics(ScreenInfoFirebaseAnalyticsImpl analytics) {
         return analytics;
     }
 

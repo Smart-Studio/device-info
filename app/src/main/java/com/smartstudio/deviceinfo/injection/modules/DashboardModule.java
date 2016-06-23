@@ -20,14 +20,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.smartstudio.deviceinfo.analytics.dashboard.DashboardAnalytics;
-import com.smartstudio.deviceinfo.analytics.dashboard.DashboardAnalyticsImpl;
+import com.smartstudio.deviceinfo.analytics.dashboard.DashboardFirebaseAnalyticsImpl;
 import com.smartstudio.deviceinfo.analytics.dashboard.DashboardFabricAnalytics;
 import com.smartstudio.deviceinfo.controllers.dashboard.DashboardController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForGoogle;
 import com.smartstudio.deviceinfo.injection.scopes.PerActivity;
+import com.smartstudio.deviceinfo.injection.scopes.PerApplication;
 import com.smartstudio.deviceinfo.ui.BaseView;
 import com.smartstudio.deviceinfo.ui.dashboard.DashboardPagerAdapter;
 import com.smartstudio.deviceinfo.ui.dashboard.DashboardPagerAdapterImpl;
@@ -89,7 +91,7 @@ public class DashboardModule {
     @Provides
     @PerActivity
     @ForGoogle
-    DashboardAnalytics provideGoogleAnalytics(DashboardAnalyticsImpl analytics) {
+    DashboardAnalytics provideGoogleAnalytics(DashboardFirebaseAnalyticsImpl analytics) {
         return analytics;
     }
 
@@ -99,4 +101,5 @@ public class DashboardModule {
     DashboardAnalytics provideFabricAnalytics(DashboardFabricAnalytics analytics) {
         return analytics;
     }
+
 }
