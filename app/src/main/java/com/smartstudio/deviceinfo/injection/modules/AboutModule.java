@@ -19,7 +19,7 @@ package com.smartstudio.deviceinfo.injection.modules;
 import android.content.Context;
 
 import com.smartstudio.deviceinfo.analytics.about.AboutAnalytics;
-import com.smartstudio.deviceinfo.analytics.about.AboutAnalyticsImpl;
+import com.smartstudio.deviceinfo.analytics.about.AboutFirebaseAnalyticsImpl;
 import com.smartstudio.deviceinfo.analytics.about.AboutFabricAnalytics;
 import com.smartstudio.deviceinfo.controllers.about.AboutController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForActivity;
@@ -72,7 +72,7 @@ public class AboutModule {
     @Provides
     @PerActivity
     @ForGoogle
-    AboutAnalytics provideAnalytics(AboutAnalyticsImpl analytics) {
+    AboutAnalytics provideAnalytics(AboutFirebaseAnalyticsImpl analytics) {
         return analytics;
     }
 

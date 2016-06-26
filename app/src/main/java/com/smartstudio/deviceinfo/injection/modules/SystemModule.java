@@ -1,7 +1,7 @@
 package com.smartstudio.deviceinfo.injection.modules;
 
 import com.smartstudio.deviceinfo.analytics.dashboard.system.SystemAnalytics;
-import com.smartstudio.deviceinfo.analytics.dashboard.system.SystemAnalyticsImpl;
+import com.smartstudio.deviceinfo.analytics.dashboard.system.SystemFirebaseAnalyticsImpl;
 import com.smartstudio.deviceinfo.analytics.dashboard.system.SystemFabricAnalytics;
 import com.smartstudio.deviceinfo.controllers.dashboard.system.SystemController;
 import com.smartstudio.deviceinfo.injection.qualifiers.ForFabric;
@@ -56,7 +56,7 @@ public class SystemModule {
     @Provides
     @PerFragment
     @ForGoogle
-    SystemAnalytics provideGoogleAnalytics(SystemAnalyticsImpl analytics) {
+    SystemAnalytics provideGoogleAnalytics(SystemFirebaseAnalyticsImpl analytics) {
         return analytics;
     }
 

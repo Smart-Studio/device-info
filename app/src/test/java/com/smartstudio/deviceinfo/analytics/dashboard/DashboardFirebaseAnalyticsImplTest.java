@@ -1,53 +1,53 @@
 package com.smartstudio.deviceinfo.analytics.dashboard;
 
-import com.smartstudio.deviceinfo.analytics.AnalyticsManagerImpl;
-import com.smartstudio.deviceinfo.analytics.AnalyticsManagerImplTest;
+import com.smartstudio.deviceinfo.analytics.FirebaseAnalyticsManagerImpl;
+import com.smartstudio.deviceinfo.analytics.FirebaseAnalyticsManagerImplTest;
 
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class DashboardAnalyticsImplTest extends AnalyticsManagerImplTest {
-    private DashboardAnalyticsImpl mAnalytics;
+public class DashboardFirebaseAnalyticsImplTest extends FirebaseAnalyticsManagerImplTest {
+    private DashboardFirebaseAnalyticsImpl mAnalytics;
 
     @Test
     public void testGetScreenName() throws Exception {
         String screenName = mAnalytics.getScreenName();
-        assertThat(screenName).isEqualTo(DashboardAnalyticsImpl.SCREEN_NAME);
+        assertThat(screenName).isEqualTo(DashboardFirebaseAnalyticsImpl.SCREEN_NAME);
     }
 
     @Test
     public void testReportShareTap() throws Exception {
         setScreenName();
         mAnalytics.reportShareTap();
-        verifyEvent(DashboardAnalyticsImpl.SCREEN_NAME, DashboardAnalyticsImpl.TAP_SHARE);
+        verifyEvent(DashboardFirebaseAnalyticsImpl.TAP_SHARE);
     }
 
     @Test
     public void testReportAboutTap() throws Exception {
         setScreenName();
         mAnalytics.reportAboutTap();
-        verifyEvent(DashboardAnalyticsImpl.SCREEN_NAME, DashboardAnalyticsImpl.TAP_ABOUT);
+        verifyEvent(DashboardFirebaseAnalyticsImpl.TAP_ABOUT);
     }
 
     @Test
     public void testReportOptionsMenuOpened() throws Exception {
         setScreenName();
         mAnalytics.reportOptionsMenuOpened();
-        verifyEvent(DashboardAnalyticsImpl.SCREEN_NAME, DashboardAnalyticsImpl.MENU_OPTIONS_OPENED);
+        verifyEvent(DashboardFirebaseAnalyticsImpl.MENU_OPTIONS_OPENED);
     }
 
     @Test
     public void testReportOptionsMenuClosed() throws Exception {
         setScreenName();
         mAnalytics.reportOptionsMenuClosed();
-        verifyEvent(DashboardAnalyticsImpl.SCREEN_NAME, DashboardAnalyticsImpl.MENU_OPTIONS_CLOSED);
+        verifyEvent(DashboardFirebaseAnalyticsImpl.MENU_OPTIONS_CLOSED);
     }
 
     @Override
-    protected AnalyticsManagerImpl createAnalyticsManager() {
-        mAnalytics = new DashboardAnalyticsImpl(mTracker, mScreenViewBuilderProvider, mEventBuilderProvider);
+    protected FirebaseAnalyticsManagerImpl createAnalyticsManager() {
+        mAnalytics = new DashboardFirebaseAnalyticsImpl(mMockAnalytics, mMockBundleProvider);
         return mAnalytics;
     }
 }

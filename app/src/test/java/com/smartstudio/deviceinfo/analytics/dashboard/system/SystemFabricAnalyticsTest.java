@@ -15,7 +15,7 @@ public class SystemFabricAnalyticsTest extends FabricAnalyticsManagerTest {
     @Test
     public void testGetScreenName() throws Exception {
         String screenName = mAnalytics.getScreenName();
-        assertThat(screenName).isEqualTo(SystemAnalyticsImpl.SCREEN_NAME);
+        assertThat(screenName).isEqualTo(SystemFirebaseAnalyticsImpl.SCREEN_NAME);
     }
 
     @Test

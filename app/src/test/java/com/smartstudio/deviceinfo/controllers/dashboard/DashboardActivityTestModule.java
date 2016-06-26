@@ -20,11 +20,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.os.Bundle;
 
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.smartstudio.deviceinfo.R;
 import com.smartstudio.deviceinfo.analytics.about.AboutAnalytics;
 import com.smartstudio.deviceinfo.analytics.dashboard.DashboardAnalytics;
@@ -89,22 +89,6 @@ public class DashboardActivityTestModule {
     }
 
     @Provides
-    @PerActivity
-    Tracker provideTracker() {
-        return mock(Tracker.class);
-    }
-
-    @Provides
-    HitBuilders.ScreenViewBuilder provideScreenViewBuilder() {
-        return new HitBuilders.ScreenViewBuilder();
-    }
-
-    @Provides
-    HitBuilders.EventBuilder provideEventBuilder() {
-        return new HitBuilders.EventBuilder();
-    }
-
-    @Provides
     ContentViewEvent provideContentViewEvent() {
         return new ContentViewEvent();
     }
@@ -138,7 +122,17 @@ public class DashboardActivityTestModule {
     }
 
     @Provides
-    IntentFilter provideIntentFilter(){
+    IntentFilter provideIntentFilter() {
         return mock(IntentFilter.class);
+    }
+
+    @Provides
+    Bundle provideBundle() {
+        return mock(Bundle.class);
+    }
+
+    @Provides
+    FirebaseAnalytics provideFirebaseAnalytics() {
+        return mock(FirebaseAnalytics.class);
     }
 }
