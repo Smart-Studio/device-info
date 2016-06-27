@@ -108,7 +108,7 @@ android {
             useProguard true
             shrinkResources true
             //TODO Disable for Google Play Store apk
-            testCoverageEnabled true
+            testCoverageEnabled false
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -217,6 +217,7 @@ dependencies {
     compile "com.google.android.gms:play-services-base:$playServicesVersion"
     compile "com.google.android.gms:play-services-ads:$playServicesVersion"
     compile "com.google.firebase:firebase-core:$playServicesVersion"
+    compile "com.google.firebase:firebase-analytics:$playServicesVersion"
     compile "com.jakewharton:butterknife:$butterknifeVersion"
     apt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
     compile "com.jakewharton.timber:timber:$timberVersion"
