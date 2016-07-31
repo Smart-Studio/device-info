@@ -13,7 +13,7 @@ public class SystemFabricAnalytics extends FabricAnalyticsManager implements Sys
     static final String SHARE = "Share system info";
 
     @Inject
-    public SystemFabricAnalytics(Answers answers, ContentViewEvent contentViewEvent) {
+    SystemFabricAnalytics(Answers answers, ContentViewEvent contentViewEvent) {
         super(answers, contentViewEvent);
     }
 

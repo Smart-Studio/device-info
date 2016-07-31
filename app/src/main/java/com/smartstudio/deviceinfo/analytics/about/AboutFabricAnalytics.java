@@ -14,7 +14,7 @@ public class AboutFabricAnalytics extends FabricAnalyticsManager implements Abou
     static final String TAP_ACTION_BAR_BACK = "Tap action bar back";
 
     @Inject
-    public AboutFabricAnalytics(Answers answers, ContentViewEvent contentViewEvent) {
+    AboutFabricAnalytics(Answers answers, ContentViewEvent contentViewEvent) {
         super(answers, contentViewEvent);
     }
 

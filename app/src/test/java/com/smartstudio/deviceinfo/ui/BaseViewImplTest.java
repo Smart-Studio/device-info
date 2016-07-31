@@ -38,7 +38,7 @@ import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 public abstract class BaseViewImplTest {
     @Mock
     protected View mMockView;
-    protected BaseView mBaseView;
+    private BaseView mBaseView;
 
     @Before
     public void setUp() throws Exception {

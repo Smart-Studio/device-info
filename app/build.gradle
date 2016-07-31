@@ -186,7 +186,7 @@ spoon {
 ext {
     // App dependencies
     supportLibraryVersion = '24.0.0'
-    playServicesVersion = '9.0.2'
+    playServicesVersion = '9.2.1'
     guavaVersion = '19.0'
     butterknifeVersion = '8.0.1'
     timberVersion = '4.1.2'
