@@ -16,7 +16,7 @@ public class ScreenInfoFirebaseAnalyticsImpl extends FirebaseAnalyticsManagerImp
      * Creates an instance of the AnalyticsManagerImpl
      **/
     @Inject
-    public ScreenInfoFirebaseAnalyticsImpl(FirebaseAnalytics analytics, Provider<Bundle> bundleProvider) {
+    ScreenInfoFirebaseAnalyticsImpl(FirebaseAnalytics analytics, Provider<Bundle> bundleProvider) {
         super(analytics, bundleProvider);
     }
 

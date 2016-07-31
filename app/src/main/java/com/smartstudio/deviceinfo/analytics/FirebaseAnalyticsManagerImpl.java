@@ -17,7 +17,7 @@ public abstract class FirebaseAnalyticsManagerImpl implements AnalyticsManager {
 
     private final FirebaseAnalytics mAnalytics;
     private final Provider<Bundle> mBundleProvider;
-    protected String mScreenName;
+    private String mScreenName;
 
     /**
      * Creates an instance of the AnalyticsManagerImpl
@@ -38,7 +38,7 @@ public abstract class FirebaseAnalyticsManagerImpl implements AnalyticsManager {
         Timber.d("GAnalytics Screen tracked: %s", mScreenName);
     }
 
-    protected void setScreenName() {
+    void setScreenName() {
         mScreenName = getScreenName();
     }
 

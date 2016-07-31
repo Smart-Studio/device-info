@@ -19,7 +19,7 @@ public class AboutFirebaseAnalyticsImpl extends FirebaseAnalyticsManagerImpl imp
      * Creates an instance of the AnalyticsManagerImpl
      **/
     @Inject
-    public AboutFirebaseAnalyticsImpl(FirebaseAnalytics analytics, Provider<Bundle> bundleProvider) {
+    AboutFirebaseAnalyticsImpl(FirebaseAnalytics analytics, Provider<Bundle> bundleProvider) {
         super(analytics, bundleProvider);
     }
 
