@@ -35,7 +35,7 @@ apply from: 'jacoco.gradle'
 
 def versionMajor = 1
 def versionMinor = 1
-def versionPatch = 0
+def versionPatch = 1
 def versionBuild = 1 // bump for dogfood builds, public betas, etc.
 
 
