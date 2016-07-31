@@ -15,7 +15,7 @@ public class DashboardFabricAnalytics extends FabricAnalyticsManager implements 
     static final String CONTENT_TYPE = "Activity";
 
     @Inject
-    public DashboardFabricAnalytics(Answers answers, ContentViewEvent contentViewEvent) {
+    DashboardFabricAnalytics(Answers answers, ContentViewEvent contentViewEvent) {
         super(answers, contentViewEvent);
     }
 

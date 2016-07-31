@@ -13,7 +13,7 @@ public class ScreenInfoFabricAnalytics extends FabricAnalyticsManager implements
     static final String CONTENT_TYPE = "Fragment";
 
     @Inject
-    public ScreenInfoFabricAnalytics(Answers answers, ContentViewEvent contentViewEvent) {
+    ScreenInfoFabricAnalytics(Answers answers, ContentViewEvent contentViewEvent) {
         super(answers, contentViewEvent);
     }
 

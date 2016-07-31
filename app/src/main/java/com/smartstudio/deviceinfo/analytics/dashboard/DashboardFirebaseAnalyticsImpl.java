@@ -20,7 +20,7 @@ public class DashboardFirebaseAnalyticsImpl extends FirebaseAnalyticsManagerImpl
      *
      **/
     @Inject
-    public DashboardFirebaseAnalyticsImpl(FirebaseAnalytics analytics, Provider<Bundle> bundleProvider) {
+    DashboardFirebaseAnalyticsImpl(FirebaseAnalytics analytics, Provider<Bundle> bundleProvider) {
         super(analytics, bundleProvider);
     }
 
