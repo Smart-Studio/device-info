@@ -60,7 +60,7 @@ ext {
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '23.0.3'
+    buildToolsVersion '24.0.1'
     //TODO To support shadow object in robolectric, remove when fixed https://github.com/robolectric/robolectric/issues/1862
     useLibrary 'org.apache.http.legacy'
 
@@ -185,8 +185,8 @@ spoon {
 
 ext {
     // App dependencies
-    supportLibraryVersion = '24.0.0'
-    playServicesVersion = '9.2.1'
+    supportLibraryVersion = '24.1.1'
+    playServicesVersion = '9.4.0'
     guavaVersion = '19.0'
     butterknifeVersion = '8.0.1'
     timberVersion = '4.1.2'
